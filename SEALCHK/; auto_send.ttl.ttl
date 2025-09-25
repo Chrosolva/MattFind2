@@ -1,0 +1,16 @@
+; auto_loop.ttl
+; Open COM port (adjust settings to your device)
+connect 'COM3:9600,N,8,1'
+
+; Small delay to stabilize connection
+pause 1
+
+; Infinite loop
+while 1
+    ; Send your command
+    send '*A-168#'
+    send 13        ; send CR/LF if your device expects Enter
+
+    ; Wait 400 ms before next send
+    pause 0.4
+endwhile

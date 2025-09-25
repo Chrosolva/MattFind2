@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C09620E7-0BF1-4969-B366-92E6BD539186}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SEALCHK</RootNamespace>
+    <AssemblyName>SEALCHK</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SCIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net35\BCrypt.Net-Next.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net40\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataGridViewHelper.cs" />
+    <Compile Include="Data\DBContext.cs" />
+    <Compile Include="Custom\CustomMaterialButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\TblDetailMT.cs" />
+    <Compile Include="Model\TblDetailRegister.cs" />
+    <Compile Include="Model\TblMobilTangki.cs" />
+    <Compile Include="Model\TblRegister.cs" />
+    <Compile Include="Model\TblTimeSettings.cs" />
+    <Compile Include="Model\TblTujuan.cs" />
+    <Compile Include="Model\TblUser.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\RegisterSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegisterSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SealReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SealReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs" />
+    <Compile Include="UserControls\UCTujuan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCTujuan.Designer.cs">
+      <DependentUpon>UCTujuan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AdminMenuForm.Designer.cs">
+      <DependentUpon>AdminMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollectSealForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CollectSealForm.Designer.cs">
+      <DependentUpon>CollectSealForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DestinationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DestinationForm.Designer.cs">
+      <DependentUpon>DestinationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindMT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FindMT.Designer.cs">
+      <DependentUpon>FindMT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindRegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FindRegisterForm.Designer.cs">
+      <DependentUpon>FindRegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmMainMenu.Designer.cs">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HistoryForm.Designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MobilTangkiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MobilTangkiForm.Designer.cs">
+      <DependentUpon>MobilTangkiForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PilihTujuan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PilihTujuan.Designer.cs">
+      <DependentUpon>PilihTujuan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegisterSealForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RegisterSealForm.Designer.cs">
+      <DependentUpon>RegisterSealForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VerifyDispose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VerifyDispose.Designer.cs">
+      <DependentUpon>VerifyDispose.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reports\RegisterSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegisterSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCTujuan.resx">
+      <DependentUpon>UCTujuan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AdminMenuForm.resx">
+      <DependentUpon>AdminMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CollectSealForm.resx">
+      <DependentUpon>CollectSealForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DestinationForm.resx">
+      <DependentUpon>DestinationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FindMT.resx">
+      <DependentUpon>FindMT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FindRegisterForm.resx">
+      <DependentUpon>FindRegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmMainMenu.resx">
+      <DependentUpon>FrmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HistoryForm.resx">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MobilTangkiForm.resx">
+      <DependentUpon>MobilTangkiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PilihTujuan.resx">
+      <DependentUpon>PilihTujuan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RegisterSealForm.resx">
+      <DependentUpon>RegisterSealForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VerifyDispose.resx">
+      <DependentUpon>VerifyDispose.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Reports\SealReportDataSet.xsc">
+      <DependentUpon>SealReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\SealReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SealReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\SealReportDataSet.xss">
+      <DependentUpon>SealReportDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SCIcon.ico" />
+    <Content Include="SEALCHECK.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

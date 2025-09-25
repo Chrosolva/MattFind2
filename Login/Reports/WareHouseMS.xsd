@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WareHouseMS" targetNamespace="http://tempuri.org/WareHouseMS.xsd" xmlns:mstns="http://tempuri.org/WareHouseMS.xsd" xmlns="http://tempuri.org/WareHouseMS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="WBPOSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WBPOSConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Login.Properties.Settings.GlobalReference.Default.WBPOSConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="WareHouseMSConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="WareHouseMSConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Login.Properties.Settings.GlobalReference.Default.WareHouseMSConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MMJoinMMDTableAdapter" GeneratorDataComponentClassName="MMJoinMMDTableAdapter" Name="MMJoinMMD" UserDataComponentName="MMJoinMMDTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WBPOSConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>Select MM.*, MMD.*, M.Material_Description, M.Value from WareHouseMS.dbo.Material_Management as MM 
+left join WareHouseMS.dbo.MManagement_Detail as MMD on MM.Management_ID = MMD.Management_ID 
+left join WareHouseMS.dbo.Material as M on MMD.Material_Number = M.Material_Number 
+where MM.Management_ID = 'M.EN.22-00001'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Management_ID" DataSetColumn="Management_ID" />
+              <Mapping SourceColumn="Management_Type" DataSetColumn="Management_Type" />
+              <Mapping SourceColumn="Tgl_Dibuat" DataSetColumn="Tgl_Dibuat" />
+              <Mapping SourceColumn="Reservation_Code" DataSetColumn="Reservation_Code" />
+              <Mapping SourceColumn="PO_RO" DataSetColumn="PO_RO" />
+              <Mapping SourceColumn="WorkOrder" DataSetColumn="WorkOrder" />
+              <Mapping SourceColumn="Nama_PenanggungJawab" DataSetColumn="Nama_PenanggungJawab" />
+              <Mapping SourceColumn="UserID" DataSetColumn="UserID" />
+              <Mapping SourceColumn="Management_ID1" DataSetColumn="Management_ID1" />
+              <Mapping SourceColumn="No_Urut" DataSetColumn="No_Urut" />
+              <Mapping SourceColumn="Material_Number" DataSetColumn="Material_Number" />
+              <Mapping SourceColumn="Qty" DataSetColumn="Qty" />
+              <Mapping SourceColumn="Base_Unit" DataSetColumn="Base_Unit" />
+              <Mapping SourceColumn="Material_Description" DataSetColumn="Material_Description" />
+              <Mapping SourceColumn="Value" DataSetColumn="Value" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AllocationTableAdapter" GeneratorDataComponentClassName="AllocationTableAdapter" Name="Allocation" UserDataComponentName="AllocationTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="WareHouseMSConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        SBD.SlocBin, SBD.Management_ID, SBD.Material_Number, M.Material_Description, SBD.Tgl, MA.Reference, M.Qty AS LastStock, SUM(SBD.Qty) AS Qty_SBD, ISNULL(SUM(MA.Qty), 0) AS Qty_Alokasi
+FROM            Material AS M INNER JOIN
+                         SlocBinDetail AS SBD ON M.Material_Number = SBD.Material_Number LEFT OUTER JOIN
+                         Material_Alocation AS MA ON SBD.Management_ID = MA.Management_ID AND M.Material_Number = MA.Material_Number
+WHERE        (SBD.Management_Type = 'Entry')
+GROUP BY SBD.SlocBin, SBD.Management_ID, SBD.Material_Number,M.Material_Number, M.Material_Description, SBD.Tgl, ISNULL(MA.Reference, N'Free Stock'), M.Qty, MA.Reference
+ORDER BY M.Material_Number, MA.Reference, SBD.Management_ID, SBD.Tgl</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SlocBin" DataSetColumn="SlocBin" />
+              <Mapping SourceColumn="Management_ID" DataSetColumn="Management_ID" />
+              <Mapping SourceColumn="Material_Number" DataSetColumn="Material_Number" />
+              <Mapping SourceColumn="Material_Description" DataSetColumn="Material_Description" />
+              <Mapping SourceColumn="Tgl" DataSetColumn="Tgl" />
+              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
+              <Mapping SourceColumn="LastStock" DataSetColumn="LastStock" />
+              <Mapping SourceColumn="Qty_SBD" DataSetColumn="Qty_SBD" />
+              <Mapping SourceColumn="Qty_Alokasi" DataSetColumn="Qty_Alokasi" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WareHouseMS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="WareHouseMS" msprop:Generator_UserDSName="WareHouseMS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TblQRCode" msprop:Generator_TableClassName="TblQRCodeDataTable" msprop:Generator_TableVarName="tableTblQRCode" msprop:Generator_TablePropName="TblQRCode" msprop:Generator_RowDeletingName="TblQRCodeRowDeleting" msprop:Generator_RowChangingName="TblQRCodeRowChanging" msprop:Generator_RowEvHandlerName="TblQRCodeRowChangeEventHandler" msprop:Generator_RowDeletedName="TblQRCodeRowDeleted" msprop:Generator_UserTableName="TblQRCode" msprop:Generator_RowChangedName="TblQRCodeRowChanged" msprop:Generator_RowEvArgName="TblQRCodeRowChangeEvent" msprop:Generator_RowClassName="TblQRCodeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Material_Number" msprop:Generator_ColumnVarNameInTable="columnMaterial_Number" msprop:Generator_ColumnPropNameInRow="Material_Number" msprop:Generator_ColumnPropNameInTable="Material_NumberColumn" msprop:Generator_UserColumnName="Material_Number" type="xs:string" />
+              <xs:element name="QRCode" msprop:Generator_ColumnVarNameInTable="columnQRCode" msprop:Generator_ColumnPropNameInRow="QRCode" msprop:Generator_ColumnPropNameInTable="QRCodeColumn" msprop:Generator_UserColumnName="QRCode" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Data" msprop:Generator_ColumnVarNameInTable="columnData" msprop:Generator_ColumnPropNameInRow="Data" msprop:Generator_ColumnPropNameInTable="DataColumn" msprop:Generator_UserColumnName="Data" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SlocBinQR" msprop:Generator_TableClassName="SlocBinQRDataTable" msprop:Generator_TableVarName="tableSlocBinQR" msprop:Generator_TablePropName="SlocBinQR" msprop:Generator_RowDeletingName="SlocBinQRRowDeleting" msprop:Generator_RowChangingName="SlocBinQRRowChanging" msprop:Generator_RowEvHandlerName="SlocBinQRRowChangeEventHandler" msprop:Generator_RowDeletedName="SlocBinQRRowDeleted" msprop:Generator_UserTableName="SlocBinQR" msprop:Generator_RowChangedName="SlocBinQRRowChanged" msprop:Generator_RowEvArgName="SlocBinQRRowChangeEvent" msprop:Generator_RowClassName="SlocBinQRRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SlocBin" msprop:Generator_ColumnVarNameInTable="columnSlocBin" msprop:Generator_ColumnPropNameInRow="SlocBin" msprop:Generator_ColumnPropNameInTable="SlocBinColumn" msprop:Generator_UserColumnName="SlocBin" type="xs:string" />
+              <xs:element name="QRCode" msprop:Generator_ColumnVarNameInTable="columnQRCode" msprop:Generator_ColumnPropNameInRow="QRCode" msprop:Generator_ColumnPropNameInTable="QRCodeColumn" msprop:Generator_UserColumnName="QRCode" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MMJoinMMD" msprop:Generator_TableClassName="MMJoinMMDDataTable" msprop:Generator_TableVarName="tableMMJoinMMD" msprop:Generator_RowChangedName="MMJoinMMDRowChanged" msprop:Generator_TablePropName="MMJoinMMD" msprop:Generator_RowDeletingName="MMJoinMMDRowDeleting" msprop:Generator_RowChangingName="MMJoinMMDRowChanging" msprop:Generator_RowEvHandlerName="MMJoinMMDRowChangeEventHandler" msprop:Generator_RowDeletedName="MMJoinMMDRowDeleted" msprop:Generator_RowClassName="MMJoinMMDRow" msprop:Generator_UserTableName="MMJoinMMD" msprop:Generator_RowEvArgName="MMJoinMMDRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Management_ID" msprop:Generator_ColumnVarNameInTable="columnManagement_ID" msprop:Generator_ColumnPropNameInRow="Management_ID" msprop:Generator_ColumnPropNameInTable="Management_IDColumn" msprop:Generator_UserColumnName="Management_ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Management_Type" msprop:Generator_ColumnVarNameInTable="columnManagement_Type" msprop:Generator_ColumnPropNameInRow="Management_Type" msprop:Generator_ColumnPropNameInTable="Management_TypeColumn" msprop:Generator_UserColumnName="Management_Type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tgl_Dibuat" msprop:Generator_ColumnVarNameInTable="columnTgl_Dibuat" msprop:Generator_ColumnPropNameInRow="Tgl_Dibuat" msprop:Generator_ColumnPropNameInTable="Tgl_DibuatColumn" msprop:Generator_UserColumnName="Tgl_Dibuat" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Reservation_Code" msprop:Generator_ColumnVarNameInTable="columnReservation_Code" msprop:Generator_ColumnPropNameInRow="Reservation_Code" msprop:Generator_ColumnPropNameInTable="Reservation_CodeColumn" msprop:Generator_UserColumnName="Reservation_Code" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PO_RO" msprop:Generator_ColumnVarNameInTable="columnPO_RO" msprop:Generator_ColumnPropNameInRow="PO_RO" msprop:Generator_ColumnPropNameInTable="PO_ROColumn" msprop:Generator_UserColumnName="PO_RO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WorkOrder" msprop:Generator_ColumnVarNameInTable="columnWorkOrder" msprop:Generator_ColumnPropNameInRow="WorkOrder" msprop:Generator_ColumnPropNameInTable="WorkOrderColumn" msprop:Generator_UserColumnName="WorkOrder" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Nama_PenanggungJawab" msprop:Generator_ColumnVarNameInTable="columnNama_PenanggungJawab" msprop:Generator_ColumnPropNameInRow="Nama_PenanggungJawab" msprop:Generator_ColumnPropNameInTable="Nama_PenanggungJawabColumn" msprop:Generator_UserColumnName="Nama_PenanggungJawab" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UserID" msprop:Generator_ColumnVarNameInTable="columnUserID" msprop:Generator_ColumnPropNameInRow="UserID" msprop:Generator_ColumnPropNameInTable="UserIDColumn" msprop:Generator_UserColumnName="UserID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Management_ID1" msprop:Generator_ColumnVarNameInTable="columnManagement_ID1" msprop:Generator_ColumnPropNameInRow="Management_ID1" msprop:Generator_ColumnPropNameInTable="Management_ID1Column" msprop:Generator_UserColumnName="Management_ID1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="No_Urut" msprop:Generator_ColumnVarNameInTable="columnNo_Urut" msprop:Generator_ColumnPropNameInRow="No_Urut" msprop:Generator_ColumnPropNameInTable="No_UrutColumn" msprop:Generator_UserColumnName="No_Urut" type="xs:int" minOccurs="0" />
+              <xs:element name="Material_Number" msprop:Generator_ColumnVarNameInTable="columnMaterial_Number" msprop:Generator_ColumnPropNameInRow="Material_Number" msprop:Generator_ColumnPropNameInTable="Material_NumberColumn" msprop:Generator_UserColumnName="Material_Number" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Base_Unit" msprop:Generator_ColumnVarNameInTable="columnBase_Unit" msprop:Generator_ColumnPropNameInRow="Base_Unit" msprop:Generator_ColumnPropNameInTable="Base_UnitColumn" msprop:Generator_UserColumnName="Base_Unit" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Material_Description" msprop:Generator_ColumnVarNameInTable="columnMaterial_Description" msprop:Generator_ColumnPropNameInRow="Material_Description" msprop:Generator_ColumnPropNameInTable="Material_DescriptionColumn" msprop:Generator_UserColumnName="Material_Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnPropNameInTable="ValueColumn" msprop:Generator_UserColumnName="Value" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Allocation" msprop:Generator_TableClassName="AllocationDataTable" msprop:Generator_TableVarName="tableAllocation" msprop:Generator_TablePropName="Allocation" msprop:Generator_RowDeletingName="AllocationRowDeleting" msprop:Generator_RowChangingName="AllocationRowChanging" msprop:Generator_RowEvHandlerName="AllocationRowChangeEventHandler" msprop:Generator_RowDeletedName="AllocationRowDeleted" msprop:Generator_UserTableName="Allocation" msprop:Generator_RowChangedName="AllocationRowChanged" msprop:Generator_RowEvArgName="AllocationRowChangeEvent" msprop:Generator_RowClassName="AllocationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SlocBin" msprop:Generator_ColumnVarNameInTable="columnSlocBin" msprop:Generator_ColumnPropNameInRow="SlocBin" msprop:Generator_ColumnPropNameInTable="SlocBinColumn" msprop:Generator_UserColumnName="SlocBin">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Management_ID" msprop:Generator_ColumnVarNameInTable="columnManagement_ID" msprop:Generator_ColumnPropNameInRow="Management_ID" msprop:Generator_ColumnPropNameInTable="Management_IDColumn" msprop:Generator_UserColumnName="Management_ID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Material_Number" msprop:Generator_ColumnVarNameInTable="columnMaterial_Number" msprop:Generator_ColumnPropNameInRow="Material_Number" msprop:Generator_ColumnPropNameInTable="Material_NumberColumn" msprop:Generator_UserColumnName="Material_Number">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Material_Description" msprop:Generator_ColumnVarNameInTable="columnMaterial_Description" msprop:Generator_ColumnPropNameInRow="Material_Description" msprop:Generator_ColumnPropNameInTable="Material_DescriptionColumn" msprop:Generator_UserColumnName="Material_Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tgl" msprop:Generator_ColumnVarNameInTable="columnTgl" msprop:Generator_ColumnPropNameInRow="Tgl" msprop:Generator_ColumnPropNameInTable="TglColumn" msprop:Generator_UserColumnName="Tgl" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastStock" msprop:Generator_ColumnVarNameInTable="columnLastStock" msprop:Generator_ColumnPropNameInRow="LastStock" msprop:Generator_ColumnPropNameInTable="LastStockColumn" msprop:Generator_UserColumnName="LastStock" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Qty_SBD" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnQty_SBD" msprop:Generator_ColumnPropNameInRow="Qty_SBD" msprop:Generator_ColumnPropNameInTable="Qty_SBDColumn" msprop:Generator_UserColumnName="Qty_SBD" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Qty_Alokasi" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnQty_Alokasi" msprop:Generator_ColumnPropNameInRow="Qty_Alokasi" msprop:Generator_ColumnPropNameInTable="Qty_AlokasiColumn" msprop:Generator_UserColumnName="Qty_Alokasi" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TblQRCode" />
+      <xs:field xpath="mstns:Material_Number" />
+    </xs:unique>
+    <xs:unique name="SlocBinQR_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SlocBinQR" />
+      <xs:field xpath="mstns:SlocBin" />
+    </xs:unique>
+    <xs:unique name="Allocation_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Allocation" />
+      <xs:field xpath="mstns:SlocBin" />
+      <xs:field xpath="mstns:Management_ID" />
+      <xs:field xpath="mstns:Material_Number" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

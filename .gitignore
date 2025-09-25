@@ -1,0 +1,36 @@
+## Build outputs
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+## VS caches/user files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## NuGet
+packages/
+*.nupkg
+# If using PackageReference (default in modern VS), do NOT ignore the obj project.assets.json
+# Keep this: !**/obj/**/project.assets.json
+
+## Rider/Resharper
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+## Publish
+*.Publish.xml
+
+## OS crap
+[Dd]esktop.ini
+[Tt]humbs.db
+
+## Secrets / local config (you create these)
+appsettings.Development.json
+*.local.json
+*.env
+secrets.json
