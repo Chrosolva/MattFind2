@@ -16,7 +16,8 @@ namespace DEPTHCHK
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLogin());
+            new FrmLogin().ShowDialog();
+            Application.Run(new DEPTHCHK.Views.FrmMainMenu());
         }
     }
 }
