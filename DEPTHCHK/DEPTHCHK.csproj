@@ -81,6 +81,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom\CustomMaterialButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Custom\CustomMaterialButton.Designer.cs">
+      <DependentUpon>CustomMaterialButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataGridViewHelper.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="FrmLogin.cs">
@@ -134,7 +140,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Custom\" />
     <Folder Include="Reports\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
