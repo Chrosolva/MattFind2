@@ -99,6 +99,7 @@
     <Compile Include="Models\TblDetailPengiriman.cs" />
     <Compile Include="Models\TblMobilTangki.cs" />
     <Compile Include="Models\TblPengiriman.cs" />
+    <Compile Include="Models\TblTimeSettings.cs" />
     <Compile Include="Models\TblTujuan.cs" />
     <Compile Include="Models\TblUser.cs" />
     <Compile Include="Program.cs" />

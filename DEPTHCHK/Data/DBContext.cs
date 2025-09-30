@@ -23,10 +23,15 @@ namespace DEPTHCHK.Data
         public virtual DbSet<TblUser> Users { get; set; }
         public virtual DbSet<TblPengiriman> Pengirimans { get; set; }
         public virtual DbSet<TblDetailPengiriman> DetailPengirimans { get; set; }
+        public DbSet<TblTimeSettings> TimeSettings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<TblTimeSettings>()
+                .ToTable("TblTimeSettings")
+                .HasKey(t => t.Id);
 
             // TblMobilTangki
             modelBuilder.Entity<TblMobilTangki>()

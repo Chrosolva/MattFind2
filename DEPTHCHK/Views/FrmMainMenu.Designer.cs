@@ -83,6 +83,7 @@
             this.btnBackUP.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnBackUP.UseAccentColor = true;
             this.btnBackUP.UseVisualStyleBackColor = true;
+            this.btnBackUP.Click += new System.EventHandler(this.btnBackUP_Click);
             // 
             // btnLogOut
             // 
@@ -105,6 +106,7 @@
             this.btnLogOut.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnLogOut.UseAccentColor = false;
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // ContentCard
             // 
@@ -219,6 +221,7 @@
             this.btnConnect.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnConnect.UseAccentColor = false;
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // NUDBaudRate
             // 
@@ -259,6 +262,7 @@
             this.btnDisconnect.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnDisconnect.UseAccentColor = false;
             this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // btnSetActive
             // 
@@ -270,6 +274,7 @@
             this.btnSetActive.TabIndex = 18;
             this.btnSetActive.Text = "SET";
             this.btnSetActive.UseVisualStyleBackColor = true;
+            this.btnSetActive.Click += new System.EventHandler(this.btnSetActive_Click);
             // 
             // lblTime
             // 
@@ -312,6 +317,7 @@
             this.Controls.Add(this.panelMenu2);
             this.Name = "FrmMainMenu";
             this.Text = "FrmMainMenu";
+            this.Load += new System.EventHandler(this.FrmMainMenu_Load);
             this.panelMenu2.ResumeLayout(false);
             this.panelMenu2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUDBaudRate)).EndInit();
