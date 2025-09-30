@@ -153,11 +153,12 @@ namespace SEALCHK.View
                 _db.MobilTangki.Add(mt);
             }
             else
-            {
+            {   
                 // Update existing
                 currentMT.Type = txtType.Text.Trim();
                 currentMT.JlhCompartment = (int)NUDJlhCompartment.Value;
                 currentMT.CoverBoxPanel = (int)NUDPanelCover.Value;
+                currentMT.DetailStatus = "-"; // default
                 // leave DetailStatus as is, or update if you add an input for it
             }
 
@@ -247,15 +248,18 @@ namespace SEALCHK.View
                         // optionally add a PCover row if CoverBoxPanel > 0
                         if (mt.CoverBoxPanel.HasValue && mt.CoverBoxPanel.Value > 0)
                         {
-                            db.DetailMT.Add(new TblDetailMT
+                            for (int i = 1; i <= compartments; i++)
                             {
-                                PartID = $"{mt.NoPlat}_PCover",
-                                NoPlat = mt.NoPlat,
-                                SealCode = "-",
-                                Status = "-",
-                                Capacity = null,
-                                PartIndex = (compartments * 2) + 1
-                            });
+                                db.DetailMT.Add(new TblDetailMT
+                                {
+                                    PartID = $"{mt.NoPlat}_PCover{i}",
+                                    NoPlat = mt.NoPlat,
+                                    SealCode = "-",
+                                    Status = "-",
+                                    Capacity = null,
+                                    PartIndex = (compartments * 2) + i
+                                });
+                            }
                         }
                     }
 
