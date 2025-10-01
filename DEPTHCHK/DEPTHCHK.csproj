@@ -156,6 +156,9 @@
     <EmbeddedResource Include="Views\AdminMenuForm.resx">
       <DependentUpon>AdminMenuForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\DestinationForm.resx">
+      <DependentUpon>DestinationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FrmMainMenu.resx">
       <DependentUpon>FrmMainMenu.cs</DependentUpon>
     </EmbeddedResource>

@@ -75,8 +75,8 @@
             this.btnBack.Depth = 0;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(268, 379);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnBack.Location = new System.Drawing.Point(357, 466);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnBack.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
             this.btnBack.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -94,8 +94,8 @@
             this.btnClear.Depth = 0;
             this.btnClear.HighEmphasis = true;
             this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(146, 379);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClear.Location = new System.Drawing.Point(195, 466);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClear.Name = "btnClear";
             this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -113,8 +113,8 @@
             this.btnSave.Depth = 0;
             this.btnSave.HighEmphasis = true;
             this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(19, 379);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSave.Location = new System.Drawing.Point(25, 466);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSave.Name = "btnSave";
             this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -131,7 +131,8 @@
             this.Type.AutoSize = true;
             this.Type.Depth = 0;
             this.Type.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Type.Location = new System.Drawing.Point(17, 119);
+            this.Type.Location = new System.Drawing.Point(23, 146);
+            this.Type.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Type.MouseState = MaterialSkin.MouseState.HOVER;
             this.Type.Name = "Type";
             this.Type.Size = new System.Drawing.Size(90, 19);
@@ -144,10 +145,11 @@
             this.txtNamaSPBU.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtNamaSPBU.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtNamaSPBU.Depth = 0;
-            this.txtNamaSPBU.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNamaSPBU.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNamaSPBU.HideSelection = true;
             this.txtNamaSPBU.LeadingIcon = null;
-            this.txtNamaSPBU.Location = new System.Drawing.Point(17, 150);
+            this.txtNamaSPBU.Location = new System.Drawing.Point(23, 185);
+            this.txtNamaSPBU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNamaSPBU.MaxLength = 32767;
             this.txtNamaSPBU.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNamaSPBU.Name = "txtNamaSPBU";
@@ -159,7 +161,7 @@
             this.txtNamaSPBU.SelectionLength = 0;
             this.txtNamaSPBU.SelectionStart = 0;
             this.txtNamaSPBU.ShortcutsEnabled = true;
-            this.txtNamaSPBU.Size = new System.Drawing.Size(250, 48);
+            this.txtNamaSPBU.Size = new System.Drawing.Size(333, 48);
             this.txtNamaSPBU.TabIndex = 3;
             this.txtNamaSPBU.TabStop = false;
             this.txtNamaSPBU.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -172,10 +174,11 @@
             this.txtKodeTujuan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtKodeTujuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtKodeTujuan.Depth = 0;
-            this.txtKodeTujuan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtKodeTujuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtKodeTujuan.HideSelection = true;
             this.txtKodeTujuan.LeadingIcon = null;
-            this.txtKodeTujuan.Location = new System.Drawing.Point(17, 56);
+            this.txtKodeTujuan.Location = new System.Drawing.Point(23, 69);
+            this.txtKodeTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtKodeTujuan.MaxLength = 32767;
             this.txtKodeTujuan.MouseState = MaterialSkin.MouseState.OUT;
             this.txtKodeTujuan.Name = "txtKodeTujuan";
@@ -187,7 +190,7 @@
             this.txtKodeTujuan.SelectionLength = 0;
             this.txtKodeTujuan.SelectionStart = 0;
             this.txtKodeTujuan.ShortcutsEnabled = true;
-            this.txtKodeTujuan.Size = new System.Drawing.Size(250, 48);
+            this.txtKodeTujuan.Size = new System.Drawing.Size(333, 48);
             this.txtKodeTujuan.TabIndex = 1;
             this.txtKodeTujuan.TabStop = false;
             this.txtKodeTujuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -201,8 +204,8 @@
             this.btnExport.Depth = 0;
             this.btnExport.HighEmphasis = true;
             this.btnExport.Icon = null;
-            this.btnExport.Location = new System.Drawing.Point(737, 6);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExport.Location = new System.Drawing.Point(983, 7);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnExport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnExport.Name = "btnExport";
             this.btnExport.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -221,8 +224,8 @@
             this.btnImport.Depth = 0;
             this.btnImport.HighEmphasis = true;
             this.btnImport.Icon = null;
-            this.btnImport.Location = new System.Drawing.Point(600, 6);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnImport.Location = new System.Drawing.Point(800, 7);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnImport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnImport.Name = "btnImport";
             this.btnImport.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -241,8 +244,8 @@
             this.btnNew.Depth = 0;
             this.btnNew.HighEmphasis = true;
             this.btnNew.Icon = null;
-            this.btnNew.Location = new System.Drawing.Point(9, 6);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNew.Location = new System.Drawing.Point(12, 7);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnNew.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNew.Name = "btnNew";
             this.btnNew.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -280,11 +283,11 @@
             this.CardCRUD.Depth = 0;
             this.CardCRUD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.CardCRUD.Location = new System.Drawing.Point(0, 0);
-            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14);
+            this.CardCRUD.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.CardCRUD.MouseState = MaterialSkin.MouseState.HOVER;
             this.CardCRUD.Name = "CardCRUD";
-            this.CardCRUD.Padding = new System.Windows.Forms.Padding(14);
-            this.CardCRUD.Size = new System.Drawing.Size(1308, 435);
+            this.CardCRUD.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.CardCRUD.Size = new System.Drawing.Size(1744, 536);
             this.CardCRUD.TabIndex = 0;
             // 
             // materialLabel5
@@ -292,7 +295,8 @@
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(588, 214);
+            this.materialLabel5.Location = new System.Drawing.Point(784, 263);
+            this.materialLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(150, 19);
@@ -306,10 +310,11 @@
             this.txtNamaKepemilikan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtNamaKepemilikan.Depth = 0;
             this.txtNamaKepemilikan.Enabled = false;
-            this.txtNamaKepemilikan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNamaKepemilikan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNamaKepemilikan.HideSelection = true;
             this.txtNamaKepemilikan.LeadingIcon = null;
-            this.txtNamaKepemilikan.Location = new System.Drawing.Point(588, 245);
+            this.txtNamaKepemilikan.Location = new System.Drawing.Point(784, 302);
+            this.txtNamaKepemilikan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNamaKepemilikan.MaxLength = 32767;
             this.txtNamaKepemilikan.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNamaKepemilikan.Name = "txtNamaKepemilikan";
@@ -321,7 +326,7 @@
             this.txtNamaKepemilikan.SelectionLength = 0;
             this.txtNamaKepemilikan.SelectionStart = 0;
             this.txtNamaKepemilikan.ShortcutsEnabled = true;
-            this.txtNamaKepemilikan.Size = new System.Drawing.Size(250, 48);
+            this.txtNamaKepemilikan.Size = new System.Drawing.Size(333, 48);
             this.txtNamaKepemilikan.TabIndex = 25;
             this.txtNamaKepemilikan.TabStop = false;
             this.txtNamaKepemilikan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -333,7 +338,8 @@
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(315, 214);
+            this.materialLabel4.Location = new System.Drawing.Point(420, 263);
+            this.materialLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(125, 19);
@@ -347,10 +353,11 @@
             this.txtNamaRegional.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtNamaRegional.Depth = 0;
             this.txtNamaRegional.Enabled = false;
-            this.txtNamaRegional.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNamaRegional.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNamaRegional.HideSelection = true;
             this.txtNamaRegional.LeadingIcon = null;
-            this.txtNamaRegional.Location = new System.Drawing.Point(315, 245);
+            this.txtNamaRegional.Location = new System.Drawing.Point(420, 302);
+            this.txtNamaRegional.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNamaRegional.MaxLength = 32767;
             this.txtNamaRegional.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNamaRegional.Name = "txtNamaRegional";
@@ -362,7 +369,7 @@
             this.txtNamaRegional.SelectionLength = 0;
             this.txtNamaRegional.SelectionStart = 0;
             this.txtNamaRegional.ShortcutsEnabled = true;
-            this.txtNamaRegional.Size = new System.Drawing.Size(250, 48);
+            this.txtNamaRegional.Size = new System.Drawing.Size(333, 48);
             this.txtNamaRegional.TabIndex = 23;
             this.txtNamaRegional.TabStop = false;
             this.txtNamaRegional.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -383,11 +390,12 @@
             this.cbxOwned.FormattingEnabled = true;
             this.cbxOwned.IntegralHeight = false;
             this.cbxOwned.ItemHeight = 43;
-            this.cbxOwned.Location = new System.Drawing.Point(588, 149);
+            this.cbxOwned.Location = new System.Drawing.Point(784, 183);
+            this.cbxOwned.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxOwned.MaxDropDownItems = 4;
             this.cbxOwned.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxOwned.Name = "cbxOwned";
-            this.cbxOwned.Size = new System.Drawing.Size(250, 49);
+            this.cbxOwned.Size = new System.Drawing.Size(332, 49);
             this.cbxOwned.StartIndex = 0;
             this.cbxOwned.TabIndex = 22;
             this.cbxOwned.SelectedIndexChanged += new System.EventHandler(this.cbxOwned_SelectedIndexChanged);
@@ -397,7 +405,8 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(595, 119);
+            this.materialLabel3.Location = new System.Drawing.Point(793, 146);
+            this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(146, 19);
@@ -418,11 +427,12 @@
             this.cbxRegional.FormattingEnabled = true;
             this.cbxRegional.IntegralHeight = false;
             this.cbxRegional.ItemHeight = 43;
-            this.cbxRegional.Location = new System.Drawing.Point(315, 149);
+            this.cbxRegional.Location = new System.Drawing.Point(420, 183);
+            this.cbxRegional.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxRegional.MaxDropDownItems = 4;
             this.cbxRegional.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxRegional.Name = "cbxRegional";
-            this.cbxRegional.Size = new System.Drawing.Size(250, 49);
+            this.cbxRegional.Size = new System.Drawing.Size(332, 49);
             this.cbxRegional.StartIndex = 0;
             this.cbxRegional.TabIndex = 20;
             this.cbxRegional.SelectedIndexChanged += new System.EventHandler(this.cbxRegional_SelectedIndexChanged);
@@ -432,7 +442,8 @@
             this.lblUserTYPE.AutoSize = true;
             this.lblUserTYPE.Depth = 0;
             this.lblUserTYPE.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUserTYPE.Location = new System.Drawing.Point(322, 119);
+            this.lblUserTYPE.Location = new System.Drawing.Point(429, 146);
+            this.lblUserTYPE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUserTYPE.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblUserTYPE.Name = "lblUserTYPE";
             this.lblUserTYPE.Size = new System.Drawing.Size(121, 19);
@@ -444,7 +455,8 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(20, 214);
+            this.materialLabel2.Location = new System.Drawing.Point(27, 263);
+            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(108, 19);
@@ -457,10 +469,11 @@
             this.txtAlamatSPBU.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtAlamatSPBU.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtAlamatSPBU.Depth = 0;
-            this.txtAlamatSPBU.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtAlamatSPBU.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtAlamatSPBU.HideSelection = true;
             this.txtAlamatSPBU.LeadingIcon = null;
-            this.txtAlamatSPBU.Location = new System.Drawing.Point(20, 245);
+            this.txtAlamatSPBU.Location = new System.Drawing.Point(27, 302);
+            this.txtAlamatSPBU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtAlamatSPBU.MaxLength = 32767;
             this.txtAlamatSPBU.MouseState = MaterialSkin.MouseState.OUT;
             this.txtAlamatSPBU.Name = "txtAlamatSPBU";
@@ -472,7 +485,7 @@
             this.txtAlamatSPBU.SelectionLength = 0;
             this.txtAlamatSPBU.SelectionStart = 0;
             this.txtAlamatSPBU.ShortcutsEnabled = true;
-            this.txtAlamatSPBU.Size = new System.Drawing.Size(250, 48);
+            this.txtAlamatSPBU.Size = new System.Drawing.Size(333, 48);
             this.txtAlamatSPBU.TabIndex = 13;
             this.txtAlamatSPBU.TabStop = false;
             this.txtAlamatSPBU.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -484,7 +497,8 @@
             this.lblNoPlat.AutoSize = true;
             this.lblNoPlat.Depth = 0;
             this.lblNoPlat.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNoPlat.Location = new System.Drawing.Point(17, 25);
+            this.lblNoPlat.Location = new System.Drawing.Point(23, 31);
+            this.lblNoPlat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNoPlat.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNoPlat.Name = "lblNoPlat";
             this.lblNoPlat.Size = new System.Drawing.Size(106, 19);
@@ -494,10 +508,11 @@
             // TPAddEditTujuan
             // 
             this.TPAddEditTujuan.Controls.Add(this.CardCRUD);
-            this.TPAddEditTujuan.Location = new System.Drawing.Point(4, 22);
+            this.TPAddEditTujuan.Location = new System.Drawing.Point(4, 25);
+            this.TPAddEditTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPAddEditTujuan.Name = "TPAddEditTujuan";
-            this.TPAddEditTujuan.Padding = new System.Windows.Forms.Padding(3);
-            this.TPAddEditTujuan.Size = new System.Drawing.Size(1308, 431);
+            this.TPAddEditTujuan.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPAddEditTujuan.Size = new System.Drawing.Size(1747, 534);
             this.TPAddEditTujuan.TabIndex = 1;
             this.TPAddEditTujuan.Text = "ADD / EDIT TUJUAN";
             this.TPAddEditTujuan.UseVisualStyleBackColor = true;
@@ -508,11 +523,11 @@
             this.btnDelete.CustomColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(57)))), ((int)(((byte)(53)))));
             this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnDelete.Depth = 0;
-            this.btnDelete.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.HighEmphasis = true;
             this.btnDelete.Icon = null;
-            this.btnDelete.Location = new System.Drawing.Point(177, 6);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDelete.Location = new System.Drawing.Point(236, 7);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -532,9 +547,10 @@
             this.TopPanel.Controls.Add(this.btnDelete);
             this.TopPanel.Controls.Add(this.btnEdit);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(3, 3);
+            this.TopPanel.Location = new System.Drawing.Point(4, 4);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1302, 53);
+            this.TopPanel.Size = new System.Drawing.Size(1739, 65);
             this.TopPanel.TabIndex = 0;
             // 
             // btnEdit
@@ -544,8 +560,8 @@
             this.btnEdit.Depth = 0;
             this.btnEdit.HighEmphasis = true;
             this.btnEdit.Icon = null;
-            this.btnEdit.Location = new System.Drawing.Point(93, 6);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnEdit.Location = new System.Drawing.Point(124, 7);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnEdit.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -562,7 +578,8 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(6, 7);
+            this.materialLabel1.Location = new System.Drawing.Point(8, 9);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(81, 19);
@@ -575,9 +592,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTujuan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTujuan.Location = new System.Drawing.Point(6, 29);
+            this.dgvTujuan.Location = new System.Drawing.Point(8, 36);
+            this.dgvTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvTujuan.Name = "dgvTujuan";
-            this.dgvTujuan.Size = new System.Drawing.Size(1290, 337);
+            this.dgvTujuan.Size = new System.Drawing.Size(1723, 418);
             this.dgvTujuan.TabIndex = 0;
             // 
             // LeftCard
@@ -588,22 +606,23 @@
             this.LeftCard.Depth = 0;
             this.LeftCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LeftCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LeftCard.Location = new System.Drawing.Point(3, 56);
-            this.LeftCard.Margin = new System.Windows.Forms.Padding(14);
+            this.LeftCard.Location = new System.Drawing.Point(4, 69);
+            this.LeftCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
-            this.LeftCard.Padding = new System.Windows.Forms.Padding(3);
-            this.LeftCard.Size = new System.Drawing.Size(1302, 372);
+            this.LeftCard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LeftCard.Size = new System.Drawing.Size(1739, 461);
             this.LeftCard.TabIndex = 8;
             // 
             // TPTujuan
             // 
             this.TPTujuan.Controls.Add(this.LeftCard);
             this.TPTujuan.Controls.Add(this.TopPanel);
-            this.TPTujuan.Location = new System.Drawing.Point(4, 22);
+            this.TPTujuan.Location = new System.Drawing.Point(4, 25);
+            this.TPTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPTujuan.Name = "TPTujuan";
-            this.TPTujuan.Padding = new System.Windows.Forms.Padding(3);
-            this.TPTujuan.Size = new System.Drawing.Size(1308, 431);
+            this.TPTujuan.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPTujuan.Size = new System.Drawing.Size(1747, 534);
             this.TPTujuan.TabIndex = 0;
             this.TPTujuan.Text = "TUJUAN";
             this.TPTujuan.UseVisualStyleBackColor = true;
@@ -614,12 +633,13 @@
             this.TCTujuan.Controls.Add(this.TPAddEditTujuan);
             this.TCTujuan.Depth = 0;
             this.TCTujuan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TCTujuan.Location = new System.Drawing.Point(0, 48);
+            this.TCTujuan.Location = new System.Drawing.Point(0, 59);
+            this.TCTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TCTujuan.MouseState = MaterialSkin.MouseState.HOVER;
             this.TCTujuan.Multiline = true;
             this.TCTujuan.Name = "TCTujuan";
             this.TCTujuan.SelectedIndex = 0;
-            this.TCTujuan.Size = new System.Drawing.Size(1316, 457);
+            this.TCTujuan.Size = new System.Drawing.Size(1755, 563);
             this.TCTujuan.TabIndex = 2;
             // 
             // TabSelector
@@ -630,19 +650,21 @@
             this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.TabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TabSelector.Location = new System.Drawing.Point(0, 0);
+            this.TabSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TabSelector.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabSelector.Name = "TabSelector";
-            this.TabSelector.Size = new System.Drawing.Size(1316, 48);
+            this.TabSelector.Size = new System.Drawing.Size(1755, 59);
             this.TabSelector.TabIndex = 3;
             this.TabSelector.Text = "materialTabSelector1";
             // 
             // DestinationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1316, 505);
+            this.ClientSize = new System.Drawing.Size(1755, 622);
             this.Controls.Add(this.TCTujuan);
             this.Controls.Add(this.TabSelector);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DestinationForm";
             this.Text = "DestinationForm";
             this.Load += new System.EventHandler(this.DestinationForm_Load);
