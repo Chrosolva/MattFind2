@@ -7,20 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SEALCHK.Data;
-using SEALCHK.Model;
+using DEPTHCHK.Data;
+using DEPTHCHK.Models;
 
-namespace SEALCHK.View
+namespace DEPTHCHK.Views
 {
     public partial class AdminMenuForm : Form
     {
-        private readonly SealCheckContext _db = new SealCheckContext();
+        private readonly depthchkDBContext _db = new depthchkDBContext();
         private TblUser currentUser = null;
+
 
         public AdminMenuForm()
         {
             InitializeComponent();
-                
+            LoadUsers();
         }
 
         private void LoadUsers()
@@ -35,8 +36,6 @@ namespace SEALCHK.View
                       .ToList();
 
             dgvUserList.DataSource = userList;
-
-            
         }
 
         private void AdminMenuForm_Load(object sender, EventArgs e)
@@ -71,25 +70,6 @@ namespace SEALCHK.View
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (dgvUserList.CurrentRow == null) return;
-            string id = dgvUserList.CurrentRow.Cells["UserID"].Value.ToString();
-
-            var confirm = MessageBox.Show($"Delete user {id}?",
-                "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (confirm != DialogResult.Yes) return;
-
-            var user = _db.Users.FirstOrDefault(u => u.UserID == id);
-            if (user != null)
-            {
-                _db.Users.Remove(user);
-                _db.SaveChanges();
-                LoadUsers();
-            }
-        }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadUsers();
@@ -98,9 +78,9 @@ namespace SEALCHK.View
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUserID.Text) ||
-            string.IsNullOrWhiteSpace(txtUserName.Text) ||
-            string.IsNullOrWhiteSpace(txtPassword.Text) ||
-            string.IsNullOrWhiteSpace(txtConfirm.Text))
+           string.IsNullOrWhiteSpace(txtUserName.Text) ||
+           string.IsNullOrWhiteSpace(txtPassword.Text) ||
+           string.IsNullOrWhiteSpace(txtConfirm.Text))
             {
                 MessageBox.Show("All fields are required.");
                 return;
@@ -168,6 +148,25 @@ namespace SEALCHK.View
         {
             _db.Dispose();
             base.OnFormClosed(e);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvUserList.CurrentRow == null) return;
+            string id = dgvUserList.CurrentRow.Cells["UserID"].Value.ToString();
+
+            var confirm = MessageBox.Show($"Delete user {id}?",
+                "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes) return;
+
+            var user = _db.Users.FirstOrDefault(u => u.UserID == id);
+            if (user != null)
+            {
+                _db.Users.Remove(user);
+                _db.SaveChanges();
+                LoadUsers();
+            }
         }
     }
 }

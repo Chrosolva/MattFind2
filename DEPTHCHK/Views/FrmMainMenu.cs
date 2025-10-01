@@ -166,13 +166,12 @@ namespace DEPTHCHK.Views
         private void InitializeMenuPanel()
         {
             // Add menu buttons
-            //AddMenuButton("Register Seal", (s, e) => OpenChildForm(new RegisterSealForm(this)), "OPERATOR", "SUPERADMIN");
-            ////AddMenuButton("Collect Seal", (s, e) => OpenChildForm(new CollectSealForm()), "OPERATOR", "SUPERADMIN");
-            //AddMenuButton("Mobil Tangki", (s, e) => OpenChildForm(new MobilTangkiForm()), "ADMIN", "SUPERADMIN");
-            //AddMenuButton("Tujuan", (s, e) => OpenChildForm(new DestinationForm()), "ADMIN", "SUPERADMIN");
-            //AddMenuButton("History", (s, e) => OpenChildForm(new HistoryForm()), "ADMIN", "SUPERADMIN");
-            //AddMenuButton("Report", (s, e) => OpenChildForm(new ReportForm()), "ADMIN", "SUPERADMIN");
-            //AddMenuButton("USER", (s, e) => OpenChildForm(new AdminMenuForm()), "ADMIN", "SUPERADMIN");
+            AddMenuButton("PENGIRIMAN", (s, e) => OpenChildForm(new PengirimanForm()), "OPERATOR", "SUPERADMIN");
+            AddMenuButton("MOBIL TANGKI", (s, e) => OpenChildForm(new MobilTangkiForm()), "ADMIN", "SUPERADMIN");
+            AddMenuButton("TUJUAN", (s, e) => OpenChildForm(new DestinationForm()), "ADMIN", "SUPERADMIN");
+            //AddMenuButton("HIS", (s, e) => OpenChildForm(new HistoryForm()), "ADMIN", "SUPERADMIN");
+            AddMenuButton("REPORT", (s, e) => OpenChildForm(new ReportForm()), "ADMIN", "SUPERADMIN");
+            AddMenuButton("USER", (s, e) => OpenChildForm(new AdminMenuForm()), "ADMIN", "SUPERADMIN");
 
             // Style panelMenu2 (already on form)
             this.panelMenu2.BackColor = Color.FromArgb(45, 45, 48);
@@ -260,12 +259,10 @@ namespace DEPTHCHK.Views
         private void OpenChildForm(Form childForm)
         {
             // If the form requires the serial port, enforce that the port is open first
-            //bool requiresPort =
-            //    (childForm is RegisterSealForm) ||
-            //    (childForm is CollectSealForm) ||
-            //    (childForm is HistoryForm);
+            bool requiresPort =
+                (childForm is PengirimanForm);
 
-            bool requiresPort = false;
+            //bool requiresPort = false;
 
             if (requiresPort && !Session.IsPortOpen)
             {

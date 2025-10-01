@@ -4,13 +4,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 
-namespace SEALCHK.Custom
+namespace DEPTHCHK.Custom
 {
     public class CustomMaterialButton : MaterialButton
     {
         private Color customColor = Color.Red; // default green
 
-        [Category("Appearance")]
+        [Category("Appearance")]    
         [Description("Sets the background color of the button.")]
         public Color CustomColor
         {
