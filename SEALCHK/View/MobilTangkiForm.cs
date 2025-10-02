@@ -24,72 +24,72 @@ namespace SEALCHK.View
         public MobilTangkiForm()
         {
             InitializeComponent();
-            dgvMobilTangki.AutoGenerateColumns = true;
-            dgvDetailMT.AutoGenerateColumns = true;
+                dgvMobilTangki.AutoGenerateColumns = true;
+                dgvDetailMT.AutoGenerateColumns = true;
         }
 
         private void MobilTangkiForm_Load(object sender, EventArgs e)
         {
-            btnDelete.Font = btnEdit.Font;
-            DataGridViewHelper.ApplyDefaultStyle(dgvMobilTangki);
-            DataGridViewHelper.ApplyDefaultStyle(dgvDetailMT);
-            LoadMobilTangki();
-            dgvMobilTangki.SelectionChanged += DgvMobilTangki_SelectionChanged;
+                btnDelete.Font = btnEdit.Font;
+                DataGridViewHelper.ApplyDefaultStyle(dgvMobilTangki);
+                DataGridViewHelper.ApplyDefaultStyle(dgvDetailMT);
+                LoadMobilTangki();
+                dgvMobilTangki.SelectionChanged += DgvMobilTangki_SelectionChanged;
         }
 
-        private void LoadMobilTangki()
-        {
-            var data = _db.MobilTangki
-                          .OrderBy(m => m.NoPlat)
-                          .Select(m => new
-                          {
-                              m.NoPlat,
-                              m.Type,
-                              m.JlhCompartment,
-                              m.CoverBoxPanel,
-                              m.DetailStatus
-                          })
-                          .ToList();
-
-            dgvMobilTangki.DataSource = data;
-
-            if (dgvMobilTangki.Rows.Count > 0)
-                dgvMobilTangki.Rows[0].Selected = true; // trigger detail load
-        }
-
-        private void DgvMobilTangki_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvMobilTangki.CurrentRow == null) return;
-
-            var noPlat = dgvMobilTangki.CurrentRow.Cells["NoPlat"]?.Value?.ToString();
-            if (string.IsNullOrWhiteSpace(noPlat)) return;
-
-            var details = _db.DetailMT
-                             .Where(d => d.NoPlat == noPlat)
-                             .OrderBy(d => d.PartIndex)
-                             .Select(d => new
-                             {
-                                 d.PartID,
-                                 d.NoPlat,
-                                 d.SealCode,
-                                 d.Status,
-                                 d.Capacity,
-                                 d.PartIndex
-                             })
-                             .ToList();
-
-            if (details.Any())
+            private void LoadMobilTangki()
             {
-                dgvDetailMT.DataSource = details;
-                dgvDetailMT.ClearSelection();
-                dgvDetailMT.Rows[0].Selected = true; // optional: pre-select first row
+                var data = _db.MobilTangki
+                              .OrderBy(m => m.NoPlat)
+                              .Select(m => new
+                              {
+                                  m.NoPlat,
+                                  m.Type,
+                                  m.JlhCompartment,
+                                  m.CoverBoxPanel,
+                                  m.DetailStatus
+                              })
+                              .ToList();
+
+                dgvMobilTangki.DataSource = data;
+
+                if (dgvMobilTangki.Rows.Count > 0)
+                    dgvMobilTangki.Rows[0].Selected = true; // trigger detail load
             }
-            else
+
+            private void DgvMobilTangki_SelectionChanged(object sender, EventArgs e)
             {
-                // When there are no users, bind to an empty list so DataGridView clears itself
-                dgvDetailMT.DataSource = new List<object>();
+                if (dgvMobilTangki.CurrentRow == null) return;
+
+                var noPlat = dgvMobilTangki.CurrentRow.Cells["NoPlat"]?.Value?.ToString();
+                if (string.IsNullOrWhiteSpace(noPlat)) return;
+
+                var details = _db.DetailMT
+                                 .Where(d => d.NoPlat == noPlat)
+                                 .OrderBy(d => d.PartIndex)
+                                 .Select(d => new
+                                 {
+                                     d.PartID,
+                                     d.NoPlat,
+                                     d.SealCode,
+                                     d.Status,
+                                     d.Capacity,
+                                     d.PartIndex
+                                 })
+                                 .ToList();
+
+                if (details.Any())
+                {
+                    dgvDetailMT.DataSource = details;
+                    dgvDetailMT.ClearSelection();
+                    dgvDetailMT.Rows[0].Selected = true; // optional: pre-select first row
+                }
+                else
+                {
+                    // When there are no users, bind to an empty list so DataGridView clears itself
+                    dgvDetailMT.DataSource = new List<object>();
+                }
             }
-        }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -174,7 +174,7 @@ namespace SEALCHK.View
             txtNoPlat.Text = "";
             txtType.Text = "";
             NUDJlhCompartment.Value = 0;
-            NUDPanelCover.Value = 0;
+            NUDPanelCover.Value = 0;    
             currentMT = null;
             txtNoPlat.Enabled = true;
         }

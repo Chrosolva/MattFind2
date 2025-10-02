@@ -17,7 +17,7 @@ namespace DEPTHCHK.Data
             Database.SetInitializer<depthchkDBContext>(null);
         }
 
-        public virtual DbSet<TblMobilTangki> MobilTankis { get; set; }
+        public virtual DbSet<TblMobilTangki> MobilTangkis { get; set; }
         public virtual DbSet<TblDetailMT> DetailMTs { get; set; }
         public virtual DbSet<TblTujuan> Tujuans { get; set; }
         public virtual DbSet<TblUser> Users { get; set; }

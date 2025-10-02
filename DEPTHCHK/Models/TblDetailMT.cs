@@ -14,7 +14,7 @@ namespace DEPTHCHK.Models
         public string NoPlat { get; set; }      // FK → TblMobilTangki
 
         [StringLength(30)]
-        public string Compartment { get; set; }
+        public string CompartmentID { get; set; }
 
         public decimal? Kalibrasi { get; set; } // precision set in Fluent API
 
