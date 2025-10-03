@@ -38,8 +38,6 @@ namespace DEPTHCHK.Models
         [ForeignKey(nameof(IDPengiriman))]
         public virtual TblPengiriman Pengiriman { get; set; }
 
-        [ForeignKey(nameof(KodeTujuan))]
-        public virtual TblTujuan TujuanRef { get; set; }
 
         [ForeignKey(nameof(PartID))]
         public virtual TblDetailMT DetailMT { get; set; }

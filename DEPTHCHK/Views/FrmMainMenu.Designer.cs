@@ -44,8 +44,8 @@
             this.SPRegis = new System.IO.Ports.SerialPort(this.components);
             this.lblPortStatus = new System.Windows.Forms.Label();
             this.panelMenu2 = new System.Windows.Forms.Panel();
-            this.btnDisconnect = new DEPTHCHK.Custom.CustomMaterialButton();
             this.btnLogOut = new DEPTHCHK.Custom.CustomMaterialButton();
+            this.btnDisconnect = new DEPTHCHK.Custom.CustomMaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.NUDBaudRate)).BeginInit();
             this.panelMenu2.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +53,10 @@
             // btnSetActive
             // 
             this.btnSetActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSetActive.Location = new System.Drawing.Point(1033, 492);
+            this.btnSetActive.Location = new System.Drawing.Point(1183, 609);
+            this.btnSetActive.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetActive.Name = "btnSetActive";
-            this.btnSetActive.Size = new System.Drawing.Size(47, 23);
+            this.btnSetActive.Size = new System.Drawing.Size(63, 28);
             this.btnSetActive.TabIndex = 31;
             this.btnSetActive.Text = "SET";
             this.btnSetActive.UseVisualStyleBackColor = true;
@@ -65,7 +66,8 @@
             // 
             this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(1030, 518);
+            this.lblTime.Location = new System.Drawing.Point(1189, 642);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(33, 13);
             this.lblTime.TabIndex = 33;
@@ -75,21 +77,22 @@
             // 
             this.cbxTimeZone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxTimeZone.FormattingEnabled = true;
-            this.cbxTimeZone.Location = new System.Drawing.Point(1086, 492);
+            this.cbxTimeZone.Location = new System.Drawing.Point(1254, 612);
+            this.cbxTimeZone.Margin = new System.Windows.Forms.Padding(4);
             this.cbxTimeZone.Name = "cbxTimeZone";
-            this.cbxTimeZone.Size = new System.Drawing.Size(121, 21);
+            this.cbxTimeZone.Size = new System.Drawing.Size(160, 21);
             this.cbxTimeZone.TabIndex = 32;
             // 
             // btnConnect
             // 
-            this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnConnect.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnConnect.Depth = 0;
             this.btnConnect.HighEmphasis = true;
             this.btnConnect.Icon = null;
-            this.btnConnect.Location = new System.Drawing.Point(751, 499);
-            this.btnConnect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnConnect.Location = new System.Drawing.Point(914, 613);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnConnect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -104,14 +107,15 @@
             // NUDBaudRate
             // 
             this.NUDBaudRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.NUDBaudRate.Location = new System.Drawing.Point(668, 502);
+            this.NUDBaudRate.Location = new System.Drawing.Point(801, 636);
+            this.NUDBaudRate.Margin = new System.Windows.Forms.Padding(4);
             this.NUDBaudRate.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.NUDBaudRate.Name = "NUDBaudRate";
-            this.NUDBaudRate.Size = new System.Drawing.Size(58, 20);
+            this.NUDBaudRate.Size = new System.Drawing.Size(77, 20);
             this.NUDBaudRate.TabIndex = 30;
             this.NUDBaudRate.Value = new decimal(new int[] {
             9600,
@@ -125,7 +129,8 @@
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(592, 506);
+            this.materialLabel7.Location = new System.Drawing.Point(798, 613);
+            this.materialLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(70, 19);
@@ -148,11 +153,12 @@
             this.cbxPort.Hint = "PORT";
             this.cbxPort.IntegralHeight = false;
             this.cbxPort.ItemHeight = 43;
-            this.cbxPort.Location = new System.Drawing.Point(458, 489);
+            this.cbxPort.Location = new System.Drawing.Point(588, 609);
+            this.cbxPort.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPort.MaxDropDownItems = 4;
             this.cbxPort.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxPort.Name = "cbxPort";
-            this.cbxPort.Size = new System.Drawing.Size(128, 49);
+            this.cbxPort.Size = new System.Drawing.Size(169, 49);
             this.cbxPort.StartIndex = 0;
             this.cbxPort.TabIndex = 26;
             // 
@@ -162,7 +168,8 @@
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(410, 506);
+            this.materialLabel6.Location = new System.Drawing.Point(524, 630);
+            this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(42, 19);
@@ -173,7 +180,8 @@
             // 
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(162, 502);
+            this.lblStatus.Location = new System.Drawing.Point(205, 609);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(224, 13);
             this.lblStatus.TabIndex = 24;
@@ -189,28 +197,29 @@
             this.ContentCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ContentCard.Depth = 0;
             this.ContentCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ContentCard.Location = new System.Drawing.Point(157, 66);
-            this.ContentCard.Margin = new System.Windows.Forms.Padding(14);
+            this.ContentCard.Location = new System.Drawing.Point(2, 74);
+            this.ContentCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.ContentCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.ContentCard.Name = "ContentCard";
-            this.ContentCard.Padding = new System.Windows.Forms.Padding(2);
-            this.ContentCard.Size = new System.Drawing.Size(1135, 419);
+            this.ContentCard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ContentCard.Size = new System.Drawing.Size(1500, 523);
             this.ContentCard.TabIndex = 22;
             // 
             // btnBackUP
             // 
+            this.btnBackUP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBackUP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnBackUP.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnBackUP.Depth = 0;
-            this.btnBackUP.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnBackUP.HighEmphasis = true;
             this.btnBackUP.Icon = null;
-            this.btnBackUP.Location = new System.Drawing.Point(0, 402);
-            this.btnBackUP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnBackUP.Location = new System.Drawing.Point(8, 612);
+            this.btnBackUP.Margin = new System.Windows.Forms.Padding(5, 7, 6, 7);
             this.btnBackUP.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBackUP.Name = "btnBackUP";
             this.btnBackUP.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBackUP.Size = new System.Drawing.Size(153, 36);
+            this.btnBackUP.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
+            this.btnBackUP.Size = new System.Drawing.Size(104, 36);
             this.btnBackUP.TabIndex = 1;
             this.btnBackUP.Text = "BACK UP DB";
             this.btnBackUP.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -223,7 +232,8 @@
             this.lblPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPortStatus.AutoSize = true;
             this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortStatus.Location = new System.Drawing.Point(162, 522);
+            this.lblPortStatus.Location = new System.Drawing.Point(205, 625);
+            this.lblPortStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPortStatus.Name = "lblPortStatus";
             this.lblPortStatus.Size = new System.Drawing.Size(63, 13);
             this.lblPortStatus.TabIndex = 25;
@@ -231,16 +241,41 @@
             // 
             // panelMenu2
             // 
+            this.panelMenu2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMenu2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.panelMenu2.Controls.Add(this.btnBackUP);
+            this.panelMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.panelMenu2.Controls.Add(this.btnLogOut);
-            this.panelMenu2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelMenu2.Location = new System.Drawing.Point(3, 64);
+            this.panelMenu2.Location = new System.Drawing.Point(208, 26);
+            this.panelMenu2.Margin = new System.Windows.Forms.Padding(4);
             this.panelMenu2.Name = "panelMenu2";
             this.panelMenu2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.panelMenu2.Size = new System.Drawing.Size(153, 474);
+            this.panelMenu2.Size = new System.Drawing.Size(1223, 44);
             this.panelMenu2.TabIndex = 21;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogOut.CustomColor = System.Drawing.Color.DarkRed;
+            this.btnLogOut.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLogOut.Depth = 0;
+            this.btnLogOut.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnLogOut.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.HighEmphasis = true;
+            this.btnLogOut.Icon = null;
+            this.btnLogOut.Location = new System.Drawing.Point(1145, 2);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLogOut.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLogOut.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
+            this.btnLogOut.Size = new System.Drawing.Size(78, 42);
+            this.btnLogOut.TabIndex = 2;
+            this.btnLogOut.Text = "LOGOUT";
+            this.btnLogOut.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnLogOut.UseAccentColor = false;
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnDisconnect
             // 
@@ -252,8 +287,8 @@
             this.btnDisconnect.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDisconnect.HighEmphasis = true;
             this.btnDisconnect.Icon = null;
-            this.btnDisconnect.Location = new System.Drawing.Point(847, 497);
-            this.btnDisconnect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnDisconnect.Location = new System.Drawing.Point(1011, 613);
+            this.btnDisconnect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnDisconnect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -265,35 +300,14 @@
             this.btnDisconnect.UseVisualStyleBackColor = true;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
-            // btnLogOut
-            // 
-            this.btnLogOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnLogOut.CustomColor = System.Drawing.Color.DarkRed;
-            this.btnLogOut.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnLogOut.Depth = 0;
-            this.btnLogOut.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnLogOut.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogOut.HighEmphasis = true;
-            this.btnLogOut.Icon = null;
-            this.btnLogOut.Location = new System.Drawing.Point(0, 438);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnLogOut.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnLogOut.Size = new System.Drawing.Size(153, 36);
-            this.btnLogOut.TabIndex = 2;
-            this.btnLogOut.Text = "LOGOUT";
-            this.btnLogOut.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnLogOut.UseAccentColor = false;
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
-            // 
             // FrmMainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1294, 541);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(1439, 666);
+            this.Controls.Add(this.panelMenu2);
             this.Controls.Add(this.btnSetActive);
+            this.Controls.Add(this.btnBackUP);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.cbxTimeZone);
             this.Controls.Add(this.btnDisconnect);
@@ -305,9 +319,11 @@
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.ContentCard);
             this.Controls.Add(this.lblPortStatus);
-            this.Controls.Add(this.panelMenu2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_48;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmMainMenu";
+            this.Padding = new System.Windows.Forms.Padding(3, 72, 4, 4);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DEPTHCHK";
             this.Load += new System.EventHandler(this.FrmMainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NUDBaudRate)).EndInit();

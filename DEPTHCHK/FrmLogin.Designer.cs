@@ -42,8 +42,7 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(97, 485);
-            this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel3.Location = new System.Drawing.Point(73, 394);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(59, 19);
@@ -59,8 +58,7 @@
             this.txtServerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtServerAdd.HideSelection = true;
             this.txtServerAdd.LeadingIcon = null;
-            this.txtServerAdd.Location = new System.Drawing.Point(84, 526);
-            this.txtServerAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServerAdd.Location = new System.Drawing.Point(63, 427);
             this.txtServerAdd.MaxLength = 32767;
             this.txtServerAdd.MouseState = MaterialSkin.MouseState.OUT;
             this.txtServerAdd.Name = "txtServerAdd";
@@ -72,7 +70,7 @@
             this.txtServerAdd.SelectionLength = 0;
             this.txtServerAdd.SelectionStart = 0;
             this.txtServerAdd.ShortcutsEnabled = true;
-            this.txtServerAdd.Size = new System.Drawing.Size(333, 48);
+            this.txtServerAdd.Size = new System.Drawing.Size(250, 48);
             this.txtServerAdd.TabIndex = 12;
             this.txtServerAdd.TabStop = false;
             this.txtServerAdd.Text = "localhost";
@@ -87,8 +85,8 @@
             this.btnLogin.Depth = 0;
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = null;
-            this.btnLogin.Location = new System.Drawing.Point(152, 361);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnLogin.Location = new System.Drawing.Point(114, 293);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -105,8 +103,7 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(97, 228);
-            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel2.Location = new System.Drawing.Point(73, 185);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(87, 19);
@@ -122,8 +119,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPassword.HideSelection = true;
             this.txtPassword.LeadingIcon = null;
-            this.txtPassword.Location = new System.Drawing.Point(84, 270);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Location = new System.Drawing.Point(63, 219);
             this.txtPassword.MaxLength = 32767;
             this.txtPassword.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPassword.Name = "txtPassword";
@@ -135,7 +131,7 @@
             this.txtPassword.SelectionLength = 0;
             this.txtPassword.SelectionStart = 0;
             this.txtPassword.ShortcutsEnabled = true;
-            this.txtPassword.Size = new System.Drawing.Size(333, 48);
+            this.txtPassword.Size = new System.Drawing.Size(250, 48);
             this.txtPassword.TabIndex = 9;
             this.txtPassword.TabStop = false;
             this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -147,8 +143,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(97, 100);
-            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel1.Location = new System.Drawing.Point(73, 81);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(59, 19);
@@ -164,8 +159,7 @@
             this.txtUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtUserID.HideSelection = true;
             this.txtUserID.LeadingIcon = null;
-            this.txtUserID.Location = new System.Drawing.Point(84, 142);
-            this.txtUserID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUserID.Location = new System.Drawing.Point(63, 115);
             this.txtUserID.MaxLength = 32767;
             this.txtUserID.MouseState = MaterialSkin.MouseState.OUT;
             this.txtUserID.Name = "txtUserID";
@@ -177,7 +171,7 @@
             this.txtUserID.SelectionLength = 0;
             this.txtUserID.SelectionStart = 0;
             this.txtUserID.ShortcutsEnabled = true;
-            this.txtUserID.Size = new System.Drawing.Size(333, 48);
+            this.txtUserID.Size = new System.Drawing.Size(250, 48);
             this.txtUserID.TabIndex = 7;
             this.txtUserID.TabStop = false;
             this.txtUserID.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -186,9 +180,9 @@
             // 
             // FrmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 617);
+            this.ClientSize = new System.Drawing.Size(400, 501);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.txtServerAdd);
             this.Controls.Add(this.btnLogin);
@@ -196,7 +190,10 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.txtUserID);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmLogin";
+            this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmLogin_FormClosed);
             this.ResumeLayout(false);

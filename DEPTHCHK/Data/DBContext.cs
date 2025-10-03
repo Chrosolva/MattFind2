@@ -70,12 +70,6 @@ namespace DEPTHCHK.Data
                 .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<TblDetailPengiriman>()
-                .HasOptional(d => d.TujuanRef)
-                .WithMany(t => t.DetailPengiriman)
-                .HasForeignKey(d => d.KodeTujuan)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TblDetailPengiriman>()
                 .HasRequired(d => d.DetailMT)
                 .WithMany(mt => mt.DetailPengiriman)
                 .HasForeignKey(d => d.PartID)

@@ -174,7 +174,7 @@ namespace DEPTHCHK.Views
             AddMenuButton("USER", (s, e) => OpenChildForm(new AdminMenuForm()), "ADMIN", "SUPERADMIN");
 
             // Style panelMenu2 (already on form)
-            this.panelMenu2.BackColor = Color.FromArgb(45, 45, 48);
+            this.panelMenu2.BackColor = Color.FromArgb(21, 101, 192);
         }
 
         // -------------------------------
@@ -185,9 +185,10 @@ namespace DEPTHCHK.Views
 
             Panel container = new Panel
             {
-                Dock = DockStyle.Top,
+                Dock = DockStyle.Left,
                 Height = 40,
-                Padding = new Padding(0, 2, 0, 0)
+                Width = 140,
+                Padding = new Padding(2, 2, 2, 0)
             };
 
             var btn = new MaterialButton
