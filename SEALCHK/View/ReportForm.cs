@@ -12,12 +12,24 @@ using CrystalDecisions.Shared;
 using SEALCHK.Data;
 using SEALCHK.Model;
 using SEALCHK.Reports;
+using System.Data.SqlClient;
 
 namespace SEALCHK.View
 {
     public partial class ReportForm : Form
     {
         private readonly SealCheckContext _db = new SealCheckContext();
+
+        public class BAPenghapusanSegelRow
+        {
+            public DateTime Tgl_Input { get; set; }
+            public string NoPlat { get; set; }
+            public string UserInput { get; set; }
+            public string UserOut { get; set; }
+            public string SPBU { get; set; }
+            public string Segel { get; set; }
+        }
+
 
         public ReportForm()
         {
@@ -104,6 +116,47 @@ namespace SEALCHK.View
                 crViewer.ReportSource = rpt;
                 crViewer.Refresh();
             }
+            else if (cbxJenisLaporan.SelectedIndex == 1)
+            {
+                //BA Penghapusan Segel
+                DateTime from = dtpFrom.Value.Date;
+                DateTime toExcl = dtpTo.Value.Date.AddDays(1);
+
+                string noPlat = (cbxNoPlat.Text ?? "").Trim();
+                string status = (cbxStatus.Text ?? "").Trim();
+                string tujuan = (txtTujuan.Text ?? "").Trim();
+
+                var dt = BuildBAPenghapusanSegelTable(from, toExcl, noPlat, status, tujuan);
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("No data for the selected filters / date range.", "Report",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    crViewer.ReportSource = null;
+                    return;
+                }
+
+                // Use a Crystal report you’ll create named BAPenghapusanSegel.rpt
+                ReportDocument rpt = new Reports.BAPenghapusanSegel(); // strongly-typed
+                                                                       // OR:
+                                                                       // var rpt = new ReportDocument();
+                                                                       // rpt.Load(Path.Combine(Application.StartupPath, "Reports\\BAPenghapusanSegel.rpt"));
+
+                var ds = new DataSet("SealReportData"); // name arbitrary
+                ds.Tables.Add(dt);
+                rpt.SetDataSource(ds);
+
+                // header params (optional)
+                SetParamEverywhere(rpt, "FromDate", from);
+                SetParamEverywhere(rpt, "ToDate", toExcl.AddDays(-1));
+                SetParamEverywhere(rpt, "NoPlat", string.IsNullOrWhiteSpace(noPlat) ? "" : noPlat);
+                SetParamEverywhere(rpt, "Status", string.IsNullOrWhiteSpace(status) ? "" : status);
+                SetParamEverywhere(rpt, "Tujuan", string.IsNullOrWhiteSpace(tujuan) ? "" : tujuan);
+
+                crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+                crViewer.ReportSource = rpt;
+                crViewer.Refresh();
+            }
+
         }
 
         private SealReportDataSet BuildRegisterDataSet(DateTime tglfrom, DateTime toExcl, string noPlat, string status, string tujuan)
@@ -183,6 +236,92 @@ namespace SEALCHK.View
 
             return ds;
         }
+
+        private DataTable BuildBAPenghapusanSegelTable(
+    DateTime from, DateTime toExcl, string noPlat, string status, string tujuan)
+        {
+            var sql = @"
+DECLARE @From DATETIME = @pFrom;
+DECLARE @ToExcl DATETIME = @pToExcl;
+DECLARE @NoPlat VARCHAR(50) = @pNoPlat;
+DECLARE @Status VARCHAR(50) = @pStatus;
+DECLARE @Tujuan NVARCHAR(200) = @pTujuan;
+
+SELECT
+    r.Tgl_Input,
+    r.NoPlat,
+    r.UserINPUT  AS UserInput,
+    r.UserOUT    AS UserOut,
+    r.Tujuan     AS SPBU,
+    ca.Segel,
+    cb.StatusSegel 
+FROM dbo.TblRegister AS r
+OUTER APPLY (
+    SELECT
+        STUFF((
+            SELECT ' | ' + CAST(d2.Seal AS varchar(50))
+            FROM dbo.TblDetailRegister AS d2
+            WHERE d2.NoPlat    = r.NoPlat
+              AND d2.Tgl_Input = r.Tgl_Input
+              AND NULLIF(LTRIM(RTRIM(d2.Seal)), '') IS NOT NULL
+              AND (@Status is not null AND (ISNULL(d2.Status,'') LIKE '%' + @Status + '%'))
+            ORDER BY d2.PartID
+            FOR XML PATH(''), TYPE
+        ).value('.', 'nvarchar(max)'), 1, 1, '') AS Segel
+) AS ca
+OUTER APPLY (
+    SELECT
+        STUFF((
+            SELECT ' | ' + CAST(d2.[Status] AS varchar(50))
+            FROM dbo.TblDetailRegister AS d2
+            WHERE d2.NoPlat    = r.NoPlat
+              AND d2.Tgl_Input = r.Tgl_Input
+              AND (@Status is not null AND (ISNULL(d2.Status,'') LIKE '%' + @Status + '%'))  -- skip empty/NULL
+            ORDER BY d2.PartID                                   -- set your order
+            FOR XML PATH(''), TYPE
+        ).value('.', 'nvarchar(max)'), 1, 1, '') AS StatusSegel
+) AS cb
+WHERE
+    r.Tgl_Input >= @From AND r.Tgl_Input < @ToExcl
+    AND (@NoPlat = '' OR r.NoPlat = @NoPlat)
+    AND (@Tujuan = '' OR (ISNULL(r.Tujuan,'') LIKE '%' + @Tujuan + '%'))
+    AND (
+    @Status = '' OR EXISTS (                                   -- << key line
+        SELECT 1
+        FROM dbo.TblDetailRegister AS dx
+        WHERE dx.NoPlat    = r.NoPlat
+          AND dx.Tgl_Input = r.Tgl_Input
+          AND ISNULL(dx.Status,'') LIKE '%' + @Status + '%'
+    )
+)
+ORDER BY r.Tgl_Input, r.NoPlat;";
+
+            var rows = _db.Database.SqlQuery<BAPenghapusanSegelRow>(
+                sql,
+                new SqlParameter("@pFrom", from),
+                new SqlParameter("@pToExcl", toExcl),
+                new SqlParameter("@pNoPlat", (noPlat ?? "").Trim()),
+                new SqlParameter("@pStatus", (status ?? "").Trim()),
+                new SqlParameter("@pTujuan", (tujuan ?? "").Trim())
+            ).ToList();
+
+            // make DataTable with stable column names for Crystal
+            var dt = new DataTable("BAPenghapusanSegel");
+            dt.Columns.Add("Tgl_Input", typeof(DateTime));
+            dt.Columns.Add("NoPlat", typeof(string));
+            dt.Columns.Add("UserInput", typeof(string));
+            dt.Columns.Add("UserOut", typeof(string));
+            dt.Columns.Add("SPBU", typeof(string));
+            dt.Columns.Add("Segel", typeof(string));
+
+            foreach (var r in rows)
+            {
+                dt.Rows.Add(r.Tgl_Input, r.NoPlat ?? "", r.UserInput ?? "", r.UserOut ?? "",
+                            r.SPBU ?? "", r.Segel ?? "");
+            }
+            return dt;
+        }
+
 
         // Log available parameters (for quick diagnosis)
         private static string ListParams(ReportDocument rpt)

@@ -52,6 +52,29 @@
             this.leftPanel = new System.Windows.Forms.Panel();
             this.UpPanel = new System.Windows.Forms.Panel();
             this.TabSelector = new MaterialSkin.Controls.MaterialTabSelector();
+            this.lblJlhCapacity = new MaterialSkin.Controls.MaterialLabel();
+            this.lblJlhCompartment = new MaterialSkin.Controls.MaterialLabel();
+            this.lblType = new MaterialSkin.Controls.MaterialLabel();
+            this.grpRegister = new System.Windows.Forms.GroupBox();
+            this.pnlTujuan = new System.Windows.Forms.Panel();
+            this.btnSetTujuan = new MaterialSkin.Controls.MaterialButton();
+            this.txtTujuan = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            this.grpRegisLive = new System.Windows.Forms.GroupBox();
+            this.dgvPengirimanLive = new System.Windows.Forms.DataGridView();
+            this.pnlTopRLive = new System.Windows.Forms.Panel();
+            this.btnClearLog = new MaterialSkin.Controls.MaterialButton();
+            this.btnSave = new MaterialSkin.Controls.MaterialButton();
+            this.ProListen = new MaterialSkin.Controls.MaterialProgressBar();
+            this.btnStartListen = new MaterialSkin.Controls.MaterialButton();
+            this.txtSerialLog = new System.Windows.Forms.RichTextBox();
+            this.lblNoPlat = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblIDPengiriman = new MaterialSkin.Controls.MaterialLabel();
             this.TCPengiriman.SuspendLayout();
             this.TPPengiriman.SuspendLayout();
             this.RightCard.SuspendLayout();
@@ -62,6 +85,14 @@
             this.UpCard.SuspendLayout();
             this.TPAddPengiriman.SuspendLayout();
             this.CardCRUD.SuspendLayout();
+            this.RightPanel.SuspendLayout();
+            this.leftPanel.SuspendLayout();
+            this.UpPanel.SuspendLayout();
+            this.grpRegister.SuspendLayout();
+            this.pnlTujuan.SuspendLayout();
+            this.grpRegisLive.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPengirimanLive)).BeginInit();
+            this.pnlTopRLive.SuspendLayout();
             this.SuspendLayout();
             // 
             // TCPengiriman
@@ -70,13 +101,12 @@
             this.TCPengiriman.Controls.Add(this.TPAddPengiriman);
             this.TCPengiriman.Depth = 0;
             this.TCPengiriman.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TCPengiriman.Location = new System.Drawing.Point(0, 59);
-            this.TCPengiriman.Margin = new System.Windows.Forms.Padding(4);
+            this.TCPengiriman.Location = new System.Drawing.Point(0, 48);
             this.TCPengiriman.MouseState = MaterialSkin.MouseState.HOVER;
             this.TCPengiriman.Multiline = true;
             this.TCPengiriman.Name = "TCPengiriman";
             this.TCPengiriman.SelectedIndex = 0;
-            this.TCPengiriman.Size = new System.Drawing.Size(1172, 563);
+            this.TCPengiriman.Size = new System.Drawing.Size(879, 457);
             this.TCPengiriman.TabIndex = 6;
             // 
             // TPPengiriman
@@ -84,11 +114,10 @@
             this.TPPengiriman.Controls.Add(this.RightCard);
             this.TPPengiriman.Controls.Add(this.LeftCard);
             this.TPPengiriman.Controls.Add(this.TopPanel);
-            this.TPPengiriman.Location = new System.Drawing.Point(4, 25);
-            this.TPPengiriman.Margin = new System.Windows.Forms.Padding(4);
+            this.TPPengiriman.Location = new System.Drawing.Point(4, 22);
             this.TPPengiriman.Name = "TPPengiriman";
-            this.TPPengiriman.Padding = new System.Windows.Forms.Padding(4);
-            this.TPPengiriman.Size = new System.Drawing.Size(1164, 534);
+            this.TPPengiriman.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPPengiriman.Size = new System.Drawing.Size(871, 431);
             this.TPPengiriman.TabIndex = 0;
             this.TPPengiriman.Text = "DAFTAR PENGIRIMAN";
             this.TPPengiriman.UseVisualStyleBackColor = true;
@@ -101,12 +130,12 @@
             this.RightCard.Depth = 0;
             this.RightCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.RightCard.Location = new System.Drawing.Point(4, 372);
-            this.RightCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.RightCard.Location = new System.Drawing.Point(3, 302);
+            this.RightCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.RightCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.RightCard.Name = "RightCard";
-            this.RightCard.Padding = new System.Windows.Forms.Padding(4);
-            this.RightCard.Size = new System.Drawing.Size(1156, 158);
+            this.RightCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RightCard.Size = new System.Drawing.Size(865, 126);
             this.RightCard.TabIndex = 9;
             // 
             // dgvDetailPengiriman
@@ -115,10 +144,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetailPengiriman.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailPengiriman.Location = new System.Drawing.Point(8, 36);
-            this.dgvDetailPengiriman.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvDetailPengiriman.Location = new System.Drawing.Point(6, 29);
             this.dgvDetailPengiriman.Name = "dgvDetailPengiriman";
-            this.dgvDetailPengiriman.Size = new System.Drawing.Size(1140, 115);
+            this.dgvDetailPengiriman.Size = new System.Drawing.Size(853, 91);
             this.dgvDetailPengiriman.TabIndex = 3;
             // 
             // materialLabel2
@@ -126,8 +154,7 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(8, 9);
-            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel2.Location = new System.Drawing.Point(6, 7);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(152, 19);
@@ -142,12 +169,12 @@
             this.LeftCard.Depth = 0;
             this.LeftCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeftCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LeftCard.Location = new System.Drawing.Point(4, 102);
-            this.LeftCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.LeftCard.Location = new System.Drawing.Point(3, 83);
+            this.LeftCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
-            this.LeftCard.Padding = new System.Windows.Forms.Padding(4);
-            this.LeftCard.Size = new System.Drawing.Size(1156, 270);
+            this.LeftCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LeftCard.Size = new System.Drawing.Size(865, 219);
             this.LeftCard.TabIndex = 8;
             // 
             // materialLabel1
@@ -155,8 +182,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(8, 9);
-            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel1.Location = new System.Drawing.Point(6, 7);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(159, 19);
@@ -169,20 +195,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPengiriman.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPengiriman.Location = new System.Drawing.Point(8, 36);
-            this.dgvPengiriman.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvPengiriman.Location = new System.Drawing.Point(6, 29);
             this.dgvPengiriman.Name = "dgvPengiriman";
-            this.dgvPengiriman.Size = new System.Drawing.Size(1140, 226);
+            this.dgvPengiriman.Size = new System.Drawing.Size(853, 184);
             this.dgvPengiriman.TabIndex = 0;
             // 
             // TopPanel
             // 
             this.TopPanel.Controls.Add(this.UpCard);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(4, 4);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.TopPanel.Location = new System.Drawing.Point(3, 3);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1156, 98);
+            this.TopPanel.Size = new System.Drawing.Size(865, 80);
             this.TopPanel.TabIndex = 0;
             // 
             // UpCard
@@ -200,11 +224,11 @@
             this.UpCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.UpCard.Location = new System.Drawing.Point(0, 0);
-            this.UpCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.UpCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.UpCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.UpCard.Name = "UpCard";
-            this.UpCard.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.UpCard.Size = new System.Drawing.Size(1156, 98);
+            this.UpCard.Padding = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.UpCard.Size = new System.Drawing.Size(865, 80);
             this.UpCard.TabIndex = 0;
             // 
             // btnFilter
@@ -214,8 +238,8 @@
             this.btnFilter.Depth = 0;
             this.btnFilter.HighEmphasis = true;
             this.btnFilter.Icon = null;
-            this.btnFilter.Location = new System.Drawing.Point(1183, 36);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnFilter.Location = new System.Drawing.Point(887, 29);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnFilter.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -230,20 +254,18 @@
             // 
             this.dtpPengTo.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpPengTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPengTo.Location = new System.Drawing.Point(895, 68);
-            this.dtpPengTo.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpPengTo.Location = new System.Drawing.Point(671, 55);
             this.dtpPengTo.Name = "dtpPengTo";
-            this.dtpPengTo.Size = new System.Drawing.Size(265, 22);
+            this.dtpPengTo.Size = new System.Drawing.Size(200, 20);
             this.dtpPengTo.TabIndex = 30;
             // 
             // dtpPengFrom
             // 
             this.dtpPengFrom.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpPengFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPengFrom.Location = new System.Drawing.Point(895, 36);
-            this.dtpPengFrom.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpPengFrom.Location = new System.Drawing.Point(671, 29);
             this.dtpPengFrom.Name = "dtpPengFrom";
-            this.dtpPengFrom.Size = new System.Drawing.Size(265, 22);
+            this.dtpPengFrom.Size = new System.Drawing.Size(200, 20);
             this.dtpPengFrom.TabIndex = 29;
             // 
             // materialLabel10
@@ -251,8 +273,7 @@
             this.materialLabel10.AutoSize = true;
             this.materialLabel10.Depth = 0;
             this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel10.Location = new System.Drawing.Point(895, 11);
-            this.materialLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel10.Location = new System.Drawing.Point(671, 9);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
             this.materialLabel10.Size = new System.Drawing.Size(211, 19);
@@ -273,12 +294,11 @@
             this.cbxPengSearchBy.FormattingEnabled = true;
             this.cbxPengSearchBy.IntegralHeight = false;
             this.cbxPengSearchBy.ItemHeight = 43;
-            this.cbxPengSearchBy.Location = new System.Drawing.Point(720, 34);
-            this.cbxPengSearchBy.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxPengSearchBy.Location = new System.Drawing.Point(540, 28);
             this.cbxPengSearchBy.MaxDropDownItems = 4;
             this.cbxPengSearchBy.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxPengSearchBy.Name = "cbxPengSearchBy";
-            this.cbxPengSearchBy.Size = new System.Drawing.Size(165, 49);
+            this.cbxPengSearchBy.Size = new System.Drawing.Size(125, 49);
             this.cbxPengSearchBy.StartIndex = 0;
             this.cbxPengSearchBy.TabIndex = 27;
             // 
@@ -287,8 +307,7 @@
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.Location = new System.Drawing.Point(733, 11);
-            this.materialLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel9.Location = new System.Drawing.Point(550, 9);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(89, 19);
@@ -305,8 +324,7 @@
             this.txtSearchPeng.HideSelection = true;
             this.txtSearchPeng.Hint = "SEARCH PENGIRIMAN";
             this.txtSearchPeng.LeadingIcon = null;
-            this.txtSearchPeng.Location = new System.Drawing.Point(365, 36);
-            this.txtSearchPeng.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearchPeng.Location = new System.Drawing.Point(274, 29);
             this.txtSearchPeng.MaxLength = 32767;
             this.txtSearchPeng.MouseState = MaterialSkin.MouseState.OUT;
             this.txtSearchPeng.Name = "txtSearchPeng";
@@ -318,7 +336,7 @@
             this.txtSearchPeng.SelectionLength = 0;
             this.txtSearchPeng.SelectionStart = 0;
             this.txtSearchPeng.ShortcutsEnabled = true;
-            this.txtSearchPeng.Size = new System.Drawing.Size(347, 48);
+            this.txtSearchPeng.Size = new System.Drawing.Size(260, 48);
             this.txtSearchPeng.TabIndex = 8;
             this.txtSearchPeng.TabStop = false;
             this.txtSearchPeng.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -332,8 +350,8 @@
             this.btnNew.Depth = 0;
             this.btnNew.HighEmphasis = true;
             this.btnNew.Icon = null;
-            this.btnNew.Location = new System.Drawing.Point(24, 36);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnNew.Location = new System.Drawing.Point(18, 29);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNew.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNew.Name = "btnNew";
             this.btnNew.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -347,11 +365,10 @@
             // TPAddPengiriman
             // 
             this.TPAddPengiriman.Controls.Add(this.CardCRUD);
-            this.TPAddPengiriman.Location = new System.Drawing.Point(4, 25);
-            this.TPAddPengiriman.Margin = new System.Windows.Forms.Padding(4);
+            this.TPAddPengiriman.Location = new System.Drawing.Point(4, 22);
             this.TPAddPengiriman.Name = "TPAddPengiriman";
-            this.TPAddPengiriman.Padding = new System.Windows.Forms.Padding(4);
-            this.TPAddPengiriman.Size = new System.Drawing.Size(1164, 534);
+            this.TPAddPengiriman.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPAddPengiriman.Size = new System.Drawing.Size(871, 431);
             this.TPAddPengiriman.TabIndex = 1;
             this.TPAddPengiriman.Text = "ADD PENGIRIMAN";
             this.TPAddPengiriman.UseVisualStyleBackColor = true;
@@ -361,47 +378,59 @@
             this.CardCRUD.AutoScroll = true;
             this.CardCRUD.AutoSize = true;
             this.CardCRUD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.CardCRUD.Controls.Add(this.RightPanel);
             this.CardCRUD.Controls.Add(this.leftPanel);
+            this.CardCRUD.Controls.Add(this.RightPanel);
             this.CardCRUD.Controls.Add(this.UpPanel);
             this.CardCRUD.Depth = 0;
             this.CardCRUD.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardCRUD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.CardCRUD.Location = new System.Drawing.Point(4, 4);
-            this.CardCRUD.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.CardCRUD.Location = new System.Drawing.Point(3, 3);
+            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.CardCRUD.MouseState = MaterialSkin.MouseState.HOVER;
             this.CardCRUD.Name = "CardCRUD";
-            this.CardCRUD.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.CardCRUD.Size = new System.Drawing.Size(1156, 526);
+            this.CardCRUD.Padding = new System.Windows.Forms.Padding(8);
+            this.CardCRUD.Size = new System.Drawing.Size(865, 425);
             this.CardCRUD.TabIndex = 0;
             // 
             // RightPanel
             // 
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightPanel.Location = new System.Drawing.Point(894, 197);
-            this.RightPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.RightPanel.Controls.Add(this.txtSerialLog);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(613, 162);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(243, 312);
+            this.RightPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.RightPanel.Size = new System.Drawing.Size(244, 255);
             this.RightPanel.TabIndex = 2;
             // 
             // leftPanel
             // 
-            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftPanel.Location = new System.Drawing.Point(19, 197);
-            this.leftPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.leftPanel.Controls.Add(this.grpRegisLive);
+            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.leftPanel.Location = new System.Drawing.Point(8, 162);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(875, 312);
+            this.leftPanel.Size = new System.Drawing.Size(605, 255);
             this.leftPanel.TabIndex = 1;
             // 
             // UpPanel
             // 
             this.UpPanel.AutoScroll = true;
+            this.UpPanel.Controls.Add(this.lblIDPengiriman);
+            this.UpPanel.Controls.Add(this.materialLabel3);
+            this.UpPanel.Controls.Add(this.materialLabel11);
+            this.UpPanel.Controls.Add(this.lblNoPlat);
+            this.UpPanel.Controls.Add(this.materialLabel5);
+            this.UpPanel.Controls.Add(this.materialLabel6);
+            this.UpPanel.Controls.Add(this.materialLabel7);
+            this.UpPanel.Controls.Add(this.grpRegister);
+            this.UpPanel.Controls.Add(this.lblJlhCapacity);
+            this.UpPanel.Controls.Add(this.lblJlhCompartment);
+            this.UpPanel.Controls.Add(this.lblType);
             this.UpPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.UpPanel.Location = new System.Drawing.Point(19, 17);
-            this.UpPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.UpPanel.Location = new System.Drawing.Point(8, 8);
             this.UpPanel.Name = "UpPanel";
-            this.UpPanel.Size = new System.Drawing.Size(1118, 180);
+            this.UpPanel.Size = new System.Drawing.Size(849, 154);
             this.UpPanel.TabIndex = 0;
+            this.UpPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.UpPanel_Paint);
             // 
             // TabSelector
             // 
@@ -411,21 +440,338 @@
             this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.TabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TabSelector.Location = new System.Drawing.Point(0, 0);
-            this.TabSelector.Margin = new System.Windows.Forms.Padding(4);
             this.TabSelector.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabSelector.Name = "TabSelector";
-            this.TabSelector.Size = new System.Drawing.Size(1172, 59);
+            this.TabSelector.Size = new System.Drawing.Size(879, 48);
             this.TabSelector.TabIndex = 7;
             this.TabSelector.Text = "materialTabSelector1";
             // 
+            // lblJlhCapacity
+            // 
+            this.lblJlhCapacity.AutoSize = true;
+            this.lblJlhCapacity.Depth = 0;
+            this.lblJlhCapacity.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblJlhCapacity.Location = new System.Drawing.Point(136, 123);
+            this.lblJlhCapacity.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblJlhCapacity.Name = "lblJlhCapacity";
+            this.lblJlhCapacity.Size = new System.Drawing.Size(63, 19);
+            this.lblJlhCapacity.TabIndex = 7;
+            this.lblJlhCapacity.Text = "Capacity";
+            // 
+            // lblJlhCompartment
+            // 
+            this.lblJlhCompartment.AutoSize = true;
+            this.lblJlhCompartment.Depth = 0;
+            this.lblJlhCompartment.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblJlhCompartment.Location = new System.Drawing.Point(136, 98);
+            this.lblJlhCompartment.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblJlhCompartment.Name = "lblJlhCompartment";
+            this.lblJlhCompartment.Size = new System.Drawing.Size(98, 19);
+            this.lblJlhCompartment.TabIndex = 6;
+            this.lblJlhCompartment.Text = "Compartment";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Depth = 0;
+            this.lblType.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblType.Location = new System.Drawing.Point(136, 75);
+            this.lblType.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(36, 19);
+            this.lblType.TabIndex = 5;
+            this.lblType.Text = "Type";
+            // 
+            // grpRegister
+            // 
+            this.grpRegister.Controls.Add(this.pnlTujuan);
+            this.grpRegister.Location = new System.Drawing.Point(392, 3);
+            this.grpRegister.Name = "grpRegister";
+            this.grpRegister.Size = new System.Drawing.Size(328, 146);
+            this.grpRegister.TabIndex = 29;
+            this.grpRegister.TabStop = false;
+            this.grpRegister.Text = "REGISTER DATA";
+            // 
+            // pnlTujuan
+            // 
+            this.pnlTujuan.Controls.Add(this.btnSetTujuan);
+            this.pnlTujuan.Controls.Add(this.txtTujuan);
+            this.pnlTujuan.Controls.Add(this.materialLabel8);
+            this.pnlTujuan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTujuan.Location = new System.Drawing.Point(3, 16);
+            this.pnlTujuan.Name = "pnlTujuan";
+            this.pnlTujuan.Size = new System.Drawing.Size(322, 127);
+            this.pnlTujuan.TabIndex = 0;
+            // 
+            // btnSetTujuan
+            // 
+            this.btnSetTujuan.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSetTujuan.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSetTujuan.Depth = 0;
+            this.btnSetTujuan.HighEmphasis = true;
+            this.btnSetTujuan.Icon = null;
+            this.btnSetTujuan.Location = new System.Drawing.Point(84, 74);
+            this.btnSetTujuan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSetTujuan.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSetTujuan.Name = "btnSetTujuan";
+            this.btnSetTujuan.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSetTujuan.Size = new System.Drawing.Size(149, 36);
+            this.btnSetTujuan.TabIndex = 10;
+            this.btnSetTujuan.Text = "SET DATA TUJUAN";
+            this.btnSetTujuan.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSetTujuan.UseAccentColor = false;
+            this.btnSetTujuan.UseVisualStyleBackColor = true;
+            this.btnSetTujuan.Click += new System.EventHandler(this.btnSetTujuan_Click);
+            // 
+            // txtTujuan
+            // 
+            this.txtTujuan.AnimateReadOnly = false;
+            this.txtTujuan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTujuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTujuan.Depth = 0;
+            this.txtTujuan.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtTujuan.Enabled = false;
+            this.txtTujuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTujuan.HideSelection = true;
+            this.txtTujuan.Hint = "TUJUAN";
+            this.txtTujuan.LeadingIcon = null;
+            this.txtTujuan.Location = new System.Drawing.Point(0, 19);
+            this.txtTujuan.MaxLength = 32767;
+            this.txtTujuan.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTujuan.Name = "txtTujuan";
+            this.txtTujuan.PasswordChar = '\0';
+            this.txtTujuan.PrefixSuffixText = null;
+            this.txtTujuan.ReadOnly = false;
+            this.txtTujuan.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTujuan.SelectedText = "";
+            this.txtTujuan.SelectionLength = 0;
+            this.txtTujuan.SelectionStart = 0;
+            this.txtTujuan.ShortcutsEnabled = true;
+            this.txtTujuan.Size = new System.Drawing.Size(322, 48);
+            this.txtTujuan.TabIndex = 8;
+            this.txtTujuan.TabStop = false;
+            this.txtTujuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTujuan.TrailingIcon = null;
+            this.txtTujuan.UseSystemPasswordChar = false;
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.Location = new System.Drawing.Point(0, 0);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(102, 19);
+            this.materialLabel8.TabIndex = 7;
+            this.materialLabel8.Text = "DESTINATION";
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(14, 123);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(63, 19);
+            this.materialLabel5.TabIndex = 33;
+            this.materialLabel5.Text = "Capacity";
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.Location = new System.Drawing.Point(14, 98);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(98, 19);
+            this.materialLabel6.TabIndex = 32;
+            this.materialLabel6.Text = "Compartment";
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel7.Location = new System.Drawing.Point(14, 75);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(36, 19);
+            this.materialLabel7.TabIndex = 31;
+            this.materialLabel7.Text = "Type";
+            // 
+            // grpRegisLive
+            // 
+            this.grpRegisLive.Controls.Add(this.dgvPengirimanLive);
+            this.grpRegisLive.Controls.Add(this.pnlTopRLive);
+            this.grpRegisLive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpRegisLive.Location = new System.Drawing.Point(0, 0);
+            this.grpRegisLive.Name = "grpRegisLive";
+            this.grpRegisLive.Size = new System.Drawing.Size(605, 255);
+            this.grpRegisLive.TabIndex = 31;
+            this.grpRegisLive.TabStop = false;
+            this.grpRegisLive.Text = "REGISTER DATA";
+            // 
+            // dgvPengirimanLive
+            // 
+            this.dgvPengirimanLive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPengirimanLive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPengirimanLive.Location = new System.Drawing.Point(3, 82);
+            this.dgvPengirimanLive.Name = "dgvPengirimanLive";
+            this.dgvPengirimanLive.Size = new System.Drawing.Size(599, 170);
+            this.dgvPengirimanLive.TabIndex = 11;
+            // 
+            // pnlTopRLive
+            // 
+            this.pnlTopRLive.Controls.Add(this.btnClearLog);
+            this.pnlTopRLive.Controls.Add(this.btnSave);
+            this.pnlTopRLive.Controls.Add(this.ProListen);
+            this.pnlTopRLive.Controls.Add(this.btnStartListen);
+            this.pnlTopRLive.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTopRLive.Location = new System.Drawing.Point(3, 16);
+            this.pnlTopRLive.Name = "pnlTopRLive";
+            this.pnlTopRLive.Size = new System.Drawing.Size(599, 66);
+            this.pnlTopRLive.TabIndex = 13;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearLog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearLog.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearLog.Depth = 0;
+            this.btnClearLog.HighEmphasis = true;
+            this.btnClearLog.Icon = null;
+            this.btnClearLog.Location = new System.Drawing.Point(521, 9);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearLog.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearLog.Size = new System.Drawing.Size(66, 36);
+            this.btnClearLog.TabIndex = 20;
+            this.btnClearLog.Text = "CLEAR";
+            this.btnClearLog.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearLog.UseAccentColor = false;
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSave.Depth = 0;
+            this.btnSave.HighEmphasis = true;
+            this.btnSave.Icon = null;
+            this.btnSave.Location = new System.Drawing.Point(379, 9);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSave.Size = new System.Drawing.Size(64, 36);
+            this.btnSave.TabIndex = 19;
+            this.btnSave.Text = "SAVE";
+            this.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSave.UseAccentColor = true;
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // ProListen
+            // 
+            this.ProListen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProListen.Depth = 0;
+            this.ProListen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(165)))), ((int)(((byte)(22)))));
+            this.ProListen.Location = new System.Drawing.Point(10, 52);
+            this.ProListen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ProListen.Name = "ProListen";
+            this.ProListen.Size = new System.Drawing.Size(579, 5);
+            this.ProListen.TabIndex = 16;
+            // 
+            // btnStartListen
+            // 
+            this.btnStartListen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStartListen.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnStartListen.Depth = 0;
+            this.btnStartListen.HighEmphasis = true;
+            this.btnStartListen.Icon = null;
+            this.btnStartListen.Location = new System.Drawing.Point(14, 8);
+            this.btnStartListen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStartListen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnStartListen.Name = "btnStartListen";
+            this.btnStartListen.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnStartListen.Size = new System.Drawing.Size(67, 36);
+            this.btnStartListen.TabIndex = 15;
+            this.btnStartListen.Text = "START ";
+            this.btnStartListen.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnStartListen.UseAccentColor = false;
+            this.btnStartListen.UseVisualStyleBackColor = true;
+            // 
+            // txtSerialLog
+            // 
+            this.txtSerialLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSerialLog.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSerialLog.Location = new System.Drawing.Point(3, 3);
+            this.txtSerialLog.Name = "txtSerialLog";
+            this.txtSerialLog.Size = new System.Drawing.Size(238, 249);
+            this.txtSerialLog.TabIndex = 15;
+            this.txtSerialLog.Text = "";
+            // 
+            // lblNoPlat
+            // 
+            this.lblNoPlat.AutoSize = true;
+            this.lblNoPlat.Depth = 0;
+            this.lblNoPlat.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNoPlat.Location = new System.Drawing.Point(136, 50);
+            this.lblNoPlat.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNoPlat.Name = "lblNoPlat";
+            this.lblNoPlat.Size = new System.Drawing.Size(49, 19);
+            this.lblNoPlat.TabIndex = 35;
+            this.lblNoPlat.Text = "NoPlat";
+            // 
+            // materialLabel11
+            // 
+            this.materialLabel11.AutoSize = true;
+            this.materialLabel11.Depth = 0;
+            this.materialLabel11.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel11.Location = new System.Drawing.Point(14, 50);
+            this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel11.Name = "materialLabel11";
+            this.materialLabel11.Size = new System.Drawing.Size(49, 19);
+            this.materialLabel11.TabIndex = 36;
+            this.materialLabel11.Text = "NoPlat";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(14, 19);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(101, 19);
+            this.materialLabel3.TabIndex = 37;
+            this.materialLabel3.Text = "ID Pengiriman";
+            // 
+            // lblIDPengiriman
+            // 
+            this.lblIDPengiriman.AutoSize = true;
+            this.lblIDPengiriman.Depth = 0;
+            this.lblIDPengiriman.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblIDPengiriman.Location = new System.Drawing.Point(136, 19);
+            this.lblIDPengiriman.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblIDPengiriman.Name = "lblIDPengiriman";
+            this.lblIDPengiriman.Size = new System.Drawing.Size(105, 19);
+            this.lblIDPengiriman.TabIndex = 38;
+            this.lblIDPengiriman.Text = "ID Pengiriman ";
+            // 
             // PengirimanForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 622);
+            this.ClientSize = new System.Drawing.Size(879, 505);
             this.Controls.Add(this.TCPengiriman);
             this.Controls.Add(this.TabSelector);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PengirimanForm";
             this.Text = "PengirimanForm";
             this.Load += new System.EventHandler(this.PengirimanForm_Load);
@@ -443,6 +789,17 @@
             this.TPAddPengiriman.ResumeLayout(false);
             this.TPAddPengiriman.PerformLayout();
             this.CardCRUD.ResumeLayout(false);
+            this.RightPanel.ResumeLayout(false);
+            this.leftPanel.ResumeLayout(false);
+            this.UpPanel.ResumeLayout(false);
+            this.UpPanel.PerformLayout();
+            this.grpRegister.ResumeLayout(false);
+            this.pnlTujuan.ResumeLayout(false);
+            this.pnlTujuan.PerformLayout();
+            this.grpRegisLive.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPengirimanLive)).EndInit();
+            this.pnlTopRLive.ResumeLayout(false);
+            this.pnlTopRLive.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -473,5 +830,28 @@
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Panel UpPanel;
         private MaterialSkin.Controls.MaterialTabSelector TabSelector;
+        private MaterialSkin.Controls.MaterialLabel lblJlhCapacity;
+        private MaterialSkin.Controls.MaterialLabel lblJlhCompartment;
+        private MaterialSkin.Controls.MaterialLabel lblType;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private System.Windows.Forms.GroupBox grpRegister;
+        private System.Windows.Forms.Panel pnlTujuan;
+        private MaterialSkin.Controls.MaterialButton btnSetTujuan;
+        private MaterialSkin.Controls.MaterialTextBox2 txtTujuan;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private System.Windows.Forms.RichTextBox txtSerialLog;
+        private System.Windows.Forms.GroupBox grpRegisLive;
+        private System.Windows.Forms.DataGridView dgvPengirimanLive;
+        private System.Windows.Forms.Panel pnlTopRLive;
+        private MaterialSkin.Controls.MaterialButton btnClearLog;
+        private MaterialSkin.Controls.MaterialButton btnSave;
+        private MaterialSkin.Controls.MaterialProgressBar ProListen;
+        private MaterialSkin.Controls.MaterialButton btnStartListen;
+        private MaterialSkin.Controls.MaterialLabel materialLabel11;
+        private MaterialSkin.Controls.MaterialLabel lblNoPlat;
+        private MaterialSkin.Controls.MaterialLabel lblIDPengiriman;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
     }
 }

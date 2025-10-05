@@ -1,4 +1,4 @@
-﻿namespace SEALCHK.UserControls
+﻿namespace DEPTHCHK.UserControls
 {
     partial class UCTujuan
     {
@@ -28,19 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtKodeTujuan = new System.Windows.Forms.TextBox();
-            this.btnSel = new MaterialSkin.Controls.MaterialButton();
-            this.lblPortStatus = new System.Windows.Forms.Label();
             this.lblNamaSPBU = new System.Windows.Forms.Label();
+            this.lblPortStatus = new System.Windows.Forms.Label();
+            this.btnSel = new MaterialSkin.Controls.MaterialButton();
+            this.txtKodeTujuan = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // txtKodeTujuan
+            // lblNamaSPBU
             // 
-            this.txtKodeTujuan.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKodeTujuan.Location = new System.Drawing.Point(7, 27);
-            this.txtKodeTujuan.Name = "txtKodeTujuan";
-            this.txtKodeTujuan.Size = new System.Drawing.Size(215, 25);
-            this.txtKodeTujuan.TabIndex = 0;
+            this.lblNamaSPBU.AutoSize = true;
+            this.lblNamaSPBU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNamaSPBU.Location = new System.Drawing.Point(44, 2);
+            this.lblNamaSPBU.Name = "lblNamaSPBU";
+            this.lblNamaSPBU.Size = new System.Drawing.Size(11, 13);
+            this.lblNamaSPBU.TabIndex = 15;
+            this.lblNamaSPBU.Text = "-";
+            // 
+            // lblPortStatus
+            // 
+            this.lblPortStatus.AutoSize = true;
+            this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPortStatus.Location = new System.Drawing.Point(-2, 2);
+            this.lblPortStatus.Name = "lblPortStatus";
+            this.lblPortStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblPortStatus.TabIndex = 14;
+            this.lblPortStatus.Text = "SPBU :";
             // 
             // btnSel
             // 
@@ -49,37 +61,25 @@
             this.btnSel.Depth = 0;
             this.btnSel.HighEmphasis = true;
             this.btnSel.Icon = null;
-            this.btnSel.Location = new System.Drawing.Point(229, 21);
+            this.btnSel.Location = new System.Drawing.Point(214, 12);
             this.btnSel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSel.Name = "btnSel";
             this.btnSel.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnSel.Size = new System.Drawing.Size(64, 36);
-            this.btnSel.TabIndex = 2;
+            this.btnSel.TabIndex = 13;
             this.btnSel.Text = "SET";
             this.btnSel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSel.UseAccentColor = false;
             this.btnSel.UseVisualStyleBackColor = true;
             // 
-            // lblPortStatus
+            // txtKodeTujuan
             // 
-            this.lblPortStatus.AutoSize = true;
-            this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortStatus.Location = new System.Drawing.Point(13, 11);
-            this.lblPortStatus.Name = "lblPortStatus";
-            this.lblPortStatus.Size = new System.Drawing.Size(40, 13);
-            this.lblPortStatus.TabIndex = 10;
-            this.lblPortStatus.Text = "SPBU :";
-            // 
-            // lblNamaSPBU
-            // 
-            this.lblNamaSPBU.AutoSize = true;
-            this.lblNamaSPBU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNamaSPBU.Location = new System.Drawing.Point(59, 11);
-            this.lblNamaSPBU.Name = "lblNamaSPBU";
-            this.lblNamaSPBU.Size = new System.Drawing.Size(11, 13);
-            this.lblNamaSPBU.TabIndex = 11;
-            this.lblNamaSPBU.Text = "-";
+            this.txtKodeTujuan.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKodeTujuan.Location = new System.Drawing.Point(-8, 18);
+            this.txtKodeTujuan.Name = "txtKodeTujuan";
+            this.txtKodeTujuan.Size = new System.Drawing.Size(215, 25);
+            this.txtKodeTujuan.TabIndex = 12;
             // 
             // UCTujuan
             // 
@@ -90,8 +90,7 @@
             this.Controls.Add(this.btnSel);
             this.Controls.Add(this.txtKodeTujuan);
             this.Name = "UCTujuan";
-            this.Size = new System.Drawing.Size(303, 67);
-            this.Load += new System.EventHandler(this.UCTujuan_Load);
+            this.Size = new System.Drawing.Size(271, 50);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,9 +98,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtKodeTujuan;
-        private MaterialSkin.Controls.MaterialButton btnSel;
-        private System.Windows.Forms.Label lblPortStatus;
         private System.Windows.Forms.Label lblNamaSPBU;
+        private System.Windows.Forms.Label lblPortStatus;
+        private MaterialSkin.Controls.MaterialButton btnSel;
+        private System.Windows.Forms.TextBox txtKodeTujuan;
     }
 }

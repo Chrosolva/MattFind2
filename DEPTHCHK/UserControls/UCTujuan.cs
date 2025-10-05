@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SEALCHK.UserControls
+namespace DEPTHCHK.UserControls
 {
     public partial class UCTujuan : UserControl
     {
@@ -38,11 +38,5 @@ namespace SEALCHK.UserControls
         {
             this.BackColor = on ? System.Drawing.Color.FromArgb(235, 247, 255) : System.Drawing.Color.Transparent;
         }
-
-        private void UCTujuan_Load(object sender, EventArgs e)
-        {
-
-        }
     }
-
 }

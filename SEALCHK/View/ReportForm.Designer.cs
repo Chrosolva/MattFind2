@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.leftpanel = new System.Windows.Forms.Panel();
+            this.btnExportExcel = new MaterialSkin.Controls.MaterialButton();
+            this.btnExportPDF = new MaterialSkin.Controls.MaterialButton();
+            this.txtTujuan = new MaterialSkin.Controls.MaterialTextBox2();
+            this.cbxStatus = new MaterialSkin.Controls.MaterialComboBox();
+            this.cbxNoPlat = new MaterialSkin.Controls.MaterialComboBox();
             this.btnPreview = new MaterialSkin.Controls.MaterialButton();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
@@ -39,10 +44,9 @@
             this.TPReportViewer = new System.Windows.Forms.TabPage();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.crViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.cbxNoPlat = new MaterialSkin.Controls.MaterialComboBox();
-            this.cbxStatus = new MaterialSkin.Controls.MaterialComboBox();
-            this.txtTujuan = new MaterialSkin.Controls.MaterialTextBox2();
-            this.btnExportPDF = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.leftpanel.SuspendLayout();
             this.ContentPanel.SuspendLayout();
             this.TCReport.SuspendLayout();
@@ -51,6 +55,10 @@
             // 
             // leftpanel
             // 
+            this.leftpanel.Controls.Add(this.materialLabel3);
+            this.leftpanel.Controls.Add(this.materialLabel2);
+            this.leftpanel.Controls.Add(this.materialLabel1);
+            this.leftpanel.Controls.Add(this.btnExportExcel);
             this.leftpanel.Controls.Add(this.btnExportPDF);
             this.leftpanel.Controls.Add(this.txtTujuan);
             this.leftpanel.Controls.Add(this.cbxStatus);
@@ -63,8 +71,119 @@
             this.leftpanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftpanel.Location = new System.Drawing.Point(0, 0);
             this.leftpanel.Name = "leftpanel";
-            this.leftpanel.Size = new System.Drawing.Size(313, 528);
+            this.leftpanel.Size = new System.Drawing.Size(313, 556);
             this.leftpanel.TabIndex = 0;
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExportExcel.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExportExcel.Depth = 0;
+            this.btnExportExcel.HighEmphasis = true;
+            this.btnExportExcel.Icon = null;
+            this.btnExportExcel.Location = new System.Drawing.Point(115, 249);
+            this.btnExportExcel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExportExcel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExportExcel.Size = new System.Drawing.Size(124, 36);
+            this.btnExportExcel.TabIndex = 43;
+            this.btnExportExcel.Text = "EXPORT EXCEL";
+            this.btnExportExcel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExportExcel.UseAccentColor = false;
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            // 
+            // btnExportPDF
+            // 
+            this.btnExportPDF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExportPDF.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExportPDF.Depth = 0;
+            this.btnExportPDF.HighEmphasis = true;
+            this.btnExportPDF.Icon = null;
+            this.btnExportPDF.Location = new System.Drawing.Point(115, 201);
+            this.btnExportPDF.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExportPDF.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExportPDF.Name = "btnExportPDF";
+            this.btnExportPDF.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExportPDF.Size = new System.Drawing.Size(108, 36);
+            this.btnExportPDF.TabIndex = 42;
+            this.btnExportPDF.Text = "EXPORT PDF";
+            this.btnExportPDF.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExportPDF.UseAccentColor = false;
+            this.btnExportPDF.UseVisualStyleBackColor = true;
+            this.btnExportPDF.Click += new System.EventHandler(this.btnExportPdf_Click);
+            // 
+            // txtTujuan
+            // 
+            this.txtTujuan.AnimateReadOnly = false;
+            this.txtTujuan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtTujuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtTujuan.Depth = 0;
+            this.txtTujuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTujuan.HideSelection = true;
+            this.txtTujuan.LeadingIcon = null;
+            this.txtTujuan.Location = new System.Drawing.Point(15, 485);
+            this.txtTujuan.MaxLength = 32767;
+            this.txtTujuan.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtTujuan.Name = "txtTujuan";
+            this.txtTujuan.PasswordChar = '\0';
+            this.txtTujuan.PrefixSuffixText = null;
+            this.txtTujuan.ReadOnly = false;
+            this.txtTujuan.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtTujuan.SelectedText = "";
+            this.txtTujuan.SelectionLength = 0;
+            this.txtTujuan.SelectionStart = 0;
+            this.txtTujuan.ShortcutsEnabled = true;
+            this.txtTujuan.Size = new System.Drawing.Size(250, 48);
+            this.txtTujuan.TabIndex = 41;
+            this.txtTujuan.TabStop = false;
+            this.txtTujuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTujuan.TrailingIcon = null;
+            this.txtTujuan.UseSystemPasswordChar = false;
+            // 
+            // cbxStatus
+            // 
+            this.cbxStatus.AutoResize = false;
+            this.cbxStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbxStatus.Depth = 0;
+            this.cbxStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbxStatus.DropDownHeight = 174;
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatus.DropDownWidth = 121;
+            this.cbxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbxStatus.FormattingEnabled = true;
+            this.cbxStatus.IntegralHeight = false;
+            this.cbxStatus.ItemHeight = 43;
+            this.cbxStatus.Location = new System.Drawing.Point(15, 411);
+            this.cbxStatus.MaxDropDownItems = 4;
+            this.cbxStatus.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Size = new System.Drawing.Size(135, 49);
+            this.cbxStatus.StartIndex = 0;
+            this.cbxStatus.TabIndex = 40;
+            // 
+            // cbxNoPlat
+            // 
+            this.cbxNoPlat.AutoResize = false;
+            this.cbxNoPlat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbxNoPlat.Depth = 0;
+            this.cbxNoPlat.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbxNoPlat.DropDownHeight = 174;
+            this.cbxNoPlat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxNoPlat.DropDownWidth = 121;
+            this.cbxNoPlat.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbxNoPlat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbxNoPlat.FormattingEnabled = true;
+            this.cbxNoPlat.IntegralHeight = false;
+            this.cbxNoPlat.ItemHeight = 43;
+            this.cbxNoPlat.Location = new System.Drawing.Point(15, 329);
+            this.cbxNoPlat.MaxDropDownItems = 4;
+            this.cbxNoPlat.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbxNoPlat.Name = "cbxNoPlat";
+            this.cbxNoPlat.Size = new System.Drawing.Size(135, 49);
+            this.cbxNoPlat.StartIndex = 0;
+            this.cbxNoPlat.TabIndex = 39;
             // 
             // btnPreview
             // 
@@ -127,7 +246,8 @@
             this.cbxJenisLaporan.IntegralHeight = false;
             this.cbxJenisLaporan.ItemHeight = 43;
             this.cbxJenisLaporan.Items.AddRange(new object[] {
-            "REGISTER SUMMARY"});
+            "REGISTER SUMMARY",
+            "RINCIAN SEGEL"});
             this.cbxJenisLaporan.Location = new System.Drawing.Point(12, 25);
             this.cbxJenisLaporan.MaxDropDownItems = 4;
             this.cbxJenisLaporan.MouseState = MaterialSkin.MouseState.OUT;
@@ -142,7 +262,7 @@
             this.ContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentPanel.Location = new System.Drawing.Point(313, 0);
             this.ContentPanel.Name = "ContentPanel";
-            this.ContentPanel.Size = new System.Drawing.Size(794, 528);
+            this.ContentPanel.Size = new System.Drawing.Size(794, 556);
             this.ContentPanel.TabIndex = 1;
             // 
             // TCReport
@@ -152,7 +272,7 @@
             this.TCReport.Location = new System.Drawing.Point(0, 0);
             this.TCReport.Name = "TCReport";
             this.TCReport.SelectedIndex = 0;
-            this.TCReport.Size = new System.Drawing.Size(794, 528);
+            this.TCReport.Size = new System.Drawing.Size(794, 556);
             this.TCReport.TabIndex = 0;
             // 
             // TPReportViewer
@@ -162,14 +282,14 @@
             this.TPReportViewer.Location = new System.Drawing.Point(4, 22);
             this.TPReportViewer.Name = "TPReportViewer";
             this.TPReportViewer.Padding = new System.Windows.Forms.Padding(3);
-            this.TPReportViewer.Size = new System.Drawing.Size(786, 502);
+            this.TPReportViewer.Size = new System.Drawing.Size(786, 530);
             this.TPReportViewer.TabIndex = 0;
             this.TPReportViewer.Text = "REPORT VIEWER";
             this.TPReportViewer.UseVisualStyleBackColor = true;
             // 
             // StatusStrip
             // 
-            this.StatusStrip.Location = new System.Drawing.Point(3, 477);
+            this.StatusStrip.Location = new System.Drawing.Point(3, 505);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(780, 22);
             this.StatusStrip.TabIndex = 2;
@@ -178,111 +298,56 @@
             // crViewer
             // 
             this.crViewer.ActiveViewIndex = -1;
+            this.crViewer.AutoSize = true;
             this.crViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crViewer.Cursor = System.Windows.Forms.Cursors.Default;
             this.crViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crViewer.Location = new System.Drawing.Point(3, 3);
             this.crViewer.Name = "crViewer";
-            this.crViewer.Size = new System.Drawing.Size(780, 496);
+            this.crViewer.Size = new System.Drawing.Size(780, 524);
             this.crViewer.TabIndex = 1;
             // 
-            // cbxNoPlat
+            // materialLabel1
             // 
-            this.cbxNoPlat.AutoResize = false;
-            this.cbxNoPlat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cbxNoPlat.Depth = 0;
-            this.cbxNoPlat.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cbxNoPlat.DropDownHeight = 174;
-            this.cbxNoPlat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxNoPlat.DropDownWidth = 121;
-            this.cbxNoPlat.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cbxNoPlat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cbxNoPlat.FormattingEnabled = true;
-            this.cbxNoPlat.IntegralHeight = false;
-            this.cbxNoPlat.ItemHeight = 43;
-            this.cbxNoPlat.Location = new System.Drawing.Point(15, 270);
-            this.cbxNoPlat.MaxDropDownItems = 4;
-            this.cbxNoPlat.MouseState = MaterialSkin.MouseState.OUT;
-            this.cbxNoPlat.Name = "cbxNoPlat";
-            this.cbxNoPlat.Size = new System.Drawing.Size(135, 49);
-            this.cbxNoPlat.StartIndex = 0;
-            this.cbxNoPlat.TabIndex = 39;
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 307);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(62, 19);
+            this.materialLabel1.TabIndex = 44;
+            this.materialLabel1.Text = "NOPLAT";
             // 
-            // cbxStatus
+            // materialLabel2
             // 
-            this.cbxStatus.AutoResize = false;
-            this.cbxStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cbxStatus.Depth = 0;
-            this.cbxStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cbxStatus.DropDownHeight = 174;
-            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxStatus.DropDownWidth = 121;
-            this.cbxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cbxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.IntegralHeight = false;
-            this.cbxStatus.ItemHeight = 43;
-            this.cbxStatus.Location = new System.Drawing.Point(15, 339);
-            this.cbxStatus.MaxDropDownItems = 4;
-            this.cbxStatus.MouseState = MaterialSkin.MouseState.OUT;
-            this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(135, 49);
-            this.cbxStatus.StartIndex = 0;
-            this.cbxStatus.TabIndex = 40;
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(12, 389);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(61, 19);
+            this.materialLabel2.TabIndex = 45;
+            this.materialLabel2.Text = "STATUS";
             // 
-            // txtTujuan
+            // materialLabel3
             // 
-            this.txtTujuan.AnimateReadOnly = false;
-            this.txtTujuan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtTujuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtTujuan.Depth = 0;
-            this.txtTujuan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtTujuan.HideSelection = true;
-            this.txtTujuan.LeadingIcon = null;
-            this.txtTujuan.Location = new System.Drawing.Point(15, 407);
-            this.txtTujuan.MaxLength = 32767;
-            this.txtTujuan.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtTujuan.Name = "txtTujuan";
-            this.txtTujuan.PasswordChar = '\0';
-            this.txtTujuan.PrefixSuffixText = null;
-            this.txtTujuan.ReadOnly = false;
-            this.txtTujuan.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtTujuan.SelectedText = "";
-            this.txtTujuan.SelectionLength = 0;
-            this.txtTujuan.SelectionStart = 0;
-            this.txtTujuan.ShortcutsEnabled = true;
-            this.txtTujuan.Size = new System.Drawing.Size(250, 48);
-            this.txtTujuan.TabIndex = 41;
-            this.txtTujuan.TabStop = false;
-            this.txtTujuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtTujuan.TrailingIcon = null;
-            this.txtTujuan.UseSystemPasswordChar = false;
-            // 
-            // btnExportPDF
-            // 
-            this.btnExportPDF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnExportPDF.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnExportPDF.Depth = 0;
-            this.btnExportPDF.HighEmphasis = true;
-            this.btnExportPDF.Icon = null;
-            this.btnExportPDF.Location = new System.Drawing.Point(115, 201);
-            this.btnExportPDF.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnExportPDF.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnExportPDF.Name = "btnExportPDF";
-            this.btnExportPDF.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnExportPDF.Size = new System.Drawing.Size(108, 36);
-            this.btnExportPDF.TabIndex = 42;
-            this.btnExportPDF.Text = "EXPORT PDF";
-            this.btnExportPDF.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnExportPDF.UseAccentColor = false;
-            this.btnExportPDF.UseVisualStyleBackColor = true;
-            this.btnExportPDF.Click += new System.EventHandler(this.btnExportPdf_Click);
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(13, 463);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(61, 19);
+            this.materialLabel3.TabIndex = 46;
+            this.materialLabel3.Text = "TUJUAN";
             // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 528);
+            this.ClientSize = new System.Drawing.Size(1107, 556);
             this.Controls.Add(this.ContentPanel);
             this.Controls.Add(this.leftpanel);
             this.Name = "ReportForm";
@@ -315,5 +380,9 @@
         private MaterialSkin.Controls.MaterialComboBox cbxNoPlat;
         private MaterialSkin.Controls.MaterialTextBox2 txtTujuan;
         private MaterialSkin.Controls.MaterialButton btnExportPDF;
+        private MaterialSkin.Controls.MaterialButton btnExportExcel;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

@@ -112,11 +112,20 @@
     <Compile Include="Model\TblUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BAPenghapusanSegel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BAPenghapusanSegel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\RegisterSummary.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RegisterSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SealReportDataSet.cs">
+      <DependentUpon>SealReportDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\SealReportDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -214,6 +223,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reports\BAPenghapusanSegel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BAPenghapusanSegel.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\RegisterSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RegisterSummary.cs</LastGenOutput>

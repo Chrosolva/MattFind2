@@ -99,6 +99,7 @@
             this.dgvCollectBuffer = new System.Windows.Forms.DataGridView();
             this.txtCollect = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRecreatePort = new MaterialSkin.Controls.MaterialButton();
             this.btnStopCollect = new SEALCHK.CustomMaterialButton();
             this.lblCollectStatus = new System.Windows.Forms.Label();
             this.btnClearCollect = new MaterialSkin.Controls.MaterialButton();
@@ -106,7 +107,6 @@
             this.btnStartCollect = new MaterialSkin.Controls.MaterialButton();
             this.TabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnRecreatePort = new MaterialSkin.Controls.MaterialButton();
             this.OuterMostPanel.SuspendLayout();
             this.TCRegisterSeal.SuspendLayout();
             this.TPRegister.SuspendLayout();
@@ -379,7 +379,7 @@
             this.txtRegSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtRegSearch.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtRegSearch.Depth = 0;
-            this.txtRegSearch.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRegSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtRegSearch.HideSelection = true;
             this.txtRegSearch.Hint = "SEARCH REGISTER";
             this.txtRegSearch.LeadingIcon = null;
@@ -428,7 +428,7 @@
             this.btnDelete.CustomColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(57)))), ((int)(((byte)(53)))));
             this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnDelete.Depth = 0;
-            this.btnDelete.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.HighEmphasis = true;
             this.btnDelete.Icon = null;
             this.btnDelete.Location = new System.Drawing.Point(179, 29);
@@ -939,7 +939,7 @@
             this.txtTujuan.Depth = 0;
             this.txtTujuan.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtTujuan.Enabled = false;
-            this.txtTujuan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTujuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtTujuan.HideSelection = true;
             this.txtTujuan.Hint = "TUJUAN";
             this.txtTujuan.LeadingIcon = null;
@@ -1127,13 +1127,33 @@
             this.panel1.Size = new System.Drawing.Size(1172, 66);
             this.panel1.TabIndex = 13;
             // 
+            // btnRecreatePort
+            // 
+            this.btnRecreatePort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRecreatePort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRecreatePort.Depth = 0;
+            this.btnRecreatePort.HighEmphasis = true;
+            this.btnRecreatePort.Icon = null;
+            this.btnRecreatePort.Location = new System.Drawing.Point(324, 20);
+            this.btnRecreatePort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRecreatePort.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRecreatePort.Name = "btnRecreatePort";
+            this.btnRecreatePort.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRecreatePort.Size = new System.Drawing.Size(111, 36);
+            this.btnRecreatePort.TabIndex = 23;
+            this.btnRecreatePort.Text = "RE-CONNECT";
+            this.btnRecreatePort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnRecreatePort.UseAccentColor = false;
+            this.btnRecreatePort.UseVisualStyleBackColor = true;
+            this.btnRecreatePort.Click += new System.EventHandler(this.btnRecreatePort_Click);
+            // 
             // btnStopCollect
             // 
             this.btnStopCollect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStopCollect.CustomColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(57)))), ((int)(((byte)(53)))));
             this.btnStopCollect.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnStopCollect.Depth = 0;
-            this.btnStopCollect.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStopCollect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStopCollect.HighEmphasis = true;
             this.btnStopCollect.Icon = null;
             this.btnStopCollect.Location = new System.Drawing.Point(89, 20);
@@ -1234,26 +1254,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnRecreatePort
-            // 
-            this.btnRecreatePort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnRecreatePort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnRecreatePort.Depth = 0;
-            this.btnRecreatePort.HighEmphasis = true;
-            this.btnRecreatePort.Icon = null;
-            this.btnRecreatePort.Location = new System.Drawing.Point(324, 20);
-            this.btnRecreatePort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnRecreatePort.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnRecreatePort.Name = "btnRecreatePort";
-            this.btnRecreatePort.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnRecreatePort.Size = new System.Drawing.Size(111, 36);
-            this.btnRecreatePort.TabIndex = 23;
-            this.btnRecreatePort.Text = "RE-CONNECT";
-            this.btnRecreatePort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnRecreatePort.UseAccentColor = false;
-            this.btnRecreatePort.UseVisualStyleBackColor = true;
-            this.btnRecreatePort.Click += new System.EventHandler(this.btnRecreatePort_Click);
             // 
             // RegisterSealForm
             // 

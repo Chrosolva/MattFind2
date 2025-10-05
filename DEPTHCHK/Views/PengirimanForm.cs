@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DEPTHCHK.Data;
 using DEPTHCHK.Models;
-using DEPTHCHK.Views;
+using System.Text.RegularExpressions; // <— add this
 using System.Data.Entity;
+using System.Windows.Forms.VisualStyles;
+using System.Data.SqlClient;
+using System.Timers;
+using System.Threading;
 
 namespace DEPTHCHK.Views
 {
@@ -21,6 +27,8 @@ namespace DEPTHCHK.Views
         private BindingSource _bsPeng = new BindingSource();
         private BindingSource _bsDetail = new BindingSource();
         private bool _loadingMaster;
+        private string[] _compartmentKodeTujuan;
+        private string[] _compartmentNamaTujuan;
 
         // simple combo item type (avoid anonymous types binding)
         private class ComboItem
@@ -286,5 +294,86 @@ namespace DEPTHCHK.Views
             base.OnFormClosed(e);
             if (_db != null) _db.Dispose();
         }
+
+        private void UpPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public sealed class RegionOption
+        {
+            public int Id { get; set; }       // value (1, 2, 3)
+            public string Name { get; set; }  // display ("Wilayah Sumatra", etc.)
+                                              // Composite text shown in the ComboBox
+            public string Display => $"{Id}. {Name}";
+        }
+
+        public sealed class OwnedOption
+        {
+            public int Id { get; set; }       // value (1, 2, 3)
+            public string Name { get; set; }  // display ("Wilayah Sumatra", etc.)
+                                              // Composite text shown in the ComboBox
+            public string Display => $"{Id}. {Name}";
+        }
+
+        private void btnSetTujuan_Click(object sender, EventArgs e)
+        {
+            int jlhComp = 0;
+            int.TryParse(lblJlhCompartment.Text, out jlhComp);
+            if (jlhComp <= 0)
+            {
+                MessageBox.Show("Jumlah compartment tidak valid.", "Tujuan", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var regions = new List<RegionOption>
+            {
+                new RegionOption { Id = 1, Name = "Wilayah Sumatra"},
+                new RegionOption { Id = 2, Name = "Wilayah Sumatra"},
+                new RegionOption { Id = 3, Name = "Wilayah Jakarta / Jawa Barat"},
+                new RegionOption { Id = 4, Name = "Wilayah Jawa Tengah / DIY"},
+                new RegionOption { Id = 5, Name = "Wilayah Jawa Timur / Bali/ Nusa Tenggara"},
+                new RegionOption { Id = 6, Name = "Wilayah Kalimantan"},
+                new RegionOption { Id = 7, Name = "Wilayah Sulawesi"},
+                new RegionOption { Id = 8, Name = "Wilayah Papua dan Maluku"},
+            };
+
+            var owners = new List<OwnedOption>
+            {
+                new OwnedOption { Id = 1, Name = "COCO (Corporate Owner, Corporate Operate)"},
+                new OwnedOption { Id = 3, Name = "CODO (Corporate Owner, Dealer Operate)"},
+                new OwnedOption { Id = 4, Name = "DODO (Dealer Owned Dealer Operate)"},
+            };
+
+            string[] initial = _compartmentKodeTujuan; // reuse previous picks if any
+
+            using (var dlg = new PilihTujuan(jlhComp, regions, owners, initial))
+            {
+                dlg.StartPosition = FormStartPosition.CenterParent;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    _compartmentKodeTujuan = dlg.SelectedKodeTujuan ?? new string[jlhComp];
+                    _compartmentNamaTujuan = dlg.SelectedNamaSPBU ?? new string[jlhComp];
+
+                    // Show a compact summary: "C1: 531234 | C2: 531111 | ..."
+                    txtTujuan.Text = ComposeTujuanSummaryText(_compartmentKodeTujuan);
+                }
+            }
+        }
+
+        // Helper to display a friendly summary in txtTujuan
+        private static string ComposeTujuanSummaryText(string[] arr)
+        {
+            if (arr == null || arr.Length == 0) return string.Empty;
+            var parts = new List<string>(arr.Length);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var val = string.IsNullOrWhiteSpace(arr[i]) ? "-" : arr[i].Trim();
+                parts.Add($"C{i + 1}: {val}");
+            }
+            return string.Join(" | ", parts);
+        }
+
+
     }
 }

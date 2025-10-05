@@ -26,6 +26,8 @@ namespace SEALCHK.Reports {
         
         private RegisterDetailDataTable tableRegisterDetail;
         
+        private BAPenghapusanSegelDataTable tableBAPenghapusanSegel;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -57,6 +59,9 @@ namespace SEALCHK.Reports {
                 if ((ds.Tables["RegisterDetail"] != null)) {
                     base.Tables.Add(new RegisterDetailDataTable(ds.Tables["RegisterDetail"]));
                 }
+                if ((ds.Tables["BAPenghapusanSegel"] != null)) {
+                    base.Tables.Add(new BAPenghapusanSegelDataTable(ds.Tables["BAPenghapusanSegel"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -82,6 +87,16 @@ namespace SEALCHK.Reports {
         public RegisterDetailDataTable RegisterDetail {
             get {
                 return this.tableRegisterDetail;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public BAPenghapusanSegelDataTable BAPenghapusanSegel {
+            get {
+                return this.tableBAPenghapusanSegel;
             }
         }
         
@@ -155,6 +170,9 @@ namespace SEALCHK.Reports {
                 if ((ds.Tables["RegisterDetail"] != null)) {
                     base.Tables.Add(new RegisterDetailDataTable(ds.Tables["RegisterDetail"]));
                 }
+                if ((ds.Tables["BAPenghapusanSegel"] != null)) {
+                    base.Tables.Add(new BAPenghapusanSegelDataTable(ds.Tables["BAPenghapusanSegel"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -194,6 +212,12 @@ namespace SEALCHK.Reports {
                     this.tableRegisterDetail.InitVars();
                 }
             }
+            this.tableBAPenghapusanSegel = ((BAPenghapusanSegelDataTable)(base.Tables["BAPenghapusanSegel"]));
+            if ((initTable == true)) {
+                if ((this.tableBAPenghapusanSegel != null)) {
+                    this.tableBAPenghapusanSegel.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -206,11 +230,19 @@ namespace SEALCHK.Reports {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableRegisterDetail = new RegisterDetailDataTable();
             base.Tables.Add(this.tableRegisterDetail);
+            this.tableBAPenghapusanSegel = new BAPenghapusanSegelDataTable();
+            base.Tables.Add(this.tableBAPenghapusanSegel);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeRegisterDetail() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeBAPenghapusanSegel() {
             return false;
         }
         
@@ -271,6 +303,9 @@ namespace SEALCHK.Reports {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void RegisterDetailRowChangeEventHandler(object sender, RegisterDetailRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void BAPenghapusanSegelRowChangeEventHandler(object sender, BAPenghapusanSegelRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -674,6 +709,337 @@ namespace SEALCHK.Reports {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class BAPenghapusanSegelDataTable : global::System.Data.TypedTableBase<BAPenghapusanSegelRow> {
+            
+            private global::System.Data.DataColumn columnTgl_Input;
+            
+            private global::System.Data.DataColumn columnNoPlat;
+            
+            private global::System.Data.DataColumn columnUserINPUT;
+            
+            private global::System.Data.DataColumn columnUserOUT;
+            
+            private global::System.Data.DataColumn columnSPBU;
+            
+            private global::System.Data.DataColumn columnSegel;
+            
+            private global::System.Data.DataColumn columnStatusSegel;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelDataTable() {
+                this.TableName = "BAPenghapusanSegel";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal BAPenghapusanSegelDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected BAPenghapusanSegelDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tgl_InputColumn {
+                get {
+                    return this.columnTgl_Input;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NoPlatColumn {
+                get {
+                    return this.columnNoPlat;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UserINPUTColumn {
+                get {
+                    return this.columnUserINPUT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn UserOUTColumn {
+                get {
+                    return this.columnUserOUT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SPBUColumn {
+                get {
+                    return this.columnSPBU;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SegelColumn {
+                get {
+                    return this.columnSegel;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StatusSegelColumn {
+                get {
+                    return this.columnStatusSegel;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelRow this[int index] {
+                get {
+                    return ((BAPenghapusanSegelRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BAPenghapusanSegelRowChangeEventHandler BAPenghapusanSegelRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BAPenghapusanSegelRowChangeEventHandler BAPenghapusanSegelRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BAPenghapusanSegelRowChangeEventHandler BAPenghapusanSegelRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event BAPenghapusanSegelRowChangeEventHandler BAPenghapusanSegelRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddBAPenghapusanSegelRow(BAPenghapusanSegelRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelRow AddBAPenghapusanSegelRow(System.DateTime Tgl_Input, string NoPlat, string UserINPUT, string UserOUT, string SPBU, string Segel, string StatusSegel) {
+                BAPenghapusanSegelRow rowBAPenghapusanSegelRow = ((BAPenghapusanSegelRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Tgl_Input,
+                        NoPlat,
+                        UserINPUT,
+                        UserOUT,
+                        SPBU,
+                        Segel,
+                        StatusSegel};
+                rowBAPenghapusanSegelRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowBAPenghapusanSegelRow);
+                return rowBAPenghapusanSegelRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                BAPenghapusanSegelDataTable cln = ((BAPenghapusanSegelDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new BAPenghapusanSegelDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnTgl_Input = base.Columns["Tgl_Input"];
+                this.columnNoPlat = base.Columns["NoPlat"];
+                this.columnUserINPUT = base.Columns["UserINPUT"];
+                this.columnUserOUT = base.Columns["UserOUT"];
+                this.columnSPBU = base.Columns["SPBU"];
+                this.columnSegel = base.Columns["Segel"];
+                this.columnStatusSegel = base.Columns["StatusSegel"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnTgl_Input = new global::System.Data.DataColumn("Tgl_Input", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTgl_Input);
+                this.columnNoPlat = new global::System.Data.DataColumn("NoPlat", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNoPlat);
+                this.columnUserINPUT = new global::System.Data.DataColumn("UserINPUT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUserINPUT);
+                this.columnUserOUT = new global::System.Data.DataColumn("UserOUT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUserOUT);
+                this.columnSPBU = new global::System.Data.DataColumn("SPBU", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSPBU);
+                this.columnSegel = new global::System.Data.DataColumn("Segel", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSegel);
+                this.columnStatusSegel = new global::System.Data.DataColumn("StatusSegel", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatusSegel);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelRow NewBAPenghapusanSegelRow() {
+                return ((BAPenghapusanSegelRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new BAPenghapusanSegelRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(BAPenghapusanSegelRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.BAPenghapusanSegelRowChanged != null)) {
+                    this.BAPenghapusanSegelRowChanged(this, new BAPenghapusanSegelRowChangeEvent(((BAPenghapusanSegelRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.BAPenghapusanSegelRowChanging != null)) {
+                    this.BAPenghapusanSegelRowChanging(this, new BAPenghapusanSegelRowChangeEvent(((BAPenghapusanSegelRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.BAPenghapusanSegelRowDeleted != null)) {
+                    this.BAPenghapusanSegelRowDeleted(this, new BAPenghapusanSegelRowChangeEvent(((BAPenghapusanSegelRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.BAPenghapusanSegelRowDeleting != null)) {
+                    this.BAPenghapusanSegelRowDeleting(this, new BAPenghapusanSegelRowChangeEvent(((BAPenghapusanSegelRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveBAPenghapusanSegelRow(BAPenghapusanSegelRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SealReportDataSet ds = new SealReportDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "BAPenghapusanSegelDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class RegisterDetailRow : global::System.Data.DataRow {
@@ -1025,6 +1391,217 @@ namespace SEALCHK.Reports {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class BAPenghapusanSegelRow : global::System.Data.DataRow {
+            
+            private BAPenghapusanSegelDataTable tableBAPenghapusanSegel;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal BAPenghapusanSegelRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableBAPenghapusanSegel = ((BAPenghapusanSegelDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime Tgl_Input {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBAPenghapusanSegel.Tgl_InputColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Tgl_Input\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.Tgl_InputColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string NoPlat {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.NoPlatColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NoPlat\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.NoPlatColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UserINPUT {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.UserINPUTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UserINPUT\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.UserINPUTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string UserOUT {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.UserOUTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UserOUT\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.UserOUTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SPBU {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.SPBUColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SPBU\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.SPBUColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Segel {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.SegelColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Segel\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.SegelColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string StatusSegel {
+                get {
+                    try {
+                        return ((string)(this[this.tableBAPenghapusanSegel.StatusSegelColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'StatusSegel\' in table \'BAPenghapusanSegel\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBAPenghapusanSegel.StatusSegelColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTgl_InputNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.Tgl_InputColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTgl_InputNull() {
+                this[this.tableBAPenghapusanSegel.Tgl_InputColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNoPlatNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.NoPlatColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNoPlatNull() {
+                this[this.tableBAPenghapusanSegel.NoPlatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUserINPUTNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.UserINPUTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUserINPUTNull() {
+                this[this.tableBAPenghapusanSegel.UserINPUTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUserOUTNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.UserOUTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUserOUTNull() {
+                this[this.tableBAPenghapusanSegel.UserOUTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSPBUNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.SPBUColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSPBUNull() {
+                this[this.tableBAPenghapusanSegel.SPBUColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSegelNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.SegelColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSegelNull() {
+                this[this.tableBAPenghapusanSegel.SegelColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStatusSegelNull() {
+                return this.IsNull(this.tableBAPenghapusanSegel.StatusSegelColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStatusSegelNull() {
+                this[this.tableBAPenghapusanSegel.StatusSegelColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1044,6 +1621,40 @@ namespace SEALCHK.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public RegisterDetailRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class BAPenghapusanSegelRowChangeEvent : global::System.EventArgs {
+            
+            private BAPenghapusanSegelRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelRowChangeEvent(BAPenghapusanSegelRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public BAPenghapusanSegelRow Row {
                 get {
                     return this.eventRow;
                 }
