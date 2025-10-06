@@ -124,6 +124,12 @@
       <DependentUpon>RegisterSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\SealPerStatusPivot.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SealPerStatusPivot.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\SealReportDataSet.cs">
       <DependentUpon>SealReportDataSet.xsd</DependentUpon>
     </Compile>
@@ -131,6 +137,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SealReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\srKeteranganPivot.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>srKeteranganPivot.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="UserControls\UCTujuan.cs">
@@ -230,6 +242,14 @@
     <EmbeddedResource Include="Reports\RegisterSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RegisterSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SealPerStatusPivot.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SealPerStatusPivot.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\srKeteranganPivot.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>srKeteranganPivot.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCTujuan.resx">
       <DependentUpon>UCTujuan.cs</DependentUpon>

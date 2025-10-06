@@ -284,7 +284,8 @@
             this.cbxJenisLaporan.ItemHeight = 43;
             this.cbxJenisLaporan.Items.AddRange(new object[] {
             "REGISTER SUMMARY",
-            "RINCIAN SEGEL"});
+            "RINCIAN SEGEL",
+            "REGISTER SUMMARY PIVOT"});
             this.cbxJenisLaporan.Location = new System.Drawing.Point(12, 25);
             this.cbxJenisLaporan.MaxDropDownItems = 4;
             this.cbxJenisLaporan.MouseState = MaterialSkin.MouseState.OUT;
@@ -292,6 +293,7 @@
             this.cbxJenisLaporan.Size = new System.Drawing.Size(262, 49);
             this.cbxJenisLaporan.StartIndex = 0;
             this.cbxJenisLaporan.TabIndex = 0;
+            this.cbxJenisLaporan.SelectedIndexChanged += new System.EventHandler(this.cbxJenisLaporan_SelectedIndexChanged);
             // 
             // ContentPanel
             // 

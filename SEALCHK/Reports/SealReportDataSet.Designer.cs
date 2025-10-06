@@ -28,6 +28,10 @@ namespace SEALCHK.Reports {
         
         private BAPenghapusanSegelDataTable tableBAPenghapusanSegel;
         
+        private SealPerStatusPivotDataTable tableSealPerStatusPivot;
+        
+        private KeteranganPivotDataTable tableKeteranganPivot;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -61,6 +65,12 @@ namespace SEALCHK.Reports {
                 }
                 if ((ds.Tables["BAPenghapusanSegel"] != null)) {
                     base.Tables.Add(new BAPenghapusanSegelDataTable(ds.Tables["BAPenghapusanSegel"]));
+                }
+                if ((ds.Tables["SealPerStatusPivot"] != null)) {
+                    base.Tables.Add(new SealPerStatusPivotDataTable(ds.Tables["SealPerStatusPivot"]));
+                }
+                if ((ds.Tables["KeteranganPivot"] != null)) {
+                    base.Tables.Add(new KeteranganPivotDataTable(ds.Tables["KeteranganPivot"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -97,6 +107,26 @@ namespace SEALCHK.Reports {
         public BAPenghapusanSegelDataTable BAPenghapusanSegel {
             get {
                 return this.tableBAPenghapusanSegel;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SealPerStatusPivotDataTable SealPerStatusPivot {
+            get {
+                return this.tableSealPerStatusPivot;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public KeteranganPivotDataTable KeteranganPivot {
+            get {
+                return this.tableKeteranganPivot;
             }
         }
         
@@ -173,6 +203,12 @@ namespace SEALCHK.Reports {
                 if ((ds.Tables["BAPenghapusanSegel"] != null)) {
                     base.Tables.Add(new BAPenghapusanSegelDataTable(ds.Tables["BAPenghapusanSegel"]));
                 }
+                if ((ds.Tables["SealPerStatusPivot"] != null)) {
+                    base.Tables.Add(new SealPerStatusPivotDataTable(ds.Tables["SealPerStatusPivot"]));
+                }
+                if ((ds.Tables["KeteranganPivot"] != null)) {
+                    base.Tables.Add(new KeteranganPivotDataTable(ds.Tables["KeteranganPivot"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -218,6 +254,18 @@ namespace SEALCHK.Reports {
                     this.tableBAPenghapusanSegel.InitVars();
                 }
             }
+            this.tableSealPerStatusPivot = ((SealPerStatusPivotDataTable)(base.Tables["SealPerStatusPivot"]));
+            if ((initTable == true)) {
+                if ((this.tableSealPerStatusPivot != null)) {
+                    this.tableSealPerStatusPivot.InitVars();
+                }
+            }
+            this.tableKeteranganPivot = ((KeteranganPivotDataTable)(base.Tables["KeteranganPivot"]));
+            if ((initTable == true)) {
+                if ((this.tableKeteranganPivot != null)) {
+                    this.tableKeteranganPivot.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -232,6 +280,10 @@ namespace SEALCHK.Reports {
             base.Tables.Add(this.tableRegisterDetail);
             this.tableBAPenghapusanSegel = new BAPenghapusanSegelDataTable();
             base.Tables.Add(this.tableBAPenghapusanSegel);
+            this.tableSealPerStatusPivot = new SealPerStatusPivotDataTable();
+            base.Tables.Add(this.tableSealPerStatusPivot);
+            this.tableKeteranganPivot = new KeteranganPivotDataTable();
+            base.Tables.Add(this.tableKeteranganPivot);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -243,6 +295,18 @@ namespace SEALCHK.Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeBAPenghapusanSegel() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeSealPerStatusPivot() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeKeteranganPivot() {
             return false;
         }
         
@@ -306,6 +370,12 @@ namespace SEALCHK.Reports {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void BAPenghapusanSegelRowChangeEventHandler(object sender, BAPenghapusanSegelRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void SealPerStatusPivotRowChangeEventHandler(object sender, SealPerStatusPivotRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void KeteranganPivotRowChangeEventHandler(object sender, KeteranganPivotRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1040,6 +1110,668 @@ namespace SEALCHK.Reports {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SealPerStatusPivotDataTable : global::System.Data.TypedTableBase<SealPerStatusPivotRow> {
+            
+            private global::System.Data.DataColumn columnNoPlat;
+            
+            private global::System.Data.DataColumn columnN_DIKELUARKAN;
+            
+            private global::System.Data.DataColumn columnN_DIKEMBALIKAN;
+            
+            private global::System.Data.DataColumn columnN_HILANG;
+            
+            private global::System.Data.DataColumn columnN_DIKIRIM;
+            
+            private global::System.Data.DataColumn columnN_OTHER;
+            
+            private global::System.Data.DataColumn columnTotal;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotDataTable() {
+                this.TableName = "SealPerStatusPivot";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal SealPerStatusPivotDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected SealPerStatusPivotDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NoPlatColumn {
+                get {
+                    return this.columnNoPlat;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn N_DIKELUARKANColumn {
+                get {
+                    return this.columnN_DIKELUARKAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn N_DIKEMBALIKANColumn {
+                get {
+                    return this.columnN_DIKEMBALIKAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn N_HILANGColumn {
+                get {
+                    return this.columnN_HILANG;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn N_DIKIRIMColumn {
+                get {
+                    return this.columnN_DIKIRIM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn N_OTHERColumn {
+                get {
+                    return this.columnN_OTHER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalColumn {
+                get {
+                    return this.columnTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotRow this[int index] {
+                get {
+                    return ((SealPerStatusPivotRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event SealPerStatusPivotRowChangeEventHandler SealPerStatusPivotRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event SealPerStatusPivotRowChangeEventHandler SealPerStatusPivotRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event SealPerStatusPivotRowChangeEventHandler SealPerStatusPivotRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event SealPerStatusPivotRowChangeEventHandler SealPerStatusPivotRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddSealPerStatusPivotRow(SealPerStatusPivotRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotRow AddSealPerStatusPivotRow(string NoPlat, int N_DIKELUARKAN, int N_DIKEMBALIKAN, int N_HILANG, int N_DIKIRIM, int N_OTHER, int Total) {
+                SealPerStatusPivotRow rowSealPerStatusPivotRow = ((SealPerStatusPivotRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        NoPlat,
+                        N_DIKELUARKAN,
+                        N_DIKEMBALIKAN,
+                        N_HILANG,
+                        N_DIKIRIM,
+                        N_OTHER,
+                        Total};
+                rowSealPerStatusPivotRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSealPerStatusPivotRow);
+                return rowSealPerStatusPivotRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                SealPerStatusPivotDataTable cln = ((SealPerStatusPivotDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SealPerStatusPivotDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnNoPlat = base.Columns["NoPlat"];
+                this.columnN_DIKELUARKAN = base.Columns["N_DIKELUARKAN"];
+                this.columnN_DIKEMBALIKAN = base.Columns["N_DIKEMBALIKAN"];
+                this.columnN_HILANG = base.Columns["N_HILANG"];
+                this.columnN_DIKIRIM = base.Columns["N_DIKIRIM"];
+                this.columnN_OTHER = base.Columns["N_OTHER"];
+                this.columnTotal = base.Columns["Total"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnNoPlat = new global::System.Data.DataColumn("NoPlat", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNoPlat);
+                this.columnN_DIKELUARKAN = new global::System.Data.DataColumn("N_DIKELUARKAN", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnN_DIKELUARKAN);
+                this.columnN_DIKEMBALIKAN = new global::System.Data.DataColumn("N_DIKEMBALIKAN", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnN_DIKEMBALIKAN);
+                this.columnN_HILANG = new global::System.Data.DataColumn("N_HILANG", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnN_HILANG);
+                this.columnN_DIKIRIM = new global::System.Data.DataColumn("N_DIKIRIM", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnN_DIKIRIM);
+                this.columnN_OTHER = new global::System.Data.DataColumn("N_OTHER", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnN_OTHER);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotRow NewSealPerStatusPivotRow() {
+                return ((SealPerStatusPivotRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SealPerStatusPivotRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(SealPerStatusPivotRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SealPerStatusPivotRowChanged != null)) {
+                    this.SealPerStatusPivotRowChanged(this, new SealPerStatusPivotRowChangeEvent(((SealPerStatusPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SealPerStatusPivotRowChanging != null)) {
+                    this.SealPerStatusPivotRowChanging(this, new SealPerStatusPivotRowChangeEvent(((SealPerStatusPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SealPerStatusPivotRowDeleted != null)) {
+                    this.SealPerStatusPivotRowDeleted(this, new SealPerStatusPivotRowChangeEvent(((SealPerStatusPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SealPerStatusPivotRowDeleting != null)) {
+                    this.SealPerStatusPivotRowDeleting(this, new SealPerStatusPivotRowChangeEvent(((SealPerStatusPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveSealPerStatusPivotRow(SealPerStatusPivotRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SealReportDataSet ds = new SealReportDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SealPerStatusPivotDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class KeteranganPivotDataTable : global::System.Data.TypedTableBase<KeteranganPivotRow> {
+            
+            private global::System.Data.DataColumn columnNoPlat;
+            
+            private global::System.Data.DataColumn columnK_TEPAT_WAKTU;
+            
+            private global::System.Data.DataColumn columnK_TERLAMBAT;
+            
+            private global::System.Data.DataColumn columnK_TELAH_DIKELUARKAN;
+            
+            private global::System.Data.DataColumn columnK_TIDAK_PERNAH_KEMBALI;
+            
+            private global::System.Data.DataColumn columnK_DIKIRIM;
+            
+            private global::System.Data.DataColumn columnTotal;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotDataTable() {
+                this.TableName = "KeteranganPivot";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal KeteranganPivotDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected KeteranganPivotDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NoPlatColumn {
+                get {
+                    return this.columnNoPlat;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_TEPAT_WAKTUColumn {
+                get {
+                    return this.columnK_TEPAT_WAKTU;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_TERLAMBATColumn {
+                get {
+                    return this.columnK_TERLAMBAT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_TELAH_DIKELUARKANColumn {
+                get {
+                    return this.columnK_TELAH_DIKELUARKAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_TIDAK_PERNAH_KEMBALIColumn {
+                get {
+                    return this.columnK_TIDAK_PERNAH_KEMBALI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_DIKIRIMColumn {
+                get {
+                    return this.columnK_DIKIRIM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalColumn {
+                get {
+                    return this.columnTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotRow this[int index] {
+                get {
+                    return ((KeteranganPivotRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event KeteranganPivotRowChangeEventHandler KeteranganPivotRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event KeteranganPivotRowChangeEventHandler KeteranganPivotRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event KeteranganPivotRowChangeEventHandler KeteranganPivotRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event KeteranganPivotRowChangeEventHandler KeteranganPivotRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddKeteranganPivotRow(KeteranganPivotRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotRow AddKeteranganPivotRow(string NoPlat, int K_TEPAT_WAKTU, int K_TERLAMBAT, int K_TELAH_DIKELUARKAN, int K_TIDAK_PERNAH_KEMBALI, int K_DIKIRIM, int Total) {
+                KeteranganPivotRow rowKeteranganPivotRow = ((KeteranganPivotRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        NoPlat,
+                        K_TEPAT_WAKTU,
+                        K_TERLAMBAT,
+                        K_TELAH_DIKELUARKAN,
+                        K_TIDAK_PERNAH_KEMBALI,
+                        K_DIKIRIM,
+                        Total};
+                rowKeteranganPivotRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowKeteranganPivotRow);
+                return rowKeteranganPivotRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                KeteranganPivotDataTable cln = ((KeteranganPivotDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new KeteranganPivotDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnNoPlat = base.Columns["NoPlat"];
+                this.columnK_TEPAT_WAKTU = base.Columns["K_TEPAT_WAKTU"];
+                this.columnK_TERLAMBAT = base.Columns["K_TERLAMBAT"];
+                this.columnK_TELAH_DIKELUARKAN = base.Columns["K_TELAH_DIKELUARKAN"];
+                this.columnK_TIDAK_PERNAH_KEMBALI = base.Columns["K_TIDAK_PERNAH_KEMBALI"];
+                this.columnK_DIKIRIM = base.Columns["K_DIKIRIM"];
+                this.columnTotal = base.Columns["Total"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnNoPlat = new global::System.Data.DataColumn("NoPlat", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNoPlat);
+                this.columnK_TEPAT_WAKTU = new global::System.Data.DataColumn("K_TEPAT_WAKTU", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_TEPAT_WAKTU);
+                this.columnK_TERLAMBAT = new global::System.Data.DataColumn("K_TERLAMBAT", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_TERLAMBAT);
+                this.columnK_TELAH_DIKELUARKAN = new global::System.Data.DataColumn("K_TELAH_DIKELUARKAN", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_TELAH_DIKELUARKAN);
+                this.columnK_TIDAK_PERNAH_KEMBALI = new global::System.Data.DataColumn("K_TIDAK_PERNAH_KEMBALI", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_TIDAK_PERNAH_KEMBALI);
+                this.columnK_DIKIRIM = new global::System.Data.DataColumn("K_DIKIRIM", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_DIKIRIM);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotRow NewKeteranganPivotRow() {
+                return ((KeteranganPivotRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new KeteranganPivotRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(KeteranganPivotRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.KeteranganPivotRowChanged != null)) {
+                    this.KeteranganPivotRowChanged(this, new KeteranganPivotRowChangeEvent(((KeteranganPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.KeteranganPivotRowChanging != null)) {
+                    this.KeteranganPivotRowChanging(this, new KeteranganPivotRowChangeEvent(((KeteranganPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.KeteranganPivotRowDeleted != null)) {
+                    this.KeteranganPivotRowDeleted(this, new KeteranganPivotRowChangeEvent(((KeteranganPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.KeteranganPivotRowDeleting != null)) {
+                    this.KeteranganPivotRowDeleting(this, new KeteranganPivotRowChangeEvent(((KeteranganPivotRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveKeteranganPivotRow(KeteranganPivotRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SealReportDataSet ds = new SealReportDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "KeteranganPivotDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class RegisterDetailRow : global::System.Data.DataRow {
@@ -1602,6 +2334,429 @@ namespace SEALCHK.Reports {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class SealPerStatusPivotRow : global::System.Data.DataRow {
+            
+            private SealPerStatusPivotDataTable tableSealPerStatusPivot;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal SealPerStatusPivotRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSealPerStatusPivot = ((SealPerStatusPivotDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string NoPlat {
+                get {
+                    try {
+                        return ((string)(this[this.tableSealPerStatusPivot.NoPlatColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NoPlat\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.NoPlatColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int N_DIKELUARKAN {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.N_DIKELUARKANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'N_DIKELUARKAN\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.N_DIKELUARKANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int N_DIKEMBALIKAN {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.N_DIKEMBALIKANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'N_DIKEMBALIKAN\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.N_DIKEMBALIKANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int N_HILANG {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.N_HILANGColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'N_HILANG\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.N_HILANGColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int N_DIKIRIM {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.N_DIKIRIMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'N_DIKIRIM\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.N_DIKIRIMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int N_OTHER {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.N_OTHERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'N_OTHER\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.N_OTHERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Total {
+                get {
+                    try {
+                        return ((int)(this[this.tableSealPerStatusPivot.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'SealPerStatusPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSealPerStatusPivot.TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNoPlatNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.NoPlatColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNoPlatNull() {
+                this[this.tableSealPerStatusPivot.NoPlatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsN_DIKELUARKANNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.N_DIKELUARKANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetN_DIKELUARKANNull() {
+                this[this.tableSealPerStatusPivot.N_DIKELUARKANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsN_DIKEMBALIKANNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.N_DIKEMBALIKANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetN_DIKEMBALIKANNull() {
+                this[this.tableSealPerStatusPivot.N_DIKEMBALIKANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsN_HILANGNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.N_HILANGColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetN_HILANGNull() {
+                this[this.tableSealPerStatusPivot.N_HILANGColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsN_DIKIRIMNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.N_DIKIRIMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetN_DIKIRIMNull() {
+                this[this.tableSealPerStatusPivot.N_DIKIRIMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsN_OTHERNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.N_OTHERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetN_OTHERNull() {
+                this[this.tableSealPerStatusPivot.N_OTHERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tableSealPerStatusPivot.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tableSealPerStatusPivot.TotalColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class KeteranganPivotRow : global::System.Data.DataRow {
+            
+            private KeteranganPivotDataTable tableKeteranganPivot;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal KeteranganPivotRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableKeteranganPivot = ((KeteranganPivotDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string NoPlat {
+                get {
+                    try {
+                        return ((string)(this[this.tableKeteranganPivot.NoPlatColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NoPlat\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.NoPlatColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_TEPAT_WAKTU {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_TEPAT_WAKTUColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_TEPAT_WAKTU\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_TEPAT_WAKTUColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_TERLAMBAT {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_TERLAMBATColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_TERLAMBAT\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_TERLAMBATColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_TELAH_DIKELUARKAN {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_TELAH_DIKELUARKANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_TELAH_DIKELUARKAN\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_TELAH_DIKELUARKANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_TIDAK_PERNAH_KEMBALI {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_TIDAK_PERNAH_KEMBALIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_TIDAK_PERNAH_KEMBALI\' in table \'KeteranganPivot\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_TIDAK_PERNAH_KEMBALIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_DIKIRIM {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_DIKIRIMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_DIKIRIM\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_DIKIRIMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Total {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNoPlatNull() {
+                return this.IsNull(this.tableKeteranganPivot.NoPlatColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNoPlatNull() {
+                this[this.tableKeteranganPivot.NoPlatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_TEPAT_WAKTUNull() {
+                return this.IsNull(this.tableKeteranganPivot.K_TEPAT_WAKTUColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_TEPAT_WAKTUNull() {
+                this[this.tableKeteranganPivot.K_TEPAT_WAKTUColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_TERLAMBATNull() {
+                return this.IsNull(this.tableKeteranganPivot.K_TERLAMBATColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_TERLAMBATNull() {
+                this[this.tableKeteranganPivot.K_TERLAMBATColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_TELAH_DIKELUARKANNull() {
+                return this.IsNull(this.tableKeteranganPivot.K_TELAH_DIKELUARKANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_TELAH_DIKELUARKANNull() {
+                this[this.tableKeteranganPivot.K_TELAH_DIKELUARKANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_TIDAK_PERNAH_KEMBALINull() {
+                return this.IsNull(this.tableKeteranganPivot.K_TIDAK_PERNAH_KEMBALIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_TIDAK_PERNAH_KEMBALINull() {
+                this[this.tableKeteranganPivot.K_TIDAK_PERNAH_KEMBALIColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_DIKIRIMNull() {
+                return this.IsNull(this.tableKeteranganPivot.K_DIKIRIMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_DIKIRIMNull() {
+                this[this.tableKeteranganPivot.K_DIKIRIMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tableKeteranganPivot.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tableKeteranganPivot.TotalColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1655,6 +2810,74 @@ namespace SEALCHK.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BAPenghapusanSegelRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class SealPerStatusPivotRowChangeEvent : global::System.EventArgs {
+            
+            private SealPerStatusPivotRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotRowChangeEvent(SealPerStatusPivotRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SealPerStatusPivotRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class KeteranganPivotRowChangeEvent : global::System.EventArgs {
+            
+            private KeteranganPivotRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotRowChangeEvent(KeteranganPivotRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public KeteranganPivotRow Row {
                 get {
                     return this.eventRow;
                 }

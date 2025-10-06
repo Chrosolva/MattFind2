@@ -29,6 +29,7 @@ namespace SEALCHK.View
             public string UserOut { get; set; }
             public string SPBU { get; set; }
             public string Segel { get; set; }
+            public string StatusSegel { get; set; }
         }
 
 
@@ -128,7 +129,7 @@ namespace SEALCHK.View
                 string tujuan = (txtTujuan.Text ?? "").Trim();
 
                 var dt = BuildBAPenghapusanSegelTable(from, toExcl, noPlat, status, tujuan);
-                if (dt.Rows.Count == 0)
+                        if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("No data for the selected filters / date range.", "Report",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -157,6 +158,53 @@ namespace SEALCHK.View
                 crViewer.ReportSource = rpt;
                 crViewer.Refresh();
             }
+
+            else if (cbxJenisLaporan.SelectedIndex == 2)
+            {
+                // Summary: Seal counts per Status pivoted by NoPlat
+                DateTime from = dtpFrom.Value.Date;
+                DateTime toExcl = dtpTo.Value.Date.AddDays(1);
+
+                string noPlat = (cbxNoPlat.Text ?? "").Trim();
+                string status = (cbxStatus.Text ?? "").Trim();
+
+                var dt = BuildSealPerStatusPivotTable(from, toExcl, noPlat, status);
+                var dtKet = BuildKeteranganPivotTable(from, toExcl, noPlat, status);     // "KeteranganPivot"
+
+                if (dt.Rows.Count == 0 && dtKet.Rows.Count == 0)
+                {
+                    MessageBox.Show("No data for the selected filters / date range.", "Report",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    crViewer.ReportSource = null;
+                    return;
+                }
+
+                // wrap into a DataSet (Crystal likes a DataSet even if you don't have an XSD)
+                var ds = new DataSet("SealReportDataSet");
+                ds.Tables.Add(dt);
+                ds.Tables.Add(dtKet);
+
+                // Load your Crystal report designed for this table
+                // Option A: strongly-typed class if you added the .rpt to project
+                var rpt = new Reports.SealPerStatusPivot(); // create this .rpt once (see below)
+
+                // Option B: load by path
+                // var rpt = new ReportDocument();
+                // rpt.Load(Path.Combine(Application.StartupPath, "Reports\\SealPerStatusPivot.rpt"));
+
+                rpt.SetDataSource(ds);
+
+                // Header parameters (optional)
+                SetParamEverywhere(rpt, "FromDate", from);
+                SetParamEverywhere(rpt, "ToDate", toExcl.AddDays(-1));
+                SetParamEverywhere(rpt, "NoPlat", string.IsNullOrWhiteSpace(noPlat) ? "" : noPlat);
+                SetParamEverywhere(rpt, "Status", string.IsNullOrWhiteSpace(status) ? "" : status);
+
+                crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+                crViewer.ReportSource = rpt;
+                crViewer.Refresh();
+            }
+
 
         }
 
@@ -235,7 +283,7 @@ namespace SEALCHK.View
                 t.AddRegisterDetailRow(row);
             }
 
-            return ds;
+            return ds;  
         }
 
         private DataTable BuildBAPenghapusanSegelTable(
@@ -276,14 +324,14 @@ OUTER APPLY (
 OUTER APPLY (
     SELECT
         STUFF((
-            SELECT ' | ' + CAST(d2.[Status] AS varchar(50))
+            SELECT ' | ' + CAST(d2.[Keterangan] AS varchar(50))
             FROM dbo.TblDetailRegister AS d2
             WHERE d2.NoPlat    = r.NoPlat
               AND d2.Tgl_Input = r.Tgl_Input
-              AND (@Status is not null AND (ISNULL(d2.Status,'') LIKE '%' + @Status + '%'))  -- skip empty/NULL
-            ORDER BY d2.PartID                                   -- set your order
+              AND (@Status = '' OR ISNULL(d2.[Status],'') LIKE '%' + @Status + '%')
+            ORDER BY d2.PartID
             FOR XML PATH(''), TYPE
-        ).value('.', 'nvarchar(max)'), 1, 3, '') AS StatusSegel
+        ).value('.', 'nvarchar(max)'), 1, 3, '') AS StatusSegel 
 ) AS cb
 WHERE
     r.Tgl_Input >= @From AND r.Tgl_Input < @ToExcl
@@ -317,14 +365,144 @@ ORDER BY r.Tgl_Input, r.NoPlat;";
             dt.Columns.Add("UserOut", typeof(string));
             dt.Columns.Add("SPBU", typeof(string));
             dt.Columns.Add("Segel", typeof(string));
+            dt.Columns.Add("StatusSegel", typeof(string));
 
             foreach (var r in rows)
             {
                 dt.Rows.Add(r.Tgl_Input, r.NoPlat ?? "", r.UserInput ?? "", r.UserOut ?? "",
-                            r.SPBU ?? "", r.Segel ?? "");
+                            r.SPBU ?? "", r.Segel ?? "", r.StatusSegel ?? "");
             }
             return dt;
         }
+
+        public class SealPerStatusPivotRow
+        {
+            public string NoPlat { get; set; }
+            public int N_DIKELUARKAN { get; set; }
+            public int N_DIKEMBALIKAN { get; set; }
+            public int N_HILANG { get; set; }
+            public int N_DIKIRIM { get; set; }
+            public int N_OTHER { get; set; }
+            public int Total { get; set; }      
+        }
+
+
+        private DataTable BuildSealPerStatusPivotTable(
+    DateTime from, DateTime toExcl, string noPlat, string status)
+        {
+            var sql = @"
+SET ARITHABORT ON;
+SET NUMERIC_ROUNDABORT OFF;
+
+SELECT
+  r.NoPlat,
+  SUM(CASE WHEN d.Status='DIKELUARKAN'  THEN 1 ELSE 0 END) AS N_DIKELUARKAN,
+  SUM(CASE WHEN d.Status='DIKEMBALIKAN' THEN 1 ELSE 0 END) AS N_DIKEMBALIKAN,
+  SUM(CASE WHEN d.Status='HILANG'       THEN 1 ELSE 0 END) AS N_HILANG,
+  SUM(CASE WHEN d.Status='DIKIRIM'      THEN 1 ELSE 0 END) AS N_DIKIRIM,
+  SUM(CASE WHEN d.Status IS NULL OR d.Status NOT IN ('DIKELUARKAN','DIKEMBALIKAN','HILANG','DIKIRIM') THEN 1 ELSE 0 END) AS N_OTHER,
+  COUNT(*) AS Total
+FROM dbo.TblRegister r
+JOIN dbo.TblDetailRegister d
+  ON d.NoPlat=r.NoPlat AND d.Tgl_Input=r.Tgl_Input
+WHERE r.Tgl_Input >= @pFrom AND r.Tgl_Input < @pToExcl
+  AND (@pNoPlat='' OR r.NoPlat=@pNoPlat)
+  AND (@pStatus='' OR ISNULL(d.Status,'') LIKE '%'+@pStatus+'%')
+GROUP BY r.NoPlat
+ORDER BY r.NoPlat;";
+
+            var rows = _db.Database.SqlQuery<SealPerStatusPivotRow>(
+                sql,
+                new SqlParameter("@pFrom", from),
+                new SqlParameter("@pToExcl", toExcl),
+                new SqlParameter("@pNoPlat", (noPlat ?? "").Trim()),
+                new SqlParameter("@pStatus", (status ?? "").Trim())
+            ).ToList();
+
+            // Build a DataTable that Crystal can bind to
+            var dt = new DataTable("SealPerStatusPivot");
+            dt.Columns.Add("NoPlat", typeof(string));
+            dt.Columns.Add("N_DIKELUARKAN", typeof(int));
+            dt.Columns.Add("N_DIKEMBALIKAN", typeof(int));
+            dt.Columns.Add("N_HILANG", typeof(int));
+            dt.Columns.Add("N_DIKIRIM", typeof(int));
+            dt.Columns.Add("N_OTHER", typeof(int));
+            dt.Columns.Add("Total", typeof(int));
+
+            foreach (var r in rows)
+            {
+                dt.Rows.Add(
+                    r.NoPlat ?? "",
+                    r.N_DIKELUARKAN,
+                    r.N_DIKEMBALIKAN,
+                    r.N_HILANG,
+                    r.N_DIKIRIM,
+                    r.N_OTHER,
+                    r.Total
+                );
+            }
+
+            return dt;
+        }
+
+        public class KeteranganPivotRow
+        {
+            public string NoPlat { get; set; }
+            public int K_TEPAT_WAKTU { get; set; }
+            public int K_TERLAMBAT { get; set; }
+            public int K_TELAH_DIKELUARKAN { get; set; }
+            public int K_TIDAK_PERNAH_KEMBALI { get; set; }
+            public int K_DIKIRIM { get; set; }
+            public int Total { get; set; }
+        }
+
+        private DataTable BuildKeteranganPivotTable(DateTime from, DateTime toExcl, string noPlat, string status)
+        {
+            var sql = @"
+SET ARITHABORT ON;
+SET NUMERIC_ROUNDABORT OFF;
+
+SELECT
+  r.NoPlat,
+  SUM(CASE WHEN (d.Keterangan LIKE '%TEPAT WAKTU%' AND d.Keterangan not like '%TELAH DIKELUARKAN%')        THEN 1 ELSE 0 END) AS K_TEPAT_WAKTU,
+  SUM(CASE WHEN (d.Keterangan LIKE '%TERLAMBAT%'  AND d.Keterangan not like '%TELAH DIKELUARKAN%')        THEN 1 ELSE 0 END) AS K_TERLAMBAT,
+  SUM(CASE WHEN d.Keterangan LIKE '%TELAH DIKELUARKAN%'  THEN 1 ELSE 0 END) AS K_TELAH_DIKELUARKAN,
+  SUM(CASE WHEN d.Keterangan LIKE '%TIDAK PERNAH KEMBALI%' THEN 1 ELSE 0 END) AS K_TIDAK_PERNAH_KEMBALI,
+  SUM(CASE WHEN d.Keterangan is null THEN 1 ELSE 0 END) AS K_DIKIRIM,
+  COUNT(*) AS Total
+FROM dbo.TblRegister r
+JOIN dbo.TblDetailRegister d
+  ON d.NoPlat=r.NoPlat AND d.Tgl_Input=r.Tgl_Input
+WHERE r.Tgl_Input >= @pFrom AND r.Tgl_Input < @pToExcl
+  AND (@pNoPlat='' OR r.NoPlat=@pNoPlat)
+  AND (@pStatus='' OR ISNULL(d.Status,'') LIKE '%'+@pStatus+'%')
+GROUP BY r.NoPlat
+ORDER BY r.NoPlat;";
+
+            var rows = _db.Database.SqlQuery<KeteranganPivotRow>(
+                sql,
+                new SqlParameter("@pFrom", from),
+                new SqlParameter("@pToExcl", toExcl),
+                new SqlParameter("@pNoPlat", (noPlat ?? "").Trim()),
+                new SqlParameter("@pStatus", (status ?? "").Trim())
+            ).ToList();
+
+            var dt = new DataTable("KeteranganPivot"); // <-- table name Crystal will use in the subreport
+            dt.Columns.Add("NoPlat", typeof(string));
+            dt.Columns.Add("K_TEPAT_WAKTU", typeof(int));
+            dt.Columns.Add("K_TERLAMBAT", typeof(int));
+            dt.Columns.Add("K_TELAH_DIKELUARKAN", typeof(int));
+            dt.Columns.Add("K_TIDAK_PERNAH_KEMBALI", typeof(int));
+            dt.Columns.Add("K_DIKIRIM", typeof(int));
+            dt.Columns.Add("Total", typeof(int));
+
+            foreach (var r in rows)
+                dt.Rows.Add(r.NoPlat ?? "", r.K_TEPAT_WAKTU, r.K_TERLAMBAT, r.K_TELAH_DIKELUARKAN, r.K_TIDAK_PERNAH_KEMBALI, r.K_DIKIRIM, r.Total);
+
+            return dt;
+        }
+
+
 
 
         // Log available parameters (for quick diagnosis)
@@ -419,7 +597,7 @@ ORDER BY r.Tgl_Input, r.NoPlat;";
             {
                 Title = "Export to Excel",
                 Filter = "Excel 97-2003 (*.xls)|*.xls",
-                FileName = $"Report_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+                FileName = $"Report_{DateTime.Now:yyyyMMdd_HHmmss}.xls"
             })
             {
                 if (sfd.ShowDialog(this) != DialogResult.OK) return;
@@ -433,7 +611,18 @@ ORDER BY r.Tgl_Input, r.NoPlat;";
 
                 // If you want DATA-ONLY (clean columns) choose ExcelRecord; 
                 // if you want layout, choose Excel/ExcelWorkbook depending on extension.
-                bool dataOnly = true; // set false if you prefer keeping layout by default
+                // Ask the user: Data-only or Keep Layout?
+                var choice = MessageBox.Show(
+                    "Export to Excel:\n\nYes = Data-only (clean columns, for analysis)\nNo = Keep layout (looks like the report)\nCancel = Abort",
+                    "Excel Export",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                if (choice == DialogResult.Cancel) return;
+
+                bool dataOnly = (choice == DialogResult.Yes);
+
+
 
                 if (dataOnly)
                 {
@@ -485,6 +674,11 @@ ORDER BY r.Tgl_Input, r.NoPlat;";
                 rpt.Export(exp);
                 MessageBox.Show("Saved: " + sfd.FileName, "Excel Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void cbxJenisLaporan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
