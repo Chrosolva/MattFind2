@@ -13,6 +13,7 @@ using SEALCHK.Data;
 using SEALCHK.Model;
 using SEALCHK.Reports;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace SEALCHK.View
 {
@@ -241,6 +242,9 @@ namespace SEALCHK.View
     DateTime from, DateTime toExcl, string noPlat, string status, string tujuan)
         {
             var sql = @"
+SET ARITHABORT ON;
+SET NUMERIC_ROUNDABORT OFF;
+
 DECLARE @From DATETIME = @pFrom;
 DECLARE @ToExcl DATETIME = @pToExcl;
 DECLARE @NoPlat VARCHAR(50) = @pNoPlat;
@@ -267,7 +271,7 @@ OUTER APPLY (
               AND (@Status is not null AND (ISNULL(d2.Status,'') LIKE '%' + @Status + '%'))
             ORDER BY d2.PartID
             FOR XML PATH(''), TYPE
-        ).value('.', 'nvarchar(max)'), 1, 1, '') AS Segel
+        ).value('.', 'nvarchar(max)'), 1, 3, '') AS Segel
 ) AS ca
 OUTER APPLY (
     SELECT
@@ -279,7 +283,7 @@ OUTER APPLY (
               AND (@Status is not null AND (ISNULL(d2.Status,'') LIKE '%' + @Status + '%'))  -- skip empty/NULL
             ORDER BY d2.PartID                                   -- set your order
             FOR XML PATH(''), TYPE
-        ).value('.', 'nvarchar(max)'), 1, 1, '') AS StatusSegel
+        ).value('.', 'nvarchar(max)'), 1, 3, '') AS StatusSegel
 ) AS cb
 WHERE
     r.Tgl_Input >= @From AND r.Tgl_Input < @ToExcl
@@ -399,6 +403,87 @@ ORDER BY r.Tgl_Input, r.NoPlat;";
                     rpt.Export(exp);
                     MessageBox.Show("Saved: " + sfd.FileName);
                 }
+            }
+        }
+
+        private void btnExportExcel_Click(object sender, EventArgs e)
+        {
+            var rpt = crViewer.ReportSource as ReportDocument;
+            if (rpt == null)
+            {
+                MessageBox.Show("No report to export. Click Preview first.");
+                return;
+            }
+
+            using (var sfd = new SaveFileDialog
+            {
+                Title = "Export to Excel",
+                Filter = "Excel 97-2003 (*.xls)|*.xls",
+                FileName = $"Report_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+            })
+            {
+                if (sfd.ShowDialog(this) != DialogResult.OK) return;
+
+                var di = new DiskFileDestinationOptions { DiskFileName = sfd.FileName };
+                var exp = new ExportOptions
+                {
+                    ExportDestinationType = ExportDestinationType.DiskFile,
+                    DestinationOptions = di
+                };
+
+                // If you want DATA-ONLY (clean columns) choose ExcelRecord; 
+                // if you want layout, choose Excel/ExcelWorkbook depending on extension.
+                bool dataOnly = true; // set false if you prefer keeping layout by default
+
+                if (dataOnly)
+                {
+                    // -------- Excel (Data Only) - most compatible -------------
+                    exp.ExportFormatType = ExportFormatType.ExcelRecord;
+                    // NOTE: Many properties differ per runtime; safest is to not set extras.
+                    // If your runtime supports it, you can optionally set:
+                    // exp.FormatOptions = new ExcelDataOnlyFormatOptions();
+                }
+                else
+                {
+                    // -------- Keep layout -------------
+                    // Some runtimes don’t have ExcelWorkbook; fall back to Excel (.xls)
+                    if (Path.GetExtension(sfd.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            exp.ExportFormatType = ExportFormatType.ExcelWorkbook; // .xlsx
+                            var fmt = new ExcelFormatOptions
+                            {
+                                ExcelTabHasColumnHeadings = true,
+                                ShowGridLines = true
+                            };
+                            exp.FormatOptions = fmt;
+                        }
+                        catch
+                        {
+                            exp.ExportFormatType = ExportFormatType.Excel;
+                            var fmt = new ExcelFormatOptions
+                            {
+                                ExcelTabHasColumnHeadings = true,
+                                ShowGridLines = true
+                            };
+                            exp.FormatOptions = fmt;
+                        }
+                    }
+                    else
+                    {
+                        exp.ExportFormatType = ExportFormatType.Excel; // .xls
+                        var fmt = new ExcelFormatOptions
+                        {
+                            ExcelTabHasColumnHeadings = true,
+                            ShowGridLines = true
+                        };
+                        exp.FormatOptions = fmt;
+                    }
+                }
+
+                rpt.Export(exp);
+                MessageBox.Show("Saved: " + sfd.FileName, "Excel Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

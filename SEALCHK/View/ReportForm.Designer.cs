@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.leftpanel = new System.Windows.Forms.Panel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnExportExcel = new MaterialSkin.Controls.MaterialButton();
             this.btnExportPDF = new MaterialSkin.Controls.MaterialButton();
             this.txtTujuan = new MaterialSkin.Controls.MaterialTextBox2();
@@ -44,9 +47,6 @@
             this.TPReportViewer = new System.Windows.Forms.TabPage();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.crViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.leftpanel.SuspendLayout();
             this.ContentPanel.SuspendLayout();
             this.TCReport.SuspendLayout();
@@ -74,6 +74,42 @@
             this.leftpanel.Size = new System.Drawing.Size(313, 556);
             this.leftpanel.TabIndex = 0;
             // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(13, 463);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(61, 19);
+            this.materialLabel3.TabIndex = 46;
+            this.materialLabel3.Text = "TUJUAN";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(12, 389);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(61, 19);
+            this.materialLabel2.TabIndex = 45;
+            this.materialLabel2.Text = "STATUS";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 307);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(62, 19);
+            this.materialLabel1.TabIndex = 44;
+            this.materialLabel1.Text = "NOPLAT";
+            // 
             // btnExportExcel
             // 
             this.btnExportExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -92,6 +128,7 @@
             this.btnExportExcel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnExportExcel.UseAccentColor = false;
             this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
             // btnExportPDF
             // 
@@ -159,7 +196,7 @@
             this.cbxStatus.MaxDropDownItems = 4;
             this.cbxStatus.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(135, 49);
+            this.cbxStatus.Size = new System.Drawing.Size(197, 49);
             this.cbxStatus.StartIndex = 0;
             this.cbxStatus.TabIndex = 40;
             // 
@@ -181,7 +218,7 @@
             this.cbxNoPlat.MaxDropDownItems = 4;
             this.cbxNoPlat.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxNoPlat.Name = "cbxNoPlat";
-            this.cbxNoPlat.Size = new System.Drawing.Size(135, 49);
+            this.cbxNoPlat.Size = new System.Drawing.Size(197, 49);
             this.cbxNoPlat.StartIndex = 0;
             this.cbxNoPlat.TabIndex = 39;
             // 
@@ -306,42 +343,6 @@
             this.crViewer.Name = "crViewer";
             this.crViewer.Size = new System.Drawing.Size(780, 524);
             this.crViewer.TabIndex = 1;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(12, 307);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(62, 19);
-            this.materialLabel1.TabIndex = 44;
-            this.materialLabel1.Text = "NOPLAT";
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(12, 389);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(61, 19);
-            this.materialLabel2.TabIndex = 45;
-            this.materialLabel2.Text = "STATUS";
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(13, 463);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(61, 19);
-            this.materialLabel3.TabIndex = 46;
-            this.materialLabel3.Text = "TUJUAN";
             // 
             // ReportForm
             // 
