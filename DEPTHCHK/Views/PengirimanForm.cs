@@ -30,6 +30,27 @@ namespace DEPTHCHK.Views
         private string[] _compartmentKodeTujuan;
         private string[] _compartmentNamaTujuan;
 
+        private SerialPort _serialPort;
+        private StringBuilder _serialBuffer = new StringBuilder();
+        private string _currentPartID;      // PartID of the last selected compartment
+        private List<LiveRow> _liveRows;    // holds rows shown in dgvPengirimanLive
+
+        // Row shape for dgvPengirimanLive (matches TblDetailPengiriman)
+        private class LiveRow
+        {
+            public string IDPengiriman { get; set; }
+            public DateTime? Tgl_Input { get; set; }
+            public string NoPlat { get; set; }
+            public string PartID { get; set; }
+            public string Compartment { get; set; }
+            public decimal DataBacaan { get; set; }
+            public decimal DataKalibrasi { get; set; }
+            public string Satuan { get; set; }
+            public string Keterangan { get; set; }
+            public string KodeTujuan { get; set; }
+        } 
+
+
         // simple combo item type (avoid anonymous types binding)
         private class ComboItem
         {
@@ -91,6 +112,13 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailPengiriman);
 
             ReloadPengiriman();
+
+            // existing setup …
+            btnStartListen.Click += btnStartListen_Click;
+            btnSave.Click += btnSave_Click;
+            btnClearLog.Click += btnClearLog_Click;
+            // default states
+            _liveRows = new List<LiveRow>();
         }
 
         private void SetupSearchCombo()
@@ -373,6 +401,9 @@ namespace DEPTHCHK.Views
             }
             return string.Join(" | ", parts);
         }
+
+
+        // Pengiriman 
 
 
     }
