@@ -30,7 +30,10 @@ namespace DEPTHCHK.Views
         private string[] _compartmentKodeTujuan;
         private string[] _compartmentNamaTujuan;
 
-        private SerialPort _serialPort;
+        private SerialPort _serialPort => Session.GlobalPort;
+        private SerialDataReceivedEventHandler _dataReceivedHandler;
+        private bool _listening = false;
+
         private StringBuilder _serialBuffer = new StringBuilder();
         private string _currentPartID;      // PartID of the last selected compartment
         private List<LiveRow> _liveRows;    // holds rows shown in dgvPengirimanLive
@@ -48,7 +51,7 @@ namespace DEPTHCHK.Views
             public string Satuan { get; set; }
             public string Keterangan { get; set; }
             public string KodeTujuan { get; set; }
-        } 
+        }
 
 
         // simple combo item type (avoid anonymous types binding)
@@ -85,6 +88,30 @@ namespace DEPTHCHK.Views
             public string Keterangan { get; set; }
         }
 
+        private void InitSerialUi()
+        {
+            if (_dataReceivedHandler == null)
+            {
+                _dataReceivedHandler = _serialPort_DataReceived;
+                _serialPort.DataReceived += _dataReceivedHandler;
+                _serialPort.ErrorReceived += _serialPort_ErrorReceived;
+                _serialPort.PinChanged += _serialPort_PinChanged;
+            }
+
+            if (_serialPort.IsOpen)
+            {
+                UpdateUiForPortState(true);
+            }
+            else
+            {
+                UpdateUiForPortState(false);
+            }
+
+            // Buttons
+            btnStartListen.Click += btnStartListen_Click;
+            btnSave.Click += btnSave_Click;
+        }
+
         public PengirimanForm()
         {
             InitializeComponent();
@@ -92,6 +119,7 @@ namespace DEPTHCHK.Views
 
         private void PengirimanForm_Load(object sender, EventArgs e)
         {
+            InitSerialUi();
             _db = new depthchkDBContext();
 
             SetupSearchCombo();
@@ -113,12 +141,7 @@ namespace DEPTHCHK.Views
 
             ReloadPengiriman();
 
-            // existing setup …
-            btnStartListen.Click += btnStartListen_Click;
-            btnSave.Click += btnSave_Click;
-            btnClearLog.Click += btnClearLog_Click;
-            // default states
-            _liveRows = new List<LiveRow>();
+
         }
 
         private void SetupSearchCombo()
@@ -402,9 +425,122 @@ namespace DEPTHCHK.Views
             return string.Join(" | ", parts);
         }
 
+        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //EnsureOpen();
 
-        // Pengiriman 
+            var sp = (SerialPort)sender;
 
+            try
+            {
+                while (sp.IsOpen && sp.BytesToRead > 0)
+                {
+                    string line;
+                    try
+                    {
+                        line = sp.ReadLine(); // NewLine-based read
+                    }
+                    catch (TimeoutException)
+                    {
+                        break; // partial line, wait next event
+                    }
 
+                    BeginInvoke(new Action(() => OnLineReceived(line)));
+
+                    if (sp.BytesToRead == 0) break;
+                }
+            }
+            catch (IOException)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    lblPortStatus.Text = "I/O error (disconnected?)";
+                    lblPortStatus.ForeColor = Color.DarkOrange;
+                }));
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+            catch (InvalidOperationException)
+            {
+                // Port closed between reads
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+            catch (Exception ex)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    lblPortStatus.Text = "Read error: " + ex.Message;
+                    lblPortStatus.ForeColor = Color.DarkOrange;
+                }));
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+        }
+
+        private void OnLineReceived(string line)
+        {
+            txtSerialLog.AppendText(line + Environment.NewLine);
+            //if (!_listening) return;
+
+            if (_listening)
+            {
+                
+            }
+        }
+
+        private void TryReconnectPort()
+        {
+            try
+            {
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _serialPort.Open();
+                UpdateUiForPortState(true);
+            }
+            catch (Exception ex)
+            {
+                UpdateUiForPortState(false);
+                txtSerialLog.AppendText("Failed to reopen serial port: " + ex.Message);
+            }
+        }
+
+        private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                lblPortStatus.Text = "Serial error: " + e.EventType;
+                lblPortStatus.ForeColor = Color.DarkOrange;
+            }));
+        }
+
+        private void _serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                txtSerialLog.AppendText("PinChanged: " + e.EventType + Environment.NewLine);
+            }));
+        }
+
+        private void UpdateUiForPortState(bool connected)
+        {
+
+            lblPortStatus.Text = connected
+                ? "Connected: " + _serialPort.PortName + " @ " + _serialPort.BaudRate
+                : "Disconnected";
+            lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
+        }
+
+        private void btnStartListen_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

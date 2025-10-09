@@ -227,7 +227,7 @@ namespace SEALCHK.View
                 {
                     r.Tgl_Input,
                     r.NoPlat,
-                    Tujuan = r.Tujuan,
+                    Tujuan = d.KodeTujuan,
                     RegStatus = r.Status,
                     r.UserINPUT,
 
