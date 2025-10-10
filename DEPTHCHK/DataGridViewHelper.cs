@@ -67,6 +67,24 @@ namespace DEPTHCHK
                 System.Reflection.BindingFlags.SetProperty,
                 null, dgv, new object[] { true });
         }
+
+        public static void FitOnceThenUnlock(DataGridView dgv)
+        {
+            // 1) Auto-fit to fill on this pass
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Optional: tweak weights for nicer initial proportions
+            foreach (DataGridViewColumn c in dgv.Columns)
+            {
+                c.Resizable = DataGridViewTriState.True;
+                c.MinimumWidth = 60; // safety
+                                     // c.FillWeight = 1f; // or set per column if needed
+            }
+
+            // 2) Freeze widths so user can freely resize after the initial fit
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+        }
+
     }
 
 }

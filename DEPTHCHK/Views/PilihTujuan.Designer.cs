@@ -59,7 +59,7 @@
             this.dgvTujuan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTujuan.Location = new System.Drawing.Point(408, 165);
             this.dgvTujuan.Name = "dgvTujuan";
-            this.dgvTujuan.Size = new System.Drawing.Size(516, 341);
+            this.dgvTujuan.Size = new System.Drawing.Size(516, 491);
             this.dgvTujuan.TabIndex = 6;
             // 
             // btnAssignToActive
@@ -236,7 +236,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(3, 165);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(405, 341);
+            this.leftPanel.Size = new System.Drawing.Size(405, 491);
             this.leftPanel.TabIndex = 5;
             // 
             // cardTujuan
@@ -256,7 +256,7 @@
             this.cardTujuan.MouseState = MaterialSkin.MouseState.HOVER;
             this.cardTujuan.Name = "cardTujuan";
             this.cardTujuan.Padding = new System.Windows.Forms.Padding(14);
-            this.cardTujuan.Size = new System.Drawing.Size(405, 341);
+            this.cardTujuan.Size = new System.Drawing.Size(405, 491);
             this.cardTujuan.TabIndex = 0;
             // 
             // btnFinSet
@@ -277,6 +277,7 @@
             this.btnFinSet.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnFinSet.UseAccentColor = true;
             this.btnFinSet.UseVisualStyleBackColor = true;
+            
             // 
             // grpCompart
             // 
@@ -371,7 +372,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 509);
+            this.ClientSize = new System.Drawing.Size(927, 659);
             this.Controls.Add(this.dgvTujuan);
             this.Controls.Add(this.leftPanel);
             this.Controls.Add(this.TopPanel);

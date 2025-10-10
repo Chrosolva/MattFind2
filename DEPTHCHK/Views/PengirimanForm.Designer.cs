@@ -107,7 +107,7 @@
             this.TCPengiriman.Multiline = true;
             this.TCPengiriman.Name = "TCPengiriman";
             this.TCPengiriman.SelectedIndex = 0;
-            this.TCPengiriman.Size = new System.Drawing.Size(879, 457);
+            this.TCPengiriman.Size = new System.Drawing.Size(879, 528);
             this.TCPengiriman.TabIndex = 6;
             // 
             // TPPengiriman
@@ -118,7 +118,7 @@
             this.TPPengiriman.Location = new System.Drawing.Point(4, 22);
             this.TPPengiriman.Name = "TPPengiriman";
             this.TPPengiriman.Padding = new System.Windows.Forms.Padding(3);
-            this.TPPengiriman.Size = new System.Drawing.Size(871, 431);
+            this.TPPengiriman.Size = new System.Drawing.Size(871, 502);
             this.TPPengiriman.TabIndex = 0;
             this.TPPengiriman.Text = "DAFTAR PENGIRIMAN";
             this.TPPengiriman.UseVisualStyleBackColor = true;
@@ -131,12 +131,12 @@
             this.RightCard.Depth = 0;
             this.RightCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.RightCard.Location = new System.Drawing.Point(3, 302);
+            this.RightCard.Location = new System.Drawing.Point(3, 384);
             this.RightCard.Margin = new System.Windows.Forms.Padding(14);
             this.RightCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.RightCard.Name = "RightCard";
             this.RightCard.Padding = new System.Windows.Forms.Padding(3);
-            this.RightCard.Size = new System.Drawing.Size(865, 126);
+            this.RightCard.Size = new System.Drawing.Size(865, 115);
             this.RightCard.TabIndex = 9;
             // 
             // dgvDetailPengiriman
@@ -147,7 +147,7 @@
             this.dgvDetailPengiriman.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetailPengiriman.Location = new System.Drawing.Point(6, 29);
             this.dgvDetailPengiriman.Name = "dgvDetailPengiriman";
-            this.dgvDetailPengiriman.Size = new System.Drawing.Size(853, 91);
+            this.dgvDetailPengiriman.Size = new System.Drawing.Size(853, 80);
             this.dgvDetailPengiriman.TabIndex = 3;
             // 
             // materialLabel2
@@ -175,7 +175,7 @@
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
             this.LeftCard.Padding = new System.Windows.Forms.Padding(3);
-            this.LeftCard.Size = new System.Drawing.Size(865, 219);
+            this.LeftCard.Size = new System.Drawing.Size(865, 301);
             this.LeftCard.TabIndex = 8;
             // 
             // materialLabel1
@@ -198,7 +198,7 @@
             this.dgvPengiriman.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPengiriman.Location = new System.Drawing.Point(6, 29);
             this.dgvPengiriman.Name = "dgvPengiriman";
-            this.dgvPengiriman.Size = new System.Drawing.Size(853, 184);
+            this.dgvPengiriman.Size = new System.Drawing.Size(853, 266);
             this.dgvPengiriman.TabIndex = 0;
             // 
             // TopPanel
@@ -454,6 +454,7 @@
             this.btnClearLog.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnClearLog.UseAccentColor = false;
             this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
             // btnSave
             // 
@@ -781,7 +782,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 505);
+            this.ClientSize = new System.Drawing.Size(879, 576);
             this.Controls.Add(this.TCPengiriman);
             this.Controls.Add(this.TabSelector);
             this.Name = "PengirimanForm";

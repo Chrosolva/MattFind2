@@ -20,7 +20,7 @@ namespace DEPTHCHK.Models
         public string PartID { get; set; }         // FK → TblDetailMT
 
         [StringLength(30)]
-        public string Compartment { get; set; }
+        public string CompartmentID { get; set; }
 
         public decimal? DataBacaan { get; set; }   // precision set in Fluent API
         public decimal? DataKalibrasi { get; set; }// precision set in Fluent API

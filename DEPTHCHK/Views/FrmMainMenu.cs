@@ -64,6 +64,7 @@ namespace DEPTHCHK.Views
             //btnConnect.Click += btnMainConnect_Click;
             //btnDisconnect.Click += btnMainDisconnect_Click;
             UpdateUiForPortState(false);
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnConnect_Click(object sender, EventArgs e)

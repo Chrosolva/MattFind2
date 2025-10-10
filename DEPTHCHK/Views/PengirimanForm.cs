@@ -38,20 +38,23 @@ namespace DEPTHCHK.Views
         private string _currentPartID;      // PartID of the last selected compartment
         private List<LiveRow> _liveRows;    // holds rows shown in dgvPengirimanLive
 
-        // Row shape for dgvPengirimanLive (matches TblDetailPengiriman)
+        // row shape for dgvPengirimanLive
         private class LiveRow
         {
             public string IDPengiriman { get; set; }
             public DateTime? Tgl_Input { get; set; }
             public string NoPlat { get; set; }
             public string PartID { get; set; }
-            public string Compartment { get; set; }
+            public string CompartmentID { get; set; }
             public decimal DataBacaan { get; set; }
             public decimal DataKalibrasi { get; set; }
             public string Satuan { get; set; }
             public string Keterangan { get; set; }
             public string KodeTujuan { get; set; }
+            public decimal Kalibrasi { get; set; }
+            public bool positive { get; set; }
         }
+
 
 
         // simple combo item type (avoid anonymous types binding)
@@ -81,7 +84,7 @@ namespace DEPTHCHK.Views
             public DateTime? Tgl_Input { get; set; }
             public string NoPlat { get; set; }
             public string PartID { get; set; }
-            public string Compartment { get; set; }
+            public string CompartmentID { get; set; }
             public decimal? DataBacaan { get; set; }
             public decimal? DataKalibrasi { get; set; }
             public string Satuan { get; set; }
@@ -138,6 +141,7 @@ namespace DEPTHCHK.Views
 
             DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailPengiriman);
+            DataGridViewHelper.ApplyDefaultStyle(dgvPengirimanLive, false);
 
             ReloadPengiriman();
 
@@ -178,15 +182,16 @@ namespace DEPTHCHK.Views
 
         private void dgvPengiriman_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            TryFormatColumn(dgvPengiriman, "Tgl_Input", "dd-MM-yyyy HH:mm");
+            TryFormatColumn(dgvPengiriman, "Tgl_Input", "yyyy-MM-dd HH:mm:ss.fff");
             AutoFit(dgvPengiriman);
         }
 
         private void dgvDetailPengiriman_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            TryFormatColumn(dgvDetailPengiriman, "Tgl_Input", "dd-MM-yyyy HH:mm");
-            TryFormatColumn(dgvDetailPengiriman, "DataBacaan", "N2");
-            TryFormatColumn(dgvDetailPengiriman, "DataKalibrasi", "N2");
+            TryFormatColumn(dgvDetailPengiriman, "Tgl_Input", "yyyy-MM-dd HH:mm:ss.fff");
+            TryFormatColumn(dgvDetailPengiriman, "DataBacaan", "0.##");
+            TryFormatColumn(dgvDetailPengiriman, "DataKalibrasi", "0.##");
+            TryFormatColumn(dgvDetailPengiriman, "Kalibrasi", "0.##");
             AutoFit(dgvDetailPengiriman);
         }
 
@@ -267,6 +272,9 @@ namespace DEPTHCHK.Views
                 _loadingMaster = false;
                 Cursor = Cursors.Default;
             }
+
+            DataGridViewHelper.FitOnceThenUnlock(dgvPengiriman);
+            DataGridViewHelper.FitOnceThenUnlock(dgvDetailPengiriman);
         }
 
         private void LoadDetailForSelected()
@@ -297,7 +305,7 @@ namespace DEPTHCHK.Views
                     Tgl_Input = d.Tgl_Input,
                     NoPlat = d.NoPlat,
                     PartID = d.PartID,
-                    Compartment = d.Compartment,
+                    CompartmentID = d.CompartmentID,
                     DataBacaan = d.DataBacaan,
                     DataKalibrasi = d.DataKalibrasi,
                     Satuan = d.Satuan,
@@ -408,6 +416,22 @@ namespace DEPTHCHK.Views
 
                     // Show a compact summary: "C1: 531234 | C2: 531111 | ..."
                     txtTujuan.Text = ComposeTujuanSummaryText(_compartmentKodeTujuan);
+
+                    // Show a compact summary: "C1: 531234 | C2: 531111 | ..."
+                    txtTujuan.Text = ComposeTujuanSummaryText(_compartmentKodeTujuan);
+
+                    // NEW: update KodeTujuan in the live grid
+                    if (_liveRows != null && _liveRows.Count > 0)
+                    {
+                        for (int i = 0; i < _liveRows.Count; i++)
+                        {
+                            if (_compartmentKodeTujuan != null && i < _compartmentKodeTujuan.Length)
+                                _liveRows[i].KodeTujuan = _compartmentKodeTujuan[i];
+                            else
+                                _liveRows[i].KodeTujuan = null;
+                        }
+                        dgvPengirimanLive.Refresh(); // reflect changes in the UI
+                    }
                 }
             }
         }
@@ -481,13 +505,175 @@ namespace DEPTHCHK.Views
         private void OnLineReceived(string line)
         {
             txtSerialLog.AppendText(line + Environment.NewLine);
-            //if (!_listening) return;
 
-            if (_listening)
+            // ignore data when not listening
+            if (!_listening) return;
+
+            // detect [CompartmentID]
+            Match m = Regex.Match(line, @"\[(.*?)\]");
+            if (m.Success)
             {
-                
+                string compId = m.Groups[1].Value.Trim();
+                HandleCompartmentMessage(compId);
+                return;
+            }
+
+            // detect *BACAAN&POSITIVE#
+            m = Regex.Match(line, @"\*(\d+)&(\d)#");
+            if (m.Success)
+            {
+                decimal bacaan;
+                int positiveFlag;
+                if (decimal.TryParse(m.Groups[1].Value, out bacaan) &&
+                    int.TryParse(m.Groups[2].Value, out positiveFlag))
+                {
+                    HandleMeasurementMessage(bacaan, positiveFlag);
+                }
             }
         }
+
+        // add a new field
+        private string _currentNoPlat;
+
+        // modify HandleCompartmentMessage:
+        private void HandleCompartmentMessage(string compId)
+        {
+            var detail = _db.DetailMTs.AsNoTracking()
+                              .FirstOrDefault(d => d.CompartmentID == compId);
+            if (detail == null)
+            {
+                MessageBox.Show("Compartment not found: " + compId);
+                return;
+            }
+
+            // check if this is a new truck
+            if (!string.Equals(_currentNoPlat, detail.NoPlat, StringComparison.Ordinal))
+            {
+                _currentNoPlat = detail.NoPlat;
+                // load the truck and all its compartments
+                var truck = _db.MobilTangkis.AsNoTracking()
+                                   .FirstOrDefault(t => t.NoPlat == _currentNoPlat);
+                if (truck != null)
+                {
+                    lblNoPlat.Text = truck.NoPlat;
+                    lblType.Text = truck.Type ?? "";
+                    lblJlhCompartment.Text = truck.JlhCompartment?.ToString();
+                    lblJlhCapacity.Text = truck.Capacity?.ToString("N2");
+                }
+                PopulateLiveGrid(_currentNoPlat);
+            }
+
+            // update the current part ID regardless
+            _currentPartID = detail.PartID;
+
+            // optional: highlight the row in dgvPengirimanLive for this part
+            var index = _liveRows.FindIndex(r => r.PartID == _currentPartID);
+            if (index >= 0)
+            {
+                dgvPengirimanLive.ClearSelection();
+                dgvPengirimanLive.Rows[index].Selected = true;
+            }
+        }
+
+
+        private void PopulateLiveGrid(string noPlat)
+        {
+            _liveRows = new List<LiveRow>();
+
+            var details = _db.DetailMTs.AsNoTracking()
+                              .Where(d => d.NoPlat == noPlat)
+                              .OrderBy(d => d.PartID)
+                              .ToList();
+
+            for (int i = 0; i < details.Count; i++)
+            {
+                var d = details[i];
+                var row = new LiveRow();
+                row.IDPengiriman = null;
+                row.Tgl_Input = null;
+                row.NoPlat = d.NoPlat;
+                row.PartID = d.PartID;
+                row.CompartmentID = d.CompartmentID;
+                row.DataBacaan = 0m;
+                row.DataKalibrasi = 0m;
+                row.Satuan = "LTR";
+                row.Keterangan = "INACTIVE";
+                if (_compartmentKodeTujuan != null &&
+                    i < _compartmentKodeTujuan.Length)
+                {
+                    row.KodeTujuan = _compartmentKodeTujuan[i];
+                }
+                row.Kalibrasi = Convert.ToDecimal(d.Kalibrasi);
+                row.positive = Convert.ToBoolean(d.Positive);
+                _liveRows.Add(row);
+            }
+
+            dgvPengirimanLive.AutoGenerateColumns = true;
+            dgvPengirimanLive.DataSource = null;
+            dgvPengirimanLive.DataSource = _liveRows;
+
+            // Apply dynamic decimal formatting to DataKalibrasi and Kalibrasi columns
+            if (dgvPengirimanLive.Columns.Contains("DataKalibrasi"))
+                dgvPengirimanLive.Columns["DataKalibrasi"].DefaultCellStyle.Format = "0.##";
+            if (dgvPengirimanLive.Columns.Contains("Kalibrasi"))
+                dgvPengirimanLive.Columns["Kalibrasi"].DefaultCellStyle.Format = "0.##";
+        }
+
+        private void HandleMeasurementMessage(decimal bacaan, int positiveFlag)
+        {
+            if (_liveRows == null || string.IsNullOrEmpty(_currentPartID))
+                return;
+
+            var row = _liveRows.FirstOrDefault(r => r.PartID == _currentPartID);
+            if (row == null) return;
+
+            row.DataBacaan = bacaan;
+
+            var detail = _db.DetailMTs.AsNoTracking()
+                             .FirstOrDefault(d => d.PartID == _currentPartID);
+            decimal kalib = (detail != null && detail.Kalibrasi.HasValue)
+                              ? detail.Kalibrasi.Value : 0m;
+
+            // positiveFlag=1 → add; otherwise subtract
+            row.DataKalibrasi = positiveFlag == 1
+                                   ? bacaan + kalib
+                                   : bacaan - kalib;
+
+            row.Keterangan = "ACTIVE";
+            dgvPengirimanLive.Refresh();
+        }
+
+        private string GenerateNewIDPengiriman()
+        {
+            var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Session.tzi);
+            string year = now.ToString("yy");
+            string month = now.ToString("MM");
+            string prefix = "D-" + year + "-" + month + "-";
+
+            var ids = _db.Pengirimans
+                         .Where(p => p.IDPengiriman.StartsWith(prefix))
+                         .Select(p => p.IDPengiriman)
+                         .ToList();
+
+            int maxSeq = 0;
+            foreach (var id in ids)
+            {
+                // expect D-YY-MM-XXXXX
+                string[] parts = id.Split('-');
+                if (parts.Length == 4)
+                {
+                    int seq;
+                    if (int.TryParse(parts[3], out seq) && seq > maxSeq)
+                    {
+                        maxSeq = seq;
+                    }
+                }
+            }
+            int newSeq = maxSeq + 1;
+            return prefix + newSeq.ToString("D5");
+        }
+
+
 
         private void TryReconnectPort()
         {
@@ -535,12 +721,101 @@ namespace DEPTHCHK.Views
 
         private void btnStartListen_Click(object sender, EventArgs e)
         {
-            
+            if (!_serialPort.IsOpen)
+            {
+                _serialPort.Open();
+            }
+            _listening = true;
+            ProListen.Value = 0; // reset the progress bar if you’re using it
+            lblPortStatus.Text = "Listening...  Waiting for compartmentID & MeasurementData";
+            lblPortStatus.ForeColor = Color.DodgerBlue;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (_liveRows == null || _liveRows.Count == 0)
+            {
+                MessageBox.Show("No data to save.", "Save",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            // Check for active rows that are missing a KodeTujuan
+            int missingDest = 0;
+            foreach (LiveRow row in _liveRows)
+            {
+                // Compare ignoring case; you can also use row.Keterangan == "ACTIVE" if you prefer
+                if (!string.IsNullOrEmpty(row.Keterangan) &&
+                    string.Equals(row.Keterangan, "ACTIVE", StringComparison.OrdinalIgnoreCase) &&
+                    string.IsNullOrWhiteSpace(row.KodeTujuan))
+                {
+                    missingDest++;
+                }
+            }
+
+            if (missingDest > 0)
+            {
+                MessageBox.Show(
+                    "Set KodeTujuan terlebih dahulu, terdapat " + missingDest +
+                    " KodeTujuan yang belum di set.",
+                    "Save",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            string newId = GenerateNewIDPengiriman();
+            lblIDPengiriman.Text = newId;
+
+            // create master record
+            var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Session.tzi);
+            TblPengiriman master = new TblPengiriman();
+            master.IDPengiriman = newId;
+            master.Tgl_Input = now;
+            master.NoPlat = lblNoPlat.Text;
+            master.Tujuan = txtTujuan.Text;
+            master.Status = "DIKIRIM";    // or another status
+            master.UserID = null;     // set your current user id
+            master.Keterangan = null;
+
+            _db.Pengirimans.Add(master);
+
+            // create detail records
+            foreach (LiveRow lr in _liveRows)
+            {
+                TblDetailPengiriman det = new TblDetailPengiriman();
+                det.IDPengiriman = newId;
+                det.Tgl_Input = now;
+                det.NoPlat = lr.NoPlat;
+                det.PartID = lr.PartID;
+                det.CompartmentID = lr.CompartmentID;
+                det.DataBacaan = lr.DataBacaan;
+                det.DataKalibrasi = lr.DataKalibrasi;
+                det.Satuan = lr.Satuan;
+                det.Keterangan = lr.Keterangan;
+                det.KodeTujuan = lr.KodeTujuan;
+                _db.DetailPengirimans.Add(det);
+            }
+
+            _db.SaveChanges();
+
+            // reset for next entry
+            _liveRows.Clear();
+            dgvPengirimanLive.DataSource = null;
+            txtSerialLog.Clear();
+            lblIDPengiriman.Text = "";
+            _currentPartID = null;
+            _listening = false;
+
+            ReloadPengiriman();
+            MessageBox.Show("Pengiriman saved successfully.", "Success",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            txtSerialLog.Clear();
+        }
+
     }
 }
