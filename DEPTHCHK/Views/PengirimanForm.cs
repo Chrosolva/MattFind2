@@ -17,6 +17,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Data.SqlClient;
 using System.Timers;
 using System.Threading;
+using DEPTHCHK.Reports;
 
 namespace DEPTHCHK.Views
 {
@@ -139,9 +140,10 @@ namespace DEPTHCHK.Views
             txtSearchPeng.KeyDown += txtSearchPeng_KeyDown;
             dgvPengiriman.SelectionChanged += dgvPengiriman_SelectionChanged;
 
-            DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman);
+            DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman, false);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailPengiriman);
             DataGridViewHelper.ApplyDefaultStyle(dgvPengirimanLive, false);
+            
 
             ReloadPengiriman();
 
@@ -178,6 +180,16 @@ namespace DEPTHCHK.Views
             dgvDetailPengiriman.MultiSelect = false;
             dgvDetailPengiriman.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDetailPengiriman.DataBindingComplete += dgvDetailPengiriman_DataBindingComplete;
+
+            // add a checkbox column for selection
+            var chkCol = new DataGridViewCheckBoxColumn();
+            chkCol.HeaderText = "";
+            chkCol.Width = 30;
+            chkCol.Name = "Select";
+            chkCol.TrueValue = true;
+            chkCol.FalseValue = false;
+            chkCol.ReadOnly = false;
+            dgvPengiriman.Columns.Insert(0, chkCol);
         }
 
         private void dgvPengiriman_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -275,6 +287,12 @@ namespace DEPTHCHK.Views
 
             DataGridViewHelper.FitOnceThenUnlock(dgvPengiriman);
             DataGridViewHelper.FitOnceThenUnlock(dgvDetailPengiriman);
+
+            foreach (DataGridViewColumn col in dgvPengiriman.Columns)
+            {
+                if (col.Name != "Select")
+                    col.ReadOnly = true;
+            }
         }
 
         private void LoadDetailForSelected()
@@ -518,16 +536,16 @@ namespace DEPTHCHK.Views
                 return;
             }
 
-            // detect *BACAAN&POSITIVE#
-            m = Regex.Match(line, @"\*(\d+)&(\d)#");
+            // NEW: detect *BACAAN#
+            // Use a regex that captures an integer or decimal number after the asterisk and before the '#' terminator.
+            m = Regex.Match(line, @"\*(\d+(\.\d+)?)#");
             if (m.Success)
             {
                 decimal bacaan;
-                int positiveFlag;
-                if (decimal.TryParse(m.Groups[1].Value, out bacaan) &&
-                    int.TryParse(m.Groups[2].Value, out positiveFlag))
+                if (decimal.TryParse(m.Groups[1].Value, out bacaan))
                 {
-                    HandleMeasurementMessage(bacaan, positiveFlag);
+                    // Call the updated method that no longer needs a positive flag from the input
+                    HandleMeasurementMessage(bacaan);
                 }
             }
         }
@@ -598,11 +616,12 @@ namespace DEPTHCHK.Views
                 row.DataKalibrasi = 0m;
                 row.Satuan = "LTR";
                 row.Keterangan = "INACTIVE";
-                if (_compartmentKodeTujuan != null &&
-                    i < _compartmentKodeTujuan.Length)
-                {
-                    row.KodeTujuan = _compartmentKodeTujuan[i];
-                }
+                //if (_compartmentKodeTujuan != null &&
+                //    i < _compartmentKodeTujuan.Length)
+                //{
+                //    row.KodeTujuan = _compartmentKodeTujuan[i];
+                //}
+                row.KodeTujuan = "";
                 row.Kalibrasi = Convert.ToDecimal(d.Kalibrasi);
                 row.positive = Convert.ToBoolean(d.Positive);
                 _liveRows.Add(row);
@@ -619,25 +638,25 @@ namespace DEPTHCHK.Views
                 dgvPengirimanLive.Columns["Kalibrasi"].DefaultCellStyle.Format = "0.##";
         }
 
-        private void HandleMeasurementMessage(decimal bacaan, int positiveFlag)
+        // Change the signature and body of HandleMeasurementMessage
+        private void HandleMeasurementMessage(decimal bacaan)
         {
+            // Find the row matching the current PartID
             if (_liveRows == null || string.IsNullOrEmpty(_currentPartID))
                 return;
 
-            var row = _liveRows.FirstOrDefault(r => r.PartID == _currentPartID);
+            LiveRow row = _liveRows.FirstOrDefault(r => r.PartID == _currentPartID);
             if (row == null) return;
 
+            // Update the raw reading
             row.DataBacaan = bacaan;
 
-            var detail = _db.DetailMTs.AsNoTracking()
-                             .FirstOrDefault(d => d.PartID == _currentPartID);
-            decimal kalib = (detail != null && detail.Kalibrasi.HasValue)
-                              ? detail.Kalibrasi.Value : 0m;
+            // Use the calibration and sign stored in the row instead of any flag from the input
+            decimal kalib = row.Kalibrasi;
+            bool positiveFlag = row.positive;
 
-            // positiveFlag=1 → add; otherwise subtract
-            row.DataKalibrasi = positiveFlag == 1
-                                   ? bacaan + kalib
-                                   : bacaan - kalib;
+            // Add or subtract calibration based on the 'positive' column
+            row.DataKalibrasi = positiveFlag ? bacaan + kalib : bacaan - kalib;
 
             row.Keterangan = "ACTIVE";
             dgvPengirimanLive.Refresh();
@@ -726,7 +745,7 @@ namespace DEPTHCHK.Views
                 _serialPort.Open();
             }
             _listening = true;
-            ProListen.Value = 0; // reset the progress bar if you’re using it
+            
             lblPortStatus.Text = "Listening...  Waiting for compartmentID & MeasurementData";
             lblPortStatus.ForeColor = Color.DodgerBlue;
         }
@@ -775,7 +794,7 @@ namespace DEPTHCHK.Views
             master.NoPlat = lblNoPlat.Text;
             master.Tujuan = txtTujuan.Text;
             master.Status = "DIKIRIM";    // or another status
-            master.UserID = null;     // set your current user id
+            master.UserID = Session.CurrentUser.UserID;     // set your current user id
             master.Keterangan = null;
 
             _db.Pengirimans.Add(master);
@@ -802,10 +821,11 @@ namespace DEPTHCHK.Views
             // reset for next entry
             _liveRows.Clear();
             dgvPengirimanLive.DataSource = null;
-            txtSerialLog.Clear();
+            //txtSerialLog.Clear();
             lblIDPengiriman.Text = "";
             _currentPartID = null;
-            _listening = false;
+            _currentNoPlat = null;
+            //_compartmentKodeTujuan = null;
 
             ReloadPengiriman();
             MessageBox.Show("Pengiriman saved successfully.", "Success",
@@ -817,5 +837,144 @@ namespace DEPTHCHK.Views
             txtSerialLog.Clear();
         }
 
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            TCPengiriman.SelectedTab = TPAddPengiriman;
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            var selectedIds = new List<string>();
+            foreach (DataGridViewRow row in dgvPengiriman.Rows)
+            {
+                bool isChecked = false;
+                if (row.Cells["Select"].Value != null)
+                    bool.TryParse(row.Cells["Select"].Value.ToString(), out isChecked);
+                if (isChecked)
+                {
+                    var bound = row.DataBoundItem as PengirimanRow;
+                    if (bound != null) selectedIds.Add(bound.IDPengiriman);
+                }
+            }
+
+            if (selectedIds.Count == 0)
+            {
+                MessageBox.Show("Tidak ada pengiriman yang dipilih untuk dicetak.");
+                return;
+            }
+
+            // Build ONE DataSet for all selected IDs
+            DataSet ds = new DataSet();
+
+            DataTable dtHeader = new DataTable("Header");
+            dtHeader.Columns.Add("IDPengiriman");
+            dtHeader.Columns.Add("Tgl_Input", typeof(DateTime));
+            dtHeader.Columns.Add("NoPlat");
+            dtHeader.Columns.Add("Type");
+            dtHeader.Columns.Add("JlhCompartment");
+            dtHeader.Columns.Add("Capacity");
+            dtHeader.Columns.Add("Tujuan");
+
+            DataTable dtDetail = new DataTable("Detail");
+            dtDetail.Columns.Add("IDPengiriman");          // <-- KEY back to header
+            dtDetail.Columns.Add("PartID");
+            dtDetail.Columns.Add("CompartmentID");
+            dtDetail.Columns.Add("DataBacaan", typeof(decimal));
+            dtDetail.Columns.Add("Kalibrasi", typeof(decimal));
+            dtDetail.Columns.Add("DataKalibrasi", typeof(decimal));
+            dtDetail.Columns.Add("Satuan");
+            dtDetail.Columns.Add("Keterangan");
+            dtDetail.Columns.Add("KodeTujuan");
+
+            ds.Tables.Add(dtHeader);
+            ds.Tables.Add(dtDetail);
+
+            // Fill both tables
+            foreach (var id in selectedIds)
+            {
+                var header = _db.Pengirimans
+                                .Include(p => p.MobilTangki)
+                                .FirstOrDefault(p => p.IDPengiriman == id);
+
+                if (header != null)
+                {
+                    dtHeader.Rows.Add(header.IDPengiriman,
+                                      header.Tgl_Input,
+                                      header.NoPlat,
+                                      header.MobilTangki != null ? header.MobilTangki.Type : null,
+                                      header.MobilTangki != null ? (object)header.MobilTangki.JlhCompartment : DBNull.Value,
+                                      header.MobilTangki != null ? (object)header.MobilTangki.Capacity : DBNull.Value,
+                                      header.Tujuan);
+                }
+
+                var details = _db.DetailPengirimans
+                                 .Include(d => d.DetailMT)
+                                 .AsNoTracking()
+                                 .Where(d => d.IDPengiriman == id)
+                                 .OrderBy(d => d.PartID)
+                                 .ToList();
+
+                foreach (var d in details)
+                {
+                    dtDetail.Rows.Add(
+                        id,                                  // link to header
+                        d.PartID,
+                        d.CompartmentID,
+                        d.DataBacaan ?? 0m,
+                        d.DetailMT != null ? d.DetailMT.Kalibrasi ?? 0m : 0m,
+                        d.DataKalibrasi ?? 0m,
+                        d.Satuan,
+                        d.Keterangan,
+                        d.KodeTujuan
+                    );
+                }
+            }
+
+            // Add the relation so Crystal can see the master-detail link
+            if (ds.Relations["Header_Detail"] == null)
+            {
+                ds.Relations.Add(
+                    "Header_Detail",
+                    ds.Tables["Header"].Columns["IDPengiriman"],
+                    ds.Tables["Detail"].Columns["IDPengiriman"]
+                );
+            }
+
+            // Load the report once with the whole dataset
+            var report = new TicketReport();    // your .rpt
+            report.SetDataSource(ds);
+
+            // Show in your viewer form (preview first)
+            var viewer = new ReportViewer();
+            viewer.LoadReport(report);
+            viewer.ShowDialog();
+        }
+
+        private void chkAll_CheckedChanged(object sender, EventArgs e)
+        {
+            SetAllChecks(dgvPengiriman, chkAll.Checked);
+        }
+
+        private void SetAllChecks(DataGridView dgv, bool isChecked)
+        {
+            if (dgv == null || dgv.Columns.Count == 0) return;
+
+            var chkCol = dgv.Columns[0] as DataGridViewCheckBoxColumn;
+            if (chkCol == null) throw new InvalidOperationException("First column is not a CheckBox column.");
+
+            dgv.EndEdit();
+            dgv.SuspendLayout();
+            try
+            {
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    var cell = row.Cells[0] as DataGridViewCheckBoxCell;
+                    if (cell != null) cell.Value = isChecked;
+                }
+                dgv.EndEdit();
+            }
+            finally { dgv.ResumeLayout(); }
+        }
     }
 }

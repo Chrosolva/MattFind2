@@ -146,8 +146,9 @@
             this.OuterMostPanel.Controls.Add(this.TabSelector);
             this.OuterMostPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OuterMostPanel.Location = new System.Drawing.Point(0, 0);
+            this.OuterMostPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OuterMostPanel.Name = "OuterMostPanel";
-            this.OuterMostPanel.Size = new System.Drawing.Size(1192, 642);
+            this.OuterMostPanel.Size = new System.Drawing.Size(1589, 790);
             this.OuterMostPanel.TabIndex = 0;
             // 
             // TCRegisterSeal
@@ -157,12 +158,13 @@
             this.TCRegisterSeal.Controls.Add(this.TPCollectSeal);
             this.TCRegisterSeal.Depth = 0;
             this.TCRegisterSeal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TCRegisterSeal.Location = new System.Drawing.Point(0, 48);
+            this.TCRegisterSeal.Location = new System.Drawing.Point(0, 59);
+            this.TCRegisterSeal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TCRegisterSeal.MouseState = MaterialSkin.MouseState.HOVER;
             this.TCRegisterSeal.Multiline = true;
             this.TCRegisterSeal.Name = "TCRegisterSeal";
             this.TCRegisterSeal.SelectedIndex = 0;
-            this.TCRegisterSeal.Size = new System.Drawing.Size(1192, 594);
+            this.TCRegisterSeal.Size = new System.Drawing.Size(1589, 731);
             this.TCRegisterSeal.TabIndex = 4;
             // 
             // TPRegister
@@ -170,10 +172,11 @@
             this.TPRegister.Controls.Add(this.RightCard);
             this.TPRegister.Controls.Add(this.LeftCard);
             this.TPRegister.Controls.Add(this.TopPanel);
-            this.TPRegister.Location = new System.Drawing.Point(4, 22);
+            this.TPRegister.Location = new System.Drawing.Point(4, 25);
+            this.TPRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPRegister.Name = "TPRegister";
-            this.TPRegister.Padding = new System.Windows.Forms.Padding(3);
-            this.TPRegister.Size = new System.Drawing.Size(1184, 568);
+            this.TPRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPRegister.Size = new System.Drawing.Size(1581, 702);
             this.TPRegister.TabIndex = 0;
             this.TPRegister.Text = "REGISTER LIST";
             this.TPRegister.UseVisualStyleBackColor = true;
@@ -186,12 +189,12 @@
             this.RightCard.Depth = 0;
             this.RightCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.RightCard.Location = new System.Drawing.Point(3, 302);
-            this.RightCard.Margin = new System.Windows.Forms.Padding(14);
+            this.RightCard.Location = new System.Drawing.Point(4, 372);
+            this.RightCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.RightCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.RightCard.Name = "RightCard";
-            this.RightCard.Padding = new System.Windows.Forms.Padding(3);
-            this.RightCard.Size = new System.Drawing.Size(1178, 263);
+            this.RightCard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RightCard.Size = new System.Drawing.Size(1573, 326);
             this.RightCard.TabIndex = 9;
             // 
             // dgvDetailRegister
@@ -200,9 +203,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetailRegister.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailRegister.Location = new System.Drawing.Point(6, 29);
+            this.dgvDetailRegister.Location = new System.Drawing.Point(8, 36);
+            this.dgvDetailRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvDetailRegister.Name = "dgvDetailRegister";
-            this.dgvDetailRegister.Size = new System.Drawing.Size(1166, 228);
+            this.dgvDetailRegister.Size = new System.Drawing.Size(1557, 283);
             this.dgvDetailRegister.TabIndex = 3;
             this.dgvDetailRegister.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetailRegister_CellFormatting);
             // 
@@ -211,7 +215,8 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(6, 7);
+            this.materialLabel2.Location = new System.Drawing.Point(8, 9);
+            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(131, 19);
@@ -226,12 +231,12 @@
             this.LeftCard.Depth = 0;
             this.LeftCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeftCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LeftCard.Location = new System.Drawing.Point(3, 83);
-            this.LeftCard.Margin = new System.Windows.Forms.Padding(14);
+            this.LeftCard.Location = new System.Drawing.Point(4, 102);
+            this.LeftCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
-            this.LeftCard.Padding = new System.Windows.Forms.Padding(3);
-            this.LeftCard.Size = new System.Drawing.Size(1178, 219);
+            this.LeftCard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.LeftCard.Size = new System.Drawing.Size(1573, 270);
             this.LeftCard.TabIndex = 8;
             // 
             // materialLabel1
@@ -239,7 +244,8 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(6, 7);
+            this.materialLabel1.Location = new System.Drawing.Point(8, 9);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(111, 19);
@@ -252,9 +258,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRegister.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRegister.Location = new System.Drawing.Point(6, 29);
+            this.dgvRegister.Location = new System.Drawing.Point(8, 36);
+            this.dgvRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvRegister.Name = "dgvRegister";
-            this.dgvRegister.Size = new System.Drawing.Size(1166, 184);
+            this.dgvRegister.Size = new System.Drawing.Size(1557, 226);
             this.dgvRegister.TabIndex = 0;
             this.dgvRegister.SelectionChanged += new System.EventHandler(this.dgvRegister_SelectionChanged);
             // 
@@ -262,9 +269,10 @@
             // 
             this.TopPanel.Controls.Add(this.UpCard);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(3, 3);
+            this.TopPanel.Location = new System.Drawing.Point(4, 4);
+            this.TopPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1178, 80);
+            this.TopPanel.Size = new System.Drawing.Size(1573, 98);
             this.TopPanel.TabIndex = 0;
             // 
             // UpCard
@@ -283,11 +291,11 @@
             this.UpCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UpCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.UpCard.Location = new System.Drawing.Point(0, 0);
-            this.UpCard.Margin = new System.Windows.Forms.Padding(14);
+            this.UpCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.UpCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.UpCard.Name = "UpCard";
-            this.UpCard.Padding = new System.Windows.Forms.Padding(14);
-            this.UpCard.Size = new System.Drawing.Size(1178, 80);
+            this.UpCard.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.UpCard.Size = new System.Drawing.Size(1573, 98);
             this.UpCard.TabIndex = 0;
             // 
             // btnFilter
@@ -297,8 +305,8 @@
             this.btnFilter.Depth = 0;
             this.btnFilter.HighEmphasis = true;
             this.btnFilter.Icon = null;
-            this.btnFilter.Location = new System.Drawing.Point(887, 29);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFilter.Location = new System.Drawing.Point(1183, 36);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnFilter.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -313,18 +321,20 @@
             // 
             this.dtpRegTo.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpRegTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRegTo.Location = new System.Drawing.Point(671, 55);
+            this.dtpRegTo.Location = new System.Drawing.Point(895, 68);
+            this.dtpRegTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpRegTo.Name = "dtpRegTo";
-            this.dtpRegTo.Size = new System.Drawing.Size(200, 20);
+            this.dtpRegTo.Size = new System.Drawing.Size(265, 22);
             this.dtpRegTo.TabIndex = 30;
             // 
             // dtpRegFrom
             // 
             this.dtpRegFrom.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpRegFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRegFrom.Location = new System.Drawing.Point(671, 29);
+            this.dtpRegFrom.Location = new System.Drawing.Point(895, 36);
+            this.dtpRegFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpRegFrom.Name = "dtpRegFrom";
-            this.dtpRegFrom.Size = new System.Drawing.Size(200, 20);
+            this.dtpRegFrom.Size = new System.Drawing.Size(265, 22);
             this.dtpRegFrom.TabIndex = 29;
             // 
             // materialLabel10
@@ -332,7 +342,8 @@
             this.materialLabel10.AutoSize = true;
             this.materialLabel10.Depth = 0;
             this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel10.Location = new System.Drawing.Point(671, 9);
+            this.materialLabel10.Location = new System.Drawing.Point(895, 11);
+            this.materialLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
             this.materialLabel10.Size = new System.Drawing.Size(211, 19);
@@ -353,11 +364,12 @@
             this.cbxRegSearchBy.FormattingEnabled = true;
             this.cbxRegSearchBy.IntegralHeight = false;
             this.cbxRegSearchBy.ItemHeight = 43;
-            this.cbxRegSearchBy.Location = new System.Drawing.Point(540, 28);
+            this.cbxRegSearchBy.Location = new System.Drawing.Point(720, 34);
+            this.cbxRegSearchBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxRegSearchBy.MaxDropDownItems = 4;
             this.cbxRegSearchBy.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxRegSearchBy.Name = "cbxRegSearchBy";
-            this.cbxRegSearchBy.Size = new System.Drawing.Size(125, 49);
+            this.cbxRegSearchBy.Size = new System.Drawing.Size(165, 49);
             this.cbxRegSearchBy.StartIndex = 0;
             this.cbxRegSearchBy.TabIndex = 27;
             // 
@@ -366,7 +378,8 @@
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.Location = new System.Drawing.Point(550, 9);
+            this.materialLabel9.Location = new System.Drawing.Point(733, 11);
+            this.materialLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(89, 19);
@@ -383,7 +396,8 @@
             this.txtRegSearch.HideSelection = true;
             this.txtRegSearch.Hint = "SEARCH REGISTER";
             this.txtRegSearch.LeadingIcon = null;
-            this.txtRegSearch.Location = new System.Drawing.Point(274, 29);
+            this.txtRegSearch.Location = new System.Drawing.Point(365, 36);
+            this.txtRegSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRegSearch.MaxLength = 32767;
             this.txtRegSearch.MouseState = MaterialSkin.MouseState.OUT;
             this.txtRegSearch.Name = "txtRegSearch";
@@ -395,7 +409,7 @@
             this.txtRegSearch.SelectionLength = 0;
             this.txtRegSearch.SelectionStart = 0;
             this.txtRegSearch.ShortcutsEnabled = true;
-            this.txtRegSearch.Size = new System.Drawing.Size(260, 48);
+            this.txtRegSearch.Size = new System.Drawing.Size(347, 48);
             this.txtRegSearch.TabIndex = 8;
             this.txtRegSearch.TabStop = false;
             this.txtRegSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -409,8 +423,8 @@
             this.btnNew.Depth = 0;
             this.btnNew.HighEmphasis = true;
             this.btnNew.Icon = null;
-            this.btnNew.Location = new System.Drawing.Point(18, 29);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNew.Location = new System.Drawing.Point(24, 36);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnNew.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNew.Name = "btnNew";
             this.btnNew.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -431,8 +445,8 @@
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.HighEmphasis = true;
             this.btnDelete.Icon = null;
-            this.btnDelete.Location = new System.Drawing.Point(179, 29);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDelete.Location = new System.Drawing.Point(239, 36);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -447,10 +461,11 @@
             // TPAddEditSeal
             // 
             this.TPAddEditSeal.Controls.Add(this.CardCRUD);
-            this.TPAddEditSeal.Location = new System.Drawing.Point(4, 22);
+            this.TPAddEditSeal.Location = new System.Drawing.Point(4, 25);
+            this.TPAddEditSeal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPAddEditSeal.Name = "TPAddEditSeal";
-            this.TPAddEditSeal.Padding = new System.Windows.Forms.Padding(3);
-            this.TPAddEditSeal.Size = new System.Drawing.Size(1184, 568);
+            this.TPAddEditSeal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPAddEditSeal.Size = new System.Drawing.Size(1581, 702);
             this.TPAddEditSeal.TabIndex = 1;
             this.TPAddEditSeal.Text = "REGISTER SEAL";
             this.TPAddEditSeal.UseVisualStyleBackColor = true;
@@ -466,21 +481,22 @@
             this.CardCRUD.Depth = 0;
             this.CardCRUD.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardCRUD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.CardCRUD.Location = new System.Drawing.Point(3, 3);
-            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14);
+            this.CardCRUD.Location = new System.Drawing.Point(4, 4);
+            this.CardCRUD.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.CardCRUD.MouseState = MaterialSkin.MouseState.HOVER;
             this.CardCRUD.Name = "CardCRUD";
-            this.CardCRUD.Padding = new System.Windows.Forms.Padding(14);
-            this.CardCRUD.Size = new System.Drawing.Size(1178, 562);
+            this.CardCRUD.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.CardCRUD.Size = new System.Drawing.Size(1573, 694);
             this.CardCRUD.TabIndex = 0;
             // 
             // RightPanel
             // 
             this.RightPanel.Controls.Add(this.grpRegisLive);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightPanel.Location = new System.Drawing.Point(487, 160);
+            this.RightPanel.Location = new System.Drawing.Point(650, 197);
+            this.RightPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(677, 388);
+            this.RightPanel.Size = new System.Drawing.Size(904, 480);
             this.RightPanel.TabIndex = 2;
             // 
             // grpRegisLive
@@ -490,8 +506,10 @@
             this.grpRegisLive.Controls.Add(this.pnlTopRLive);
             this.grpRegisLive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpRegisLive.Location = new System.Drawing.Point(0, 0);
+            this.grpRegisLive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpRegisLive.Name = "grpRegisLive";
-            this.grpRegisLive.Size = new System.Drawing.Size(677, 388);
+            this.grpRegisLive.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpRegisLive.Size = new System.Drawing.Size(904, 480);
             this.grpRegisLive.TabIndex = 30;
             this.grpRegisLive.TabStop = false;
             this.grpRegisLive.Text = "REGISTER DATA";
@@ -500,17 +518,19 @@
             // 
             this.dgvRegisLive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegisLive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRegisLive.Location = new System.Drawing.Point(3, 82);
+            this.dgvRegisLive.Location = new System.Drawing.Point(4, 100);
+            this.dgvRegisLive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvRegisLive.Name = "dgvRegisLive";
-            this.dgvRegisLive.Size = new System.Drawing.Size(423, 303);
+            this.dgvRegisLive.Size = new System.Drawing.Size(567, 376);
             this.dgvRegisLive.TabIndex = 11;
             // 
             // txtSerialLog
             // 
             this.txtSerialLog.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtSerialLog.Location = new System.Drawing.Point(426, 82);
+            this.txtSerialLog.Location = new System.Drawing.Point(571, 100);
+            this.txtSerialLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSerialLog.Name = "txtSerialLog";
-            this.txtSerialLog.Size = new System.Drawing.Size(248, 303);
+            this.txtSerialLog.Size = new System.Drawing.Size(329, 376);
             this.txtSerialLog.TabIndex = 14;
             this.txtSerialLog.Text = "";
             // 
@@ -524,9 +544,10 @@
             this.pnlTopRLive.Controls.Add(this.ProListen);
             this.pnlTopRLive.Controls.Add(this.btnStartListen);
             this.pnlTopRLive.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTopRLive.Location = new System.Drawing.Point(3, 16);
+            this.pnlTopRLive.Location = new System.Drawing.Point(4, 19);
+            this.pnlTopRLive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTopRLive.Name = "pnlTopRLive";
-            this.pnlTopRLive.Size = new System.Drawing.Size(671, 66);
+            this.pnlTopRLive.Size = new System.Drawing.Size(896, 81);
             this.pnlTopRLive.TabIndex = 13;
             // 
             // btnSortDesc
@@ -536,8 +557,8 @@
             this.btnSortDesc.Depth = 0;
             this.btnSortDesc.HighEmphasis = true;
             this.btnSortDesc.Icon = null;
-            this.btnSortDesc.Location = new System.Drawing.Point(240, 9);
-            this.btnSortDesc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSortDesc.Location = new System.Drawing.Point(320, 11);
+            this.btnSortDesc.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSortDesc.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSortDesc.Name = "btnSortDesc";
             this.btnSortDesc.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -556,8 +577,8 @@
             this.btnSortAsc.Depth = 0;
             this.btnSortAsc.HighEmphasis = true;
             this.btnSortAsc.Icon = null;
-            this.btnSortAsc.Location = new System.Drawing.Point(166, 8);
-            this.btnSortAsc.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSortAsc.Location = new System.Drawing.Point(221, 10);
+            this.btnSortAsc.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSortAsc.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSortAsc.Name = "btnSortAsc";
             this.btnSortAsc.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -578,8 +599,8 @@
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(81, 8);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancel.Location = new System.Drawing.Point(108, 10);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -599,8 +620,8 @@
             this.btnClearLog.Depth = 0;
             this.btnClearLog.HighEmphasis = true;
             this.btnClearLog.Icon = null;
-            this.btnClearLog.Location = new System.Drawing.Point(591, 9);
-            this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearLog.Location = new System.Drawing.Point(811, 11);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnClearLog.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -620,8 +641,8 @@
             this.btnSave.Depth = 0;
             this.btnSave.HighEmphasis = true;
             this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(340, 7);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSave.Location = new System.Drawing.Point(475, 9);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSave.Name = "btnSave";
             this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -638,10 +659,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ProListen.Depth = 0;
             this.ProListen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(165)))), ((int)(((byte)(22)))));
-            this.ProListen.Location = new System.Drawing.Point(6, 52);
+            this.ProListen.Location = new System.Drawing.Point(8, 64);
+            this.ProListen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ProListen.MouseState = MaterialSkin.MouseState.HOVER;
             this.ProListen.Name = "ProListen";
-            this.ProListen.Size = new System.Drawing.Size(408, 5);
+            this.ProListen.Size = new System.Drawing.Size(545, 5);
             this.ProListen.TabIndex = 16;
             // 
             // btnStartListen
@@ -651,8 +673,8 @@
             this.btnStartListen.Depth = 0;
             this.btnStartListen.HighEmphasis = true;
             this.btnStartListen.Icon = null;
-            this.btnStartListen.Location = new System.Drawing.Point(6, 8);
-            this.btnStartListen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStartListen.Location = new System.Drawing.Point(8, 10);
+            this.btnStartListen.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnStartListen.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStartListen.Name = "btnStartListen";
             this.btnStartListen.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -667,9 +689,10 @@
             // 
             this.leftPanel.Controls.Add(this.grpPartList);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftPanel.Location = new System.Drawing.Point(14, 160);
+            this.leftPanel.Location = new System.Drawing.Point(19, 197);
+            this.leftPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(473, 388);
+            this.leftPanel.Size = new System.Drawing.Size(631, 480);
             this.leftPanel.TabIndex = 1;
             // 
             // grpPartList
@@ -678,8 +701,10 @@
             this.grpPartList.Controls.Add(this.pnlPartList);
             this.grpPartList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpPartList.Location = new System.Drawing.Point(0, 0);
+            this.grpPartList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpPartList.Name = "grpPartList";
-            this.grpPartList.Size = new System.Drawing.Size(473, 388);
+            this.grpPartList.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpPartList.Size = new System.Drawing.Size(631, 480);
             this.grpPartList.TabIndex = 27;
             this.grpPartList.TabStop = false;
             this.grpPartList.Text = "MT PART LIST";
@@ -697,9 +722,10 @@
             this.pnlPartList.Controls.Add(this.dgvBotLoadPart);
             this.pnlPartList.Controls.Add(this.materialLabel3);
             this.pnlPartList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPartList.Location = new System.Drawing.Point(3, 16);
+            this.pnlPartList.Location = new System.Drawing.Point(4, 19);
+            this.pnlPartList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPartList.Name = "pnlPartList";
-            this.pnlPartList.Size = new System.Drawing.Size(467, 369);
+            this.pnlPartList.Size = new System.Drawing.Size(623, 457);
             this.pnlPartList.TabIndex = 0;
             // 
             // dgvPCovPart
@@ -707,9 +733,10 @@
             this.dgvPCovPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPCovPart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelPCov});
-            this.dgvPCovPart.Location = new System.Drawing.Point(17, 490);
+            this.dgvPCovPart.Location = new System.Drawing.Point(23, 603);
+            this.dgvPCovPart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvPCovPart.Name = "dgvPCovPart";
-            this.dgvPCovPart.Size = new System.Drawing.Size(414, 132);
+            this.dgvPCovPart.Size = new System.Drawing.Size(552, 162);
             this.dgvPCovPart.TabIndex = 28;
             this.dgvPCovPart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPCovPart_CellClick);
             // 
@@ -724,10 +751,11 @@
             this.dgvManComPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvManComPart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelManCom});
-            this.dgvManComPart.Location = new System.Drawing.Point(17, 48);
+            this.dgvManComPart.Location = new System.Drawing.Point(23, 59);
+            this.dgvManComPart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvManComPart.Name = "dgvManComPart";
             this.dgvManComPart.RowHeadersWidth = 25;
-            this.dgvManComPart.Size = new System.Drawing.Size(414, 177);
+            this.dgvManComPart.Size = new System.Drawing.Size(552, 218);
             this.dgvManComPart.TabIndex = 29;
             this.dgvManComPart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManComPart_CellClick);
             // 
@@ -743,7 +771,7 @@
             // 
             this.chkAllPCov.AutoSize = true;
             this.chkAllPCov.Depth = 0;
-            this.chkAllPCov.Location = new System.Drawing.Point(344, 450);
+            this.chkAllPCov.Location = new System.Drawing.Point(459, 554);
             this.chkAllPCov.Margin = new System.Windows.Forms.Padding(0);
             this.chkAllPCov.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chkAllPCov.MouseState = MaterialSkin.MouseState.HOVER;
@@ -761,7 +789,8 @@
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(11, 14);
+            this.materialLabel4.Location = new System.Drawing.Point(15, 17);
+            this.materialLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(199, 19);
@@ -773,7 +802,8 @@
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(11, 459);
+            this.materialLabel5.Location = new System.Drawing.Point(15, 565);
+            this.materialLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(104, 19);
@@ -784,7 +814,7 @@
             // 
             this.chkAllManCom.AutoSize = true;
             this.chkAllManCom.Depth = 0;
-            this.chkAllManCom.Location = new System.Drawing.Point(344, 8);
+            this.chkAllManCom.Location = new System.Drawing.Point(459, 10);
             this.chkAllManCom.Margin = new System.Windows.Forms.Padding(0);
             this.chkAllManCom.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chkAllManCom.MouseState = MaterialSkin.MouseState.HOVER;
@@ -801,7 +831,7 @@
             // 
             this.chkAllBotLoad.AutoSize = true;
             this.chkAllBotLoad.Depth = 0;
-            this.chkAllBotLoad.Location = new System.Drawing.Point(344, 222);
+            this.chkAllBotLoad.Location = new System.Drawing.Point(459, 273);
             this.chkAllBotLoad.Margin = new System.Windows.Forms.Padding(0);
             this.chkAllBotLoad.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chkAllBotLoad.MouseState = MaterialSkin.MouseState.HOVER;
@@ -819,9 +849,10 @@
             this.dgvBotLoadPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBotLoadPart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelBotLoad});
-            this.dgvBotLoadPart.Location = new System.Drawing.Point(17, 262);
+            this.dgvBotLoadPart.Location = new System.Drawing.Point(23, 322);
+            this.dgvBotLoadPart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvBotLoadPart.Name = "dgvBotLoadPart";
-            this.dgvBotLoadPart.Size = new System.Drawing.Size(414, 182);
+            this.dgvBotLoadPart.Size = new System.Drawing.Size(552, 224);
             this.dgvBotLoadPart.TabIndex = 27;
             this.dgvBotLoadPart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBotLoadPart_CellClick);
             // 
@@ -836,7 +867,8 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(11, 228);
+            this.materialLabel3.Location = new System.Drawing.Point(15, 281);
+            this.materialLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(131, 19);
@@ -850,9 +882,10 @@
             this.UpPanel.Controls.Add(this.grpRegister);
             this.UpPanel.Controls.Add(this.grpMTSelector);
             this.UpPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.UpPanel.Location = new System.Drawing.Point(14, 14);
+            this.UpPanel.Location = new System.Drawing.Point(19, 17);
+            this.UpPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UpPanel.Name = "UpPanel";
-            this.UpPanel.Size = new System.Drawing.Size(1150, 146);
+            this.UpPanel.Size = new System.Drawing.Size(1535, 180);
             this.UpPanel.TabIndex = 0;
             // 
             // grpSerialPort
@@ -860,9 +893,11 @@
             this.grpSerialPort.Controls.Add(this.lblPortStatus);
             this.grpSerialPort.Controls.Add(this.materialLabel6);
             this.grpSerialPort.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grpSerialPort.Location = new System.Drawing.Point(728, 0);
+            this.grpSerialPort.Location = new System.Drawing.Point(970, 0);
+            this.grpSerialPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpSerialPort.Name = "grpSerialPort";
-            this.grpSerialPort.Size = new System.Drawing.Size(417, 146);
+            this.grpSerialPort.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpSerialPort.Size = new System.Drawing.Size(556, 180);
             this.grpSerialPort.TabIndex = 29;
             this.grpSerialPort.TabStop = false;
             this.grpSerialPort.Text = "Serial Port Settings";
@@ -871,9 +906,10 @@
             // 
             this.lblPortStatus.AutoSize = true;
             this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortStatus.Location = new System.Drawing.Point(10, 38);
+            this.lblPortStatus.Location = new System.Drawing.Point(13, 47);
+            this.lblPortStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPortStatus.Name = "lblPortStatus";
-            this.lblPortStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblPortStatus.Size = new System.Drawing.Size(76, 19);
             this.lblPortStatus.TabIndex = 9;
             this.lblPortStatus.Text = "Port Status";
             // 
@@ -882,7 +918,8 @@
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(10, 18);
+            this.materialLabel6.Location = new System.Drawing.Point(13, 22);
+            this.materialLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(42, 19);
@@ -893,9 +930,11 @@
             // 
             this.grpRegister.Controls.Add(this.pnlTujuan);
             this.grpRegister.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grpRegister.Location = new System.Drawing.Point(400, 0);
+            this.grpRegister.Location = new System.Drawing.Point(533, 0);
+            this.grpRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpRegister.Name = "grpRegister";
-            this.grpRegister.Size = new System.Drawing.Size(328, 146);
+            this.grpRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpRegister.Size = new System.Drawing.Size(437, 180);
             this.grpRegister.TabIndex = 28;
             this.grpRegister.TabStop = false;
             this.grpRegister.Text = "REGISTER DATA";
@@ -906,9 +945,10 @@
             this.pnlTujuan.Controls.Add(this.txtTujuan);
             this.pnlTujuan.Controls.Add(this.materialLabel8);
             this.pnlTujuan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTujuan.Location = new System.Drawing.Point(3, 16);
+            this.pnlTujuan.Location = new System.Drawing.Point(4, 19);
+            this.pnlTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTujuan.Name = "pnlTujuan";
-            this.pnlTujuan.Size = new System.Drawing.Size(322, 127);
+            this.pnlTujuan.Size = new System.Drawing.Size(429, 157);
             this.pnlTujuan.TabIndex = 0;
             // 
             // btnSetTujuan
@@ -918,8 +958,8 @@
             this.btnSetTujuan.Depth = 0;
             this.btnSetTujuan.HighEmphasis = true;
             this.btnSetTujuan.Icon = null;
-            this.btnSetTujuan.Location = new System.Drawing.Point(84, 74);
-            this.btnSetTujuan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSetTujuan.Location = new System.Drawing.Point(112, 91);
+            this.btnSetTujuan.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSetTujuan.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSetTujuan.Name = "btnSetTujuan";
             this.btnSetTujuan.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -944,6 +984,7 @@
             this.txtTujuan.Hint = "TUJUAN";
             this.txtTujuan.LeadingIcon = null;
             this.txtTujuan.Location = new System.Drawing.Point(0, 19);
+            this.txtTujuan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTujuan.MaxLength = 32767;
             this.txtTujuan.MouseState = MaterialSkin.MouseState.OUT;
             this.txtTujuan.Name = "txtTujuan";
@@ -955,7 +996,7 @@
             this.txtTujuan.SelectionLength = 0;
             this.txtTujuan.SelectionStart = 0;
             this.txtTujuan.ShortcutsEnabled = true;
-            this.txtTujuan.Size = new System.Drawing.Size(322, 48);
+            this.txtTujuan.Size = new System.Drawing.Size(429, 48);
             this.txtTujuan.TabIndex = 8;
             this.txtTujuan.TabStop = false;
             this.txtTujuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -969,6 +1010,7 @@
             this.materialLabel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel8.Location = new System.Drawing.Point(0, 0);
+            this.materialLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(102, 19);
@@ -984,8 +1026,10 @@
             this.grpMTSelector.Controls.Add(this.cbxNoPlat);
             this.grpMTSelector.Dock = System.Windows.Forms.DockStyle.Left;
             this.grpMTSelector.Location = new System.Drawing.Point(0, 0);
+            this.grpMTSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpMTSelector.Name = "grpMTSelector";
-            this.grpMTSelector.Size = new System.Drawing.Size(400, 146);
+            this.grpMTSelector.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpMTSelector.Size = new System.Drawing.Size(533, 180);
             this.grpMTSelector.TabIndex = 26;
             this.grpMTSelector.TabStop = false;
             this.grpMTSelector.Text = "MT SELECTOR";
@@ -995,7 +1039,8 @@
             this.lblPanelCover.AutoSize = true;
             this.lblPanelCover.Depth = 0;
             this.lblPanelCover.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPanelCover.Location = new System.Drawing.Point(165, 106);
+            this.lblPanelCover.Location = new System.Drawing.Point(220, 130);
+            this.lblPanelCover.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPanelCover.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPanelCover.Name = "lblPanelCover";
             this.lblPanelCover.Size = new System.Drawing.Size(85, 19);
@@ -1007,7 +1052,8 @@
             this.lblJlhCompartment.AutoSize = true;
             this.lblJlhCompartment.Depth = 0;
             this.lblJlhCompartment.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblJlhCompartment.Location = new System.Drawing.Point(165, 81);
+            this.lblJlhCompartment.Location = new System.Drawing.Point(220, 100);
+            this.lblJlhCompartment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblJlhCompartment.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblJlhCompartment.Name = "lblJlhCompartment";
             this.lblJlhCompartment.Size = new System.Drawing.Size(98, 19);
@@ -1019,7 +1065,8 @@
             this.lblType.AutoSize = true;
             this.lblType.Depth = 0;
             this.lblType.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblType.Location = new System.Drawing.Point(165, 32);
+            this.lblType.Location = new System.Drawing.Point(220, 39);
+            this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblType.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(36, 19);
@@ -1033,8 +1080,8 @@
             this.btnFind.Depth = 0;
             this.btnFind.HighEmphasis = true;
             this.btnFind.Icon = null;
-            this.btnFind.Location = new System.Drawing.Point(12, 90);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFind.Location = new System.Drawing.Point(16, 111);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnFind.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFind.Name = "btnFind";
             this.btnFind.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1061,11 +1108,12 @@
             this.cbxNoPlat.Hint = "No Plat";
             this.cbxNoPlat.IntegralHeight = false;
             this.cbxNoPlat.ItemHeight = 43;
-            this.cbxNoPlat.Location = new System.Drawing.Point(9, 32);
+            this.cbxNoPlat.Location = new System.Drawing.Point(12, 39);
+            this.cbxNoPlat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxNoPlat.MaxDropDownItems = 4;
             this.cbxNoPlat.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxNoPlat.Name = "cbxNoPlat";
-            this.cbxNoPlat.Size = new System.Drawing.Size(150, 49);
+            this.cbxNoPlat.Size = new System.Drawing.Size(199, 49);
             this.cbxNoPlat.StartIndex = 0;
             this.cbxNoPlat.TabIndex = 0;
             this.cbxNoPlat.SelectedIndexChanged += new System.EventHandler(this.cbxNoPlat_SelectedIndexChanged);
@@ -1073,10 +1121,11 @@
             // TPCollectSeal
             // 
             this.TPCollectSeal.Controls.Add(this.groupBox1);
-            this.TPCollectSeal.Location = new System.Drawing.Point(4, 22);
+            this.TPCollectSeal.Location = new System.Drawing.Point(4, 25);
+            this.TPCollectSeal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPCollectSeal.Name = "TPCollectSeal";
-            this.TPCollectSeal.Padding = new System.Windows.Forms.Padding(3);
-            this.TPCollectSeal.Size = new System.Drawing.Size(1184, 568);
+            this.TPCollectSeal.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPCollectSeal.Size = new System.Drawing.Size(1581, 702);
             this.TPCollectSeal.TabIndex = 2;
             this.TPCollectSeal.Text = "COLLECT SEAL";
             this.TPCollectSeal.UseVisualStyleBackColor = true;
@@ -1087,9 +1136,11 @@
             this.groupBox1.Controls.Add(this.txtCollect);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1178, 562);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1573, 694);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "COLLECT DATA";
@@ -1098,18 +1149,20 @@
             // 
             this.dgvCollectBuffer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCollectBuffer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCollectBuffer.Location = new System.Drawing.Point(3, 82);
+            this.dgvCollectBuffer.Location = new System.Drawing.Point(4, 100);
+            this.dgvCollectBuffer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvCollectBuffer.Name = "dgvCollectBuffer";
-            this.dgvCollectBuffer.Size = new System.Drawing.Size(954, 477);
+            this.dgvCollectBuffer.Size = new System.Drawing.Size(1276, 590);
             this.dgvCollectBuffer.TabIndex = 11;
             this.dgvCollectBuffer.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCollectBuffer_CellFormatting);
             // 
             // txtCollect
             // 
             this.txtCollect.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtCollect.Location = new System.Drawing.Point(957, 82);
+            this.txtCollect.Location = new System.Drawing.Point(1280, 100);
+            this.txtCollect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCollect.Name = "txtCollect";
-            this.txtCollect.Size = new System.Drawing.Size(218, 477);
+            this.txtCollect.Size = new System.Drawing.Size(289, 590);
             this.txtCollect.TabIndex = 14;
             this.txtCollect.Text = "";
             // 
@@ -1122,9 +1175,10 @@
             this.panel1.Controls.Add(this.btnSaveCollect);
             this.panel1.Controls.Add(this.btnStartCollect);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Location = new System.Drawing.Point(4, 19);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1172, 66);
+            this.panel1.Size = new System.Drawing.Size(1565, 81);
             this.panel1.TabIndex = 13;
             // 
             // btnRecreatePort
@@ -1134,8 +1188,8 @@
             this.btnRecreatePort.Depth = 0;
             this.btnRecreatePort.HighEmphasis = true;
             this.btnRecreatePort.Icon = null;
-            this.btnRecreatePort.Location = new System.Drawing.Point(324, 20);
-            this.btnRecreatePort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRecreatePort.Location = new System.Drawing.Point(432, 25);
+            this.btnRecreatePort.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnRecreatePort.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnRecreatePort.Name = "btnRecreatePort";
             this.btnRecreatePort.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1156,8 +1210,8 @@
             this.btnStopCollect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStopCollect.HighEmphasis = true;
             this.btnStopCollect.Icon = null;
-            this.btnStopCollect.Location = new System.Drawing.Point(89, 20);
-            this.btnStopCollect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStopCollect.Location = new System.Drawing.Point(119, 25);
+            this.btnStopCollect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnStopCollect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStopCollect.Name = "btnStopCollect";
             this.btnStopCollect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1172,9 +1226,10 @@
             // 
             this.lblCollectStatus.AutoSize = true;
             this.lblCollectStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCollectStatus.Location = new System.Drawing.Point(197, 32);
+            this.lblCollectStatus.Location = new System.Drawing.Point(263, 39);
+            this.lblCollectStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCollectStatus.Name = "lblCollectStatus";
-            this.lblCollectStatus.Size = new System.Drawing.Size(77, 13);
+            this.lblCollectStatus.Size = new System.Drawing.Size(92, 19);
             this.lblCollectStatus.TabIndex = 21;
             this.lblCollectStatus.Text = "Collect Status";
             // 
@@ -1186,8 +1241,8 @@
             this.btnClearCollect.Depth = 0;
             this.btnClearCollect.HighEmphasis = true;
             this.btnClearCollect.Icon = null;
-            this.btnClearCollect.Location = new System.Drawing.Point(1092, 9);
-            this.btnClearCollect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearCollect.Location = new System.Drawing.Point(1480, 11);
+            this.btnClearCollect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnClearCollect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearCollect.Name = "btnClearCollect";
             this.btnClearCollect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1206,8 +1261,8 @@
             this.btnSaveCollect.Depth = 0;
             this.btnSaveCollect.HighEmphasis = true;
             this.btnSaveCollect.Icon = null;
-            this.btnSaveCollect.Location = new System.Drawing.Point(878, 21);
-            this.btnSaveCollect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSaveCollect.Location = new System.Drawing.Point(1194, 26);
+            this.btnSaveCollect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnSaveCollect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSaveCollect.Name = "btnSaveCollect";
             this.btnSaveCollect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1225,8 +1280,8 @@
             this.btnStartCollect.Depth = 0;
             this.btnStartCollect.HighEmphasis = true;
             this.btnStartCollect.Icon = null;
-            this.btnStartCollect.Location = new System.Drawing.Point(4, 21);
-            this.btnStartCollect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStartCollect.Location = new System.Drawing.Point(5, 26);
+            this.btnStartCollect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnStartCollect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnStartCollect.Name = "btnStartCollect";
             this.btnStartCollect.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -1245,9 +1300,10 @@
             this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.TabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TabSelector.Location = new System.Drawing.Point(0, 0);
+            this.TabSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TabSelector.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabSelector.Name = "TabSelector";
-            this.TabSelector.Size = new System.Drawing.Size(1192, 48);
+            this.TabSelector.Size = new System.Drawing.Size(1589, 59);
             this.TabSelector.TabIndex = 5;
             this.TabSelector.Text = "materialTabSelector1";
             // 
@@ -1257,12 +1313,13 @@
             // 
             // RegisterSealForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1192, 642);
+            this.ClientSize = new System.Drawing.Size(1589, 790);
             this.Controls.Add(this.OuterMostPanel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "RegisterSealForm";
             this.Text = "REGISTER SEAL";
             this.Load += new System.EventHandler(this.RegisterSealForm_Load);
