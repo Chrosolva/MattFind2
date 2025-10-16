@@ -556,41 +556,41 @@ namespace DEPTHCHK.Views
         // modify HandleCompartmentMessage:
         private void HandleCompartmentMessage(string compId)
         {
-            var detail = _db.DetailMTs.AsNoTracking()
-                              .FirstOrDefault(d => d.CompartmentID == compId);
-            if (detail == null)
-            {
-                MessageBox.Show("Compartment not found: " + compId);
-                return;
-            }
+            //var detail = _db.DetailMTs.AsNoTracking()
+            //                  .FirstOrDefault(d => d.CompartmentID == compId);
+            //if (detail == null)
+            //{
+            //    MessageBox.Show("Compartment not found: " + compId);
+            //    return;
+            //}
 
-            // check if this is a new truck
-            if (!string.Equals(_currentNoPlat, detail.NoPlat, StringComparison.Ordinal))
-            {
-                _currentNoPlat = detail.NoPlat;
-                // load the truck and all its compartments
-                var truck = _db.MobilTangkis.AsNoTracking()
-                                   .FirstOrDefault(t => t.NoPlat == _currentNoPlat);
-                if (truck != null)
-                {
-                    lblNoPlat.Text = truck.NoPlat;
-                    lblType.Text = truck.Type ?? "";
-                    lblJlhCompartment.Text = truck.JlhCompartment?.ToString();
-                    lblJlhCapacity.Text = truck.Capacity?.ToString("N2");
-                }
-                PopulateLiveGrid(_currentNoPlat);
-            }
+            //// check if this is a new truck
+            //if (!string.Equals(_currentNoPlat, detail.NoPlat, StringComparison.Ordinal))
+            //{
+            //    _currentNoPlat = detail.NoPlat;
+            //    // load the truck and all its compartments
+            //    var truck = _db.MobilTangkis.AsNoTracking()
+            //                       .FirstOrDefault(t => t.NoPlat == _currentNoPlat);
+            //    if (truck != null)
+            //    {
+            //        lblNoPlat.Text = truck.NoPlat;
+            //        lblType.Text = truck.Type ?? "";
+            //        lblJlhCompartment.Text = truck.JlhCompartment?.ToString();
+            //        lblJlhCapacity.Text = truck.Capacity?.ToString("N2");
+            //    }
+            //    PopulateLiveGrid(_currentNoPlat);
+            //}
 
-            // update the current part ID regardless
-            _currentPartID = detail.PartID;
+            //// update the current part ID regardless
+            //_currentPartID = detail.PartID;
 
-            // optional: highlight the row in dgvPengirimanLive for this part
-            var index = _liveRows.FindIndex(r => r.PartID == _currentPartID);
-            if (index >= 0)
-            {
-                dgvPengirimanLive.ClearSelection();
-                dgvPengirimanLive.Rows[index].Selected = true;
-            }
+            //// optional: highlight the row in dgvPengirimanLive for this part
+            //var index = _liveRows.FindIndex(r => r.PartID == _currentPartID);
+            //if (index >= 0)
+            //{
+            //    dgvPengirimanLive.ClearSelection();
+            //    dgvPengirimanLive.Rows[index].Selected = true;
+            //}
         }
 
 
@@ -611,7 +611,6 @@ namespace DEPTHCHK.Views
                 row.Tgl_Input = null;
                 row.NoPlat = d.NoPlat;
                 row.PartID = d.PartID;
-                row.CompartmentID = d.CompartmentID;
                 row.DataBacaan = 0m;
                 row.DataKalibrasi = 0m;
                 row.Satuan = "LTR";
@@ -975,6 +974,22 @@ namespace DEPTHCHK.Views
                 dgv.EndEdit();
             }
             finally { dgv.ResumeLayout(); }
+        }
+
+        public void PrepareToClose()
+        {
+            // unsubscribe events first
+            try
+            {
+                if (_dataReceivedHandler != null && _serialPort != null)
+                {
+                    _serialPort.DataReceived -= _dataReceivedHandler;
+                    _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+                    _serialPort.PinChanged -= _serialPort_PinChanged;
+                    _dataReceivedHandler = null;
+                }
+            }
+            catch { /* ignore */ }
         }
     }
 }

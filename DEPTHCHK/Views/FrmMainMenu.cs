@@ -262,9 +262,19 @@ namespace DEPTHCHK.Views
         {
             // If the form requires the serial port, enforce that the port is open first
             bool requiresPort =
-                (childForm is PengirimanForm);
+                (childForm is PengirimanForm) ||
+                (childForm is MobilTangkiForm);
 
             //bool requiresPort = false;
+
+            // dispose the current child cleanly
+            if (_activeChild != null)
+            {
+                try { (_activeChild as MobilTangkiForm)?.PrepareToClose(); } catch { }
+                try { (_activeChild as PengirimanForm)?.PrepareToClose(); } catch { }
+                try { _activeChild.Dispose(); } catch { }
+                _activeChild = null;
+            }
 
             if (requiresPort && !Session.IsPortOpen)
             {

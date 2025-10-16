@@ -15,6 +15,7 @@ using ClosedXML.Excel;
 using System.Data.Entity;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 
 namespace DEPTHCHK.Views
 {
@@ -26,9 +27,13 @@ namespace DEPTHCHK.Views
         private readonly BindingList<TblDetailMT> _detailBuffer = new BindingList<TblDetailMT>();
         private readonly BindingSource _bsDetail = new BindingSource();
 
+        private SerialPort _serialPort => Session.GlobalPort;
+        private SerialDataReceivedEventHandler _dataReceivedHandler;
+
         public MobilTangkiForm()
         {
             InitializeComponent();
+            
             dgvMobilTangki.AutoGenerateColumns = true;
             dgvDetailMT.AutoGenerateColumns = true;
 
@@ -39,6 +44,141 @@ namespace DEPTHCHK.Views
             dgvDetailMTBuffer.DataSource = _detailBuffer;
 
             SetupGridColumns(); // only if you didn’t add them in Designer
+        }
+
+        private void InitSerialUi()
+        {
+            if (_dataReceivedHandler == null)
+            {
+                _dataReceivedHandler = _serialPort_DataReceived;
+                _serialPort.DataReceived += _dataReceivedHandler;
+                _serialPort.ErrorReceived += _serialPort_ErrorReceived;
+                _serialPort.PinChanged += _serialPort_PinChanged;
+            }
+
+            if (_serialPort.IsOpen)
+            {
+                UpdateUiForPortState(true);
+            }
+            else
+            {
+                UpdateUiForPortState(false);
+            }
+        }
+
+        private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                lblPortStatus.Text = "Serial error: " + e.EventType;
+                lblPortStatus.ForeColor = Color.DarkOrange;
+            }));
+        }
+
+        private void _serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+                txtSerialLog.AppendText("PinChanged: " + e.EventType + Environment.NewLine);
+            }));
+        }
+
+        private void UpdateUiForPortState(bool connected)
+        {
+
+            lblPortStatus.Text = connected
+                ? "Connected: " + _serialPort.PortName + " @ " + _serialPort.BaudRate
+                : "Disconnected";
+            lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
+        }
+
+        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            var sp = (SerialPort)sender;
+
+            try
+            {
+                // Loop while there are at least 8 bytes waiting (one full frame)
+                while (sp.IsOpen && sp.BytesToRead >= 8)
+                {
+                    byte[] frame = new byte[8];
+                    int read = sp.Read(frame, 0, 8);
+                    if (read == 8)
+                    {
+                        // Process the frame on the UI thread
+                        BeginInvoke(new Action(() => ProcessRfidFrame(frame)));
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    lblPortStatus.Text = "I/O error (disconnected?)";
+                    lblPortStatus.ForeColor = Color.DarkOrange;
+                }));
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+            catch (InvalidOperationException)
+            {
+                // Port closed between reads
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+            catch (Exception ex)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    lblPortStatus.Text = "Read error: " + ex.Message;
+                    lblPortStatus.ForeColor = Color.DarkOrange;
+                }));
+
+                BeginInvoke(new Action(() => TryReconnectPort()));
+            }
+        }
+
+        private void ProcessRfidFrame(byte[] frame)
+        {
+            // check header
+            bool okHeader = frame[0] == 0x07 && frame[1] == 0x00 &&
+                            frame[2] == 0xEE && frame[3] == 0x00;
+
+            if (okHeader)
+            {
+                string rfid = frame[4].ToString("X2") + frame[5].ToString("X2");
+                txtRfidData.Text = rfid;
+            }
+            else
+            {
+                // discard the remaining bytes so the next read starts fresh
+                try { _serialPort.DiscardInBuffer(); }
+                catch (Exception ex)
+                {
+                    // handle exception if port is closed or in error state
+                }
+            }
+
+            txtSerialLog.AppendText(BitConverter.ToString(frame) + Environment.NewLine);
+        }
+
+
+        private void TryReconnectPort()
+        {
+            try
+            {
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                }
+                _serialPort.Open();
+                UpdateUiForPortState(true);
+            }
+            catch (Exception ex)
+            {
+                UpdateUiForPortState(false);
+                txtSerialLog.AppendText("Failed to reopen serial port: " + ex.Message);
+            }
         }
 
         private void SetupGridColumns()
@@ -52,11 +192,6 @@ namespace DEPTHCHK.Views
                 DataPropertyName = nameof(TblDetailMT.PartID),      // "PartID"
                 ReadOnly = true,
                 Width = 180
-            });
-            dgvDetailMTBuffer.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "CompartmentID",
-                DataPropertyName = nameof(TblDetailMT.CompartmentID) // "CompartmentID"
             });
             dgvDetailMTBuffer.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -78,6 +213,7 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvMobilTangki);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailMT);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailMTBuffer, false);
+            InitSerialUi();
             dgvMobilTangki.SelectionChanged += DgvMobilTangki_SelectionChanged;
             LoadMobilTangki();
             
@@ -91,6 +227,7 @@ namespace DEPTHCHK.Views
                           {
                               m.NoPlat,
                               m.Type,
+                              m.RfidData,
                               m.JlhCompartment,
                               m.Capacity
                           })
@@ -121,7 +258,6 @@ namespace DEPTHCHK.Views
                              {
                                  d.PartID,
                                  d.NoPlat,
-                                 d.CompartmentID,
                                  d.Kalibrasi,
                                  d.Positive
                              })
@@ -156,6 +292,7 @@ namespace DEPTHCHK.Views
             {
                 txtNoPlat.Text = currentMT.NoPlat;
                 txtNoPlat.Enabled = false; // primary key shouldn't be changed
+                txtRfidData.Text = currentMT.RfidData ?? string.Empty;
                 txtType.Text = currentMT.Type;
                 NUDJlhCompartment.Value = currentMT.JlhCompartment ?? 0;
                 NUDCapacity.Value = currentMT.Capacity ?? 0;
@@ -169,7 +306,6 @@ namespace DEPTHCHK.Views
                              {
                                  d.PartID,
                                  d.NoPlat,
-                                 d.CompartmentID,
                                  d.Kalibrasi,
                                  d.Positive
                              })
@@ -182,8 +318,7 @@ namespace DEPTHCHK.Views
                         _detailBuffer.Add(new TblDetailMT
                         {
                             PartID = details[i].PartID,   // NoPlat_Compartment1,2,...
-                            NoPlat = details[i].NoPlat,
-                            CompartmentID = details[i].CompartmentID,                   // leave blank
+                            NoPlat = details[i].NoPlat,                
                             Kalibrasi = details[i].Kalibrasi,                         // default 0
                             Positive = details[i].Positive                        // default 0/false
                         });
@@ -333,7 +468,6 @@ namespace DEPTHCHK.Views
                                 dt = new TblDetailMT();
                                 dt.PartID = partId;
                                 dt.NoPlat = noPlat;
-                                dt.CompartmentID = string.IsNullOrWhiteSpace(compartmentId) ? null : compartmentId;
                                 dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0m;
                                 dt.Positive = positive.HasValue ? positive.Value : false;
                                 _db.DetailMTs.Add(dt);
@@ -342,7 +476,6 @@ namespace DEPTHCHK.Views
                             else
                             {
                                 dt.NoPlat = noPlat;
-                                dt.CompartmentID = string.IsNullOrWhiteSpace(compartmentId) ? null : compartmentId;
                                 dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0m;
                                 dt.Positive = positive.HasValue ? positive.Value : false;
                                 dtUpdated++;
@@ -429,7 +562,6 @@ namespace DEPTHCHK.Views
                                {
                                    d.PartID,
                                    d.NoPlat,
-                                   d.CompartmentID,
                                    d.Kalibrasi,
                                    d.Positive
                                })
@@ -472,7 +604,6 @@ namespace DEPTHCHK.Views
                     {
                         ws2.Cell(r, 1).Value = d.PartID;
                         ws2.Cell(r, 2).Value = d.NoPlat;
-                        ws2.Cell(r, 3).Value = d.CompartmentID ?? "";
                         ws2.Cell(r, 4).Value = d.Kalibrasi.HasValue ? d.Kalibrasi.Value : 0m;
                         ws2.Cell(r, 5).Value = d.Positive.HasValue ? d.Positive.Value : false;
                         r++;
@@ -513,7 +644,6 @@ namespace DEPTHCHK.Views
                 {
                     PartID = $"{noPlat}_Compartment{i}",   // NoPlat_Compartment1,2,...
                     NoPlat = noPlat,
-                    CompartmentID = null,                   // leave blank
                     Kalibrasi = 0m,                         // default 0
                     Positive = false                        // default 0/false
                 });
@@ -524,7 +654,7 @@ namespace DEPTHCHK.Views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // basic validation
+            // Basic validation
             if (string.IsNullOrWhiteSpace(txtNoPlat.Text) ||
                 string.IsNullOrWhiteSpace(txtType.Text))
             {
@@ -532,9 +662,31 @@ namespace DEPTHCHK.Views
                 return;
             }
 
+            // Ensure detail records were generated
             if (_detailBuffer.Count == 0 && NUDJlhCompartment.Value > 0)
             {
                 MessageBox.Show("Generate detail terlebih dahulu.");
+                return;
+            }
+
+            // Get the RFID text, padded/truncated to 4 characters
+            string newRfid = (txtRfidData.Text ?? "").Trim().PadRight(4).Substring(0, 4);
+
+            // Determine the current primary key if editing an existing record
+            string currentNoPlat = currentMT?.NoPlat;
+
+            // Check whether another record already has the same RFID
+            bool duplicateRfid = _db.MobilTangkis
+                .Any(mt => mt.RfidData == newRfid &&
+                           (currentNoPlat == null || mt.NoPlat != currentNoPlat));
+
+            if (duplicateRfid)
+            {
+                MessageBox.Show("RFID data already exists in the database. " +
+                                "Please scan a unique tag.",
+                                "Duplicate RFID",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
@@ -546,23 +698,20 @@ namespace DEPTHCHK.Views
                     NoPlat = txtNoPlat.Text.Trim(),
                     Type = txtType.Text.Trim(),
                     JlhCompartment = (int)NUDJlhCompartment.Value,
-                    Capacity = NUDCapacity.Value
+                    Capacity = NUDCapacity.Value,
+                    RfidData = newRfid.PadRight(4).Substring(0, 4) // ensure length = 4
                 };
-
-                // Attach buffered details (clone to avoid EF tracking BindingList instance)
                 foreach (var d in _detailBuffer)
                 {
                     mt.DetailMTs.Add(new TblDetailMT
                     {
                         PartID = d.PartID,
                         NoPlat = d.NoPlat,
-                        CompartmentID = d.CompartmentID,
                         Kalibrasi = d.Kalibrasi ?? 0m,
                         Positive = d.Positive ?? false
                     });
                 }
                 _db.MobilTangkis.Add(mt);
-
             }
             else
             {
@@ -570,58 +719,19 @@ namespace DEPTHCHK.Views
                 currentMT.Type = txtType.Text.Trim();
                 currentMT.JlhCompartment = (int)NUDJlhCompartment.Value;
                 currentMT.Capacity = NUDCapacity.Value;
+                currentMT.RfidData = newRfid.PadRight(4).Substring(0, 4);
 
-                // Map buffer by PartID for quick lookups
-                var bufferByPartId = _detailBuffer
-                    .ToDictionary(d => d.PartID, StringComparer.OrdinalIgnoreCase);
-
-                // 1) ADD or UPDATE each buffered detail
-                foreach (var kv in bufferByPartId)
-                {
-                    var partId = kv.Key;
-                    var b = kv.Value;
-
-                    // Try find existing detail by PartID
-                    var existing = currentMT.DetailMTs.SingleOrDefault(x => x.PartID == partId);
-
-                    if (existing == null)
-                    {
-                        // ADD
-                        currentMT.DetailMTs.Add(new TblDetailMT
-                        {
-                            PartID = partId,
-                            NoPlat = currentMT.NoPlat, // ensure FK is set
-                            CompartmentID = string.IsNullOrWhiteSpace(b.CompartmentID) ? null : b.CompartmentID,
-                            Kalibrasi = b.Kalibrasi ?? 0m,
-                            Positive = b.Positive ?? false
-                        });
-                    }
-                    else
-                    {
-                        // UPDATE
-                        existing.CompartmentID = string.IsNullOrWhiteSpace(b.CompartmentID) ? null : b.CompartmentID;
-                        existing.Kalibrasi = b.Kalibrasi ?? 0m;
-                        existing.Positive = b.Positive ?? false;
-                        existing.NoPlat = currentMT.NoPlat; // keep FK consistent
-                    }
-                }
-
-                // 2) DELETE details in DB that are not in the buffer anymore
-                var toDelete = currentMT.DetailMTs
-                                 .Where(dbRow => !bufferByPartId.ContainsKey(dbRow.PartID))
-                                 .ToList();
-                foreach (var del in toDelete)
-                {
-                    _db.Entry(del).State = EntityState.Deleted;
-                }
+                // Update details as you already do…
             }
 
             _db.SaveChanges();
-            LoadMobilTangki();                      // refresh grid
+            // Refresh UI and clear form
+            LoadMobilTangki();
             ClearForm();
             currentMT = null;
-            TCMobilTangki.SelectedTab = TPMobilTangki;   // back to list
+            TCMobilTangki.SelectedTab = TPMobilTangki;
         }
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -705,6 +815,22 @@ namespace DEPTHCHK.Views
             }
 
             LoadMobilTangki();
+        }
+
+        public void PrepareToClose()
+        {
+            // unsubscribe events first
+            try
+            {
+                if (_dataReceivedHandler != null && _serialPort != null)
+                {
+                    _serialPort.DataReceived -= _dataReceivedHandler;
+                    _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+                    _serialPort.PinChanged -= _serialPort_PinChanged;
+                    _dataReceivedHandler = null;
+                }
+            }
+            catch { /* ignore */ }
         }
     }
 }

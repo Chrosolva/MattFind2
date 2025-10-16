@@ -51,13 +51,17 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.dgvMobilTangki = new System.Windows.Forms.DataGridView();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.btnDelete = new DEPTHCHK.Custom.CustomMaterialButton();
             this.btnEdit = new MaterialSkin.Controls.MaterialButton();
             this.TPAddEditMT = new System.Windows.Forms.TabPage();
             this.CardCRUD = new MaterialSkin.Controls.MaterialCard();
-            this.txtNoPlat = new MaterialSkin.Controls.MaterialTextBox2();
-            this.dgvDetailMTBuffer = new System.Windows.Forms.DataGridView();
             this.btnGenerate = new MaterialSkin.Controls.MaterialButton();
-            this.btnDelete = new DEPTHCHK.Custom.CustomMaterialButton();
+            this.dgvDetailMTBuffer = new System.Windows.Forms.DataGridView();
+            this.txtNoPlat = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblRfid = new MaterialSkin.Controls.MaterialLabel();
+            this.txtRfidData = new MaterialSkin.Controls.MaterialTextBox2();
+            this.lblPortStatus = new System.Windows.Forms.Label();
+            this.txtSerialLog = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.NUDCapacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDJlhCompartment)).BeginInit();
             this.TCMobilTangki.SuspendLayout();
@@ -79,7 +83,7 @@
             this.btnClear.Depth = 0;
             this.btnClear.HighEmphasis = true;
             this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(144, 252);
+            this.btnClear.Location = new System.Drawing.Point(149, 312);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClear.Name = "btnClear";
@@ -159,7 +163,7 @@
             this.btnBack.Depth = 0;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(266, 252);
+            this.btnBack.Location = new System.Drawing.Point(271, 312);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBack.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
@@ -179,7 +183,7 @@
             this.btnSave.Depth = 0;
             this.btnSave.HighEmphasis = true;
             this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(17, 252);
+            this.btnSave.Location = new System.Drawing.Point(22, 312);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSave.Name = "btnSave";
@@ -419,6 +423,28 @@
             this.TopPanel.Size = new System.Drawing.Size(1316, 53);
             this.TopPanel.TabIndex = 0;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDelete.CustomColor = System.Drawing.Color.DarkRed;
+            this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDelete.Depth = 0;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.HighEmphasis = true;
+            this.btnDelete.Icon = null;
+            this.btnDelete.Location = new System.Drawing.Point(164, 6);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDelete.Size = new System.Drawing.Size(73, 36);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.Text = "DELETE";
+            this.btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDelete.UseAccentColor = false;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnEdit
             // 
             this.btnEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -456,6 +482,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CardCRUD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.CardCRUD.Controls.Add(this.txtSerialLog);
+            this.CardCRUD.Controls.Add(this.lblPortStatus);
+            this.CardCRUD.Controls.Add(this.lblRfid);
+            this.CardCRUD.Controls.Add(this.txtRfidData);
             this.CardCRUD.Controls.Add(this.btnGenerate);
             this.CardCRUD.Controls.Add(this.dgvDetailMTBuffer);
             this.CardCRUD.Controls.Add(this.btnBack);
@@ -478,6 +508,34 @@
             this.CardCRUD.Padding = new System.Windows.Forms.Padding(14);
             this.CardCRUD.Size = new System.Drawing.Size(1322, 447);
             this.CardCRUD.TabIndex = 0;
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenerate.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGenerate.Depth = 0;
+            this.btnGenerate.HighEmphasis = true;
+            this.btnGenerate.Icon = null;
+            this.btnGenerate.Location = new System.Drawing.Point(470, 25);
+            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGenerate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGenerate.Size = new System.Drawing.Size(95, 36);
+            this.btnGenerate.TabIndex = 14;
+            this.btnGenerate.Text = "GENERATE";
+            this.btnGenerate.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGenerate.UseAccentColor = false;
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
+            // dgvDetailMTBuffer
+            // 
+            this.dgvDetailMTBuffer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetailMTBuffer.Location = new System.Drawing.Point(586, 17);
+            this.dgvDetailMTBuffer.Name = "dgvDetailMTBuffer";
+            this.dgvDetailMTBuffer.Size = new System.Drawing.Size(719, 181);
+            this.dgvDetailMTBuffer.TabIndex = 13;
             // 
             // txtNoPlat
             // 
@@ -507,55 +565,65 @@
             this.txtNoPlat.TrailingIcon = null;
             this.txtNoPlat.UseSystemPasswordChar = false;
             // 
-            // dgvDetailMTBuffer
+            // lblRfid
             // 
-            this.dgvDetailMTBuffer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailMTBuffer.Location = new System.Drawing.Point(586, 17);
-            this.dgvDetailMTBuffer.Name = "dgvDetailMTBuffer";
-            this.dgvDetailMTBuffer.Size = new System.Drawing.Size(719, 271);
-            this.dgvDetailMTBuffer.TabIndex = 13;
+            this.lblRfid.AutoSize = true;
+            this.lblRfid.Depth = 0;
+            this.lblRfid.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblRfid.Location = new System.Drawing.Point(17, 218);
+            this.lblRfid.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblRfid.Name = "lblRfid";
+            this.lblRfid.Size = new System.Drawing.Size(80, 19);
+            this.lblRfid.TabIndex = 16;
+            this.lblRfid.Text = "RFID DATA";
             // 
-            // btnGenerate
+            // txtRfidData
             // 
-            this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerate.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnGenerate.Depth = 0;
-            this.btnGenerate.HighEmphasis = true;
-            this.btnGenerate.Icon = null;
-            this.btnGenerate.Location = new System.Drawing.Point(470, 25);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnGenerate.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGenerate.Size = new System.Drawing.Size(95, 36);
-            this.btnGenerate.TabIndex = 14;
-            this.btnGenerate.Text = "GENERATE";
-            this.btnGenerate.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnGenerate.UseAccentColor = false;
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            this.txtRfidData.AnimateReadOnly = false;
+            this.txtRfidData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtRfidData.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtRfidData.Depth = 0;
+            this.txtRfidData.Enabled = false;
+            this.txtRfidData.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRfidData.HideSelection = true;
+            this.txtRfidData.LeadingIcon = null;
+            this.txtRfidData.Location = new System.Drawing.Point(17, 249);
+            this.txtRfidData.MaxLength = 32767;
+            this.txtRfidData.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtRfidData.Name = "txtRfidData";
+            this.txtRfidData.PasswordChar = '\0';
+            this.txtRfidData.PrefixSuffixText = null;
+            this.txtRfidData.ReadOnly = false;
+            this.txtRfidData.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtRfidData.SelectedText = "";
+            this.txtRfidData.SelectionLength = 0;
+            this.txtRfidData.SelectionStart = 0;
+            this.txtRfidData.ShortcutsEnabled = true;
+            this.txtRfidData.Size = new System.Drawing.Size(250, 48);
+            this.txtRfidData.TabIndex = 15;
+            this.txtRfidData.TabStop = false;
+            this.txtRfidData.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtRfidData.TrailingIcon = null;
+            this.txtRfidData.UseSystemPasswordChar = false;
             // 
-            // btnDelete
+            // lblPortStatus
             // 
-            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDelete.CustomColor = System.Drawing.Color.DarkRed;
-            this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnDelete.Depth = 0;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.HighEmphasis = true;
-            this.btnDelete.Icon = null;
-            this.btnDelete.Location = new System.Drawing.Point(164, 6);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnDelete.Size = new System.Drawing.Size(73, 36);
-            this.btnDelete.TabIndex = 25;
-            this.btnDelete.Text = "DELETE";
-            this.btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnDelete.UseAccentColor = false;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.lblPortStatus.AutoSize = true;
+            this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPortStatus.Location = new System.Drawing.Point(583, 224);
+            this.lblPortStatus.Name = "lblPortStatus";
+            this.lblPortStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblPortStatus.TabIndex = 40;
+            this.lblPortStatus.Text = "Port Status";
+            // 
+            // txtSerialLog
+            // 
+            this.txtSerialLog.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSerialLog.Location = new System.Drawing.Point(586, 249);
+            this.txtSerialLog.Name = "txtSerialLog";
+            this.txtSerialLog.Size = new System.Drawing.Size(719, 188);
+            this.txtSerialLog.TabIndex = 41;
+            this.txtSerialLog.Text = "";
             // 
             // MobilTangkiForm
             // 
@@ -618,5 +686,9 @@
         private MaterialSkin.Controls.MaterialButton btnGenerate;
         private System.Windows.Forms.DataGridView dgvDetailMTBuffer;
         private Custom.CustomMaterialButton btnDelete;
+        private MaterialSkin.Controls.MaterialLabel lblRfid;
+        private MaterialSkin.Controls.MaterialTextBox2 txtRfidData;
+        private System.Windows.Forms.Label lblPortStatus;
+        private System.Windows.Forms.RichTextBox txtSerialLog;
     }
 }
