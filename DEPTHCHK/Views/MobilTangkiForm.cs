@@ -349,6 +349,7 @@ namespace DEPTHCHK.Views
             txtType.Text = "";
             NUDJlhCompartment.Value = 0;
             NUDCapacity.Value = 0;
+            txtRfidData.Text = "";
             currentMT = null;
             txtNoPlat.Enabled = true;
             // Keep the DataSource intact; just clear the list
@@ -831,6 +832,11 @@ namespace DEPTHCHK.Views
                 }
             }
             catch { /* ignore */ }
+        }
+
+        private void btnClearrfid_Click(object sender, EventArgs e)
+        {
+            txtRfidData.Text = "";
         }
     }
 }
