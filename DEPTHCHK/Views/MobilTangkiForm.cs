@@ -663,45 +663,48 @@ namespace DEPTHCHK.Views
                 return;
             }
 
-            // Ensure detail records were generated
+            // Ensure detail records were generated (if any compartments are specified)
             if (_detailBuffer.Count == 0 && NUDJlhCompartment.Value > 0)
             {
                 MessageBox.Show("Generate detail terlebih dahulu.");
                 return;
             }
 
-            // Get the RFID text, padded/truncated to 4 characters
+            // Normalize and prepare the RFID data
             string newRfid = (txtRfidData.Text ?? "").Trim().PadRight(4).Substring(0, 4);
 
-            // Determine the current primary key if editing an existing record
+            // When editing, capture the current primary key (NoPlat) in a simple string
             string currentNoPlat = currentMT?.NoPlat;
 
-            // Check whether another record already has the same RFID
-            bool duplicateRfid = _db.MobilTangkis
-                .Any(mt => mt.RfidData == newRfid &&
-                           (currentNoPlat == null || mt.NoPlat != currentNoPlat));
+            // Check for duplicate RFID data in another MobilTangki
+            bool duplicateRfid = _db.MobilTangkis.Any(mt =>
+                mt.RfidData != null &&
+                mt.RfidData.Equals(newRfid, StringComparison.OrdinalIgnoreCase) &&
+                (currentNoPlat == null || mt.NoPlat != currentNoPlat));
 
             if (duplicateRfid)
             {
-                MessageBox.Show("RFID data already exists in the database. " +
-                                "Please scan a unique tag.",
-                                "Duplicate RFID",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "RFID data already exists in the database. Please scan a unique tag.",
+                    "Duplicate RFID",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
             if (currentMT == null)
             {
-                // Create new MobilTangki
+                // ----- Create a new MobilTangki -----
                 var mt = new TblMobilTangki
                 {
                     NoPlat = txtNoPlat.Text.Trim(),
                     Type = txtType.Text.Trim(),
                     JlhCompartment = (int)NUDJlhCompartment.Value,
                     Capacity = NUDCapacity.Value,
-                    RfidData = newRfid.PadRight(4).Substring(0, 4) // ensure length = 4
+                    RfidData = newRfid
                 };
+
+                // Copy detail records from the buffer into the new entity
                 foreach (var d in _detailBuffer)
                 {
                     mt.DetailMTs.Add(new TblDetailMT
@@ -712,26 +715,70 @@ namespace DEPTHCHK.Views
                         Positive = d.Positive ?? false
                     });
                 }
+
                 _db.MobilTangkis.Add(mt);
             }
             else
             {
-                // Update existing
+                // ----- Update an existing MobilTangki -----
                 currentMT.Type = txtType.Text.Trim();
                 currentMT.JlhCompartment = (int)NUDJlhCompartment.Value;
                 currentMT.Capacity = NUDCapacity.Value;
-                currentMT.RfidData = newRfid.PadRight(4).Substring(0, 4);
+                currentMT.RfidData = newRfid;
 
-                // Update details as you already do…
+                // Map the detail buffer by PartID for quick lookup
+                var bufferByPartId = _detailBuffer.ToDictionary(d => d.PartID, StringComparer.OrdinalIgnoreCase);
+
+                // 1) Add or update detail records from the buffer
+                foreach (var kv in bufferByPartId)
+                {
+                    string partId = kv.Key;
+                    TblDetailMT bufferD = kv.Value;
+
+                    // See if this PartID already exists on the current entity
+                    var existing = currentMT.DetailMTs
+                        .SingleOrDefault(x => x.PartID.Equals(partId, StringComparison.OrdinalIgnoreCase));
+
+                    if (existing == null)
+                    {
+                        // Add a new detail
+                        currentMT.DetailMTs.Add(new TblDetailMT
+                        {
+                            PartID = partId,
+                            NoPlat = currentMT.NoPlat,
+                            Kalibrasi = bufferD.Kalibrasi ?? 0m,
+                            Positive = bufferD.Positive ?? false
+                        });
+                    }
+                    else
+                    {
+                        // Update existing detail
+                        existing.Kalibrasi = bufferD.Kalibrasi ?? 0m;
+                        existing.Positive = bufferD.Positive ?? false;
+                        existing.NoPlat = currentMT.NoPlat; // keep FK consistent
+                    }
+                }
+
+                // 2) Remove any detail records that are no longer in the buffer
+                var toDelete = currentMT.DetailMTs
+                    .Where(dbRow => !bufferByPartId.ContainsKey(dbRow.PartID))
+                    .ToList();
+
+                foreach (var del in toDelete)
+                {
+                    // mark for deletion
+                    _db.Entry(del).State = EntityState.Deleted;
+                }
             }
 
+            // Persist changes and refresh the UI
             _db.SaveChanges();
-            // Refresh UI and clear form
             LoadMobilTangki();
             ClearForm();
             currentMT = null;
             TCMobilTangki.SelectedTab = TPMobilTangki;
         }
+
 
 
         private void btnDelete_Click(object sender, EventArgs e)

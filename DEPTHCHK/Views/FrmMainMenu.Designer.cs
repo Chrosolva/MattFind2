@@ -46,6 +46,8 @@
             this.panelMenu2 = new System.Windows.Forms.Panel();
             this.btnLogOut = new DEPTHCHK.Custom.CustomMaterialButton();
             this.btnDisconnect = new DEPTHCHK.Custom.CustomMaterialButton();
+            this.cbxPort2 = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblPort2Status = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NUDBaudRate)).BeginInit();
             this.panelMenu2.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +93,7 @@
             this.btnConnect.Depth = 0;
             this.btnConnect.HighEmphasis = true;
             this.btnConnect.Icon = null;
-            this.btnConnect.Location = new System.Drawing.Point(914, 613);
+            this.btnConnect.Location = new System.Drawing.Point(965, 613);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnConnect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnConnect.Name = "btnConnect";
@@ -107,7 +109,7 @@
             // NUDBaudRate
             // 
             this.NUDBaudRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.NUDBaudRate.Location = new System.Drawing.Point(801, 636);
+            this.NUDBaudRate.Location = new System.Drawing.Point(879, 638);
             this.NUDBaudRate.Margin = new System.Windows.Forms.Padding(4);
             this.NUDBaudRate.Maximum = new decimal(new int[] {
             10000000,
@@ -129,7 +131,7 @@
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(798, 613);
+            this.materialLabel7.Location = new System.Drawing.Point(876, 615);
             this.materialLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
@@ -158,7 +160,7 @@
             this.cbxPort.MaxDropDownItems = 4;
             this.cbxPort.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxPort.Name = "cbxPort";
-            this.cbxPort.Size = new System.Drawing.Size(169, 49);
+            this.cbxPort.Size = new System.Drawing.Size(129, 49);
             this.cbxPort.StartIndex = 0;
             this.cbxPort.TabIndex = 26;
             // 
@@ -232,7 +234,7 @@
             this.lblPortStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPortStatus.AutoSize = true;
             this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortStatus.Location = new System.Drawing.Point(205, 625);
+            this.lblPortStatus.Location = new System.Drawing.Point(205, 628);
             this.lblPortStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPortStatus.Name = "lblPortStatus";
             this.lblPortStatus.Size = new System.Drawing.Size(63, 13);
@@ -287,7 +289,7 @@
             this.btnDisconnect.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDisconnect.HighEmphasis = true;
             this.btnDisconnect.Icon = null;
-            this.btnDisconnect.Location = new System.Drawing.Point(1011, 613);
+            this.btnDisconnect.Location = new System.Drawing.Point(1063, 613);
             this.btnDisconnect.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnDisconnect.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnDisconnect.Name = "btnDisconnect";
@@ -300,11 +302,50 @@
             this.btnDisconnect.UseVisualStyleBackColor = true;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
+            // cbxPort2
+            // 
+            this.cbxPort2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbxPort2.AutoResize = false;
+            this.cbxPort2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbxPort2.Depth = 0;
+            this.cbxPort2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbxPort2.DropDownHeight = 174;
+            this.cbxPort2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPort2.DropDownWidth = 121;
+            this.cbxPort2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbxPort2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbxPort2.FormattingEnabled = true;
+            this.cbxPort2.Hint = "PORT";
+            this.cbxPort2.IntegralHeight = false;
+            this.cbxPort2.ItemHeight = 43;
+            this.cbxPort2.Location = new System.Drawing.Point(725, 609);
+            this.cbxPort2.Margin = new System.Windows.Forms.Padding(4);
+            this.cbxPort2.MaxDropDownItems = 4;
+            this.cbxPort2.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbxPort2.Name = "cbxPort2";
+            this.cbxPort2.Size = new System.Drawing.Size(129, 49);
+            this.cbxPort2.StartIndex = 0;
+            this.cbxPort2.TabIndex = 34;
+            // 
+            // lblPort2Status
+            // 
+            this.lblPort2Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPort2Status.AutoSize = true;
+            this.lblPort2Status.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPort2Status.Location = new System.Drawing.Point(205, 643);
+            this.lblPort2Status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPort2Status.Name = "lblPort2Status";
+            this.lblPort2Status.Size = new System.Drawing.Size(72, 13);
+            this.lblPort2Status.TabIndex = 35;
+            this.lblPort2Status.Text = "Port 2 Status";
+            // 
             // FrmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1439, 666);
+            this.Controls.Add(this.lblPort2Status);
+            this.Controls.Add(this.cbxPort2);
             this.Controls.Add(this.panelMenu2);
             this.Controls.Add(this.btnSetActive);
             this.Controls.Add(this.btnBackUP);
@@ -353,5 +394,7 @@
         private System.IO.Ports.SerialPort SPRegis;
         private System.Windows.Forms.Label lblPortStatus;
         private System.Windows.Forms.Panel panelMenu2;
+        private MaterialSkin.Controls.MaterialComboBox cbxPort2;
+        private System.Windows.Forms.Label lblPort2Status;
     }
 }

@@ -28,6 +28,8 @@ namespace DEPTHCHK.Views
 
         private SerialPort _port;
         private CancellationTokenSource _readerCts;
+        private SerialPort _port2;
+        private CancellationTokenSource _readerCts2;
         public event EventHandler<string> SerialDataReceived;
 
         public FrmMainMenu()
@@ -61,31 +63,50 @@ namespace DEPTHCHK.Views
                 cbxPort.Items.Add(p);
             if (cbxPort.Items.Count > 0) cbxPort.SelectedIndex = 0;
 
+            // NEW: populate secondary port list
+            cbxPort2.Items.Clear();
+            foreach (var p in SerialPort.GetPortNames().OrderBy(p => p))
+                cbxPort2.Items.Add(p);
+            if (cbxPort2.Items.Count > 1) cbxPort2.SelectedIndex = 1;
+
             //btnConnect.Click += btnMainConnect_Click;
             //btnDisconnect.Click += btnMainDisconnect_Click;
             UpdateUiForPortState(false);
+            UpdateUiForPort2State(false);
             this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (cbxPort.SelectedItem == null)
+            // validate both combos
+            if (cbxPort.SelectedItem == null || cbxPort2.SelectedItem == null)
             {
-                MessageBox.Show("Select a COM port from the list first.");
-                return;
-            }
-            if (Session.IsPortOpen)
-            {
-                MessageBox.Show("Port is already open.");
+                MessageBox.Show("Please select both ports.");
                 return;
             }
 
-            string portName = cbxPort.SelectedItem.ToString();
+            string portName1 = cbxPort.SelectedItem.ToString();
+            string portName2 = cbxPort2.SelectedItem.ToString();
+
+            // prevent selecting the same COM port twice
+            if (portName1.Equals(portName2, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Cannot use the same port for both connections. Choose two different ports.");
+                return;
+            }
+
+            // ensure neither port is currently open
+            if (Session.IsPortOpen || Session.IsPort2Open)
+            {
+                MessageBox.Show("One or both ports are already open. Please disconnect first.");
+                return;
+            }
+
+            // open first port
             try
             {
-                _port = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One)
+                _port = new SerialPort(portName1, 9600, Parity.None, 8, StopBits.One)
                 {
-                    Encoding = Encoding.ASCII,
                     NewLine = "\r\n",
                     ReadTimeout = 500,
                     WriteTimeout = 500,
@@ -94,34 +115,64 @@ namespace DEPTHCHK.Views
                     Handshake = Handshake.None
                 };
                 _port.Open();
-                _readerCts = new CancellationTokenSource();
                 Session.SetGlobalPort(_port);
-                //lblPortStatus.Text = $"Serial port {portName} opened.";
                 UpdateUiForPortState(true);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to open port:\r\n" + ex.Message);
+                MessageBox.Show("Failed to open port 1: " + ex.Message);
+                return;
+            }
+
+            // open second port
+            try
+            {
+                _port2 = new SerialPort(portName2, 9600, Parity.None, 8, StopBits.One)
+                {
+                    NewLine = "\r\n",
+                    ReadTimeout = 500,
+                    WriteTimeout = 500,
+                    DtrEnable = true,
+                    RtsEnable = false,
+                    Handshake = Handshake.None
+                };
+                _port2.Open();
+                Session.SetGlobalPort2(_port2);
+                UpdateUiForPort2State(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to open port 2: " + ex.Message);
+                // close first port if second fails
+                try { _port.Close(); Session.SetGlobalPort(null); } catch { }
+                UpdateUiForPortState(false);
             }
         }
 
         private void btnDisconnect_Click(object sender, EventArgs e)
         {
-            if (!Session.IsPortOpen)
+            // close port1 if open
+            if (Session.IsPortOpen)
             {
-                MessageBox.Show("No port is open.");
-                return;
-            }
-            try
-            {
-                Session.GlobalPort.Close();
+                try
+                {
+                    Session.GlobalPort.Close();
+                }
+                catch { }
                 Session.SetGlobalPort(null);
-                lblPortStatus.Text = "Serial port closed.";
                 UpdateUiForPortState(false);
             }
-            catch (Exception ex)
+
+            // close port2 if open
+            if (Session.IsPort2Open)
             {
-                MessageBox.Show("Failed to close port:\r\n" + ex.Message);
+                try
+                {
+                    Session.GlobalPort2.Close();
+                }
+                catch { }
+                Session.SetGlobalPort2(null);
+                UpdateUiForPort2State(false);
             }
         }
 
@@ -316,6 +367,15 @@ namespace DEPTHCHK.Views
                 ? "Connected: " + Session.GlobalPort.PortName + " @ " + SPRegis.BaudRate
                 : "Disconnected";
             lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
+        }
+
+        // NEW: update second port status
+        private void UpdateUiForPort2State(bool connected)
+        {
+            lblPort2Status.Text = connected
+                ? "Connected: " + Session.GlobalPort2.PortName + " @ 9600"
+                : "Disconnected";
+            lblPort2Status.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
