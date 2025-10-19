@@ -33,17 +33,19 @@ namespace DEPTHCHK.Views
         public MobilTangkiForm()
         {
             InitializeComponent();
-            
-            dgvMobilTangki.AutoGenerateColumns = true;
-            dgvDetailMT.AutoGenerateColumns = true;
-
-            // Bind grid
-            _bsDetail.DataSource = _detailBuffer;
-            // Simple binding first. (We can add custom columns later.)
-            dgvDetailMTBuffer.AutoGenerateColumns = true;   // turn on to verify binding
-            dgvDetailMTBuffer.DataSource = _detailBuffer;
 
             SetupGridColumns(); // only if you didn’t add them in Designer
+                                // Example: materialTabControl1 is your existing control
+            TCMobilTangki.DrawMode = TabDrawMode.OwnerDrawFixed;
+            TCMobilTangki.SizeMode = TabSizeMode.Fixed;
+            TCMobilTangki.ItemSize = new Size(1, 1);      // virtually hides headers
+            TCMobilTangki.Padding = new Point(0, 0);
+
+            // (Optional) make sure it fills the main content area
+            TCMobilTangki.Dock = DockStyle.Fill;
+
+            // Optional: keep Alignment.Top (default). Since headers are hidden, alignment doesn't matter.
+
         }
 
         private void InitSerialUi()
@@ -197,7 +199,7 @@ namespace DEPTHCHK.Views
             {
                 HeaderText = "Kalibrasi",
                 DataPropertyName = nameof(TblDetailMT.Kalibrasi),     // "Kalibrasi"
-                DefaultCellStyle = { Format = "N2" }
+                DefaultCellStyle = { Format = "N0" }
             });
             dgvDetailMTBuffer.Columns.Add(new DataGridViewCheckBoxColumn
             {
@@ -216,8 +218,26 @@ namespace DEPTHCHK.Views
             InitSerialUi();
             dgvMobilTangki.SelectionChanged += DgvMobilTangki_SelectionChanged;
             LoadMobilTangki();
-            
+            MaterialTabHelper.ApplyStyle(TabSelector, TCMobilTangki);
         }
+
+        private void StyleTextBoxDisabled(MaterialSkin.Controls.MaterialTextBox2 txt)
+        {
+            txt.EnabledChanged += delegate
+            {
+                if (!txt.Enabled)
+                {
+                    txt.BackColor = Color.FromArgb(45, 45, 45);   // lighter gray for dark theme
+                    txt.ForeColor = Color.WhiteSmoke;            // light text
+                }
+                else
+                {
+                    txt.BackColor = Color.FromArgb(30, 30, 30);  // normal dark color
+                    txt.ForeColor = Color.White;
+                }
+            };
+        }
+
 
         private void LoadMobilTangki()
         {
@@ -290,50 +310,44 @@ namespace DEPTHCHK.Views
             currentMT = _db.MobilTangkis.FirstOrDefault(mt => mt.NoPlat == noPlat);
             if (currentMT != null)
             {
+                // Always clear previous entries
+                _detailBuffer.Clear();
+
                 txtNoPlat.Text = currentMT.NoPlat;
-                txtNoPlat.Enabled = false; // primary key shouldn't be changed
+                txtNoPlat.ReadOnly = true;
                 txtRfidData.Text = currentMT.RfidData ?? string.Empty;
                 txtType.Text = currentMT.Type;
                 NUDJlhCompartment.Value = currentMT.JlhCompartment ?? 0;
                 NUDCapacity.Value = currentMT.Capacity ?? 0;
 
-                // method to load detailMT to buffer. 
-
                 var details = _db.DetailMTs
-                             .Where(d => d.NoPlat == noPlat)
-                             .OrderBy(d => d.PartID)
-                             .Select(d => new
-                             {
-                                 d.PartID,
-                                 d.NoPlat,
-                                 d.Kalibrasi,
-                                 d.Positive
-                             })
-                             .ToList();
+                                 .Where(d => d.NoPlat == noPlat)
+                                 .OrderBy(d => d.PartID)
+                                 .ToList();
 
-                if (details.Any())
+                foreach (var det in details)
                 {
-                    for (int i = 0; i < details.Count; i++)
+                    _detailBuffer.Add(new TblDetailMT
                     {
-                        _detailBuffer.Add(new TblDetailMT
-                        {
-                            PartID = details[i].PartID,   // NoPlat_Compartment1,2,...
-                            NoPlat = details[i].NoPlat,                
-                            Kalibrasi = details[i].Kalibrasi,                         // default 0
-                            Positive = details[i].Positive                        // default 0/false
-                        });
-                    }
-                }
-                else
-                {
-                    // When there are no users, bind to an empty list so DataGridView clears itself
-                    dgvDetailMT.DataSource = new List<object>();
+                        PartID = det.PartID,
+                        NoPlat = det.NoPlat,
+                        Kalibrasi = det.Kalibrasi,
+                        Positive = det.Positive
+                    });
                 }
 
-                // switch to Create/Edit tab
+                // Refresh the grid’s data source
+                dgvDetailMTBuffer.DataSource = null;
+                dgvDetailMTBuffer.DataSource = _detailBuffer;
+
                 TCMobilTangki.SelectedTab = TPAddEditMT;
+
+                StyleTextBoxDisabled(txtNoPlat);
+                StyleTextBoxDisabled(txtRfidData);
             }
         }
+
+
 
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -351,7 +365,7 @@ namespace DEPTHCHK.Views
             NUDCapacity.Value = 0;
             txtRfidData.Text = "";
             currentMT = null;
-            txtNoPlat.Enabled = true;
+            txtNoPlat.ReadOnly = false;
             // Keep the DataSource intact; just clear the list
             _detailBuffer.Clear();
             _bsDetail.ResetBindings(false);
@@ -403,7 +417,8 @@ namespace DEPTHCHK.Views
 
                             string type = ws1.Cell(r, 2).GetString().Trim();
                             int? jlhCompartment = GetInt(ws1.Cell(r, 3));
-                            decimal? capacity = GetDecimal(ws1.Cell(r, 4));
+                            int? capacity = GetInt(ws1.Cell(r, 4));
+                            string RfidData = ws1.Cell(r, 5).GetString().Trim();
 
                             var mt = _db.MobilTangkis.SingleOrDefault(x => x.NoPlat == noPlat);
                             if (mt == null)
@@ -413,6 +428,7 @@ namespace DEPTHCHK.Views
                                 mt.Type = type;
                                 mt.JlhCompartment = jlhCompartment;
                                 mt.Capacity = capacity;
+                                mt.RfidData = RfidData;
                                 _db.MobilTangkis.Add(mt);
                                 mtInserted++;
                             }
@@ -421,6 +437,7 @@ namespace DEPTHCHK.Views
                                 mt.Type = type;
                                 mt.JlhCompartment = jlhCompartment;
                                 mt.Capacity = capacity;
+                                mt.RfidData = RfidData;
                                 mtUpdated++;
                             }
                         }
@@ -459,9 +476,9 @@ namespace DEPTHCHK.Views
                                 continue;
                             }
 
-                            string compartmentId = ws2.Cell(r, 3).GetString().Trim();
-                            decimal? kalibrasi = GetDecimal(ws2.Cell(r, 4));
-                            bool? positive = GetBool(ws2.Cell(r, 5));
+                            int? kalibrasi = GetInt(ws2.Cell(r, 3));  // third column
+                            bool? positive = GetBool(ws2.Cell(r, 4)); // fourth column
+
 
                             var dt = _db.DetailMTs.SingleOrDefault(x => x.PartID == partId);
                             if (dt == null)
@@ -469,7 +486,7 @@ namespace DEPTHCHK.Views
                                 dt = new TblDetailMT();
                                 dt.PartID = partId;
                                 dt.NoPlat = noPlat;
-                                dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0m;
+                                dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0;
                                 dt.Positive = positive.HasValue ? positive.Value : false;
                                 _db.DetailMTs.Add(dt);
                                 dtInserted++;
@@ -477,7 +494,7 @@ namespace DEPTHCHK.Views
                             else
                             {
                                 dt.NoPlat = noPlat;
-                                dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0m;
+                                dt.Kalibrasi = kalibrasi.HasValue ? kalibrasi.Value : 0;
                                 dt.Positive = positive.HasValue ? positive.Value : false;
                                 dtUpdated++;
                             }
@@ -553,7 +570,8 @@ namespace DEPTHCHK.Views
                                    m.NoPlat,
                                    m.Type,
                                    m.JlhCompartment,
-                                   m.Capacity
+                                   m.Capacity,
+                                   m.RfidData
                                })
                                .ToList();
 
@@ -576,6 +594,7 @@ namespace DEPTHCHK.Views
                     ws1.Cell(1, 2).Value = "Type";
                     ws1.Cell(1, 3).Value = "JlhCompartment";
                     ws1.Cell(1, 4).Value = "Capacity";
+                    ws1.Cell(1, 5).Value = "RfidData";
 
                     int r = 2;
                     foreach (var m in mobil)
@@ -584,6 +603,7 @@ namespace DEPTHCHK.Views
                         ws1.Cell(r, 2).Value = m.Type ?? "";
                         ws1.Cell(r, 3).Value = m.JlhCompartment.HasValue ? m.JlhCompartment.Value : 0;
                         ws1.Cell(r, 4).Value = m.Capacity.HasValue ? m.Capacity.Value : 0m;
+                        ws1.Cell(r, 5).Value = m.RfidData ??  "";
                         r++;
                     }
                     if (ws1.RangeUsed() != null)
@@ -596,17 +616,16 @@ namespace DEPTHCHK.Views
                     var ws2 = wb.Worksheets.Add("Sheet2");
                     ws2.Cell(1, 1).Value = "PartID";
                     ws2.Cell(1, 2).Value = "NoPlat";
-                    ws2.Cell(1, 3).Value = "CompartmentID";
-                    ws2.Cell(1, 4).Value = "Kalibrasi";
-                    ws2.Cell(1, 5).Value = "Positive";
+                    ws2.Cell(1, 3).Value = "Kalibrasi";
+                    ws2.Cell(1, 4).Value = "Positive";
 
                     r = 2;
                     foreach (var d in detail)
                     {
                         ws2.Cell(r, 1).Value = d.PartID;
                         ws2.Cell(r, 2).Value = d.NoPlat;
-                        ws2.Cell(r, 4).Value = d.Kalibrasi.HasValue ? d.Kalibrasi.Value : 0m;
-                        ws2.Cell(r, 5).Value = d.Positive.HasValue ? d.Positive.Value : false;
+                        ws2.Cell(r, 3).Value = d.Kalibrasi.HasValue ? d.Kalibrasi.Value : 0;
+                        ws2.Cell(r, 4).Value = d.Positive.HasValue ? d.Positive.Value : false;
                         r++;
                     }
                     if (ws2.RangeUsed() != null)
@@ -645,7 +664,7 @@ namespace DEPTHCHK.Views
                 {
                     PartID = $"{noPlat}_Compartment{i}",   // NoPlat_Compartment1,2,...
                     NoPlat = noPlat,
-                    Kalibrasi = 0m,                         // default 0
+                    Kalibrasi = 0,                         // default 0
                     Positive = false                        // default 0/false
                 });
             }
@@ -711,7 +730,7 @@ namespace DEPTHCHK.Views
                     {
                         PartID = d.PartID,
                         NoPlat = d.NoPlat,
-                        Kalibrasi = d.Kalibrasi ?? 0m,
+                        Kalibrasi = d.Kalibrasi ?? 0,
                         Positive = d.Positive ?? false
                     });
                 }
@@ -746,14 +765,14 @@ namespace DEPTHCHK.Views
                         {
                             PartID = partId,
                             NoPlat = currentMT.NoPlat,
-                            Kalibrasi = bufferD.Kalibrasi ?? 0m,
+                            Kalibrasi = bufferD.Kalibrasi ?? 0,
                             Positive = bufferD.Positive ?? false
                         });
                     }
                     else
                     {
                         // Update existing detail
-                        existing.Kalibrasi = bufferD.Kalibrasi ?? 0m;
+                        existing.Kalibrasi = bufferD.Kalibrasi ?? 0;
                         existing.Positive = bufferD.Positive ?? false;
                         existing.NoPlat = currentMT.NoPlat; // keep FK consistent
                     }

@@ -65,6 +65,7 @@
             // 
             this.lblPortStatus.AutoSize = true;
             this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPortStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblPortStatus.Location = new System.Drawing.Point(13, 11);
             this.lblPortStatus.Name = "lblPortStatus";
             this.lblPortStatus.Size = new System.Drawing.Size(40, 13);
@@ -75,6 +76,7 @@
             // 
             this.lblNamaSPBU.AutoSize = true;
             this.lblNamaSPBU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNamaSPBU.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblNamaSPBU.Location = new System.Drawing.Point(59, 11);
             this.lblNamaSPBU.Name = "lblNamaSPBU";
             this.lblNamaSPBU.Size = new System.Drawing.Size(11, 13);
@@ -85,6 +87,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.Controls.Add(this.lblNamaSPBU);
             this.Controls.Add(this.lblPortStatus);
             this.Controls.Add(this.btnSel);

@@ -28,15 +28,17 @@ namespace DEPTHCHK
 
             // Create a skin manager instance
             materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.AddFormToManage(this);
 
             // Define a custom color scheme (Green accent for login button)
+            // If your MaterialSkin2 has these enums, use them:
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.Blue600,   // Primary color
-                Primary.Blue700,   // Dark primary
-                Primary.Blue200,   // Light primary
-                Accent.Green700,   // Accent color (used by login button)
-                TextShade.WHITE    // Text color
+                Primary.Teal700,   // primary
+                Primary.Teal900,   // primary dark (title bar)
+                Primary.Teal400,   // primary light (ripple/hover)
+                Accent.Orange400,  // accent
+                TextShade.WHITE
             );
         }
 

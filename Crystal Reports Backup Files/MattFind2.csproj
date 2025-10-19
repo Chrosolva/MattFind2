@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F045A804-AD77-4BF3-AC75-29E7E83665C9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Login</RootNamespace>
+    <AssemblyName>WareHouseMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WMSLogoCROp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.VSDesigner, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v19.2.Core, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v19.2.Core, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net45\FontAwesome.Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Guna.UI">
+      <HintPath>..\..\..\Software\Guna.UI-Framework-Lib-master\Guna.UI-Framework-Lib-master\Guna.UI-Framework-Lib\.net 4.0\Guna.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2, Version=2.0.3.2, Culture=neutral, PublicKeyToken=4015e4865bda28a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.2\lib\net40\Guna.UI2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfoExtended, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.ConnectionInfoExtended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.Smo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlClrProvider, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.SqlClrProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Microsoft.SQLServer.SMO.2014.12.0.2000.8\lib\Microsoft.SqlServer.SqlEnum.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="XanderUI">
+      <HintPath>..\..\..\Software\csharpui.comXanderUI_DLL\XanderUI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\ControllerManagement.cs" />
+    <Compile Include="Controller\ControllerMaterial.cs" />
+    <Compile Include="Controller\ControllerSlocs.cs" />
+    <Compile Include="Models\ClsKartuRayon.cs" />
+    <Compile Include="Models\ClsManagementMaterial.cs" />
+    <Compile Include="Models\ClsMaterial.cs" />
+    <Compile Include="Models\ClsMaterialAllocation.cs" />
+    <Compile Include="Models\ClsMMaterialDetail.cs" />
+    <Compile Include="Models\ClsSloc.cs" />
+    <Compile Include="Models\ClsSlocBin.cs" />
+    <Compile Include="Models\ClsSlocBinDetail.cs" />
+    <Compile Include="Models\ClsTitipan.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\BonKeluarTitipan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BonKeluarTitipan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BonPengeluaranBarang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BonPengeluaranBarang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\BonPenitipanBarang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BonPenitipanBarang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintStripMaterial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintStripMaterial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintQRCodeWithDetail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintQRCodeWithDetail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintSlocBinQRCode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintSlocBinQRCode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintQRCodes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintQRCodes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportPencadanganMaterial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportPencadanganMaterial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\WareHouseMS.cs">
+      <DependentUpon>WareHouseMS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WareHouseMS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareHouseMS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WareHouseMS2xsd.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareHouseMS2xsd.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WBPOS.cs">
+      <DependentUpon>WBPOS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WBPOS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WBPOS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UC\CustomNUD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\CustomNUD.Designer.cs">
+      <DependentUpon>CustomNUD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\CustomTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\CustomTextBox.designer.cs">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ItemCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ItemCard.Designer.cs">
+      <DependentUpon>ItemCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\OrderBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\OrderBar.Designer.cs">
+      <DependentUpon>OrderBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\SlocBinCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\SlocBinCard.Designer.cs">
+      <DependentUpon>SlocBinCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormBackUpDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormBackUpDB.Designer.cs">
+      <DependentUpon>FormBackUpDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormChangeStatusMM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormChangeStatusMM.Designer.cs">
+      <DependentUpon>FormChangeStatusMM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormChooseGUD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormChooseGUD.Designer.cs">
+      <DependentUpon>FormChooseGUD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormChooseReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormChooseReport.Designer.cs">
+      <DependentUpon>FormChooseReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormListMR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormListMR.Designer.cs">
+      <DependentUpon>FormListMR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormMaterialAllocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormMaterialAllocation.Designer.cs">
+      <DependentUpon>FormMaterialAllocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNEMaterialAllocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNEMaterialAllocation.Designer.cs">
+      <DependentUpon>FormNEMaterialAllocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNEMaterialManagement2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNEMaterialManagement2.Designer.cs">
+      <DependentUpon>FormNEMaterialManagement2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNETitipan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNETitipan.Designer.cs">
+      <DependentUpon>FormNETitipan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormTitipan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormTitipan.Designer.cs">
+      <DependentUpon>FormTitipan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormViewImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormViewImage.Designer.cs">
+      <DependentUpon>FormViewImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormWareHouseDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormWareHouseDetail.Designer.cs">
+      <DependentUpon>FormWareHouseDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormListItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormListItem.Designer.cs">
+      <DependentUpon>FormListItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormMaterial.Designer.cs">
+      <DependentUpon>FormMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormMaterialManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormMaterialManagement.Designer.cs">
+      <DependentUpon>FormMaterialManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNEMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNEMaterial.Designer.cs">
+      <DependentUpon>FormNEMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNEMaterialManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNEMaterialManagement.Designer.cs">
+      <DependentUpon>FormNEMaterialManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormNESlocSlocBin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormNESlocSlocBin.Designer.cs">
+      <DependentUpon>FormNESlocSlocBin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormReport.Designer.cs">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormSloc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormSloc.Designer.cs">
+      <DependentUpon>FormSloc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormSlocBinDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormSlocBinDetails.Designer.cs">
+      <DependentUpon>FormSlocBinDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormTKartuRayon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormTKartuRayon.Designer.cs">
+      <DependentUpon>FormTKartuRayon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormUserControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormUserControl.Designer.cs">
+      <DependentUpon>FormUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModernMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModernMainForm.Designer.cs">
+      <DependentUpon>ModernMainForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reports\BonKeluarTitipan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BonKeluarTitipan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BonPengeluaranBarang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BonPengeluaranBarang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\BonPenitipanBarang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BonPenitipanBarang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintStripMaterial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintStripMaterial.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintQRCodeWithDetail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintQRCodeWithDetail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintSlocBinQRCode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintSlocBinQRCode.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintQRCodes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintQRCodes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportPencadanganMaterial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportPencadanganMaterial.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\CustomNUD.resx">
+      <DependentUpon>CustomNUD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\CustomTextBox.resx">
+      <DependentUpon>CustomTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ItemCard.resx">
+      <DependentUpon>ItemCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\OrderBar.resx">
+      <DependentUpon>OrderBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\SlocBinCard.resx">
+      <DependentUpon>SlocBinCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormBackUpDB.resx">
+      <DependentUpon>FormBackUpDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormChangeStatusMM.resx">
+      <DependentUpon>FormChangeStatusMM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormChooseGUD.resx">
+      <DependentUpon>FormChooseGUD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormChooseReport.resx">
+      <DependentUpon>FormChooseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormListMR.resx">
+      <DependentUpon>FormListMR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormMaterialAllocation.resx">
+      <DependentUpon>FormMaterialAllocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNEMaterialAllocation.resx">
+      <DependentUpon>FormNEMaterialAllocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNEMaterialManagement2.resx">
+      <DependentUpon>FormNEMaterialManagement2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNETitipan.resx">
+      <DependentUpon>FormNETitipan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormTitipan.resx">
+      <DependentUpon>FormTitipan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormViewImage.resx">
+      <DependentUpon>FormViewImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormWareHouseDetail.resx">
+      <DependentUpon>FormWareHouseDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormListItem.resx">
+      <DependentUpon>FormListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormMaterial.resx">
+      <DependentUpon>FormMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormMaterialManagement.resx">
+      <DependentUpon>FormMaterialManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNEMaterial.resx">
+      <DependentUpon>FormNEMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNEMaterialManagement.resx">
+      <DependentUpon>FormNEMaterialManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormNESlocSlocBin.resx">
+      <DependentUpon>FormNESlocSlocBin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormReport.resx">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormSloc.resx">
+      <DependentUpon>FormSloc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormSlocBinDetails.resx">
+      <DependentUpon>FormSlocBinDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormTKartuRayon.resx">
+      <DependentUpon>FormTKartuRayon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormUserControl.resx">
+      <DependentUpon>FormUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModernMainForm.resx">
+      <DependentUpon>ModernMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Reports\WareHouseMS.xsc">
+      <DependentUpon>WareHouseMS.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\WareHouseMS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WareHouseMS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\WareHouseMS.xss">
+      <DependentUpon>WareHouseMS.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\WareHouseMS2xsd.xsc">
+      <DependentUpon>WareHouseMS2xsd.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\WareHouseMS2xsd.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WareHouseMS2xsd.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\WareHouseMS2xsd.xss">
+      <DependentUpon>WareHouseMS2xsd.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\WBPOS.xsc">
+      <DependentUpon>WBPOS.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\WBPOS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WBPOS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\WBPOS.xss">
+      <DependentUpon>WBPOS.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WMSLogoCROp.ico" />
+    <None Include="Icon\qricon.png" />
+    <None Include="Icon\Free.jpg" />
+    <None Include="Icon\free-shipping-icons-clipart-3.png" />
+    <Content Include="MetroFramework.txt" />
+    <Content Include="WareHousMSCROp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ACTIVEXLib">
+      <Guid>{012F24C1-35B0-11D0-BF2D-0000E8D0D146}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CRDESIGNERLib">
+      <Guid>{C0AA5023-C763-4A4B-AFED-ADCF78D6C08B}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CrystalReportsCommonObjectModelLib">
+      <Guid>{FDB9B69E-BA79-4B13-9E96-8373AF162AEA}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Access.Dao">
+      <Guid>{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}</Guid>
+      <VersionMajor>12</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Master\Master.csproj">
+      <Project>{de13a3b2-121b-45fc-afb7-489e6ca09536}</Project>
+      <Name>Master</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

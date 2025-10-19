@@ -37,6 +37,7 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.dgvUserList = new System.Windows.Forms.DataGridView();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.btnDelete = new DEPTHCHK.Custom.CustomMaterialButton();
             this.btnRefresh = new MaterialSkin.Controls.MaterialButton();
             this.btnNew = new MaterialSkin.Controls.MaterialButton();
             this.btnEdit = new MaterialSkin.Controls.MaterialButton();
@@ -56,7 +57,6 @@
             this.lblUserID = new MaterialSkin.Controls.MaterialLabel();
             this.txtUserID = new MaterialSkin.Controls.MaterialTextBox2();
             this.TabSelector = new MaterialSkin.Controls.MaterialTabSelector();
-            this.btnDelete = new DEPTHCHK.Custom.CustomMaterialButton();
             this.TCAdminMenu.SuspendLayout();
             this.TPUserList.SuspendLayout();
             this.RightCard.SuspendLayout();
@@ -92,7 +92,7 @@
             this.TPUserList.Padding = new System.Windows.Forms.Padding(3);
             this.TPUserList.Size = new System.Drawing.Size(1167, 456);
             this.TPUserList.TabIndex = 0;
-            this.TPUserList.Text = "User List";
+            this.TPUserList.Text = "USER LIST";
             this.TPUserList.UseVisualStyleBackColor = true;
             // 
             // RightCard
@@ -187,6 +187,28 @@
             this.TopPanel.Size = new System.Drawing.Size(1161, 53);
             this.TopPanel.TabIndex = 0;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDelete.CustomColor = System.Drawing.Color.DarkRed;
+            this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDelete.Depth = 0;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.HighEmphasis = true;
+            this.btnDelete.Icon = null;
+            this.btnDelete.Location = new System.Drawing.Point(177, 5);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDelete.Size = new System.Drawing.Size(73, 36);
+            this.btnDelete.TabIndex = 24;
+            this.btnDelete.Text = "DELETE";
+            this.btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDelete.UseAccentColor = false;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnRefresh
             // 
             this.btnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -255,7 +277,7 @@
             this.TPAddEditUser.Padding = new System.Windows.Forms.Padding(3);
             this.TPAddEditUser.Size = new System.Drawing.Size(1167, 456);
             this.TPAddEditUser.TabIndex = 1;
-            this.TPAddEditUser.Text = "Create User";
+            this.TPAddEditUser.Text = "CREATE USER";
             this.TPAddEditUser.UseVisualStyleBackColor = true;
             // 
             // CardCRUD
@@ -343,7 +365,7 @@
             this.txtConfirm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtConfirm.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtConfirm.Depth = 0;
-            this.txtConfirm.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtConfirm.HideSelection = true;
             this.txtConfirm.LeadingIcon = null;
             this.txtConfirm.Location = new System.Drawing.Point(292, 145);
@@ -383,7 +405,7 @@
             this.txtPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtPassword.Depth = 0;
-            this.txtPassword.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPassword.HideSelection = true;
             this.txtPassword.LeadingIcon = null;
             this.txtPassword.Location = new System.Drawing.Point(17, 145);
@@ -483,7 +505,7 @@
             this.txtUserName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtUserName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtUserName.Depth = 0;
-            this.txtUserName.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtUserName.HideSelection = true;
             this.txtUserName.LeadingIcon = null;
             this.txtUserName.Location = new System.Drawing.Point(292, 56);
@@ -523,7 +545,7 @@
             this.txtUserID.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtUserID.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtUserID.Depth = 0;
-            this.txtUserID.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtUserID.HideSelection = true;
             this.txtUserID.LeadingIcon = null;
             this.txtUserID.Location = new System.Drawing.Point(17, 56);
@@ -558,28 +580,7 @@
             this.TabSelector.Size = new System.Drawing.Size(1175, 48);
             this.TabSelector.TabIndex = 5;
             this.TabSelector.Text = "materialTabSelector1";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDelete.CustomColor = System.Drawing.Color.DarkRed;
-            this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnDelete.Depth = 0;
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.HighEmphasis = true;
-            this.btnDelete.Icon = null;
-            this.btnDelete.Location = new System.Drawing.Point(177, 5);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnDelete.Size = new System.Drawing.Size(73, 36);
-            this.btnDelete.TabIndex = 24;
-            this.btnDelete.Text = "DELETE";
-            this.btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnDelete.UseAccentColor = false;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.TabSelector.Visible = false;
             // 
             // AdminMenuForm
             // 

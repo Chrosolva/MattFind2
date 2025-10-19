@@ -61,7 +61,7 @@ namespace DEPTHCHK.Views
             if (currentUser != null)
             {
                 txtUserID.Text = currentUser.UserID;
-                txtUserID.Enabled = false;
+                txtUserID.ReadOnly = true;
                 txtUserName.Text = currentUser.UserName;
                 txtPassword.Text = "";
                 txtConfirm.Text = "";
@@ -136,7 +136,7 @@ namespace DEPTHCHK.Views
         private void ClearFields()
         {
             txtUserID.Text = "";
-            txtUserID.Enabled = true;
+            txtUserID.ReadOnly = false;
             txtUserName.Text = "";
             txtPassword.Text = "";
             txtConfirm.Text = "";

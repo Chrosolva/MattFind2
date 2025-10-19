@@ -31,12 +31,16 @@ namespace DEPTHCHK.Views
         private string[] _compartmentKodeTujuan;
         private string[] _compartmentNamaTujuan;
 
-        private SerialPort _serialPort => Session.GlobalPort;
-        private SerialDataReceivedEventHandler _dataReceivedHandler;
+        private SerialPort _serialPortRfid => Session.GlobalPort;  // port 1
+        private SerialPort _serialPortMeas => Session.GlobalPort2;  // port 2
+
+        private SerialDataReceivedEventHandler _rfidReceivedHandler;
+        private SerialDataReceivedEventHandler _measReceivedHandler;
         private bool _listening = false;
 
         private StringBuilder _serialBuffer = new StringBuilder();
         private string _currentPartID;      // PartID of the last selected compartment
+        private int _currentPartIndex = 0;       // index into _liveRows for measurement order
         private List<LiveRow> _liveRows;    // holds rows shown in dgvPengirimanLive
 
         // row shape for dgvPengirimanLive
@@ -46,13 +50,12 @@ namespace DEPTHCHK.Views
             public DateTime? Tgl_Input { get; set; }
             public string NoPlat { get; set; }
             public string PartID { get; set; }
-            public string CompartmentID { get; set; }
-            public decimal DataBacaan { get; set; }
-            public decimal DataKalibrasi { get; set; }
+            public int DataBacaan { get; set; }
+            public int DataKalibrasi { get; set; }
             public string Satuan { get; set; }
             public string Keterangan { get; set; }
             public string KodeTujuan { get; set; }
-            public decimal Kalibrasi { get; set; }
+            public int Kalibrasi { get; set; }
             public bool positive { get; set; }
         }
 
@@ -94,22 +97,26 @@ namespace DEPTHCHK.Views
 
         private void InitSerialUi()
         {
-            if (_dataReceivedHandler == null)
+            // RFID port
+            if (_rfidReceivedHandler == null && Session.GlobalPort != null)
             {
-                _dataReceivedHandler = _serialPort_DataReceived;
-                _serialPort.DataReceived += _dataReceivedHandler;
-                _serialPort.ErrorReceived += _serialPort_ErrorReceived;
-                _serialPort.PinChanged += _serialPort_PinChanged;
+                _rfidReceivedHandler = RfidPort_DataReceived;
+                _serialPortRfid.DataReceived += _rfidReceivedHandler;
+                _serialPortRfid.ErrorReceived += _serialPort_ErrorReceived;
+                _serialPortRfid.PinChanged += _serialPort_PinChanged;
             }
 
-            if (_serialPort.IsOpen)
+            // Measurement port
+            if (_measReceivedHandler == null && Session.GlobalPort2 != null)
             {
-                UpdateUiForPortState(true);
+                _measReceivedHandler = MeasPort_DataReceived;
+                _serialPortMeas.DataReceived += _measReceivedHandler;
+                _serialPortMeas.ErrorReceived += _serialPort_ErrorReceived;
+                _serialPortMeas.PinChanged += _serialPort_PinChanged;
             }
-            else
-            {
-                UpdateUiForPortState(false);
-            }
+
+            UpdateUiForPortState(Session.IsPortOpen);
+            // Optionally: update a second status label for port2
 
             // Buttons
             btnStartListen.Click += btnStartListen_Click;
@@ -143,8 +150,9 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman, false);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailPengiriman);
             DataGridViewHelper.ApplyDefaultStyle(dgvPengirimanLive, false);
-            
 
+            // When initialising the grid (e.g. in Load):
+            dgvPengirimanLive.AllowUserToAddRows = false;
             ReloadPengiriman();
 
 
@@ -323,7 +331,6 @@ namespace DEPTHCHK.Views
                     Tgl_Input = d.Tgl_Input,
                     NoPlat = d.NoPlat,
                     PartID = d.PartID,
-                    CompartmentID = d.CompartmentID,
                     DataBacaan = d.DataBacaan,
                     DataKalibrasi = d.DataKalibrasi,
                     Satuan = d.Satuan,
@@ -467,29 +474,34 @@ namespace DEPTHCHK.Views
             return string.Join(" | ", parts);
         }
 
-        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void RfidPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //EnsureOpen();
-
-            var sp = (SerialPort)sender;
-
+            var sp = _serialPortRfid;
             try
             {
-                while (sp.IsOpen && sp.BytesToRead > 0)
+                while (sp.IsOpen && sp.BytesToRead >= 8)
                 {
-                    string line;
-                    try
+                    byte[] frame = new byte[8];
+                    int read = sp.Read(frame, 0, 8);
+                    if (read == 8)
                     {
-                        line = sp.ReadLine(); // NewLine-based read
+                        // Validate header: 07 00 EE 00
+                        if (frame[0] == 0x07 && frame[1] == 0x00 &&
+                            frame[2] == 0xEE && frame[3] == 0x00)
+                        {
+                            string rfid = frame[4].ToString("X2") + frame[5].ToString("X2");
+                            BeginInvoke(new Action(() => OnRfidReceived(rfid)));
+                        }
+                        else
+                        {
+                            // discard the remaining bytes so the next read starts fresh
+                            try { sp.DiscardInBuffer(); }
+                            catch (Exception ex)
+                            {
+                                // handle exception if port is closed or in error state
+                            }
+                        }
                     }
-                    catch (TimeoutException)
-                    {
-                        break; // partial line, wait next event
-                    }
-
-                    BeginInvoke(new Action(() => OnLineReceived(line)));
-
-                    if (sp.BytesToRead == 0) break;
                 }
             }
             catch (IOException)
@@ -500,13 +512,13 @@ namespace DEPTHCHK.Views
                     lblPortStatus.ForeColor = Color.DarkOrange;
                 }));
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                BeginInvoke(new Action(() => TryReconnectPort(_serialPortRfid, "RFID")));
             }
             catch (InvalidOperationException)
             {
                 // Port closed between reads
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                BeginInvoke(new Action(() => TryReconnectPort(_serialPortRfid, "RFID")));
             }
             catch (Exception ex)
             {
@@ -516,38 +528,100 @@ namespace DEPTHCHK.Views
                     lblPortStatus.ForeColor = Color.DarkOrange;
                 }));
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                BeginInvoke(new Action(() => TryReconnectPort(_serialPortRfid, "RFID")));
             }
         }
 
-        private void OnLineReceived(string line)
+        // Keep track of the last RFID / NoPlat seen
+        private string _lastRfid = null;
+        private string _lastNoPlat = null;
+
+        private void OnRfidReceived(string rfid)
         {
-            txtSerialLog.AppendText(line + Environment.NewLine);
+            // Look up the truck by RFID
+            var mt = _db.MobilTangkis
+                        .AsNoTracking()
+                        .FirstOrDefault(m => m.RfidData == rfid);
 
-            // ignore data when not listening
-            if (!_listening) return;
-
-            // detect [CompartmentID]
-            Match m = Regex.Match(line, @"\[(.*?)\]");
-            if (m.Success)
+            if (mt == null)
             {
-                string compId = m.Groups[1].Value.Trim();
-                HandleCompartmentMessage(compId);
+                MessageBox.Show("RFID not recognized.");
                 return;
             }
 
-            // NEW: detect *BACAAN#
-            // Use a regex that captures an integer or decimal number after the asterisk and before the '#' terminator.
-            m = Regex.Match(line, @"\*(\d+(\.\d+)?)#");
-            if (m.Success)
+            // Show truck info in your labels
+            lblNoPlat.Text = mt.NoPlat;
+            lblType.Text = mt.Type ?? "";
+            lblJlhCompartment.Text = mt.JlhCompartment?.ToString();
+            lblJlhCapacity.Text = mt.Capacity?.ToString("N2");
+            lblRFID.Text = mt.RfidData ?? "";
+
+            // If this RFID (or truck) is new, re-populate the grid.
+            // Otherwise, keep the current rows/measurements.
+            bool isNewTruck = _lastRfid == null ||
+                              !_lastRfid.Equals(rfid, StringComparison.OrdinalIgnoreCase);
+
+            if (isNewTruck)
             {
-                decimal bacaan;
-                if (decimal.TryParse(m.Groups[1].Value, out bacaan))
+                PopulateLiveGrid(mt.NoPlat);
+                _currentPartIndex = 0;      // start measuring from the first compartment
+                _lastRfid = rfid;
+                _lastNoPlat = mt.NoPlat;
+            }
+
+            // If there are rows, set the current PartID based on the current index
+            if (_liveRows != null && _currentPartIndex < _liveRows.Count)
+                _currentPartID = _liveRows[_currentPartIndex].PartID;
+            txtSerialLog.AppendText(rfid + "\n");
+        }
+
+        private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            var sp = _serialPortMeas;
+            try
+            {
+                while (sp.IsOpen)
                 {
-                    // Call the updated method that no longer needs a positive flag from the input
-                    HandleMeasurementMessage(bacaan);
+                    string line;
+                    try { line = sp.ReadLine(); }
+                    catch (TimeoutException) { break; }
+
+                    // expected format: *45000#
+                    Match m = Regex.Match(line, @"\*(\d+(\.\d+)?)#");
+                    if (m.Success)
+                    {
+                        int val;
+                        if (int.TryParse(m.Groups[1].Value, out val))
+                            BeginInvoke(new Action(() => OnMeasurementReceived(val)));
+                    }
                 }
             }
+            catch { /* handle errors */ }
+        }
+
+        private void OnMeasurementReceived(int bacaan)
+        {
+            // Fill the current row
+            if (_liveRows == null || _currentPartIndex < 0 || _currentPartIndex >= _liveRows.Count)
+                return;
+
+            _currentPartID = _liveRows[_currentPartIndex].PartID;
+            HandleMeasurementMessage(bacaan); // uses _currentPartID and the row’s Kalibrasi/Positive
+
+            // Advance to next part
+            _currentPartIndex++;
+            if (_currentPartIndex < _liveRows.Count)
+            {
+                _currentPartID = _liveRows[_currentPartIndex].PartID;
+            }
+            else
+            {
+                // All parts measured
+                _currentPartID = null;
+                _listening = false;
+                lblPortStatus.Text = "Measurement complete.";
+            }
+            txtSerialLog.AppendText(bacaan.ToString() + "\n");
         }
 
         // add a new field
@@ -603,42 +677,51 @@ namespace DEPTHCHK.Views
                               .OrderBy(d => d.PartID)
                               .ToList();
 
-            for (int i = 0; i < details.Count; i++)
+            foreach (var d in details)
             {
-                var d = details[i];
-                var row = new LiveRow();
-                row.IDPengiriman = null;
-                row.Tgl_Input = null;
-                row.NoPlat = d.NoPlat;
-                row.PartID = d.PartID;
-                row.DataBacaan = 0m;
-                row.DataKalibrasi = 0m;
-                row.Satuan = "LTR";
-                row.Keterangan = "INACTIVE";
-                //if (_compartmentKodeTujuan != null &&
-                //    i < _compartmentKodeTujuan.Length)
-                //{
-                //    row.KodeTujuan = _compartmentKodeTujuan[i];
-                //}
-                row.KodeTujuan = "";
-                row.Kalibrasi = Convert.ToDecimal(d.Kalibrasi);
-                row.positive = Convert.ToBoolean(d.Positive);
+                var row = new LiveRow
+                {
+                    IDPengiriman = null,
+                    Tgl_Input = null,
+                    NoPlat = d.NoPlat,
+                    PartID = d.PartID,
+                    DataBacaan = 0,
+                    DataKalibrasi = 0,
+                    Satuan = "MM",
+                    Keterangan = "INACTIVE",
+                    KodeTujuan = "",            // fill later via btnSetTujuan
+                    Kalibrasi = d.Kalibrasi ?? 0,
+                    positive = d.Positive ?? false
+                };
                 _liveRows.Add(row);
             }
+
+            dgvPengirimanLive.DataSource = null;
+            dgvPengirimanLive.AutoGenerateColumns = true;
+            dgvPengirimanLive.DataSource = _liveRows;
+            dgvPengirimanLive.Columns["Kalibrasi"].DefaultCellStyle.Format = "0.##";
+            dgvPengirimanLive.Columns["DataKalibrasi"].DefaultCellStyle.Format = "0.##";
 
             dgvPengirimanLive.AutoGenerateColumns = true;
             dgvPengirimanLive.DataSource = null;
             dgvPengirimanLive.DataSource = _liveRows;
 
-            // Apply dynamic decimal formatting to DataKalibrasi and Kalibrasi columns
-            if (dgvPengirimanLive.Columns.Contains("DataKalibrasi"))
-                dgvPengirimanLive.Columns["DataKalibrasi"].DefaultCellStyle.Format = "0.##";
-            if (dgvPengirimanLive.Columns.Contains("Kalibrasi"))
-                dgvPengirimanLive.Columns["Kalibrasi"].DefaultCellStyle.Format = "0.##";
+            // Make every column read‑only except KodeTujuan (if you still want to edit that)
+            foreach (DataGridViewColumn col in dgvPengirimanLive.Columns)
+            {
+                // You can set col.Name == "KodeTujuan" to false if you allow editing KodeTujuan
+                col.ReadOnly = (col.Name != "Satuan" ? true : false);
+            }
+
+            // Optional: turn off row additions/deletions and set EditMode to programmatic
+            dgvPengirimanLive.AllowUserToAddRows = false;
+            dgvPengirimanLive.AllowUserToDeleteRows = false;
+            dgvPengirimanLive.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
 
+
         // Change the signature and body of HandleMeasurementMessage
-        private void HandleMeasurementMessage(decimal bacaan)
+        private void HandleMeasurementMessage(int bacaan)
         {
             // Find the row matching the current PartID
             if (_liveRows == null || string.IsNullOrEmpty(_currentPartID))
@@ -651,7 +734,7 @@ namespace DEPTHCHK.Views
             row.DataBacaan = bacaan;
 
             // Use the calibration and sign stored in the row instead of any flag from the input
-            decimal kalib = row.Kalibrasi;
+            int kalib = row.Kalibrasi;
             bool positiveFlag = row.positive;
 
             // Add or subtract calibration based on the 'positive' column
@@ -693,23 +776,26 @@ namespace DEPTHCHK.Views
 
 
 
-        private void TryReconnectPort()
+        private void TryReconnectPort(SerialPort port, string tag)
         {
             try
             {
-                if (_serialPort.IsOpen)
-                {
-                    _serialPort.Close();
-                }
-                _serialPort.Open();
+                if (port == null)
+                    throw new InvalidOperationException($"{tag} port is null.");
+
+                if (port.IsOpen)
+                    port.Close();
+
+                port.Open();
                 UpdateUiForPortState(true);
             }
             catch (Exception ex)
             {
                 UpdateUiForPortState(false);
-                txtSerialLog.AppendText("Failed to reopen serial port: " + ex.Message);
+                txtSerialLog.AppendText($"Failed to reopen {tag} port: {ex.Message}{Environment.NewLine}");
             }
         }
+
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
@@ -730,18 +816,31 @@ namespace DEPTHCHK.Views
 
         private void UpdateUiForPortState(bool connected)
         {
+            string rfid = _serialPortRfid?.IsOpen == true
+                        ? $"RFID: {_serialPortRfid.PortName} @ {_serialPortRfid.BaudRate}"
+                        : "RFID: Disconnected";
 
-            lblPortStatus.Text = connected
-                ? "Connected: " + _serialPort.PortName + " @ " + _serialPort.BaudRate
-                : "Disconnected";
-            lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
+            string meas = _serialPortMeas?.IsOpen == true
+                        ? $"MEAS: {_serialPortMeas.PortName} @ {_serialPortMeas.BaudRate}"
+                        : "MEAS: Disconnected";
+
+            lblPortStatus.Text = $"{rfid}   |   {meas}";
+            lblPortStatus.ForeColor =
+                (_serialPortRfid?.IsOpen == true || _serialPortMeas?.IsOpen == true)
+                ? Color.ForestGreen
+                : Color.Firebrick;
         }
 
         private void btnStartListen_Click(object sender, EventArgs e)
         {
-            if (!_serialPort.IsOpen)
+            if (!_serialPortRfid.IsOpen)
             {
-                _serialPort.Open();
+                _serialPortRfid.Open();
+            }
+
+            if(!_serialPortMeas.IsOpen)
+            {
+                _serialPortMeas.Open();
             }
             _listening = true;
             
@@ -792,6 +891,7 @@ namespace DEPTHCHK.Views
             master.Tgl_Input = now;
             master.NoPlat = lblNoPlat.Text;
             master.Tujuan = txtTujuan.Text;
+            master.RfidData = lblRFID.Text.Trim().PadRight(4).Substring(0, 4); // or use a field storing the scanned RFID
             master.Status = "DIKIRIM";    // or another status
             master.UserID = Session.CurrentUser.UserID;     // set your current user id
             master.Keterangan = null;
@@ -806,7 +906,6 @@ namespace DEPTHCHK.Views
                 det.Tgl_Input = now;
                 det.NoPlat = lr.NoPlat;
                 det.PartID = lr.PartID;
-                det.CompartmentID = lr.CompartmentID;
                 det.DataBacaan = lr.DataBacaan;
                 det.DataKalibrasi = lr.DataKalibrasi;
                 det.Satuan = lr.Satuan;
@@ -817,14 +916,15 @@ namespace DEPTHCHK.Views
 
             _db.SaveChanges();
 
-            // reset for next entry
+            // After saving and clearing the live rows:
             _liveRows.Clear();
-            dgvPengirimanLive.DataSource = null;
-            //txtSerialLog.Clear();
-            lblIDPengiriman.Text = "";
+            dgvPengirimanLive.DataSource = new List<LiveRow>();
             _currentPartID = null;
             _currentNoPlat = null;
-            //_compartmentKodeTujuan = null;
+            _lastRfid = null;          // or _lastNoPlat, depending on your implementation
+            _currentPartIndex = 0;
+            _listening = false;        // optional: stop listening until the user restarts
+
 
             ReloadPengiriman();
             MessageBox.Show("Pengiriman saved successfully.", "Success",
@@ -865,6 +965,7 @@ namespace DEPTHCHK.Views
             // Build ONE DataSet for all selected IDs
             DataSet ds = new DataSet();
 
+            // Header table
             DataTable dtHeader = new DataTable("Header");
             dtHeader.Columns.Add("IDPengiriman");
             dtHeader.Columns.Add("Tgl_Input", typeof(DateTime));
@@ -874,12 +975,12 @@ namespace DEPTHCHK.Views
             dtHeader.Columns.Add("Capacity");
             dtHeader.Columns.Add("Tujuan");
 
+            // Detail table (without CompartmentID)
             DataTable dtDetail = new DataTable("Detail");
-            dtDetail.Columns.Add("IDPengiriman");          // <-- KEY back to header
+            dtDetail.Columns.Add("IDPengiriman");         // link back to header
             dtDetail.Columns.Add("PartID");
-            dtDetail.Columns.Add("CompartmentID");
             dtDetail.Columns.Add("DataBacaan", typeof(decimal));
-            dtDetail.Columns.Add("Kalibrasi", typeof(decimal));
+            dtDetail.Columns.Add("Kalibrasi", typeof(decimal));  // or typeof(int) if you prefer
             dtDetail.Columns.Add("DataKalibrasi", typeof(decimal));
             dtDetail.Columns.Add("Satuan");
             dtDetail.Columns.Add("Keterangan");
@@ -888,22 +989,27 @@ namespace DEPTHCHK.Views
             ds.Tables.Add(dtHeader);
             ds.Tables.Add(dtDetail);
 
-            // Fill both tables
-            foreach (var id in selectedIds)
+            foreach (string id in selectedIds)
             {
                 var header = _db.Pengirimans
-                                .Include(p => p.MobilTangki)
                                 .FirstOrDefault(p => p.IDPengiriman == id);
 
                 if (header != null)
                 {
-                    dtHeader.Rows.Add(header.IDPengiriman,
-                                      header.Tgl_Input,
-                                      header.NoPlat,
-                                      header.MobilTangki != null ? header.MobilTangki.Type : null,
-                                      header.MobilTangki != null ? (object)header.MobilTangki.JlhCompartment : DBNull.Value,
-                                      header.MobilTangki != null ? (object)header.MobilTangki.Capacity : DBNull.Value,
-                                      header.Tujuan);
+                    // Look up the truck by NoPlat
+                    var mobil = _db.MobilTangkis
+                                   .AsNoTracking()
+                                   .FirstOrDefault(mt => mt.NoPlat == header.NoPlat);
+
+                    dtHeader.Rows.Add(
+                        header.IDPengiriman,
+                        header.Tgl_Input,
+                        header.NoPlat,
+                        mobil?.Type,
+                        mobil?.JlhCompartment ?? (object)DBNull.Value,
+                        mobil?.Capacity ?? (object)DBNull.Value,
+                        header.Tujuan
+                    );
                 }
 
                 var details = _db.DetailPengirimans
@@ -916,11 +1022,11 @@ namespace DEPTHCHK.Views
                 foreach (var d in details)
                 {
                     dtDetail.Rows.Add(
-                        id,                                  // link to header
+                        id,
                         d.PartID,
-                        d.CompartmentID,
                         d.DataBacaan ?? 0m,
-                        d.DetailMT != null ? d.DetailMT.Kalibrasi ?? 0m : 0m,
+                        // if your model defines Kalibrasi as int? then cast:
+                        d.DetailMT != null ? (decimal?)d.DetailMT.Kalibrasi ?? 0 : 0m,
                         d.DataKalibrasi ?? 0m,
                         d.Satuan,
                         d.Keterangan,
@@ -940,7 +1046,7 @@ namespace DEPTHCHK.Views
             }
 
             // Load the report once with the whole dataset
-            var report = new TicketReport();    // your .rpt
+            var report = new TicketReport();
             report.SetDataSource(ds);
 
             // Show in your viewer form (preview first)
@@ -948,6 +1054,7 @@ namespace DEPTHCHK.Views
             viewer.LoadReport(report);
             viewer.ShowDialog();
         }
+
 
         private void chkAll_CheckedChanged(object sender, EventArgs e)
         {
@@ -978,18 +1085,200 @@ namespace DEPTHCHK.Views
 
         public void PrepareToClose()
         {
-            // unsubscribe events first
             try
             {
-                if (_dataReceivedHandler != null && _serialPort != null)
+                // Port 1 (RFID)
+                if (_rfidReceivedHandler != null && _serialPortRfid != null)
                 {
-                    _serialPort.DataReceived -= _dataReceivedHandler;
-                    _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
-                    _serialPort.PinChanged -= _serialPort_PinChanged;
-                    _dataReceivedHandler = null;
+                    try
+                    {
+                        _serialPortRfid.DataReceived -= _rfidReceivedHandler;
+                        _serialPortRfid.ErrorReceived -= _serialPort_ErrorReceived;
+                        _serialPortRfid.PinChanged -= _serialPort_PinChanged;
+                    }
+                    catch { /* ignore */ }
+                    _rfidReceivedHandler = null;
+                }
+
+                // Port 2 (Measurement)
+                if (_measReceivedHandler != null && _serialPortMeas != null)
+                {
+                    try
+                    {
+                        _serialPortMeas.DataReceived -= _measReceivedHandler;
+                        _serialPortMeas.ErrorReceived -= _serialPort_ErrorReceived;
+                        _serialPortMeas.PinChanged -= _serialPort_PinChanged;
+                    }
+                    catch { /* ignore */ }
+                    _measReceivedHandler = null;
                 }
             }
-            catch { /* ignore */ }
+            catch
+            {
+                // swallow top-level exceptions to avoid crash during form close
+            }
+        }
+
+        private void btnRelistenAll_Click(object sender, EventArgs e)
+        {
+            if (_liveRows == null || _liveRows.Count == 0) return;
+
+            foreach (var row in _liveRows)
+            {
+                row.DataBacaan = 0;
+                row.DataKalibrasi = 0;
+                row.Keterangan = "INACTIVE";
+            }
+            _currentPartIndex = 0;
+            _listening = true;
+            dgvPengirimanLive.Refresh();
+        }
+
+        private void btnReListen_Click(object sender, EventArgs e)
+        {
+            // Get the selected row in the live grid
+            DataGridViewRow cur = dgvPengirimanLive.CurrentRow;
+            if (cur == null) return;                 // nothing selected
+
+            int rowIndex = cur.Index;
+            if (rowIndex < 0 || rowIndex >= _liveRows.Count) return;
+
+            // Reset the measurement data
+            var row = _liveRows[rowIndex];
+            row.DataBacaan = 0;
+            row.DataKalibrasi = 0;
+            row.Keterangan = "INACTIVE";
+
+            // Restart measurement from this part
+            _currentPartIndex = rowIndex;
+            _listening = true;
+
+            // Refresh the grid to show the changes
+            dgvPengirimanLive.Refresh();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            TCPengiriman.SelectedTab = TPPengiriman;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Session.CurrentUser.TipeUser != "SUPERADMIN")
+            {
+                MessageBox.Show("Anda Tidak Memiliki Hak Akses Untuk Tombol ini , Hubungi SUPERADMIN. Delete hanya bisa digunakan oleh SUPERADMIN & kurang dari 24 jam");
+                return;
+            }
+
+            // Gather all selected IDs from the first (checkbox) column
+            var selectedIds = new List<string>();
+            foreach (DataGridViewRow row in dgvPengiriman.Rows)
+            {
+                bool isChecked = false;
+                if (row.Cells["Select"].Value != null)
+                    bool.TryParse(row.Cells["Select"].Value.ToString(), out isChecked);
+
+                if (isChecked)
+                {
+                    var bound = row.DataBoundItem as PengirimanRow;
+                    if (bound != null && !string.IsNullOrWhiteSpace(bound.IDPengiriman))
+                        selectedIds.Add(bound.IDPengiriman);
+                }
+            }
+
+            // No rows checked? Warn and exit
+            if (selectedIds.Count == 0)
+            {
+                MessageBox.Show("Pilih data pengiriman terlebih dahulu.");
+                return;
+            }
+
+            // Confirm deletion
+            string msg = (selectedIds.Count == 1)
+                ? "Hapus pengiriman ID: " + selectedIds[0] + " ?"
+                : "Hapus " + selectedIds.Count + " data pengiriman?";
+            DialogResult confirm = MessageBox.Show(msg,
+                                                   "Konfirmasi Hapus",
+                                                   MessageBoxButtons.YesNo,
+                                                   MessageBoxIcon.Warning);
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (var tx = _db.Database.BeginTransaction())
+                {
+                    foreach (var id in selectedIds)
+                    {
+                        // Load master and its details
+                        var pengiriman = _db.Pengirimans
+                                            .Include(p => p.DetailPengiriman)
+                                            .SingleOrDefault(p => p.IDPengiriman == id);
+                        if (pengiriman == null)
+                            continue;
+
+                        // Delete detail records first (no cascade assumed)
+                        foreach (var det in pengiriman.DetailPengiriman.ToList())
+                        {
+                            _db.DetailPengirimans.Remove(det);
+                        }
+
+                        // Delete master
+                        _db.Pengirimans.Remove(pengiriman);
+                    }
+
+                    _db.SaveChanges();
+                    tx.Commit();
+                }
+
+                // Refresh UI: reload list and clear detail grid
+                ReloadPengiriman();
+                _bsDetail.DataSource = null;
+
+                MessageBox.Show("Data pengiriman berhasil dihapus.",
+                                "Hapus",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menghapus: " + ex.Message,
+                                "Hapus",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+
+        }
+
+        // This assumes the measurement port is Session.GlobalPort2.
+        private void btnSendACK_Click(object sender, EventArgs e)
+        {
+            var measPort = Session.GlobalPort2;  // your measurement port
+            if (measPort == null || !measPort.IsOpen)
+            {
+                MessageBox.Show(
+                    "Measurement port is not open. Please connect the measurement port first.",
+                    "Port Not Connected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Send the ASCII question mark without newline
+                measPort.Write("?");
+
+                // Optionally log what you sent
+                txtSerialLog.AppendText("Sent: ?\r\n");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Failed to send ACK: " + ex.Message,
+                    "Serial Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

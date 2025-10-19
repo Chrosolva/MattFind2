@@ -44,24 +44,21 @@ namespace DEPTHCHK.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TblMobilTangki>()
-                .HasMany(m => m.Pengiriman)
-                .WithOptional(p => p.MobilTangki)
-                .HasForeignKey(p => p.NoPlat)
-                .WillCascadeOnDelete(false);
+                .HasMany(m => m.Pengiriman);
 
             // TblDetailMT
             modelBuilder.Entity<TblDetailMT>()
-                .Property(p => p.Kalibrasi).HasPrecision(10, 2);
+                .Property(p => p.Kalibrasi);
 
             // TblDetailPengiriman (composite key + precisions + FKs)
             modelBuilder.Entity<TblDetailPengiriman>()
                 .HasKey(k => new { k.IDPengiriman, k.PartID });
 
             modelBuilder.Entity<TblDetailPengiriman>()
-                .Property(p => p.DataBacaan).HasPrecision(10, 2);
+                .Property(p => p.DataBacaan);
 
             modelBuilder.Entity<TblDetailPengiriman>()
-                .Property(p => p.DataKalibrasi).HasPrecision(10, 2);
+                .Property(p => p.DataKalibrasi);
 
             modelBuilder.Entity<TblDetailPengiriman>()
                 .HasRequired(d => d.Pengiriman)

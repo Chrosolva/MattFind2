@@ -57,7 +57,7 @@
             // 
             this.dgvTujuan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTujuan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTujuan.Location = new System.Drawing.Point(408, 165);
+            this.dgvTujuan.Location = new System.Drawing.Point(3, 165);
             this.dgvTujuan.Name = "dgvTujuan";
             this.dgvTujuan.Size = new System.Drawing.Size(516, 491);
             this.dgvTujuan.TabIndex = 6;
@@ -69,7 +69,7 @@
             this.btnAssignToActive.Depth = 0;
             this.btnAssignToActive.HighEmphasis = true;
             this.btnAssignToActive.Icon = null;
-            this.btnAssignToActive.Location = new System.Drawing.Point(327, 20);
+            this.btnAssignToActive.Location = new System.Drawing.Point(7, 383);
             this.btnAssignToActive.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnAssignToActive.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAssignToActive.Name = "btnAssignToActive";
@@ -80,6 +80,7 @@
             this.btnAssignToActive.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnAssignToActive.UseAccentColor = false;
             this.btnAssignToActive.UseVisualStyleBackColor = true;
+            this.btnAssignToActive.Click += new System.EventHandler(this.btnAssignToActive_Click);
             // 
             // lblActiveSlot
             // 
@@ -199,7 +200,7 @@
             this.btnClearAll.Depth = 0;
             this.btnClearAll.HighEmphasis = true;
             this.btnClearAll.Icon = null;
-            this.btnClearAll.Location = new System.Drawing.Point(134, 383);
+            this.btnClearAll.Location = new System.Drawing.Point(302, 381);
             this.btnClearAll.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearAll.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearAll.Name = "btnClearAll";
@@ -218,7 +219,7 @@
             this.btnClearSlot.Depth = 0;
             this.btnClearSlot.HighEmphasis = true;
             this.btnClearSlot.Icon = null;
-            this.btnClearSlot.Location = new System.Drawing.Point(20, 383);
+            this.btnClearSlot.Location = new System.Drawing.Point(177, 381);
             this.btnClearSlot.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearSlot.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearSlot.Name = "btnClearSlot";
@@ -233,8 +234,8 @@
             // leftPanel
             // 
             this.leftPanel.Controls.Add(this.cardTujuan);
-            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftPanel.Location = new System.Drawing.Point(3, 165);
+            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.leftPanel.Location = new System.Drawing.Point(519, 165);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(405, 491);
             this.leftPanel.TabIndex = 5;
@@ -266,24 +267,23 @@
             this.btnFinSet.Depth = 0;
             this.btnFinSet.HighEmphasis = true;
             this.btnFinSet.Icon = null;
-            this.btnFinSet.Location = new System.Drawing.Point(267, 444);
+            this.btnFinSet.Location = new System.Drawing.Point(268, 435);
             this.btnFinSet.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnFinSet.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnFinSet.Name = "btnFinSet";
             this.btnFinSet.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnFinSet.Size = new System.Drawing.Size(131, 36);
+            this.btnFinSet.Size = new System.Drawing.Size(130, 36);
             this.btnFinSet.TabIndex = 26;
-            this.btnFinSet.Text = "FINISH SETTING";
+            this.btnFinSet.Text = "SAVE SETTINGS";
             this.btnFinSet.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnFinSet.UseAccentColor = true;
             this.btnFinSet.UseVisualStyleBackColor = true;
-            
             // 
             // grpCompart
             // 
             this.grpCompart.Location = new System.Drawing.Point(7, 6);
             this.grpCompart.Name = "grpCompart";
-            this.grpCompart.Size = new System.Drawing.Size(313, 349);
+            this.grpCompart.Size = new System.Drawing.Size(391, 349);
             this.grpCompart.TabIndex = 0;
             this.grpCompart.TabStop = false;
             this.grpCompart.Text = "COMPARTMENT";

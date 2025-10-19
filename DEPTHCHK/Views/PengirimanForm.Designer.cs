@@ -54,12 +54,16 @@
             this.grpRegisLive = new System.Windows.Forms.GroupBox();
             this.dgvPengirimanLive = new System.Windows.Forms.DataGridView();
             this.pnlTopRLive = new System.Windows.Forms.Panel();
+            this.btnReListen = new MaterialSkin.Controls.MaterialButton();
+            this.btnRelistenAll = new MaterialSkin.Controls.MaterialButton();
             this.btnClearLog = new MaterialSkin.Controls.MaterialButton();
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnStartListen = new MaterialSkin.Controls.MaterialButton();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.txtSerialLog = new System.Windows.Forms.RichTextBox();
             this.UpPanel = new System.Windows.Forms.Panel();
+            this.lblRFID = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.lblPortStatus = new System.Windows.Forms.Label();
             this.lblIDPengiriman = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
@@ -77,6 +81,9 @@
             this.lblJlhCompartment = new MaterialSkin.Controls.MaterialLabel();
             this.lblType = new MaterialSkin.Controls.MaterialLabel();
             this.TabSelector = new MaterialSkin.Controls.MaterialTabSelector();
+            this.btnBack = new MaterialSkin.Controls.MaterialButton();
+            this.btnDelete = new DEPTHCHK.Custom.CustomMaterialButton();
+            this.btnSendACK = new MaterialSkin.Controls.MaterialButton();
             this.TCPengiriman.SuspendLayout();
             this.TPPengiriman.SuspendLayout();
             this.RightCard.SuspendLayout();
@@ -148,7 +155,7 @@
             this.dgvDetailPengiriman.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetailPengiriman.Location = new System.Drawing.Point(6, 29);
             this.dgvDetailPengiriman.Name = "dgvDetailPengiriman";
-            this.dgvDetailPengiriman.Size = new System.Drawing.Size(1059, 79);
+            this.dgvDetailPengiriman.Size = new System.Drawing.Size(1059, 78);
             this.dgvDetailPengiriman.TabIndex = 3;
             // 
             // materialLabel2
@@ -232,6 +239,7 @@
             // UpCard
             // 
             this.UpCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.UpCard.Controls.Add(this.btnDelete);
             this.UpCard.Controls.Add(this.btnPrint);
             this.UpCard.Controls.Add(this.btnFilter);
             this.UpCard.Controls.Add(this.dtpPengTo);
@@ -466,6 +474,9 @@
             // 
             // pnlTopRLive
             // 
+            this.pnlTopRLive.Controls.Add(this.btnSendACK);
+            this.pnlTopRLive.Controls.Add(this.btnReListen);
+            this.pnlTopRLive.Controls.Add(this.btnRelistenAll);
             this.pnlTopRLive.Controls.Add(this.btnClearLog);
             this.pnlTopRLive.Controls.Add(this.btnSave);
             this.pnlTopRLive.Controls.Add(this.btnStartListen);
@@ -475,6 +486,46 @@
             this.pnlTopRLive.Size = new System.Drawing.Size(805, 66);
             this.pnlTopRLive.TabIndex = 13;
             // 
+            // btnReListen
+            // 
+            this.btnReListen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReListen.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnReListen.Depth = 0;
+            this.btnReListen.HighEmphasis = true;
+            this.btnReListen.Icon = null;
+            this.btnReListen.Location = new System.Drawing.Point(226, 9);
+            this.btnReListen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReListen.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnReListen.Name = "btnReListen";
+            this.btnReListen.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnReListen.Size = new System.Drawing.Size(92, 36);
+            this.btnReListen.TabIndex = 22;
+            this.btnReListen.Text = "RE-LISTEN";
+            this.btnReListen.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnReListen.UseAccentColor = false;
+            this.btnReListen.UseVisualStyleBackColor = true;
+            this.btnReListen.Click += new System.EventHandler(this.btnReListen_Click);
+            // 
+            // btnRelistenAll
+            // 
+            this.btnRelistenAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnRelistenAll.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnRelistenAll.Depth = 0;
+            this.btnRelistenAll.HighEmphasis = true;
+            this.btnRelistenAll.Icon = null;
+            this.btnRelistenAll.Location = new System.Drawing.Point(89, 8);
+            this.btnRelistenAll.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnRelistenAll.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnRelistenAll.Name = "btnRelistenAll";
+            this.btnRelistenAll.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnRelistenAll.Size = new System.Drawing.Size(121, 36);
+            this.btnRelistenAll.TabIndex = 21;
+            this.btnRelistenAll.Text = "RE-LISTEN ALL";
+            this.btnRelistenAll.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnRelistenAll.UseAccentColor = false;
+            this.btnRelistenAll.UseVisualStyleBackColor = true;
+            this.btnRelistenAll.Click += new System.EventHandler(this.btnRelistenAll_Click);
+            // 
             // btnClearLog
             // 
             this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -483,7 +534,7 @@
             this.btnClearLog.Depth = 0;
             this.btnClearLog.HighEmphasis = true;
             this.btnClearLog.Icon = null;
-            this.btnClearLog.Location = new System.Drawing.Point(728, 9);
+            this.btnClearLog.Location = new System.Drawing.Point(729, 9);
             this.btnClearLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearLog.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearLog.Name = "btnClearLog";
@@ -558,6 +609,9 @@
             // UpPanel
             // 
             this.UpPanel.AutoScroll = true;
+            this.UpPanel.Controls.Add(this.btnBack);
+            this.UpPanel.Controls.Add(this.lblRFID);
+            this.UpPanel.Controls.Add(this.materialLabel4);
             this.UpPanel.Controls.Add(this.lblPortStatus);
             this.UpPanel.Controls.Add(this.lblIDPengiriman);
             this.UpPanel.Controls.Add(this.materialLabel3);
@@ -576,6 +630,30 @@
             this.UpPanel.Size = new System.Drawing.Size(1055, 154);
             this.UpPanel.TabIndex = 0;
             this.UpPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.UpPanel_Paint);
+            // 
+            // lblRFID
+            // 
+            this.lblRFID.AutoSize = true;
+            this.lblRFID.Depth = 0;
+            this.lblRFID.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblRFID.Location = new System.Drawing.Point(248, 87);
+            this.lblRFID.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblRFID.Name = "lblRFID";
+            this.lblRFID.Size = new System.Drawing.Size(35, 19);
+            this.lblRFID.TabIndex = 41;
+            this.lblRFID.Text = "RFID";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(215, 87);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(35, 19);
+            this.materialLabel4.TabIndex = 40;
+            this.materialLabel4.Text = "RFID";
             // 
             // lblPortStatus
             // 
@@ -719,7 +797,6 @@
             this.txtTujuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtTujuan.Depth = 0;
             this.txtTujuan.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtTujuan.Enabled = false;
             this.txtTujuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtTujuan.HideSelection = true;
             this.txtTujuan.Hint = "TUJUAN";
@@ -730,7 +807,7 @@
             this.txtTujuan.Name = "txtTujuan";
             this.txtTujuan.PasswordChar = '\0';
             this.txtTujuan.PrefixSuffixText = null;
-            this.txtTujuan.ReadOnly = false;
+            this.txtTujuan.ReadOnly = true;
             this.txtTujuan.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtTujuan.SelectedText = "";
             this.txtTujuan.SelectionLength = 0;
@@ -805,6 +882,69 @@
             this.TabSelector.Size = new System.Drawing.Size(1085, 48);
             this.TabSelector.TabIndex = 7;
             this.TabSelector.Text = "materialTabSelector1";
+            this.TabSelector.Visible = false;
+            // 
+            // btnBack
+            // 
+            this.btnBack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBack.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnBack.Depth = 0;
+            this.btnBack.HighEmphasis = true;
+            this.btnBack.Icon = null;
+            this.btnBack.Location = new System.Drawing.Point(756, 9);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnBack.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnBack.Name = "btnBack";
+            this.btnBack.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnBack.Size = new System.Drawing.Size(64, 36);
+            this.btnBack.TabIndex = 23;
+            this.btnBack.Text = "BACK";
+            this.btnBack.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnBack.UseAccentColor = false;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDelete.CustomColor = System.Drawing.Color.DarkRed;
+            this.btnDelete.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDelete.Depth = 0;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.HighEmphasis = true;
+            this.btnDelete.Icon = null;
+            this.btnDelete.Location = new System.Drawing.Point(154, 29);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDelete.Size = new System.Drawing.Size(73, 36);
+            this.btnDelete.TabIndex = 33;
+            this.btnDelete.Text = "DELETE";
+            this.btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDelete.UseAccentColor = false;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnSendACK
+            // 
+            this.btnSendACK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSendACK.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSendACK.Depth = 0;
+            this.btnSendACK.HighEmphasis = true;
+            this.btnSendACK.Icon = null;
+            this.btnSendACK.Location = new System.Drawing.Point(326, 9);
+            this.btnSendACK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSendACK.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSendACK.Name = "btnSendACK";
+            this.btnSendACK.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSendACK.Size = new System.Drawing.Size(92, 36);
+            this.btnSendACK.TabIndex = 23;
+            this.btnSendACK.Text = "GET DATA";
+            this.btnSendACK.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSendACK.UseAccentColor = false;
+            this.btnSendACK.UseVisualStyleBackColor = true;
+            this.btnSendACK.Click += new System.EventHandler(this.btnSendACK_Click);
             // 
             // PengirimanForm
             // 
@@ -896,5 +1036,12 @@
         private System.Windows.Forms.Label lblPortStatus;
         private MaterialSkin.Controls.MaterialButton btnPrint;
         private MaterialSkin.Controls.MaterialCheckbox chkAll;
+        private MaterialSkin.Controls.MaterialLabel lblRFID;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialButton btnRelistenAll;
+        private MaterialSkin.Controls.MaterialButton btnReListen;
+        private MaterialSkin.Controls.MaterialButton btnBack;
+        private Custom.CustomMaterialButton btnDelete;
+        private MaterialSkin.Controls.MaterialButton btnSendACK;
     }
 }

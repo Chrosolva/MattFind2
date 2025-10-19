@@ -13,7 +13,7 @@ namespace DEPTHCHK.Models
         [Required, StringLength(30)]
         public string NoPlat { get; set; }  // FK → TblMobilTangki
 
-        public decimal? Kalibrasi { get; set; }
+        public int? Kalibrasi { get; set; }
         public bool? Positive { get; set; }
 
         [ForeignKey("NoPlat")]

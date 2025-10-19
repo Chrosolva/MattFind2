@@ -13,8 +13,11 @@ namespace DEPTHCHK.Models
 
         public DateTime? Tgl_Input { get; set; }
 
-        [StringLength(30)]
-        public string NoPlat { get; set; }      // FK → TblMobilTangki
+        [Required, StringLength(30)]
+        public string NoPlat { get; set; }
+
+        [Column(TypeName = "char"), StringLength(4)]
+        public string RfidData { get; set; } // NEW: 4‑char RFID (two bytes)
 
         [StringLength(300)]
         public string Tujuan { get; set; }
@@ -23,18 +26,16 @@ namespace DEPTHCHK.Models
         public string Status { get; set; }
 
         [StringLength(30)]
-        public string UserID { get; set; }      // FK → TblUser
+        public string UserID { get; set; }
 
         [StringLength(255)]
         public string Keterangan { get; set; }
 
-        // Navigation
-        [ForeignKey(nameof(NoPlat))]
-        public virtual TblMobilTangki MobilTangki { get; set; }
-
         [ForeignKey(nameof(UserID))]
         public virtual TblUser User { get; set; }
 
-        public virtual ICollection<TblDetailPengiriman> DetailPengiriman { get; set; } = new HashSet<TblDetailPengiriman>();
+        public virtual ICollection<TblDetailPengiriman> DetailPengiriman { get; set; }
+            = new HashSet<TblDetailPengiriman>();
     }
+
 }

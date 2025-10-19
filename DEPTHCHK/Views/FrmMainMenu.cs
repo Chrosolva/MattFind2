@@ -39,12 +39,20 @@ namespace DEPTHCHK.Views
             // Apply MaterialSkin theme
             var skinManager = MaterialSkinManager.Instance;
             skinManager.AddFormToManage(this);
-            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
+            // Use DARK so teal/orange pops
+            skinManager.Theme = MaterialSkinManager.Themes.DARK;
+            this.Font = new Font("Tahoma", 10f, FontStyle.Regular);
+
+            // If your MaterialSkin2 has these enums, use them:
             skinManager.ColorScheme = new ColorScheme(
-                Primary.Blue600, Primary.Blue700,
-                Primary.Blue200, Accent.Green700,
+                Primary.Teal700,   // primary
+                Primary.Teal900,   // primary dark (title bar)
+                Primary.Teal400,   // primary light (ripple/hover)
+                Accent.Orange400,  // accent
                 TextShade.WHITE
             );
+
 
             this.IsMdiContainer = false;
         }
@@ -52,9 +60,19 @@ namespace DEPTHCHK.Views
         private void FrmMainMenu_Load(object sender, EventArgs e)
         {
             InitializeMenuPanel();
+            // Pick sizes to your taste
+            var appFonts = GlobalFontHelper.Resolve(
+                bodySize: 10f,           // typical body
+                headerSize: 10.5f,       // slightly larger headers
+                headerStyle: FontStyle.Bold
+            );
+
+            // Apply to the main form (and all its current controls)
+            GlobalFontHelper.Apply(this, appFonts);
+
             if (Session.CurrentUser == null) return;
 
-            lblStatus.Text = "CONNECTED TO : " + Session.SERVERADDRESS + " , USER ID = " + Session.CurrentUser.UserID;
+            lblStatus.Text = "SERVER : " + Session.SERVERADDRESS + " , USER ID = " + Session.CurrentUser.UserID;
             TryLoadTimeZone();
 
             // populate available ports
@@ -105,7 +123,7 @@ namespace DEPTHCHK.Views
             // open first port
             try
             {
-                _port = new SerialPort(portName1, 9600, Parity.None, 8, StopBits.One)
+                _port = new SerialPort(portName1, Convert.ToInt32(baudrateRFID.Value), Parity.None, 8, StopBits.One)
                 {
                     NewLine = "\r\n",
                     ReadTimeout = 500,
@@ -127,7 +145,7 @@ namespace DEPTHCHK.Views
             // open second port
             try
             {
-                _port2 = new SerialPort(portName2, 9600, Parity.None, 8, StopBits.One)
+                _port2 = new SerialPort(portName2, Convert.ToInt32(NUDBaudRate.Value), Parity.None, 8, StopBits.One)
                 {
                     NewLine = "\r\n",
                     ReadTimeout = 500,
@@ -226,7 +244,7 @@ namespace DEPTHCHK.Views
             AddMenuButton("USER", (s, e) => OpenChildForm(new AdminMenuForm()), "ADMIN", "SUPERADMIN");
 
             // Style panelMenu2 (already on form)
-            this.panelMenu2.BackColor = Color.FromArgb(21, 101, 192);
+            this.panelMenu2.BackColor = Color.FromArgb(13, 148, 136);
         }
 
         // -------------------------------
@@ -253,7 +271,8 @@ namespace DEPTHCHK.Views
                 Name = "btn" + text,
                 BackColor = MenuDefaultColor,
                 ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
+                FlatStyle = FlatStyle.Flat,
+                UseAccentColor = true
             };
             btn.FlatAppearance.BorderSize = 0;
 
@@ -352,7 +371,14 @@ namespace DEPTHCHK.Views
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
 
+            var appFonts = GlobalFontHelper.Resolve(
+                bodySize: 10f,           // typical body
+                headerSize: 10.5f,       // slightly larger headers
+                headerStyle: FontStyle.Bold
+            );
+
             ContentCard.Controls.Add(childForm);
+            GlobalFontHelper.Apply(childForm, appFonts);
             childForm.Show();
 
             _activeChild = childForm;
@@ -364,7 +390,7 @@ namespace DEPTHCHK.Views
         {
 
             lblPortStatus.Text = connected
-                ? "Connected: " + Session.GlobalPort.PortName + " @ " + SPRegis.BaudRate
+                ? "Connected: " + Session.GlobalPort.PortName + " @ " + _port.BaudRate
                 : "Disconnected";
             lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
         }
@@ -373,7 +399,7 @@ namespace DEPTHCHK.Views
         private void UpdateUiForPort2State(bool connected)
         {
             lblPort2Status.Text = connected
-                ? "Connected: " + Session.GlobalPort2.PortName + " @ 9600"
+                ? "Connected: " + Session.GlobalPort2.PortName + " @ " + _port2.BaudRate
                 : "Disconnected";
             lblPort2Status.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
         }
@@ -450,6 +476,19 @@ namespace DEPTHCHK.Views
             }
         }
 
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void cbxTimeZone_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPort2Status_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

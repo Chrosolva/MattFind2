@@ -7,23 +7,20 @@ namespace DEPTHCHK.Models
     [Table("TblDetailPengiriman")]
     public class TblDetailPengiriman
     {
-        // Composite PK configured in Fluent API
+        // Composite key is configured in Fluent API (IDPengiriman + PartID)
         [StringLength(30)]
-        public string IDPengiriman { get; set; }   // FK → TblPengiriman
+        public string IDPengiriman { get; set; }
 
         public DateTime? Tgl_Input { get; set; }
 
-        [StringLength(30)]
-        public string NoPlat { get; set; }         // denormalized (optional)
+        [Required, StringLength(30)]
+        public string NoPlat { get; set; }
 
         [StringLength(30)]
-        public string PartID { get; set; }         // FK → TblDetailMT
+        public string PartID { get; set; } // FK → TblDetailMT
 
-        [StringLength(30)]
-        public string CompartmentID { get; set; }
-
-        public decimal? DataBacaan { get; set; }   // precision set in Fluent API
-        public decimal? DataKalibrasi { get; set; }// precision set in Fluent API
+        public int? DataBacaan { get; set; }
+        public int? DataKalibrasi { get; set; }
 
         [StringLength(20)]
         public string Satuan { get; set; }
@@ -32,14 +29,13 @@ namespace DEPTHCHK.Models
         public string Keterangan { get; set; }
 
         [StringLength(12)]
-        public string KodeTujuan { get; set; }     // FK → TblTujuan
+        public string KodeTujuan { get; set; }
 
-        // Navigation
         [ForeignKey(nameof(IDPengiriman))]
         public virtual TblPengiriman Pengiriman { get; set; }
-
 
         [ForeignKey(nameof(PartID))]
         public virtual TblDetailMT DetailMT { get; set; }
     }
+
 }

@@ -45,6 +45,23 @@ namespace DEPTHCHK.Views
         {
             InitializeComponent();
 
+            // Apply MaterialSkin theme
+            var skinManager = MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+
+            // Use DARK so teal/orange pops
+            skinManager.Theme = MaterialSkinManager.Themes.DARK;
+            this.Font = new Font("Tahoma", 10f, FontStyle.Regular);
+
+            // If your MaterialSkin2 has these enums, use them:
+            skinManager.ColorScheme = new ColorScheme(
+                Primary.Teal700,   // primary
+                Primary.Teal900,   // primary dark (title bar)
+                Primary.Teal400,   // primary light (ripple/hover)
+                Accent.Orange400,  // accent
+                TextShade.WHITE
+            );
+
             _regions = regions != null ? new List<RegionOption>(regions) : new List<RegionOption>();
             _owners = owners != null ? new List<OwnedOption>(owners) : new List<OwnedOption>();
 
@@ -263,6 +280,9 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvTujuan);
         }
 
-        
+        private void btnAssignToActive_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

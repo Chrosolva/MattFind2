@@ -42,7 +42,7 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(73, 394);
+            this.materialLabel3.Location = new System.Drawing.Point(371, 82);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(59, 19);
@@ -58,7 +58,7 @@
             this.txtServerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtServerAdd.HideSelection = true;
             this.txtServerAdd.LeadingIcon = null;
-            this.txtServerAdd.Location = new System.Drawing.Point(63, 427);
+            this.txtServerAdd.Location = new System.Drawing.Point(361, 115);
             this.txtServerAdd.MaxLength = 32767;
             this.txtServerAdd.MouseState = MaterialSkin.MouseState.OUT;
             this.txtServerAdd.Name = "txtServerAdd";
@@ -85,7 +85,7 @@
             this.btnLogin.Depth = 0;
             this.btnLogin.HighEmphasis = true;
             this.btnLogin.Icon = null;
-            this.btnLogin.Location = new System.Drawing.Point(114, 293);
+            this.btnLogin.Location = new System.Drawing.Point(547, 219);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLogin.Name = "btnLogin";
@@ -182,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 501);
+            this.ClientSize = new System.Drawing.Size(687, 306);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.txtServerAdd);
             this.Controls.Add(this.btnLogin);
@@ -190,7 +190,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.txtUserID);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLogin";
             this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

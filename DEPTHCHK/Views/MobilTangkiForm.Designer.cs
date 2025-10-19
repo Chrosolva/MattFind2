@@ -55,6 +55,7 @@
             this.btnEdit = new MaterialSkin.Controls.MaterialButton();
             this.TPAddEditMT = new System.Windows.Forms.TabPage();
             this.CardCRUD = new MaterialSkin.Controls.MaterialCard();
+            this.btnClearrfid = new MaterialSkin.Controls.MaterialButton();
             this.txtSerialLog = new System.Windows.Forms.RichTextBox();
             this.lblPortStatus = new System.Windows.Forms.Label();
             this.lblRfid = new MaterialSkin.Controls.MaterialLabel();
@@ -62,7 +63,6 @@
             this.btnGenerate = new MaterialSkin.Controls.MaterialButton();
             this.dgvDetailMTBuffer = new System.Windows.Forms.DataGridView();
             this.txtNoPlat = new MaterialSkin.Controls.MaterialTextBox2();
-            this.btnClearrfid = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.NUDCapacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDJlhCompartment)).BeginInit();
             this.TCMobilTangki.SuspendLayout();
@@ -84,8 +84,8 @@
             this.btnClear.Depth = 0;
             this.btnClear.HighEmphasis = true;
             this.btnClear.Icon = null;
-            this.btnClear.Location = new System.Drawing.Point(169, 384);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnClear.Location = new System.Drawing.Point(127, 312);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClear.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClear.Name = "btnClear";
             this.btnClear.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -104,8 +104,8 @@
             this.btnExport.Depth = 0;
             this.btnExport.HighEmphasis = true;
             this.btnExport.Icon = null;
-            this.btnExport.Location = new System.Drawing.Point(744, 7);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnExport.Location = new System.Drawing.Point(558, 6);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnExport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnExport.Name = "btnExport";
             this.btnExport.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -124,8 +124,8 @@
             this.btnImport.Depth = 0;
             this.btnImport.HighEmphasis = true;
             this.btnImport.Icon = null;
-            this.btnImport.Location = new System.Drawing.Point(561, 7);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnImport.Location = new System.Drawing.Point(421, 6);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnImport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnImport.Name = "btnImport";
             this.btnImport.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -144,8 +144,8 @@
             this.btnNew.Depth = 0;
             this.btnNew.HighEmphasis = true;
             this.btnNew.Icon = null;
-            this.btnNew.Location = new System.Drawing.Point(12, 7);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnNew.Location = new System.Drawing.Point(9, 6);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNew.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnNew.Name = "btnNew";
             this.btnNew.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -164,8 +164,8 @@
             this.btnBack.Depth = 0;
             this.btnBack.HighEmphasis = true;
             this.btnBack.Icon = null;
-            this.btnBack.Location = new System.Drawing.Point(361, 384);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnBack.Location = new System.Drawing.Point(271, 312);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBack.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBack.Name = "btnBack";
             this.btnBack.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -184,8 +184,8 @@
             this.btnSave.Depth = 0;
             this.btnSave.HighEmphasis = true;
             this.btnSave.Icon = null;
-            this.btnSave.Location = new System.Drawing.Point(29, 384);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnSave.Location = new System.Drawing.Point(22, 312);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSave.Name = "btnSave";
             this.btnSave.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -199,15 +199,14 @@
             // 
             // NUDCapacity
             // 
-            this.NUDCapacity.Location = new System.Drawing.Point(427, 203);
-            this.NUDCapacity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NUDCapacity.Location = new System.Drawing.Point(320, 165);
             this.NUDCapacity.Maximum = new decimal(new int[] {
             -727379969,
             232,
             0,
             0});
             this.NUDCapacity.Name = "NUDCapacity";
-            this.NUDCapacity.Size = new System.Drawing.Size(101, 22);
+            this.NUDCapacity.Size = new System.Drawing.Size(76, 20);
             this.NUDCapacity.TabIndex = 9;
             // 
             // materialLabel5
@@ -215,8 +214,7 @@
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(415, 146);
-            this.materialLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel5.Location = new System.Drawing.Point(311, 119);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(63, 19);
@@ -225,10 +223,9 @@
             // 
             // NUDJlhCompartment
             // 
-            this.NUDJlhCompartment.Location = new System.Drawing.Point(427, 87);
-            this.NUDJlhCompartment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NUDJlhCompartment.Location = new System.Drawing.Point(320, 71);
             this.NUDJlhCompartment.Name = "NUDJlhCompartment";
-            this.NUDJlhCompartment.Size = new System.Drawing.Size(59, 22);
+            this.NUDJlhCompartment.Size = new System.Drawing.Size(44, 20);
             this.NUDJlhCompartment.TabIndex = 7;
             // 
             // materialLabel4
@@ -236,8 +233,7 @@
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(415, 31);
-            this.materialLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel4.Location = new System.Drawing.Point(311, 25);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(98, 19);
@@ -249,8 +245,7 @@
             this.Type.AutoSize = true;
             this.Type.Depth = 0;
             this.Type.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.Type.Location = new System.Drawing.Point(23, 146);
-            this.Type.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Type.Location = new System.Drawing.Point(17, 119);
             this.Type.MouseState = MaterialSkin.MouseState.HOVER;
             this.Type.Name = "Type";
             this.Type.Size = new System.Drawing.Size(36, 19);
@@ -266,8 +261,7 @@
             this.txtType.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtType.HideSelection = true;
             this.txtType.LeadingIcon = null;
-            this.txtType.Location = new System.Drawing.Point(23, 185);
-            this.txtType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtType.Location = new System.Drawing.Point(17, 150);
             this.txtType.MaxLength = 32767;
             this.txtType.MouseState = MaterialSkin.MouseState.OUT;
             this.txtType.Name = "txtType";
@@ -279,7 +273,7 @@
             this.txtType.SelectionLength = 0;
             this.txtType.SelectionStart = 0;
             this.txtType.ShortcutsEnabled = true;
-            this.txtType.Size = new System.Drawing.Size(333, 48);
+            this.txtType.Size = new System.Drawing.Size(250, 48);
             this.txtType.TabIndex = 3;
             this.txtType.TabStop = false;
             this.txtType.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -291,8 +285,7 @@
             this.lblNoPlat.AutoSize = true;
             this.lblNoPlat.Depth = 0;
             this.lblNoPlat.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblNoPlat.Location = new System.Drawing.Point(23, 31);
-            this.lblNoPlat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNoPlat.Location = new System.Drawing.Point(17, 25);
             this.lblNoPlat.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNoPlat.Name = "lblNoPlat";
             this.lblNoPlat.Size = new System.Drawing.Size(53, 19);
@@ -307,12 +300,12 @@
             this.TabSelector.Dock = System.Windows.Forms.DockStyle.Top;
             this.TabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.TabSelector.Location = new System.Drawing.Point(0, 0);
-            this.TabSelector.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TabSelector.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabSelector.Name = "TabSelector";
-            this.TabSelector.Size = new System.Drawing.Size(1773, 59);
+            this.TabSelector.Size = new System.Drawing.Size(1330, 53);
             this.TabSelector.TabIndex = 3;
             this.TabSelector.Text = "materialTabSelector1";
+            this.TabSelector.Visible = false;
             // 
             // TCMobilTangki
             // 
@@ -320,13 +313,13 @@
             this.TCMobilTangki.Controls.Add(this.TPAddEditMT);
             this.TCMobilTangki.Depth = 0;
             this.TCMobilTangki.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TCMobilTangki.Location = new System.Drawing.Point(0, 59);
-            this.TCMobilTangki.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TCMobilTangki.Location = new System.Drawing.Point(0, 53);
             this.TCMobilTangki.MouseState = MaterialSkin.MouseState.HOVER;
             this.TCMobilTangki.Multiline = true;
             this.TCMobilTangki.Name = "TCMobilTangki";
+            this.TCMobilTangki.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TCMobilTangki.SelectedIndex = 0;
-            this.TCMobilTangki.Size = new System.Drawing.Size(1773, 577);
+            this.TCMobilTangki.Size = new System.Drawing.Size(1330, 464);
             this.TCMobilTangki.TabIndex = 2;
             // 
             // TPMobilTangki
@@ -334,11 +327,10 @@
             this.TPMobilTangki.Controls.Add(this.RightCard);
             this.TPMobilTangki.Controls.Add(this.LeftCard);
             this.TPMobilTangki.Controls.Add(this.TopPanel);
-            this.TPMobilTangki.Location = new System.Drawing.Point(4, 25);
-            this.TPMobilTangki.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPMobilTangki.Location = new System.Drawing.Point(4, 22);
             this.TPMobilTangki.Name = "TPMobilTangki";
-            this.TPMobilTangki.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TPMobilTangki.Size = new System.Drawing.Size(1765, 548);
+            this.TPMobilTangki.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPMobilTangki.Size = new System.Drawing.Size(1322, 438);
             this.TPMobilTangki.TabIndex = 0;
             this.TPMobilTangki.Text = "MOBIL TANGKI";
             this.TPMobilTangki.UseVisualStyleBackColor = true;
@@ -351,12 +343,12 @@
             this.RightCard.Depth = 0;
             this.RightCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.RightCard.Location = new System.Drawing.Point(975, 69);
-            this.RightCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.RightCard.Location = new System.Drawing.Point(3, 295);
+            this.RightCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.RightCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.RightCard.Name = "RightCard";
-            this.RightCard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.RightCard.Size = new System.Drawing.Size(786, 475);
+            this.RightCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RightCard.Size = new System.Drawing.Size(1316, 140);
             this.RightCard.TabIndex = 9;
             // 
             // dgvDetailMT
@@ -365,10 +357,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetailMT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailMT.Location = new System.Drawing.Point(8, 36);
-            this.dgvDetailMT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDetailMT.Location = new System.Drawing.Point(6, 29);
             this.dgvDetailMT.Name = "dgvDetailMT";
-            this.dgvDetailMT.Size = new System.Drawing.Size(770, 432);
+            this.dgvDetailMT.Size = new System.Drawing.Size(1304, 105);
             this.dgvDetailMT.TabIndex = 3;
             // 
             // materialLabel2
@@ -376,8 +367,7 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(8, 9);
-            this.materialLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel2.Location = new System.Drawing.Point(6, 7);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(74, 19);
@@ -390,14 +380,14 @@
             this.LeftCard.Controls.Add(this.materialLabel1);
             this.LeftCard.Controls.Add(this.dgvMobilTangki);
             this.LeftCard.Depth = 0;
-            this.LeftCard.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LeftCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeftCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LeftCard.Location = new System.Drawing.Point(4, 69);
-            this.LeftCard.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.LeftCard.Location = new System.Drawing.Point(3, 56);
+            this.LeftCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
-            this.LeftCard.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.LeftCard.Size = new System.Drawing.Size(971, 475);
+            this.LeftCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LeftCard.Size = new System.Drawing.Size(1316, 239);
             this.LeftCard.TabIndex = 8;
             // 
             // materialLabel1
@@ -405,8 +395,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(8, 9);
-            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.materialLabel1.Location = new System.Drawing.Point(6, 7);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(55, 19);
@@ -419,10 +408,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMobilTangki.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMobilTangki.Location = new System.Drawing.Point(8, 36);
-            this.dgvMobilTangki.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvMobilTangki.Location = new System.Drawing.Point(6, 29);
             this.dgvMobilTangki.Name = "dgvMobilTangki";
-            this.dgvMobilTangki.Size = new System.Drawing.Size(955, 432);
+            this.dgvMobilTangki.Size = new System.Drawing.Size(1304, 204);
             this.dgvMobilTangki.TabIndex = 0;
             // 
             // TopPanel
@@ -433,10 +421,9 @@
             this.TopPanel.Controls.Add(this.btnNew);
             this.TopPanel.Controls.Add(this.btnEdit);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(4, 4);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TopPanel.Location = new System.Drawing.Point(3, 3);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1757, 65);
+            this.TopPanel.Size = new System.Drawing.Size(1316, 53);
             this.TopPanel.TabIndex = 0;
             // 
             // btnDelete
@@ -448,8 +435,8 @@
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.HighEmphasis = true;
             this.btnDelete.Icon = null;
-            this.btnDelete.Location = new System.Drawing.Point(219, 7);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDelete.Location = new System.Drawing.Point(164, 6);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnDelete.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -468,8 +455,8 @@
             this.btnEdit.Depth = 0;
             this.btnEdit.HighEmphasis = true;
             this.btnEdit.Icon = null;
-            this.btnEdit.Location = new System.Drawing.Point(124, 7);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnEdit.Location = new System.Drawing.Point(93, 6);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnEdit.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -484,11 +471,10 @@
             // TPAddEditMT
             // 
             this.TPAddEditMT.Controls.Add(this.CardCRUD);
-            this.TPAddEditMT.Location = new System.Drawing.Point(4, 25);
-            this.TPAddEditMT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPAddEditMT.Location = new System.Drawing.Point(4, 22);
             this.TPAddEditMT.Name = "TPAddEditMT";
-            this.TPAddEditMT.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.TPAddEditMT.Size = new System.Drawing.Size(1765, 548);
+            this.TPAddEditMT.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPAddEditMT.Size = new System.Drawing.Size(1322, 438);
             this.TPAddEditMT.TabIndex = 1;
             this.TPAddEditMT.Text = "ADD / EDIT MT";
             this.TPAddEditMT.UseVisualStyleBackColor = true;
@@ -520,20 +506,39 @@
             this.CardCRUD.Depth = 0;
             this.CardCRUD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.CardCRUD.Location = new System.Drawing.Point(0, 0);
-            this.CardCRUD.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
             this.CardCRUD.MouseState = MaterialSkin.MouseState.HOVER;
             this.CardCRUD.Name = "CardCRUD";
-            this.CardCRUD.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.CardCRUD.Size = new System.Drawing.Size(1763, 550);
+            this.CardCRUD.Padding = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.CardCRUD.Size = new System.Drawing.Size(1322, 442);
             this.CardCRUD.TabIndex = 0;
+            // 
+            // btnClearrfid
+            // 
+            this.btnClearrfid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearrfid.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearrfid.Depth = 0;
+            this.btnClearrfid.HighEmphasis = true;
+            this.btnClearrfid.Icon = null;
+            this.btnClearrfid.Location = new System.Drawing.Point(274, 254);
+            this.btnClearrfid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearrfid.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearrfid.Name = "btnClearrfid";
+            this.btnClearrfid.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearrfid.Size = new System.Drawing.Size(66, 36);
+            this.btnClearrfid.TabIndex = 42;
+            this.btnClearrfid.Text = "Clear";
+            this.btnClearrfid.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearrfid.UseAccentColor = false;
+            this.btnClearrfid.UseVisualStyleBackColor = true;
+            this.btnClearrfid.Click += new System.EventHandler(this.btnClearrfid_Click);
             // 
             // txtSerialLog
             // 
             this.txtSerialLog.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSerialLog.Location = new System.Drawing.Point(781, 306);
-            this.txtSerialLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSerialLog.Location = new System.Drawing.Point(586, 249);
             this.txtSerialLog.Name = "txtSerialLog";
-            this.txtSerialLog.Size = new System.Drawing.Size(957, 230);
+            this.txtSerialLog.Size = new System.Drawing.Size(719, 188);
             this.txtSerialLog.TabIndex = 41;
             this.txtSerialLog.Text = "";
             // 
@@ -541,10 +546,9 @@
             // 
             this.lblPortStatus.AutoSize = true;
             this.lblPortStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortStatus.Location = new System.Drawing.Point(777, 276);
-            this.lblPortStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPortStatus.Location = new System.Drawing.Point(583, 224);
             this.lblPortStatus.Name = "lblPortStatus";
-            this.lblPortStatus.Size = new System.Drawing.Size(76, 19);
+            this.lblPortStatus.Size = new System.Drawing.Size(63, 13);
             this.lblPortStatus.TabIndex = 40;
             this.lblPortStatus.Text = "Port Status";
             // 
@@ -553,8 +557,7 @@
             this.lblRfid.AutoSize = true;
             this.lblRfid.Depth = 0;
             this.lblRfid.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblRfid.Location = new System.Drawing.Point(23, 268);
-            this.lblRfid.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRfid.Location = new System.Drawing.Point(17, 218);
             this.lblRfid.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblRfid.Name = "lblRfid";
             this.lblRfid.Size = new System.Drawing.Size(80, 19);
@@ -567,24 +570,22 @@
             this.txtRfidData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtRfidData.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtRfidData.Depth = 0;
-            this.txtRfidData.Enabled = false;
             this.txtRfidData.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtRfidData.HideSelection = true;
             this.txtRfidData.LeadingIcon = null;
-            this.txtRfidData.Location = new System.Drawing.Point(23, 306);
-            this.txtRfidData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRfidData.Location = new System.Drawing.Point(17, 249);
             this.txtRfidData.MaxLength = 32767;
             this.txtRfidData.MouseState = MaterialSkin.MouseState.OUT;
             this.txtRfidData.Name = "txtRfidData";
             this.txtRfidData.PasswordChar = '\0';
             this.txtRfidData.PrefixSuffixText = null;
-            this.txtRfidData.ReadOnly = false;
+            this.txtRfidData.ReadOnly = true;
             this.txtRfidData.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtRfidData.SelectedText = "";
             this.txtRfidData.SelectionLength = 0;
             this.txtRfidData.SelectionStart = 0;
             this.txtRfidData.ShortcutsEnabled = true;
-            this.txtRfidData.Size = new System.Drawing.Size(333, 48);
+            this.txtRfidData.Size = new System.Drawing.Size(250, 48);
             this.txtRfidData.TabIndex = 15;
             this.txtRfidData.TabStop = false;
             this.txtRfidData.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -598,8 +599,8 @@
             this.btnGenerate.Depth = 0;
             this.btnGenerate.HighEmphasis = true;
             this.btnGenerate.Icon = null;
-            this.btnGenerate.Location = new System.Drawing.Point(627, 31);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnGenerate.Location = new System.Drawing.Point(470, 25);
+            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGenerate.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -614,10 +615,9 @@
             // dgvDetailMTBuffer
             // 
             this.dgvDetailMTBuffer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailMTBuffer.Location = new System.Drawing.Point(781, 21);
-            this.dgvDetailMTBuffer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDetailMTBuffer.Location = new System.Drawing.Point(586, 17);
             this.dgvDetailMTBuffer.Name = "dgvDetailMTBuffer";
-            this.dgvDetailMTBuffer.Size = new System.Drawing.Size(959, 223);
+            this.dgvDetailMTBuffer.Size = new System.Drawing.Size(719, 181);
             this.dgvDetailMTBuffer.TabIndex = 13;
             // 
             // txtNoPlat
@@ -629,8 +629,7 @@
             this.txtNoPlat.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNoPlat.HideSelection = true;
             this.txtNoPlat.LeadingIcon = null;
-            this.txtNoPlat.Location = new System.Drawing.Point(23, 69);
-            this.txtNoPlat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNoPlat.Location = new System.Drawing.Point(17, 56);
             this.txtNoPlat.MaxLength = 32767;
             this.txtNoPlat.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNoPlat.Name = "txtNoPlat";
@@ -642,41 +641,20 @@
             this.txtNoPlat.SelectionLength = 0;
             this.txtNoPlat.SelectionStart = 0;
             this.txtNoPlat.ShortcutsEnabled = true;
-            this.txtNoPlat.Size = new System.Drawing.Size(333, 48);
+            this.txtNoPlat.Size = new System.Drawing.Size(250, 48);
             this.txtNoPlat.TabIndex = 1;
             this.txtNoPlat.TabStop = false;
             this.txtNoPlat.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtNoPlat.TrailingIcon = null;
             this.txtNoPlat.UseSystemPasswordChar = false;
             // 
-            // btnClearrfid
-            // 
-            this.btnClearrfid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearrfid.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearrfid.Depth = 0;
-            this.btnClearrfid.HighEmphasis = true;
-            this.btnClearrfid.Icon = null;
-            this.btnClearrfid.Location = new System.Drawing.Point(365, 312);
-            this.btnClearrfid.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.btnClearrfid.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearrfid.Name = "btnClearrfid";
-            this.btnClearrfid.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearrfid.Size = new System.Drawing.Size(66, 36);
-            this.btnClearrfid.TabIndex = 42;
-            this.btnClearrfid.Text = "Clear";
-            this.btnClearrfid.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearrfid.UseAccentColor = false;
-            this.btnClearrfid.UseVisualStyleBackColor = true;
-            this.btnClearrfid.Click += new System.EventHandler(this.btnClearrfid_Click);
-            // 
             // MobilTangkiForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1773, 636);
+            this.ClientSize = new System.Drawing.Size(1330, 517);
             this.Controls.Add(this.TCMobilTangki);
             this.Controls.Add(this.TabSelector);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MobilTangkiForm";
             this.Text = "MobilTangkiForm";
             this.Load += new System.EventHandler(this.MobilTangkiForm_Load);
