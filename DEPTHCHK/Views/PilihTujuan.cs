@@ -15,6 +15,7 @@ using MaterialSkin.Controls;
 using RegionOption = DEPTHCHK.Views.PengirimanForm.RegionOption;
 using OwnedOption = DEPTHCHK.Views.PengirimanForm.OwnedOption;
 
+
 namespace DEPTHCHK.Views
 {
     public partial class PilihTujuan : MaterialForm
@@ -96,6 +97,8 @@ namespace DEPTHCHK.Views
             RefreshGrid();
             UpdateActiveUi();
         }
+
+
 
         // ---------- Build compartments ----------
         private void BuildCompartments(int jlhCompartment, string[] initialCodes)
