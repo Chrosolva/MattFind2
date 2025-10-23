@@ -22,8 +22,5 @@ namespace DEPTHCHK.Models
         public string NamaRegional { get; set; }
         [StringLength(255)]
         public string NamaKepemilikan { get; set; }
-
-        // Navigation
-        public virtual ICollection<TblDetailPengiriman> DetailPengiriman { get; set; } = new HashSet<TblDetailPengiriman>();
     }
 }
