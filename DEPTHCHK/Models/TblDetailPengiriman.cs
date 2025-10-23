@@ -28,9 +28,6 @@ namespace DEPTHCHK.Models
         [StringLength(255)]
         public string Keterangan { get; set; }
 
-        [StringLength(12)]
-        public string KodeTujuan { get; set; }
-
         [ForeignKey(nameof(IDPengiriman))]
         public virtual TblPengiriman Pengiriman { get; set; }
 

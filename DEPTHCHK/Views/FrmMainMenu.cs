@@ -62,8 +62,8 @@ namespace DEPTHCHK.Views
             InitializeMenuPanel();
             // Pick sizes to your taste
             var appFonts = GlobalFontHelper.Resolve(
-                bodySize: 10f,           // typical body
-                headerSize: 10.5f,       // slightly larger headers
+                bodySize: 12f,           // typical body
+                headerSize: 12.5f,       // slightly larger headers
                 headerStyle: FontStyle.Bold
             );
 
@@ -236,7 +236,7 @@ namespace DEPTHCHK.Views
         private void InitializeMenuPanel()
         {
             // Add menu buttons
-            AddMenuButton("PENGIRIMAN", (s, e) => OpenChildForm(new PengirimanForm()), "OPERATOR", "SUPERADMIN");
+            AddMenuButton("PENGIRIMAN", (s, e) => OpenChildForm(new PengirimanFormNew()), "OPERATOR", "SUPERADMIN");
             AddMenuButton("MOBIL TANGKI", (s, e) => OpenChildForm(new MobilTangkiForm()), "ADMIN", "SUPERADMIN");
             AddMenuButton("TUJUAN", (s, e) => OpenChildForm(new DestinationForm()), "ADMIN", "SUPERADMIN");
             //AddMenuButton("HIS", (s, e) => OpenChildForm(new HistoryForm()), "ADMIN", "SUPERADMIN");
@@ -332,7 +332,7 @@ namespace DEPTHCHK.Views
         {
             // If the form requires the serial port, enforce that the port is open first
             bool requiresPort =
-                (childForm is PengirimanForm) ||
+                (childForm is PengirimanFormNew) ||
                 (childForm is MobilTangkiForm);
 
             //bool requiresPort = false;
@@ -341,7 +341,7 @@ namespace DEPTHCHK.Views
             if (_activeChild != null)
             {
                 try { (_activeChild as MobilTangkiForm)?.PrepareToClose(); } catch { }
-                try { (_activeChild as PengirimanForm)?.PrepareToClose(); } catch { }
+                try { (_activeChild as PengirimanFormNew)?.PrepareToClose(); } catch { }
                 try { _activeChild.Dispose(); } catch { }
                 _activeChild = null;
             }
@@ -372,8 +372,8 @@ namespace DEPTHCHK.Views
             childForm.Dock = DockStyle.Fill;
 
             var appFonts = GlobalFontHelper.Resolve(
-                bodySize: 10f,           // typical body
-                headerSize: 10.5f,       // slightly larger headers
+                bodySize: 12f,           // typical body
+                headerSize: 12.5f,       // slightly larger headers
                 headerStyle: FontStyle.Bold
             );
 

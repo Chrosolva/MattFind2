@@ -19,9 +19,6 @@ namespace DEPTHCHK.Models
         [Column(TypeName = "char"), StringLength(4)]
         public string RfidData { get; set; } // NEW: 4‑char RFID (two bytes)
 
-        [StringLength(300)]
-        public string Tujuan { get; set; }
-
         [StringLength(50)]
         public string Status { get; set; }
 

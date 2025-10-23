@@ -36,7 +36,7 @@ namespace DEPTHCHK
 
         public static SerialPort GlobalPort { get; private set; }
 
-        public static bool IsPortOpen => GlobalPort?.IsOpen ?? false;
+        public static bool IsPortOpen => GlobalPort?.IsOpen ?? false;   
 
         // NEW: second port
         public static SerialPort GlobalPort2 { get; private set; }

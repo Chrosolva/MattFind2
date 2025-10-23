@@ -1,3 +1,8 @@
-send $07 $00 $EE $00 $87 $9B $F7 $E5
-
-
+send chr($07)
+send chr($00)
+send chr($EE)
+send chr($00)
+send chr($87)
+send chr($9B)
+send chr($F7)
+send chr($E5)

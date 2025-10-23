@@ -254,8 +254,6 @@ namespace DEPTHCHK.Views
                         q = q.Where(p => p.IDPengiriman.Contains(term));
                     else if (by == "NoPlat")
                         q = q.Where(p => p.NoPlat.Contains(term));
-                    else if (by == "Tujuan")
-                        q = q.Where(p => p.Tujuan.Contains(term));
                     else if (by == "Status")
                         q = q.Where(p => p.Status.Contains(term));
                     else if (by == "UserID")
@@ -268,7 +266,6 @@ namespace DEPTHCHK.Views
                         IDPengiriman = p.IDPengiriman,
                         Tgl_Input = p.Tgl_Input,
                         NoPlat = p.NoPlat,
-                        Tujuan = p.Tujuan,
                         Status = p.Status,
                         UserID = p.UserID,
                         UserName = (p.User != null ? p.User.UserName : null),
@@ -890,7 +887,6 @@ namespace DEPTHCHK.Views
             master.IDPengiriman = newId;
             master.Tgl_Input = now;
             master.NoPlat = lblNoPlat.Text;
-            master.Tujuan = txtTujuan.Text;
             master.RfidData = lblRFID.Text.Trim().PadRight(4).Substring(0, 4); // or use a field storing the scanned RFID
             master.Status = "DIKIRIM";    // or another status
             master.UserID = Session.CurrentUser.UserID;     // set your current user id
@@ -910,7 +906,6 @@ namespace DEPTHCHK.Views
                 det.DataKalibrasi = lr.DataKalibrasi;
                 det.Satuan = lr.Satuan;
                 det.Keterangan = lr.Keterangan;
-                det.KodeTujuan = lr.KodeTujuan;
                 _db.DetailPengirimans.Add(det);
             }
 
@@ -1007,8 +1002,7 @@ namespace DEPTHCHK.Views
                         header.NoPlat,
                         mobil?.Type,
                         mobil?.JlhCompartment ?? (object)DBNull.Value,
-                        mobil?.Capacity ?? (object)DBNull.Value,
-                        header.Tujuan
+                        mobil?.Capacity ?? (object)DBNull.Value
                     );
                 }
 
@@ -1029,8 +1023,7 @@ namespace DEPTHCHK.Views
                         d.DetailMT != null ? (decimal?)d.DetailMT.Kalibrasi ?? 0 : 0m,
                         d.DataKalibrasi ?? 0m,
                         d.Satuan,
-                        d.Keterangan,
-                        d.KodeTujuan
+                        d.Keterangan
                     );
                 }
             }
