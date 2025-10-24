@@ -180,7 +180,7 @@
             this.ContentCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.ContentCard.Name = "ContentCard";
             this.ContentCard.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ContentCard.Size = new System.Drawing.Size(1281, 571);
+            this.ContentCard.Size = new System.Drawing.Size(1076, 571);
             this.ContentCard.TabIndex = 22;
             // 
             // btnBackUP

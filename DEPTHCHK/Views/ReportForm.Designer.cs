@@ -61,8 +61,9 @@
             this.leftpanel.Controls.Add(this.dtpTo);
             this.leftpanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.leftpanel.Location = new System.Drawing.Point(0, 0);
+            this.leftpanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.leftpanel.Name = "leftpanel";
-            this.leftpanel.Size = new System.Drawing.Size(1243, 87);
+            this.leftpanel.Size = new System.Drawing.Size(1133, 107);
             this.leftpanel.TabIndex = 1;
             // 
             // cbxJenisLaporan
@@ -80,11 +81,12 @@
             this.cbxJenisLaporan.Hint = "REPROT TYPE";
             this.cbxJenisLaporan.IntegralHeight = false;
             this.cbxJenisLaporan.ItemHeight = 43;
-            this.cbxJenisLaporan.Location = new System.Drawing.Point(12, 27);
+            this.cbxJenisLaporan.Location = new System.Drawing.Point(16, 33);
+            this.cbxJenisLaporan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxJenisLaporan.MaxDropDownItems = 4;
             this.cbxJenisLaporan.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxJenisLaporan.Name = "cbxJenisLaporan";
-            this.cbxJenisLaporan.Size = new System.Drawing.Size(262, 49);
+            this.cbxJenisLaporan.Size = new System.Drawing.Size(268, 49);
             this.cbxJenisLaporan.StartIndex = 0;
             this.cbxJenisLaporan.TabIndex = 0;
             // 
@@ -95,8 +97,8 @@
             this.btnExportExcel.Depth = 0;
             this.btnExportExcel.HighEmphasis = true;
             this.btnExportExcel.Icon = null;
-            this.btnExportExcel.Location = new System.Drawing.Point(969, 30);
-            this.btnExportExcel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExportExcel.Location = new System.Drawing.Point(959, 55);
+            this.btnExportExcel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnExportExcel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -106,6 +108,7 @@
             this.btnExportExcel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnExportExcel.UseAccentColor = false;
             this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Visible = false;
             // 
             // materialLabel10
             // 
@@ -113,7 +116,8 @@
             this.materialLabel10.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.materialLabel10.Depth = 0;
             this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel10.Location = new System.Drawing.Point(537, 10);
+            this.materialLabel10.Location = new System.Drawing.Point(581, 12);
+            this.materialLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel10.Name = "materialLabel10";
             this.materialLabel10.Size = new System.Drawing.Size(211, 19);
@@ -127,8 +131,8 @@
             this.btnExportPDF.Depth = 0;
             this.btnExportPDF.HighEmphasis = true;
             this.btnExportPDF.Icon = null;
-            this.btnExportPDF.Location = new System.Drawing.Point(853, 30);
-            this.btnExportPDF.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExportPDF.Location = new System.Drawing.Point(959, 12);
+            this.btnExportPDF.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnExportPDF.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -153,11 +157,12 @@
             this.cbxNoPlat.FormattingEnabled = true;
             this.cbxNoPlat.IntegralHeight = false;
             this.cbxNoPlat.ItemHeight = 43;
-            this.cbxNoPlat.Location = new System.Drawing.Point(307, 27);
+            this.cbxNoPlat.Location = new System.Drawing.Point(302, 33);
+            this.cbxNoPlat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbxNoPlat.MaxDropDownItems = 4;
             this.cbxNoPlat.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxNoPlat.Name = "cbxNoPlat";
-            this.cbxNoPlat.Size = new System.Drawing.Size(197, 49);
+            this.cbxNoPlat.Size = new System.Drawing.Size(261, 49);
             this.cbxNoPlat.StartIndex = 0;
             this.cbxNoPlat.TabIndex = 39;
             // 
@@ -168,8 +173,8 @@
             this.btnPreview.Depth = 0;
             this.btnPreview.HighEmphasis = true;
             this.btnPreview.Icon = null;
-            this.btnPreview.Location = new System.Drawing.Point(762, 30);
-            this.btnPreview.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPreview.Location = new System.Drawing.Point(866, 12);
+            this.btnPreview.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnPreview.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -182,9 +187,10 @@
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Location = new System.Drawing.Point(537, 30);
+            this.dtpFrom.Location = new System.Drawing.Point(581, 37);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(200, 20);
+            this.dtpFrom.Size = new System.Drawing.Size(265, 22);
             this.dtpFrom.TabIndex = 36;
             // 
             // materialLabel1
@@ -193,7 +199,8 @@
             this.materialLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(304, 5);
+            this.materialLabel1.Location = new System.Drawing.Point(299, 10);
+            this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(62, 19);
@@ -202,38 +209,43 @@
             // 
             // dtpTo
             // 
-            this.dtpTo.Location = new System.Drawing.Point(537, 56);
+            this.dtpTo.Location = new System.Drawing.Point(581, 69);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(200, 20);
+            this.dtpTo.Size = new System.Drawing.Size(265, 22);
             this.dtpTo.TabIndex = 37;
             // 
             // TCReport
             // 
             this.TCReport.Controls.Add(this.TPReportViewer);
             this.TCReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TCReport.Location = new System.Drawing.Point(0, 87);
+            this.TCReport.Location = new System.Drawing.Point(0, 107);
+            this.TCReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TCReport.Name = "TCReport";
             this.TCReport.SelectedIndex = 0;
-            this.TCReport.Size = new System.Drawing.Size(1243, 557);
+            this.TCReport.Size = new System.Drawing.Size(1133, 686);
             this.TCReport.TabIndex = 2;
             // 
             // TPReportViewer
             // 
             this.TPReportViewer.Controls.Add(this.StatusStrip);
             this.TPReportViewer.Controls.Add(this.crViewer);
-            this.TPReportViewer.Location = new System.Drawing.Point(4, 22);
+            this.TPReportViewer.Location = new System.Drawing.Point(4, 25);
+            this.TPReportViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TPReportViewer.Name = "TPReportViewer";
-            this.TPReportViewer.Padding = new System.Windows.Forms.Padding(3);
-            this.TPReportViewer.Size = new System.Drawing.Size(1235, 531);
+            this.TPReportViewer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TPReportViewer.Size = new System.Drawing.Size(1125, 657);
             this.TPReportViewer.TabIndex = 0;
             this.TPReportViewer.Text = "REPORT VIEWER";
             this.TPReportViewer.UseVisualStyleBackColor = true;
             // 
             // StatusStrip
             // 
-            this.StatusStrip.Location = new System.Drawing.Point(3, 506);
+            this.StatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.StatusStrip.Location = new System.Drawing.Point(4, 631);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(1229, 22);
+            this.StatusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.StatusStrip.Size = new System.Drawing.Size(1117, 22);
             this.StatusStrip.TabIndex = 2;
             this.StatusStrip.Text = "statusStrip1";
             // 
@@ -244,18 +256,21 @@
             this.crViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crViewer.Cursor = System.Windows.Forms.Cursors.Default;
             this.crViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crViewer.Location = new System.Drawing.Point(3, 3);
+            this.crViewer.Location = new System.Drawing.Point(4, 4);
+            this.crViewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.crViewer.Name = "crViewer";
-            this.crViewer.Size = new System.Drawing.Size(1229, 525);
+            this.crViewer.Size = new System.Drawing.Size(1117, 649);
             this.crViewer.TabIndex = 1;
+            this.crViewer.ToolPanelWidth = 267;
             // 
             // ReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1243, 644);
+            this.ClientSize = new System.Drawing.Size(1133, 793);
             this.Controls.Add(this.TCReport);
             this.Controls.Add(this.leftpanel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ReportForm";
             this.Text = "ReportForm";
             this.Load += new System.EventHandler(this.ReportForm_Load);

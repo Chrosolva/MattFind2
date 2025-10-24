@@ -65,6 +65,7 @@ namespace DEPTHCHK.Views
             public string Keterangan { get; set; }
             public int Kalibrasi { get; set; }
             public bool Positive { get; set; }
+            public decimal Suhu { get; set; }
         }
 
         /// <summary>
@@ -140,11 +141,22 @@ namespace DEPTHCHK.Views
             dgvPengirimanLive.Columns.Clear();
             dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "PartID", DataPropertyName = "PartID", HeaderText = "PartID", ReadOnly = true });
             dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "DataBacaan", DataPropertyName = "DataBacaan", HeaderText = "Bacaan", ReadOnly = true });
-            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Kalibrasi", DataPropertyName = "Kalibrasi", HeaderText = "Kalib", ReadOnly = true, Visible = true });
+            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Kalibrasi", DataPropertyName = "Kalibrasi", HeaderText = "Kalib", ReadOnly = true, Visible = false });
             dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "DataKalibrasi", DataPropertyName = "DataKalibrasi", HeaderText = "Hasil", ReadOnly = true });
-            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Keterangan", DataPropertyName = "Keterangan", HeaderText = "Status", ReadOnly = true, Visible = false });
-            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Satuan", DataPropertyName = "Satuan", HeaderText = "Unit", ReadOnly = true });
-            dgvPengirimanLive.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Positive", DataPropertyName = "Positive", HeaderText = "Pos", ReadOnly = true });
+            // ✅ ComboBox for Keterangan
+            var comboCol = new DataGridViewComboBoxColumn
+            {
+                Name = "Keterangan",
+                DataPropertyName = "Keterangan",
+                HeaderText = "KET",
+                ReadOnly = false,
+                FlatStyle = FlatStyle.Popup
+            };
+            comboCol.Items.AddRange("Pertamax", "Pertamax Turbo", "Pertalite", "Dex", "Dexlite", "Solar");
+            dgvPengirimanLive.Columns.Add(comboCol);
+            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Satuan", DataPropertyName = "Satuan", HeaderText = "Unit", ReadOnly = true, Visible = false });
+            dgvPengirimanLive.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Positive", DataPropertyName = "Positive", HeaderText = "Pos", ReadOnly = false, Visible = false });
+            dgvPengirimanLive.Columns.Add(new DataGridViewTextBoxColumn { Name = "Suhu", DataPropertyName = "Suhu", HeaderText = "Suhu", ReadOnly = false, Visible = true });
         }
 
         private void InitSerial()
@@ -246,13 +258,29 @@ namespace DEPTHCHK.Views
             {
                 while (sp.IsOpen)
                 {
-                    string line = sp.ReadLine();
+                    string line = sp.ReadLine().Trim(); // trim to avoid \r\n issues
+
+                    // Check if measurement
                     Match m = Regex.Match(line, @"\*(\d+)#");
                     if (m.Success)
                     {
                         int val;
-                        int.TryParse(m.Groups[1].Value, out val);
-                        BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val); }));
+                        if (int.TryParse(m.Groups[1].Value, out val))
+                        {
+                            BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val); }));
+                        }
+                        continue;
+                    }
+
+                    // ✅ Check if it's the save command signal
+                    if (line == "[1]")
+                    {
+                        BeginInvoke(new MethodInvoker(delegate
+                        {
+                            txtSerialLog.AppendText("Received Order to Save and Print" + Environment.NewLine);
+                            SaveAndPrint();
+                        }));
+                        continue;
                     }
                 }
             }
@@ -273,15 +301,14 @@ namespace DEPTHCHK.Views
                 row.DataKalibrasi = value + row.Kalibrasi;
             else
                 row.DataKalibrasi = value - row.Kalibrasi;
-            row.Keterangan = "ACTIVE";
+            row.Keterangan = "Pertamax";
             dgvPengirimanLive.Refresh();
             _currentPartIndex++;
             if (_currentPartIndex >= _liveRows.Count)
             {
                 _listening = false;
-                txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + Environment.NewLine);
-                txtSerialLog.AppendText("LISTENING NEXT COMPARTMENT " + Environment.NewLine);
             }
+            txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + "NEXT COMP " + Environment.NewLine);
         }
 
         private void PopulateLiveGrid(string noPlat)
@@ -296,13 +323,19 @@ namespace DEPTHCHK.Views
                 row.DataBacaan = 0;
                 row.DataKalibrasi = 0;
                 row.Satuan = "mm";
-                row.Keterangan = "INACTIVE";
+                row.Keterangan = "Pertamax"; // ✅ default value
                 row.Kalibrasi = d.Kalibrasi.HasValue ? d.Kalibrasi.Value : 0;
                 row.Positive = d.Positive.HasValue ? d.Positive.Value : false;
+                row.Suhu = 0;
                 _liveRows.Add(row);
             }
             dgvPengirimanLive.DataSource = null;
             dgvPengirimanLive.DataSource = _liveRows;
+            dgvPengirimanLive.Columns["PartID"].Width = 145;
+            dgvPengirimanLive.Columns["DataBacaan"].Width = 45;
+            dgvPengirimanLive.Columns["DataKalibrasi"].Width = 45;
+            dgvPengirimanLive.Columns["Keterangan"].Width = 110;
+            dgvPengirimanLive.Columns["Suhu"].Width = 52;
         }
 
         private void UpdatePortStatus()
@@ -361,6 +394,8 @@ namespace DEPTHCHK.Views
             }).ToList();
             _bsPeng.DataSource = data;
             LoadDetailForSelected();
+            dgvPengiriman.Columns[0].Width = 30;
+            dgvPengiriman.Columns["Tgl_Input"].Width = 200;
         }
 
         private void LoadDetailForSelected()
@@ -384,10 +419,14 @@ namespace DEPTHCHK.Views
                 Label lblPlat = uc.Controls["lblNoPlat"] as Label;
                 Label lblBacaan = uc.Controls["lblDataBacaan"] as Label;
                 Label lblKalib = uc.Controls["lblDataKalibrasi"] as Label;
+                Label lblKet = uc.Controls["lblKeterangan"] as Label;
+                Label lblSuhu = uc.Controls["lblSuhu"] as Label;
                 if (lblPart != null) lblPart.Text = det.PartID;
                 if (lblPlat != null) lblPlat.Text = det.NoPlat;
+                if (lblKet != null) lblKet.Text = det.Keterangan;
                 if (lblBacaan != null) lblBacaan.Text = det.DataBacaan.HasValue ? det.DataBacaan.Value.ToString() : "-";
                 if (lblKalib != null) lblKalib.Text = det.DataKalibrasi.HasValue ? det.DataKalibrasi.Value.ToString() : "-";
+                if (lblSuhu != null) lblSuhu.Text = det.Suhu.HasValue ? det.Suhu.Value.ToString("#,0.##") : "-";
                 FLDetailPengiriman.Controls.Add(uc);
             }
         }
@@ -409,7 +448,7 @@ namespace DEPTHCHK.Views
 
         private void SendAckGet()
         {
-            // send "[1]" to measurement port and start listening
+            // send "?" to measurement port and start listening
             if (_measPort == null || !_measPort.IsOpen)
             {
                 MessageBox.Show("Measurement port not open.");
@@ -417,10 +456,9 @@ namespace DEPTHCHK.Views
             }
             try
             {
-                _measPort.Write("[1]");
+                _measPort.Write("?" + Environment.NewLine);
                 _listening = true;
-                _currentPartIndex = 0;
-                txtSerialLog.AppendText("Sent [1] to measurement port." + Environment.NewLine);
+                txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
             }
             catch (Exception ex)
             {
@@ -435,8 +473,8 @@ namespace DEPTHCHK.Views
             {
                 try
                 {
-                    _measPort.Write("[2]");
-                    txtSerialLog.AppendText("Sent [2] to measurement port." + Environment.NewLine);
+                    //_measPort.Write("SAVE DATA AND PRINT");
+                    //txtSerialLog.AppendText("SAVE DATA AND PRINT." + Environment.NewLine);
                 }
                 catch
                 {
@@ -472,6 +510,7 @@ namespace DEPTHCHK.Views
                 detail.DataKalibrasi = row.DataKalibrasi;
                 detail.Satuan = row.Satuan;
                 detail.Keterangan = row.Keterangan;
+                detail.Suhu = row.Suhu;
                 _db.DetailPengirimans.Add(detail);
             }
             _db.SaveChanges();
@@ -541,6 +580,7 @@ namespace DEPTHCHK.Views
             dtDetail.Columns.Add("DataKalibrasi", typeof(int));
             dtDetail.Columns.Add("Satuan");
             dtDetail.Columns.Add("Keterangan");
+            dtDetail.Columns.Add("Suhu", typeof(decimal));
             ds.Tables.Add(dtHeader);
             ds.Tables.Add(dtDetail);
 
@@ -576,6 +616,7 @@ namespace DEPTHCHK.Views
                         kalib = d.DetailMT.Kalibrasi.Value;
                     int dataBacaan = d.DataBacaan.HasValue ? d.DataBacaan.Value : 0;
                     int dataKalibrasi = d.DataKalibrasi.HasValue ? d.DataKalibrasi.Value : 0;
+                    decimal suhu = d.Suhu.HasValue ? d.Suhu.Value : 0m;
 
                     dtDetail.Rows.Add(id,
                                       d.PartID,
@@ -583,7 +624,8 @@ namespace DEPTHCHK.Views
                                       kalib,
                                       dataKalibrasi,
                                       d.Satuan,
-                                      d.Keterangan);
+                                      d.Keterangan,
+                                      suhu);
                 }
             }
             if (ds.Relations["Header_Detail"] == null)
@@ -794,6 +836,11 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman, false);
             DataGridViewHelper.ApplyDefaultStyle(dgvPengirimanLive, false);
             BtnFilter_Click(null, null);
+            txtSerialLog.Font = new Font("Segoe UI", 16f, FontStyle.Bold);
+            dgvPengiriman.Font = new Font("Segoe UI", 12f);
+            dgvPengirimanLive.Font = new Font("Segoe UI", 12f);
         }
+
+        
     }
 }

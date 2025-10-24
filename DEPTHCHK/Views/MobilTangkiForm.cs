@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
@@ -28,6 +29,8 @@ namespace DEPTHCHK.Views
         private readonly BindingSource _bsDetail = new BindingSource();
 
         private SerialPort _serialPort => Session.GlobalPort;
+        private SerialPort _measPort { get { return Session.GlobalPort2; } }
+        private SerialDataReceivedEventHandler _measHandler;
         private SerialDataReceivedEventHandler _dataReceivedHandler;
 
         public MobilTangkiForm()
@@ -66,6 +69,46 @@ namespace DEPTHCHK.Views
             {
                 UpdateUiForPortState(false);
             }
+
+            if (_measPort != null && _measHandler == null)
+            {
+                _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
+                _measPort.DataReceived += _measHandler;
+            }
+        }
+
+        private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            // measurement lines like *45000#
+            var sp = _measPort;
+            try
+            {
+                while (sp.IsOpen)
+                {
+                    string line = sp.ReadLine().Trim(); // trim to avoid \r\n issues
+
+                    // Check if measurement
+                    Match m = Regex.Match(line, @"\*(\d+)#");
+                    if (m.Success)
+                    {
+                        int val;
+                        if (int.TryParse(m.Groups[1].Value, out val))
+                        {
+                            BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val); }));
+                        }
+                        continue;
+                    }
+                }
+            }
+            catch
+            {
+                // ignore timeouts or errors
+            }
+        }
+
+        private void OnMeasurementReceived(int value)
+        {
+            txtSerialLog.AppendText("Measurement VALUE = " + value.ToString("N0") + Environment.NewLine);
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -88,10 +131,36 @@ namespace DEPTHCHK.Views
         private void UpdateUiForPortState(bool connected)
         {
 
-            lblPortStatus.Text = connected
-                ? "Connected: " + _serialPort.PortName + " @ " + _serialPort.BaudRate
-                : "Disconnected";
+            //lblPortStatus.Text = connected
+            //    ? "Connected: " + _serialPort.PortName + " @ " + _serialPort.BaudRate
+            //    : "Disconnected";
+            
+
+            List<string> parts = new List<string>();
+            if (_serialPort != null)
+            {
+                if (_serialPort.IsOpen)
+                {
+                    parts.Add("RFID " + _serialPort.PortName);
+                }
+                else
+                {
+                    parts.Add("RFID closed");
+                }
+            }
+            if (_measPort != null)
+            {
+                if (_measPort.IsOpen)
+                {
+                    parts.Add("MEAS " + _measPort.PortName);
+                }
+                else
+                {
+                    parts.Add("MEAS closed");
+                }
+            }
             lblPortStatus.ForeColor = connected ? Color.ForestGreen : Color.Firebrick;
+            lblPortStatus.Text = string.Join(" | ", parts.ToArray());
         }
 
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -218,6 +287,8 @@ namespace DEPTHCHK.Views
             dgvMobilTangki.SelectionChanged += DgvMobilTangki_SelectionChanged;
             LoadMobilTangki();
             MaterialTabHelper.ApplyStyle(TabSelector, TCMobilTangki);
+            txtSerialLog.Font = new Font("Segoe UI", 16f, FontStyle.Bold);
+            txtSerialLog.BackColor = Color.FromArgb(12, 32, 30);
         }
 
         private void StyleTextBoxDisabled(MaterialSkin.Controls.MaterialTextBox2 txt)
@@ -902,6 +973,30 @@ namespace DEPTHCHK.Views
         private void btnClearrfid_Click(object sender, EventArgs e)
         {
             txtRfidData.Text = "";
+        }
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+            SendAckGet();
+        }
+
+        private void SendAckGet()
+        {
+            // send "?" to measurement port and start listening
+            if (_measPort == null || !_measPort.IsOpen)
+            {
+                MessageBox.Show("Measurement port not open.");
+                return;
+            }
+            try
+            {
+                _measPort.Write("?" + Environment.NewLine);
+                txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send ACK: " + ex.Message);
+            }
         }
     }
 }

@@ -768,6 +768,8 @@ namespace DEPTHCHK.Reports {
             
             private global::System.Data.DataColumn columnKodeTujuan;
             
+            private global::System.Data.DataColumn columnSuhu;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DetailDataTable() {
@@ -875,6 +877,14 @@ namespace DEPTHCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SuhuColumn {
+                get {
+                    return this.columnSuhu;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -910,7 +920,7 @@ namespace DEPTHCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DetailRow AddDetailRow(string IDPengiriman, string PartID, string CompartmentID, decimal DataBacaan, decimal Kalibrasi, decimal DataKalibrasi, string Satuan, string Keterangan, string KodeTujuan) {
+            public DetailRow AddDetailRow(string IDPengiriman, string PartID, string CompartmentID, decimal DataBacaan, decimal Kalibrasi, decimal DataKalibrasi, string Satuan, string Keterangan, string KodeTujuan, decimal Suhu) {
                 DetailRow rowDetailRow = ((DetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDPengiriman,
@@ -921,7 +931,8 @@ namespace DEPTHCHK.Reports {
                         DataKalibrasi,
                         Satuan,
                         Keterangan,
-                        KodeTujuan};
+                        KodeTujuan,
+                        Suhu};
                 rowDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDetailRow);
                 return rowDetailRow;
@@ -953,6 +964,7 @@ namespace DEPTHCHK.Reports {
                 this.columnSatuan = base.Columns["Satuan"];
                 this.columnKeterangan = base.Columns["Keterangan"];
                 this.columnKodeTujuan = base.Columns["KodeTujuan"];
+                this.columnSuhu = base.Columns["Suhu"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -976,6 +988,8 @@ namespace DEPTHCHK.Reports {
                 base.Columns.Add(this.columnKeterangan);
                 this.columnKodeTujuan = new global::System.Data.DataColumn("KodeTujuan", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnKodeTujuan);
+                this.columnSuhu = new global::System.Data.DataColumn("Suhu", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSuhu);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2424,6 +2438,22 @@ namespace DEPTHCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal Suhu {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDetail.SuhuColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Suhu\' in table \'Detail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetail.SuhuColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsIDPengirimanNull() {
                 return this.IsNull(this.tableDetail.IDPengirimanColumn);
             }
@@ -2528,6 +2558,18 @@ namespace DEPTHCHK.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetKodeTujuanNull() {
                 this[this.tableDetail.KodeTujuanColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSuhuNull() {
+                return this.IsNull(this.tableDetail.SuhuColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSuhuNull() {
+                this[this.tableDetail.SuhuColumn] = global::System.Convert.DBNull;
             }
         }
         

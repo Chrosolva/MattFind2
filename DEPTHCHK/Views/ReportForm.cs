@@ -209,7 +209,7 @@ namespace DEPTHCHK.Views
                 sfd.FileName = "SummaryReport.xlsx";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    _reportDoc.ExportToDisk(ExportFormatType.ExcelWorkbook, sfd.FileName);
+                    _reportDoc.ExportToDisk(ExportFormatType.Excel, sfd.FileName);
                     MessageBox.Show("Report exported to Excel successfully.");
                 }
             }

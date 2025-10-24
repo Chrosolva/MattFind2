@@ -27,6 +27,7 @@ namespace DEPTHCHK.Models
 
         [StringLength(255)]
         public string Keterangan { get; set; }
+        public decimal? Suhu { get; set; }
 
         [ForeignKey(nameof(IDPengiriman))]
         public virtual TblPengiriman Pengiriman { get; set; }
