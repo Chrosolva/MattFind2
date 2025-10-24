@@ -88,7 +88,7 @@
             // NUDBaudRate
             // 
             this.NUDBaudRate.Location = new System.Drawing.Point(132, 230);
-            this.NUDBaudRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NUDBaudRate.Margin = new System.Windows.Forms.Padding(4);
             this.NUDBaudRate.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -132,7 +132,7 @@
             this.cbxPort.IntegralHeight = false;
             this.cbxPort.ItemHeight = 43;
             this.cbxPort.Location = new System.Drawing.Point(7, 110);
-            this.cbxPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPort.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPort.MaxDropDownItems = 4;
             this.cbxPort.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxPort.Name = "cbxPort";
@@ -171,7 +171,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContentCard.AutoScroll = true;
-            this.ContentCard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ContentCard.AutoScrollMinSize = new System.Drawing.Size(1200, 500);
             this.ContentCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ContentCard.Depth = 0;
             this.ContentCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -223,7 +223,7 @@
             this.panelMenu2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(148)))), ((int)(((byte)(136)))));
             this.panelMenu2.Location = new System.Drawing.Point(221, 26);
-            this.panelMenu2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMenu2.Margin = new System.Windows.Forms.Padding(4);
             this.panelMenu2.Name = "panelMenu2";
             this.panelMenu2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.panelMenu2.Size = new System.Drawing.Size(1210, 44);
@@ -245,7 +245,7 @@
             this.cbxPort2.IntegralHeight = false;
             this.cbxPort2.ItemHeight = 43;
             this.cbxPort2.Location = new System.Drawing.Point(7, 214);
-            this.cbxPort2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxPort2.Margin = new System.Windows.Forms.Padding(4);
             this.cbxPort2.MaxDropDownItems = 4;
             this.cbxPort2.MouseState = MaterialSkin.MouseState.OUT;
             this.cbxPort2.Name = "cbxPort2";
@@ -268,7 +268,7 @@
             // baudrateRFID
             // 
             this.baudrateRFID.Location = new System.Drawing.Point(132, 126);
-            this.baudrateRFID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.baudrateRFID.Margin = new System.Windows.Forms.Padding(4);
             this.baudrateRFID.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -394,7 +394,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1439, 666);
+            this.ClientSize = new System.Drawing.Size(1300, 666);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.cbxTimeZone);
             this.Controls.Add(this.btnSetActive);

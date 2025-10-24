@@ -13,6 +13,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace DEPTHCHK.Views
 {
@@ -56,7 +57,6 @@ namespace DEPTHCHK.Views
             );
 
 
-            this.IsMdiContainer = false;
         }
 
         private void FrmMainMenu_Load(object sender, EventArgs e)
@@ -492,5 +492,62 @@ namespace DEPTHCHK.Views
         {
 
         }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            ApplyMaximizedBounds();
+        }
+
+        private void ApplyMaximizedBounds()
+        {
+            // Clamp to monitor’s working area (excludes taskbar) — fixes 125% overshoot
+            var scr = Screen.FromHandle(this.Handle);
+            this.MaximizedBounds = scr.WorkingArea;
+        }
+
+        // Hard clamp via window message (works on all WinForms versions)
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_GETMINMAXINFO = 0x0024;
+            const int WM_DPICHANGED = 0x02E0; // sent when moving between different DPI monitors
+
+            if (m.Msg == WM_GETMINMAXINFO)
+            {
+                var wa = Screen.FromHandle(this.Handle).WorkingArea;
+                var mmi = Marshal.PtrToStructure<MINMAXINFO>(m.LParam);
+                mmi.ptMaxPosition = new POINT(wa.Left, wa.Top);
+                mmi.ptMaxSize = new POINT(wa.Width, wa.Height);
+                mmi.ptMaxTrackSize = new POINT(wa.Width, wa.Height);
+                Marshal.StructureToPtr(mmi, m.LParam, true);
+                base.WndProc(ref m);
+                return;
+            }
+            else if (m.Msg == WM_DPICHANGED)
+            {
+                // Re-apply bounds when DPI changes at runtime
+                ApplyMaximizedBounds();
+
+                // If Windows provides a suggested rect, apply it (optional but nice)
+                // lParam points to a RECT* with suggested new size/position.
+                // You can read it if you want tighter control.
+            }
+
+            base.WndProc(ref m);
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct POINT { public int X; public int Y; public POINT(int x, int y) { X = x; Y = y; } }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct MINMAXINFO
+        {
+            public POINT ptReserved;
+            public POINT ptMaxSize;
+            public POINT ptMaxPosition;
+            public POINT ptMinTrackSize;
+            public POINT ptMaxTrackSize;
+        }
+
     }
 }
