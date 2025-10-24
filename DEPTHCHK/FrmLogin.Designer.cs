@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.txtServerAdd = new MaterialSkin.Controls.MaterialTextBox2();
             this.btnLogin = new MaterialSkin.Controls.MaterialButton();
@@ -190,6 +191,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.txtUserID);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLogin";
             this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);

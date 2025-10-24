@@ -43,6 +43,8 @@ namespace DEPTHCHK.Views
             // Use DARK so teal/orange pops
             skinManager.Theme = MaterialSkinManager.Themes.DARK;
             this.Font = new Font("Tahoma", 10f, FontStyle.Regular);
+            // make the manager keep your BackColor values
+            skinManager.EnforceBackcolorOnAllComponents = true;
 
             // If your MaterialSkin2 has these enums, use them:
             skinManager.ColorScheme = new ColorScheme(
@@ -238,7 +240,7 @@ namespace DEPTHCHK.Views
             // Add menu buttons
             AddMenuButton("PENGIRIMAN", (s, e) => OpenChildForm(new PengirimanFormNew()), "OPERATOR", "SUPERADMIN");
             AddMenuButton("MOBIL TANGKI", (s, e) => OpenChildForm(new MobilTangkiForm()), "ADMIN", "SUPERADMIN");
-            AddMenuButton("TUJUAN", (s, e) => OpenChildForm(new DestinationForm()), "ADMIN", "SUPERADMIN");
+            //AddMenuButton("TUJUAN", (s, e) => OpenChildForm(new DestinationForm()), "ADMIN", "SUPERADMIN");
             //AddMenuButton("HIS", (s, e) => OpenChildForm(new HistoryForm()), "ADMIN", "SUPERADMIN");
             AddMenuButton("REPORT", (s, e) => OpenChildForm(new ReportForm()), "ADMIN", "SUPERADMIN");
             AddMenuButton("USER", (s, e) => OpenChildForm(new AdminMenuForm()), "ADMIN", "SUPERADMIN");

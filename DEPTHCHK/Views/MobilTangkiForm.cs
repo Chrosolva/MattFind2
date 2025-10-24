@@ -140,8 +140,7 @@ namespace DEPTHCHK.Views
             }
         }
 
-        private void ProcessRfidFrame(byte[] frame)
-        {
+        private void ProcessRfidFrame(byte[] frame)        {
             // check header
             bool okHeader = frame[0] == 0x07 && frame[1] == 0x00 &&
                             frame[2] == 0xEE && frame[3] == 0x00;
@@ -554,7 +553,7 @@ namespace DEPTHCHK.Views
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
+                SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Export DEPTHCHK Excel";
             sfd.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
             sfd.FileName = "DEPTHCHK_Export_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".xlsx";

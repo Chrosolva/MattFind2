@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DEPTHCHK.Data;
 using DEPTHCHK.Models;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace DEPTHCHK.Views
 {
@@ -23,7 +25,7 @@ namespace DEPTHCHK.Views
     /// are measured the operator can Save and Print to persist the shipment and
     /// produce a ticket.
     /// </summary>
-    public partial class PengirimanFormNew : Form
+    public partial class PengirimanFormNew : MaterialForm
     {
         private readonly depthchkDBContext _db;
 
@@ -177,10 +179,16 @@ namespace DEPTHCHK.Views
                     if (read == 8)
                     {
                         // header 07 00 EE 00
+                        string fullframe = "";
+                        foreach(byte x in frame)
+                        {
+                            fullframe += x.ToString("X2") + " ";
+                        }
+
                         if (frame[0] == 0x07 && frame[1] == 0x00 && frame[2] == 0xEE && frame[3] == 0x00)
                         {
                             string tag = frame[4].ToString("X2") + frame[5].ToString("X2");
-                            BeginInvoke(new MethodInvoker(delegate { OnRfidReceived(tag); }));
+                            BeginInvoke(new MethodInvoker(delegate { OnRfidReceived(tag, fullframe); }));
                         }
                         else
                         {
@@ -195,10 +203,11 @@ namespace DEPTHCHK.Views
             }
         }
 
-        private void OnRfidReceived(string rfid)
+        private void OnRfidReceived(string rfid, string fullrfid)
         {
             // log
-            txtSerialLog.AppendText("RFID: " + rfid + Environment.NewLine);
+            txtSerialLog.AppendText("RECEIVED: "+ fullrfid + ", RFID: " + rfid + Environment.NewLine);
+            txtSerialLog.AppendText("Start Listening Compartment 1" + Environment.NewLine);
             // find MobilTangki by RFID
             TblMobilTangki mt = null;
             // use AsNoTracking to avoid unnecessary tracking
@@ -269,7 +278,8 @@ namespace DEPTHCHK.Views
             if (_currentPartIndex >= _liveRows.Count)
             {
                 _listening = false;
-                txtSerialLog.AppendText("Measurement complete." + Environment.NewLine);
+                txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + Environment.NewLine);
+                txtSerialLog.AppendText("LISTENING NEXT COMPARTMENT " + Environment.NewLine);
             }
         }
 
@@ -582,9 +592,17 @@ namespace DEPTHCHK.Views
             // Use existing report classes if available.  This form references TicketReport and ReportViewer from the legacy form.
             var report = new DEPTHCHK.Reports.TicketReport();
             report.SetDataSource(ds);
-            var viewer = new DEPTHCHK.Views.ReportViewer();
-            viewer.LoadReport(report);
-            viewer.ShowDialog();
+
+
+            if(chkPrintPreview.Checked)
+            {
+                var viewer = new DEPTHCHK.Views.ReportViewer();
+                viewer.LoadReport(report);
+                viewer.ShowDialog();
+            }
+
+            // Print to default printer
+            report.PrintToPrinter(1, false, 0, 0);
         }
 
         private void DeleteSelected()
@@ -775,7 +793,6 @@ namespace DEPTHCHK.Views
             DataGridViewHelper.ApplyDefaultStyle(dgvPengiriman, false);
             DataGridViewHelper.ApplyDefaultStyle(dgvPengirimanLive, false);
             BtnFilter_Click(null, null);
-            UpCard.BackColor = Color.FromArgb(5 , 30 , 35);
         }
     }
 }
