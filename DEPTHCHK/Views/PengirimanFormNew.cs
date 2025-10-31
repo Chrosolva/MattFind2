@@ -148,7 +148,7 @@ namespace DEPTHCHK.Views
             {
                 Name = "Keterangan",
                 DataPropertyName = "Keterangan",
-                HeaderText = "KET",
+                HeaderText = "Density",
                 ReadOnly = false,
                 FlatStyle = FlatStyle.Popup
             };
@@ -301,7 +301,7 @@ namespace DEPTHCHK.Views
                 row.DataKalibrasi = value + row.Kalibrasi;
             else
                 row.DataKalibrasi = value - row.Kalibrasi;
-            row.Keterangan = "Pertamax";
+            row.Keterangan = "";
             dgvPengirimanLive.Refresh();
             _currentPartIndex++;
             if (_currentPartIndex >= _liveRows.Count)
@@ -323,7 +323,7 @@ namespace DEPTHCHK.Views
                 row.DataBacaan = 0;
                 row.DataKalibrasi = 0;
                 row.Satuan = "mm";
-                row.Keterangan = "Pertamax"; // ✅ default value
+                row.Keterangan = ""; // ✅ default value
                 row.Kalibrasi = d.Kalibrasi.HasValue ? d.Kalibrasi.Value : 0;
                 row.Positive = d.Positive.HasValue ? d.Positive.Value : false;
                 row.Suhu = 0;
