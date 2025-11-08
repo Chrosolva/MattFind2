@@ -231,7 +231,8 @@ namespace DEPTHCHK.Views
             }
             if (mt == null)
             {
-                MessageBox.Show("RFID not recognized.");
+                //MessageBox.Show("RFID not recognized.");
+                txtSerialLog.AppendText("RFID not recognized" + Environment.NewLine);
                 return;
             }
             // update labels
@@ -248,6 +249,8 @@ namespace DEPTHCHK.Views
                 _lastRfid = rfid;
                 _lastNoPlat = mt.NoPlat;
             }
+
+            serialLogScrollBottom();
         }
 
         private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -288,6 +291,8 @@ namespace DEPTHCHK.Views
             {
                 // ignore timeouts or errors
             }
+
+            serialLogScrollBottom();
         }
 
         private void OnMeasurementReceived(int value)
@@ -309,6 +314,7 @@ namespace DEPTHCHK.Views
                 _listening = false;
             }
             txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + "NEXT COMP " + Environment.NewLine);
+            serialLogScrollBottom();
         }
 
         private void PopulateLiveGrid(string noPlat)
@@ -464,6 +470,8 @@ namespace DEPTHCHK.Views
             {
                 MessageBox.Show("Failed to send ACK: " + ex.Message);
             }
+
+            serialLogScrollBottom();
         }
 
         private void SaveAndPrint()
@@ -533,7 +541,15 @@ namespace DEPTHCHK.Views
             lblCurrentJlhCompartment.Text = "";
             lblCurrentCapacity.Text = "";
             txtSerialLog.AppendText("Saved and printed." + Environment.NewLine);
+            serialLogScrollBottom();
             ReloadPengiriman();
+        }
+
+        public void serialLogScrollBottom()
+        {
+            // Scroll to the bottom
+            txtSerialLog.SelectionStart = txtSerialLog.TextLength;
+            txtSerialLog.ScrollToCaret();
         }
 
         private void PrintSelected()
