@@ -250,7 +250,7 @@ namespace DEPTHCHK.Views
                 _lastNoPlat = mt.NoPlat;
             }
 
-            serialLogScrollBottom();
+            //serialLogScrollBottom();
         }
 
         private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -292,7 +292,7 @@ namespace DEPTHCHK.Views
                 // ignore timeouts or errors
             }
 
-            serialLogScrollBottom();
+            //serialLogScrollBottom();
         }
 
         private void OnMeasurementReceived(int value)
@@ -314,7 +314,7 @@ namespace DEPTHCHK.Views
                 _listening = false;
             }
             txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + "NEXT COMP " + Environment.NewLine);
-            serialLogScrollBottom();
+            //serialLogScrollBottom();
         }
 
         private void PopulateLiveGrid(string noPlat)
@@ -462,7 +462,7 @@ namespace DEPTHCHK.Views
             }
             try
             {
-                _measPort.Write("?" + Environment.NewLine);
+                _measPort.Write("?");
                 _listening = true;
                 txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
             }
@@ -471,7 +471,7 @@ namespace DEPTHCHK.Views
                 MessageBox.Show("Failed to send ACK: " + ex.Message);
             }
 
-            serialLogScrollBottom();
+            //serialLogScrollBottom();
         }
 
         private void SaveAndPrint()
@@ -541,7 +541,7 @@ namespace DEPTHCHK.Views
             lblCurrentJlhCompartment.Text = "";
             lblCurrentCapacity.Text = "";
             txtSerialLog.AppendText("Saved and printed." + Environment.NewLine);
-            serialLogScrollBottom();
+            //serialLogScrollBottom();
             ReloadPengiriman();
         }
 

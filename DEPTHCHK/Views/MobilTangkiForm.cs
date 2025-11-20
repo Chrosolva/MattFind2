@@ -957,17 +957,49 @@ namespace DEPTHCHK.Views
         public void PrepareToClose()
         {
             // unsubscribe events first
+            //try
+            //{
+            //    if (_dataReceivedHandler != null && _serialPort != null)
+            //    {
+            //        _serialPort.DataReceived -= _dataReceivedHandler;
+            //        _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+            //        _serialPort.PinChanged -= _serialPort_PinChanged;
+            //        _dataReceivedHandler = null;
+            //    }
+            //}
+            //catch { /* ignore */ }
+
             try
             {
+                // Port 1 (RFID)
                 if (_dataReceivedHandler != null && _serialPort != null)
                 {
-                    _serialPort.DataReceived -= _dataReceivedHandler;
-                    _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
-                    _serialPort.PinChanged -= _serialPort_PinChanged;
+                    try
+                    {
+                        _serialPort.DataReceived -= _dataReceivedHandler;
+                        _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+                        _serialPort.PinChanged -= _serialPort_PinChanged;
+                        _dataReceivedHandler = null;
+                    }
+                    catch { /* ignore */ }
                     _dataReceivedHandler = null;
                 }
+
+                // Port 2 (Measurement)
+                if (_measHandler != null && _measPort != null)
+                {
+                    try
+                    {
+                        _measPort.DataReceived -= _measHandler;
+                    }
+                    catch { /* ignore */ }
+                    _measHandler = null;
+                }
             }
-            catch { /* ignore */ }
+            catch
+            {
+                // swallow top-level exceptions to avoid crash during form close
+            }
         }
 
         private void btnClearrfid_Click(object sender, EventArgs e)
@@ -990,7 +1022,7 @@ namespace DEPTHCHK.Views
             }
             try
             {
-                _measPort.Write("?" + Environment.NewLine);
+                _measPort.Write("?");
                 txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
             }
             catch (Exception ex)
