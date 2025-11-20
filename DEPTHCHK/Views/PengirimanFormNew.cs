@@ -288,8 +288,11 @@ namespace DEPTHCHK.Views
         private void OnRfidReceived(string rfid, string fullrfid)
         {
             // log
-            txtSerialLog.AppendText("RECEIVED: "+ fullrfid + ", RFID: " + rfid + Environment.NewLine);
-            txtSerialLog.AppendText("Start Listening Compartment 1" + Environment.NewLine);
+            //txtSerialLog.AppendText("RECEIVED: "+ fullrfid + ", RFID: " + rfid + Environment.NewLine);
+            //txtSerialLog.AppendText("Start Listening Compartment 1" + Environment.NewLine);
+            AppendSerialLog($"RECEIVED: {fullrfid}, RFID: {rfid}");
+            AppendSerialLog("Start Listening Compartment 1");
+
             // find MobilTangki by RFID
             TblMobilTangki mt = null;
             // use AsNoTracking to avoid unnecessary tracking
@@ -301,7 +304,9 @@ namespace DEPTHCHK.Views
             if (mt == null)
             {
                 //MessageBox.Show("RFID not recognized.");
-                txtSerialLog.AppendText("RFID not recognized" + Environment.NewLine);
+                //txtSerialLog.AppendText("RFID not recognized" + Environment.NewLine);
+                AppendSerialLog("RFID not recognized");
+
                 return;
             }
             // update labels
@@ -349,7 +354,9 @@ namespace DEPTHCHK.Views
                     {
                         BeginInvoke(new MethodInvoker(delegate
                         {
-                            txtSerialLog.AppendText("Received Order to Save and Print" + Environment.NewLine);
+                            //txtSerialLog.AppendText("Received Order to Save and Print" + Environment.NewLine);
+                            AppendSerialLog("Received Order to Save and Print");
+
                             SaveAndPrint();
                         }));
                         continue;
@@ -366,6 +373,7 @@ namespace DEPTHCHK.Views
 
         private void OnMeasurementReceived(int value)
         {
+            AppendSerialLog($"Measurement VALUE = {value:N0}");
             if (_liveRows == null || _currentPartIndex < 0 || _currentPartIndex >= _liveRows.Count)
                 return;
             var row = _liveRows[_currentPartIndex];
@@ -381,9 +389,13 @@ namespace DEPTHCHK.Views
             if (_currentPartIndex >= _liveRows.Count)
             {
                 _listening = false;
+                AppendSerialLog("All compartments measured.");
             }
-            txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + "NEXT COMP " + Environment.NewLine);
-            //serialLogScrollBottom();
+            else
+            {
+                AppendSerialLog($"Measurement stored. Next compartment: {_currentPartIndex + 1}");
+            }
+            //txtSerialLog.AppendText("Measurement complete. VALUE = " + value.ToString("N0") + "NEXT COMP " + Environment.NewLine);
         }
 
         private void PopulateLiveGrid(string noPlat)
@@ -533,7 +545,8 @@ namespace DEPTHCHK.Views
             {
                 _measPort.Write("?");
                 _listening = true;
-                txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
+                //txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
+                AppendSerialLog("GET DATA.");
             }
             catch (Exception ex)
             {
@@ -609,14 +622,22 @@ namespace DEPTHCHK.Views
             lblCurrentType.Text = "";
             lblCurrentJlhCompartment.Text = "";
             lblCurrentCapacity.Text = "";
-            txtSerialLog.AppendText("Saved and printed." + Environment.NewLine);
+            //txtSerialLog.AppendText("Saved and printed." + Environment.NewLine);
+            AppendSerialLog("Saved and printed.");
             //serialLogScrollBottom();
             ReloadPengiriman();
         }
 
-        public void serialLogScrollBottom()
+        private void AppendSerialLog(string message)
         {
-            // Scroll to the bottom
+            if (txtSerialLog == null) return;
+
+            txtSerialLog.AppendText(message + Environment.NewLine);
+            ScrollSerialLogToBottom();
+        }
+
+        private void ScrollSerialLogToBottom()
+        {
             txtSerialLog.SelectionStart = txtSerialLog.TextLength;
             txtSerialLog.ScrollToCaret();
         }
@@ -935,6 +956,33 @@ namespace DEPTHCHK.Views
             dgvPengirimanLive.Font = new Font("Segoe UI", 12f);
         }
 
-        
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            if (_liveRows == null || _liveRows.Count == 0)
+            {
+                MessageBox.Show("No measurement data to reset.");
+                return;
+            }
+
+            var result = MessageBox.Show("Are you sure you want to reset all measurements?",
+                                         "Confirm Reset",
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Warning);
+            if (result != DialogResult.Yes) return;
+
+            foreach (var row in _liveRows)
+            {
+                row.DataBacaan = 0;
+                row.DataKalibrasi = 0;
+                row.Suhu = 0;
+                // keep Keterangan and other info
+            }
+
+            dgvPengirimanLive.Refresh();
+            _currentPartIndex = 0;
+            _listening = false;
+
+            AppendSerialLog("All measurement data has been reset.");
+        }
     }
 }

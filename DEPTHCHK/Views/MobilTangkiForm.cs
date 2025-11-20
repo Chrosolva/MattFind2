@@ -188,7 +188,8 @@ namespace DEPTHCHK.Views
 
         private void OnMeasurementReceived(int value)
         {
-            txtSerialLog.AppendText("Measurement VALUE = " + value.ToString("N0") + Environment.NewLine);
+            //txtSerialLog.AppendText("Measurement VALUE = " + value.ToString("N0") + Environment.NewLine);
+            AppendSerialLog($"Measurement VALUE = {value:N0}");
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -204,7 +205,8 @@ namespace DEPTHCHK.Views
         {
             BeginInvoke(new Action(() =>
             {
-                txtSerialLog.AppendText("PinChanged: " + e.EventType + Environment.NewLine);
+                //txtSerialLog.AppendText("PinChanged: " + e.EventType + Environment.NewLine);
+                AppendSerialLog("PinChanged: " + e.EventType);
             }));
         }
 
@@ -309,7 +311,8 @@ namespace DEPTHCHK.Views
                 }
             }
 
-            txtSerialLog.AppendText(BitConverter.ToString(frame) + Environment.NewLine);
+            //txtSerialLog.AppendText(BitConverter.ToString(frame) + Environment.NewLine);
+            AppendSerialLog(BitConverter.ToString(frame));
         }
 
 
@@ -327,8 +330,23 @@ namespace DEPTHCHK.Views
             catch (Exception ex)
             {
                 UpdateUiForPortState(false);
-                txtSerialLog.AppendText("Failed to reopen serial port: " + ex.Message);
+                //txtSerialLog.AppendText("Failed to reopen serial port: " + ex.Message);
+                AppendSerialLog("Failed to reopen serial port: " + ex.Message);
             }
+        }
+
+        private void AppendSerialLog(string message)
+        {
+            if (txtSerialLog == null) return;
+
+            txtSerialLog.AppendText(message + Environment.NewLine);
+            ScrollSerialLogToBottom();
+        }
+
+        private void ScrollSerialLogToBottom()
+        {
+            txtSerialLog.SelectionStart = txtSerialLog.TextLength;
+            txtSerialLog.ScrollToCaret();
         }
 
         private void SetupGridColumns()
@@ -1114,7 +1132,8 @@ namespace DEPTHCHK.Views
             try
             {
                 _measPort.Write("?");
-                txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
+                //txtSerialLog.AppendText("GET DATA." + Environment.NewLine);
+                AppendSerialLog("GET DATA.");
             }
             catch (Exception ex)
             {
