@@ -36,11 +36,15 @@ namespace DEPTHCHK
 
         public static SerialPort GlobalPort { get; private set; }
 
-        public static bool IsPortOpen => GlobalPort?.IsOpen ?? false;   
+        public static bool IsPortOpen => GlobalPort?.IsOpen ?? false;
+
+        public static event Action<SerialPort> GlobalPortChanged;
 
         // NEW: second port
         public static SerialPort GlobalPort2 { get; private set; }
         public static bool IsPort2Open => GlobalPort2?.IsOpen ?? false;
+
+        public static event Action<SerialPort> GlobalPort2Changed;
 
         public static void SetGlobalPort(SerialPort port)
         {
@@ -50,6 +54,7 @@ namespace DEPTHCHK
                 try { GlobalPort.Close(); } catch { /* ignore */ }
             }
             GlobalPort = port;
+            GlobalPortChanged?.Invoke(GlobalPort);
         }
 
         // NEW: Set / close second port
@@ -58,6 +63,7 @@ namespace DEPTHCHK
             if (GlobalPort2 != null && GlobalPort2.IsOpen)
                 try { GlobalPort2.Close(); } catch { }
             GlobalPort2 = port;
+            GlobalPort2Changed?.Invoke(GlobalPort2);
         }
     }
 }

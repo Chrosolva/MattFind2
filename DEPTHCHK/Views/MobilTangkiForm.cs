@@ -32,6 +32,8 @@ namespace DEPTHCHK.Views
         private SerialPort _measPort { get { return Session.GlobalPort2; } }
         private SerialDataReceivedEventHandler _measHandler;
         private SerialDataReceivedEventHandler _dataReceivedHandler;
+        private SerialPort _attachedRfidPort;
+        private SerialPort _attachedMeasPort;
 
         public MobilTangkiForm()
         {
@@ -48,7 +50,9 @@ namespace DEPTHCHK.Views
             TCMobilTangki.Dock = DockStyle.Fill;
 
             // Optional: keep Alignment.Top (default). Since headers are hidden, alignment doesn't matter.
-
+            this.Activated += (s, e) => InitSerialUi();
+            Session.GlobalPortChanged += OnGlobalPortChanged;
+            Session.GlobalPort2Changed += OnGlobalPort2Changed;
         }
 
         private void InitSerialUi()
@@ -61,20 +65,96 @@ namespace DEPTHCHK.Views
                 _serialPort.PinChanged += _serialPort_PinChanged;
             }
 
-            if (_serialPort.IsOpen)
-            {
-                UpdateUiForPortState(true);
-            }
-            else
-            {
-                UpdateUiForPortState(false);
-            }
+            EnsureRfidSubscription();
+            EnsureMeasSubscription();
+            UpdateUiForPortState(_serialPort?.IsOpen == true || _measPort?.IsOpen == true);
 
-            if (_measPort != null && _measHandler == null)
+            //if (_serialPort.IsOpen)
+            //{
+            //    UpdateUiForPortState(true);
+            //}
+            //else
+            //{
+            //    UpdateUiForPortState(false);
+            //}
+
+            //if (_measPort != null && _measHandler == null)
+            //{
+            //    _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
+            //    _measPort.DataReceived += _measHandler;
+            //}
+        }
+
+        private void EnsureRfidSubscription()
+        {
+            var port = _serialPort;
+
+            if (_attachedRfidPort != port)
             {
-                _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
-                _measPort.DataReceived += _measHandler;
+                if (_attachedRfidPort != null && _dataReceivedHandler != null)
+                {
+                    try
+                    {
+                        _attachedRfidPort.DataReceived -= _dataReceivedHandler;
+                        _attachedRfidPort.ErrorReceived -= _serialPort_ErrorReceived;
+                        _attachedRfidPort.PinChanged -= _serialPort_PinChanged;
+                    }
+                    catch { }
+                }
+
+                _attachedRfidPort = port;
+
+                if (_attachedRfidPort != null)
+                {
+                    if (_dataReceivedHandler == null)
+                    {
+                        _dataReceivedHandler = _serialPort_DataReceived;
+                    }
+
+                    _attachedRfidPort.DataReceived += _dataReceivedHandler;
+                    _attachedRfidPort.ErrorReceived += _serialPort_ErrorReceived;
+                    _attachedRfidPort.PinChanged += _serialPort_PinChanged;
+                }
             }
+        }
+
+        private void EnsureMeasSubscription()
+        {
+            var port = _measPort;
+
+            if (_attachedMeasPort != port)
+            {
+                if (_attachedMeasPort != null && _measHandler != null)
+                {
+                    try
+                    {
+                        _attachedMeasPort.DataReceived -= _measHandler;
+                    }
+                    catch { }
+                }
+
+                _attachedMeasPort = port;
+
+                if (_attachedMeasPort != null)
+                {
+                    if (_measHandler == null)
+                    {
+                        _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
+                    }
+
+                    _attachedMeasPort.DataReceived += _measHandler;
+                }
+            }
+        }
+
+        private void OnGlobalPortChanged(SerialPort newPort)
+        {
+            BeginInvoke(new MethodInvoker(InitSerialUi));
+        }
+
+        private void OnGlobalPort2Changed(SerialPort newPort)
+        {
+            BeginInvoke(new MethodInvoker(InitSerialUi));
         }
 
         private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -972,29 +1052,40 @@ namespace DEPTHCHK.Views
             try
             {
                 // Port 1 (RFID)
-                if (_dataReceivedHandler != null && _serialPort != null)
+                if (_dataReceivedHandler != null && _attachedRfidPort != null)
                 {
                     try
                     {
-                        _serialPort.DataReceived -= _dataReceivedHandler;
-                        _serialPort.ErrorReceived -= _serialPort_ErrorReceived;
-                        _serialPort.PinChanged -= _serialPort_PinChanged;
-                        _dataReceivedHandler = null;
+                        //_serialPort.DataReceived -= _dataReceivedHandler;
+                        //_serialPort.ErrorReceived -= _serialPort_ErrorReceived;
+                        //_serialPort.PinChanged -= _serialPort_PinChanged;
+                        //_dataReceivedHandler = null;
+
+                        _attachedRfidPort.DataReceived -= _dataReceivedHandler;
+                        _attachedRfidPort.ErrorReceived -= _serialPort_ErrorReceived;
+                        _attachedRfidPort.PinChanged -= _serialPort_PinChanged;
                     }
                     catch { /* ignore */ }
                     _dataReceivedHandler = null;
+                    _attachedRfidPort = null;
                 }
 
                 // Port 2 (Measurement)
-                if (_measHandler != null && _measPort != null)
+                //if (_measHandler != null && _measPort != null)
+                if (_measHandler != null && _attachedMeasPort != null)
                 {
                     try
                     {
-                        _measPort.DataReceived -= _measHandler;
+                        //_measPort.DataReceived -= _measHandler;
+                        _attachedMeasPort.DataReceived -= _measHandler;
                     }
                     catch { /* ignore */ }
                     _measHandler = null;
+                    _attachedMeasPort = null;
                 }
+
+                Session.GlobalPortChanged -= OnGlobalPortChanged;
+                Session.GlobalPort2Changed -= OnGlobalPort2Changed;
             }
             catch
             {

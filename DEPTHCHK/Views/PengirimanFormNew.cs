@@ -51,6 +51,8 @@ namespace DEPTHCHK.Views
         // event handlers to remove on close
         private SerialDataReceivedEventHandler _rfidHandler;
         private SerialDataReceivedEventHandler _measHandler;
+        private SerialPort _attachedRfidPort;
+        private SerialPort _attachedMeasPort;
 
         /// <summary>
         /// row shape for the live measurement grid
@@ -85,6 +87,9 @@ namespace DEPTHCHK.Views
             SetupSearchCombo();
             SetupGrids();
             InitSerial();
+
+            Session.GlobalPortChanged += OnGlobalPortChanged;
+            Session.GlobalPort2Changed += OnGlobalPort2Changed;
 
             // default dates
             dtpPengFrom.Value = DateTime.Today.AddDays(-14);
@@ -162,18 +167,82 @@ namespace DEPTHCHK.Views
         private void InitSerial()
         {
             // attach handlers once
-            if (_rfidPort != null && _rfidHandler == null)
-            {
-                _rfidHandler = new SerialDataReceivedEventHandler(RfidPort_DataReceived);
-                _rfidPort.DataReceived += _rfidHandler;
-            }
-            if (_measPort != null && _measHandler == null)
-            {
-                _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
-                _measPort.DataReceived += _measHandler;
-            }
+            //if (_rfidPort != null && _rfidHandler == null)
+            //{
+            //    _rfidHandler = new SerialDataReceivedEventHandler(RfidPort_DataReceived);
+            //    _rfidPort.DataReceived += _rfidHandler;
+            //}
+            //if (_measPort != null && _measHandler == null)
+            //{
+            //    _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
+            //    _measPort.DataReceived += _measHandler;
+            //}
 
+            //UpdatePortStatus();
+
+            EnsureRfidSubscription();
+            EnsureMeasSubscription();
             UpdatePortStatus();
+        }
+
+        private void EnsureRfidSubscription()
+        {
+            var port = _rfidPort;
+
+            if (_attachedRfidPort != port)
+            {
+                if (_attachedRfidPort != null && _rfidHandler != null)
+                {
+                    try { _attachedRfidPort.DataReceived -= _rfidHandler; } catch { }
+                }
+
+                _attachedRfidPort = port;
+
+                if (_attachedRfidPort != null)
+                {
+                    if (_rfidHandler == null)
+                    {
+                        _rfidHandler = new SerialDataReceivedEventHandler(RfidPort_DataReceived);
+                    }
+
+                    _attachedRfidPort.DataReceived += _rfidHandler;
+                }
+            }
+        }
+
+        private void EnsureMeasSubscription()
+        {
+            var port = _measPort;
+
+            if (_attachedMeasPort != port)
+            {
+                if (_attachedMeasPort != null && _measHandler != null)
+                {
+                    try { _attachedMeasPort.DataReceived -= _measHandler; } catch { }
+                }
+
+                _attachedMeasPort = port;
+
+                if (_attachedMeasPort != null)
+                {
+                    if (_measHandler == null)
+                    {
+                        _measHandler = new SerialDataReceivedEventHandler(MeasPort_DataReceived);
+                    }
+
+                    _attachedMeasPort.DataReceived += _measHandler;
+                }
+            }
+        }
+
+        private void OnGlobalPortChanged(SerialPort newPort)
+        {
+            BeginInvoke(new MethodInvoker(InitSerial));
+        }
+
+        private void OnGlobalPort2Changed(SerialPort newPort)
+        {
+            BeginInvoke(new MethodInvoker(InitSerial));
         }
 
         #endregion
@@ -819,26 +888,35 @@ namespace DEPTHCHK.Views
             try
             {
                 // Port 1 (RFID)
-                if (_rfidHandler != null && _rfidPort != null)
+                //if (_rfidHandler != null && _rfidPort != null)
+                if (_rfidHandler != null && _attachedRfidPort != null)
                 {
                     try
                     {
-                        _rfidPort.DataReceived -= _rfidHandler;
+                        //_rfidPort.DataReceived -= _rfidHandler;
+                        _attachedRfidPort.DataReceived -= _rfidHandler;
                     }
                     catch { /* ignore */ }
                     _rfidHandler = null;
+                    _attachedRfidPort = null;
                 }
 
                 // Port 2 (Measurement)
-                if (_measHandler != null && _measPort != null)
+                //if (_measHandler != null && _measPort != null)
+                if (_measHandler != null && _attachedMeasPort != null)
                 {
                     try
                     {
-                        _measPort.DataReceived -= _measHandler;
+                        //_measPort.DataReceived -= _measHandler;
+                        _attachedMeasPort.DataReceived -= _measHandler;
                     }
                     catch { /* ignore */ }
                     _measHandler = null;
+                    _attachedMeasPort = null;
                 }
+
+                Session.GlobalPortChanged -= OnGlobalPortChanged;
+                Session.GlobalPort2Changed -= OnGlobalPort2Changed;
             }
             catch
             {
