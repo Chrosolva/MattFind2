@@ -14,6 +14,8 @@ namespace DEPTHCHK
         public static string SERVERADDRESS;
         public static TimeZoneInfo tzi;
         public static TblUser VerifiedAdmin { get; set; }
+        public static object ActiveRfidConsumer { get; set; }
+
         public static void SetUser(TblUser user)
         {
             CurrentUser = user;

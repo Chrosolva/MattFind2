@@ -149,12 +149,12 @@ namespace DEPTHCHK.Views
 
         private void OnGlobalPortChanged(SerialPort newPort)
         {
-            BeginInvoke(new MethodInvoker(InitSerialUi));
+            SafeBeginInvoke(InitSerialUi);
         }
 
         private void OnGlobalPort2Changed(SerialPort newPort)
         {
-            BeginInvoke(new MethodInvoker(InitSerialUi));
+            SafeBeginInvoke(InitSerialUi);
         }
 
         private void MeasPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -174,7 +174,7 @@ namespace DEPTHCHK.Views
                         int val;
                         if (int.TryParse(m.Groups[1].Value, out val))
                         {
-                            BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val); }));
+                            SafeBeginInvoke(() => OnMeasurementReceived(val, line));
                         }
                         continue;
                     }
@@ -186,28 +186,25 @@ namespace DEPTHCHK.Views
             }
         }
 
-        private void OnMeasurementReceived(int value)
+        private void OnMeasurementReceived(int value, string line)
         {
             //txtSerialLog.AppendText("Measurement VALUE = " + value.ToString("N0") + Environment.NewLine);
-            AppendSerialLog($"Measurement VALUE = {value:N0}");
+            //AppendSerialLog($"Measurement VALUE = {value:N0}");
+            AppendSerialLog($"line = {line} , value = {value:N0}");
         }
 
         private void _serialPort_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            BeginInvoke(new Action(() =>
+            SafeBeginInvoke(() =>
             {
                 lblPortStatus.Text = "Serial error: " + e.EventType;
                 lblPortStatus.ForeColor = Color.DarkOrange;
-            }));
+            });
         }
 
         private void _serialPort_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
-            BeginInvoke(new Action(() =>
-            {
-                //txtSerialLog.AppendText("PinChanged: " + e.EventType + Environment.NewLine);
-                AppendSerialLog("PinChanged: " + e.EventType);
-            }));
+            SafeBeginInvoke(() => AppendSerialLog("PinChanged: " + e.EventType));
         }
 
         private void UpdateUiForPortState(bool connected)
@@ -245,8 +242,29 @@ namespace DEPTHCHK.Views
             lblPortStatus.Text = string.Join(" | ", parts.ToArray());
         }
 
+        // Put inside each form class
+        private void SafeBeginInvoke(Action action)
+        {
+            if (IsDisposed) return;
+
+            // Ensure handle exists; creating Handle if needed
+            if (!IsHandleCreated)
+            {
+                try { var _ = Handle; } catch { return; }
+                if (!IsHandleCreated) return;
+            }
+
+            if (InvokeRequired) BeginInvoke(action);
+            else action();
+        }
+
+
         private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            // 🚫 Not the active reader? Do nothing.
+            if (!ReferenceEquals(Session.ActiveRfidConsumer, this))
+                return;
+
             var sp = (SerialPort)sender;
 
             try
@@ -259,7 +277,8 @@ namespace DEPTHCHK.Views
                     if (read == 8)
                     {
                         // Process the frame on the UI thread
-                        BeginInvoke(new Action(() => ProcessRfidFrame(frame)));
+                        //BeginInvoke(new Action(() => ProcessRfidFrame(frame)));
+                        SafeBeginInvoke( () => ProcessRfidFrame(frame));
                     }
                 }
             }
@@ -271,13 +290,13 @@ namespace DEPTHCHK.Views
                     lblPortStatus.ForeColor = Color.DarkOrange;
                 }));
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                SafeBeginInvoke(TryReconnectPort);
             }
             catch (InvalidOperationException)
             {
                 // Port closed between reads
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                SafeBeginInvoke(TryReconnectPort);
             }
             catch (Exception ex)
             {
@@ -287,7 +306,7 @@ namespace DEPTHCHK.Views
                     lblPortStatus.ForeColor = Color.DarkOrange;
                 }));
 
-                BeginInvoke(new Action(() => TryReconnectPort()));
+                SafeBeginInvoke(TryReconnectPort);
             }
         }
 
@@ -377,6 +396,7 @@ namespace DEPTHCHK.Views
 
         private void MobilTangkiForm_Load(object sender, EventArgs e)
         {
+            Session.ActiveRfidConsumer = this;
             btnDelete.Font = btnEdit.Font;
             DataGridViewHelper.ApplyDefaultStyle(dgvMobilTangki);
             DataGridViewHelper.ApplyDefaultStyle(dgvDetailMT);
@@ -469,6 +489,19 @@ namespace DEPTHCHK.Views
             _db.Dispose();
             base.OnFormClosed(e);
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            PrepareToClose();
+            base.OnFormClosing(e);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            InitSerialUi(); // subscriptions happen here, not in ctor
+        }
+
 
         private void btnEdit_Click(object sender, EventArgs e)
         {

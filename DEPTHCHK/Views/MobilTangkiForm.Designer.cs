@@ -329,7 +329,7 @@
             this.TPMobilTangki.Controls.Add(this.TopPanel);
             this.TPMobilTangki.Location = new System.Drawing.Point(4, 22);
             this.TPMobilTangki.Name = "TPMobilTangki";
-            this.TPMobilTangki.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPMobilTangki.Padding = new System.Windows.Forms.Padding(3);
             this.TPMobilTangki.Size = new System.Drawing.Size(720, 438);
             this.TPMobilTangki.TabIndex = 0;
             this.TPMobilTangki.Text = "MOBIL TANGKI";
@@ -344,10 +344,10 @@
             this.RightCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.RightCard.Location = new System.Drawing.Point(3, 295);
-            this.RightCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.RightCard.Margin = new System.Windows.Forms.Padding(14);
             this.RightCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.RightCard.Name = "RightCard";
-            this.RightCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.RightCard.Padding = new System.Windows.Forms.Padding(3);
             this.RightCard.Size = new System.Drawing.Size(714, 140);
             this.RightCard.TabIndex = 9;
             // 
@@ -383,10 +383,10 @@
             this.LeftCard.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeftCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.LeftCard.Location = new System.Drawing.Point(3, 56);
-            this.LeftCard.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.LeftCard.Margin = new System.Windows.Forms.Padding(14);
             this.LeftCard.MouseState = MaterialSkin.MouseState.HOVER;
             this.LeftCard.Name = "LeftCard";
-            this.LeftCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.LeftCard.Padding = new System.Windows.Forms.Padding(3);
             this.LeftCard.Size = new System.Drawing.Size(714, 239);
             this.LeftCard.TabIndex = 8;
             // 
@@ -473,7 +473,7 @@
             this.TPAddEditMT.Controls.Add(this.CardCRUD);
             this.TPAddEditMT.Location = new System.Drawing.Point(4, 22);
             this.TPAddEditMT.Name = "TPAddEditMT";
-            this.TPAddEditMT.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TPAddEditMT.Padding = new System.Windows.Forms.Padding(3);
             this.TPAddEditMT.Size = new System.Drawing.Size(720, 438);
             this.TPAddEditMT.TabIndex = 1;
             this.TPAddEditMT.Text = "ADD / EDIT MT";
@@ -507,10 +507,10 @@
             this.CardCRUD.Depth = 0;
             this.CardCRUD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.CardCRUD.Location = new System.Drawing.Point(0, 0);
-            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.CardCRUD.Margin = new System.Windows.Forms.Padding(14);
             this.CardCRUD.MouseState = MaterialSkin.MouseState.HOVER;
             this.CardCRUD.Name = "CardCRUD";
-            this.CardCRUD.Padding = new System.Windows.Forms.Padding(14, 14, 14, 14);
+            this.CardCRUD.Padding = new System.Windows.Forms.Padding(14);
             this.CardCRUD.Size = new System.Drawing.Size(720, 442);
             this.CardCRUD.TabIndex = 0;
             // 
@@ -565,7 +565,7 @@
             this.txtSerialLog.Name = "txtSerialLog";
             this.txtSerialLog.Size = new System.Drawing.Size(209, 188);
             this.txtSerialLog.TabIndex = 41;
-            this.txtSerialLog.Text = "WELCOME";
+            this.txtSerialLog.Text = "WELCOME\n";
             // 
             // lblPortStatus
             // 

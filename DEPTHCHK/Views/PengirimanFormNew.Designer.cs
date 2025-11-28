@@ -429,7 +429,7 @@
             this.txtSerialLog.Name = "txtSerialLog";
             this.txtSerialLog.Size = new System.Drawing.Size(713, 163);
             this.txtSerialLog.TabIndex = 19;
-            this.txtSerialLog.Text = "WELCOME";
+            this.txtSerialLog.Text = "WELCOME\n";
             // 
             // materialCard1
             // 

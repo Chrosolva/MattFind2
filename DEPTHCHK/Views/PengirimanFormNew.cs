@@ -235,14 +235,31 @@ namespace DEPTHCHK.Views
             }
         }
 
+        // Put inside each form class
+        private void SafeBeginInvoke(Action action)
+        {
+            if (IsDisposed) return;
+
+            // Ensure handle exists; creating Handle if needed
+            if (!IsHandleCreated)
+            {
+                try { var _ = Handle; } catch { return; }
+                if (!IsHandleCreated) return;
+            }
+
+            if (InvokeRequired) BeginInvoke(action);
+            else action();
+        }
+
+
         private void OnGlobalPortChanged(SerialPort newPort)
         {
-            BeginInvoke(new MethodInvoker(InitSerial));
+            SafeBeginInvoke(InitSerial);
         }
 
         private void OnGlobalPort2Changed(SerialPort newPort)
         {
-            BeginInvoke(new MethodInvoker(InitSerial));
+            SafeBeginInvoke(InitSerial);
         }
 
         #endregion
@@ -251,6 +268,10 @@ namespace DEPTHCHK.Views
 
         private void RfidPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            // 🚫 Not the active reader? Do nothing.
+            if (!ReferenceEquals(Session.ActiveRfidConsumer, this))
+                return;
+
             var sp = _rfidPort;
             try
             {
@@ -270,7 +291,8 @@ namespace DEPTHCHK.Views
                         if (frame[0] == 0x07 && frame[1] == 0x00 && frame[2] == 0xEE && frame[3] == 0x00)
                         {
                             string tag = frame[4].ToString("X2") + frame[5].ToString("X2");
-                            BeginInvoke(new MethodInvoker(delegate { OnRfidReceived(tag, fullframe); }));
+                            //BeginInvoke(new MethodInvoker(delegate { OnRfidReceived(tag, fullframe); }));
+                            SafeBeginInvoke(() => OnRfidReceived(tag, fullframe));
                         }
                         else
                         {
@@ -344,7 +366,8 @@ namespace DEPTHCHK.Views
                         int val;
                         if (int.TryParse(m.Groups[1].Value, out val))
                         {
-                            BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val); }));
+                            //BeginInvoke(new MethodInvoker(delegate { OnMeasurementReceived(val, line); }));
+                            SafeBeginInvoke(() => OnMeasurementReceived(val, line));
                         }
                         continue;
                     }
@@ -352,13 +375,18 @@ namespace DEPTHCHK.Views
                     // ✅ Check if it's the save command signal
                     if (line == "[1]")
                     {
-                        BeginInvoke(new MethodInvoker(delegate
+                        SafeBeginInvoke(() =>
                         {
-                            //txtSerialLog.AppendText("Received Order to Save and Print" + Environment.NewLine);
                             AppendSerialLog("Received Order to Save and Print");
-
                             SaveAndPrint();
-                        }));
+                        });
+                        //BeginInvoke(new MethodInvoker(delegate
+                        //{
+                        //    //txtSerialLog.AppendText("Received Order to Save and Print" + Environment.NewLine);
+                        //    AppendSerialLog("Received Order to Save and Print");
+
+                        //    SaveAndPrint();
+                        //}));
                         continue;
                     }
                 }
@@ -371,9 +399,10 @@ namespace DEPTHCHK.Views
             //serialLogScrollBottom();
         }
 
-        private void OnMeasurementReceived(int value)
+        private void OnMeasurementReceived(int value, string line)
         {
-            AppendSerialLog($"Measurement VALUE = {value:N0}");
+            //AppendSerialLog($"Measurement VALUE = {value:N0}");
+            AppendSerialLog($"line = {line} , value = {value:N0}");
             if (_liveRows == null || _currentPartIndex < 0 || _currentPartIndex >= _liveRows.Count)
                 return;
             var row = _liveRows[_currentPartIndex];
@@ -954,6 +983,8 @@ namespace DEPTHCHK.Views
             txtSerialLog.Font = new Font("Segoe UI", 16f, FontStyle.Bold);
             dgvPengiriman.Font = new Font("Segoe UI", 12f);
             dgvPengirimanLive.Font = new Font("Segoe UI", 12f);
+
+            Session.ActiveRfidConsumer = this;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -984,5 +1015,19 @@ namespace DEPTHCHK.Views
 
             AppendSerialLog("All measurement data has been reset.");
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            InitSerial(); // subscriptions happen here, not in ctor
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            PrepareToClose();
+            base.OnFormClosing(e);
+        }
+
+
     }
 }
