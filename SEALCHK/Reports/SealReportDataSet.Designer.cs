@@ -1459,6 +1459,8 @@ namespace SEALCHK.Reports {
             
             private global::System.Data.DataColumn columnK_DIKIRIM;
             
+            private global::System.Data.DataColumn columnK_OTHER;
+            
             private global::System.Data.DataColumn columnTotal;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1544,6 +1546,14 @@ namespace SEALCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn K_OTHERColumn {
+                get {
+                    return this.columnK_OTHER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn TotalColumn {
                 get {
                     return this.columnTotal;
@@ -1587,7 +1597,7 @@ namespace SEALCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public KeteranganPivotRow AddKeteranganPivotRow(string NoPlat, int K_TEPAT_WAKTU, int K_TERLAMBAT, int K_TELAH_DIKELUARKAN, int K_TIDAK_PERNAH_KEMBALI, int K_DIKIRIM, int Total) {
+            public KeteranganPivotRow AddKeteranganPivotRow(string NoPlat, int K_TEPAT_WAKTU, int K_TERLAMBAT, int K_TELAH_DIKELUARKAN, int K_TIDAK_PERNAH_KEMBALI, int K_DIKIRIM, int K_OTHER, int Total) {
                 KeteranganPivotRow rowKeteranganPivotRow = ((KeteranganPivotRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NoPlat,
@@ -1596,6 +1606,7 @@ namespace SEALCHK.Reports {
                         K_TELAH_DIKELUARKAN,
                         K_TIDAK_PERNAH_KEMBALI,
                         K_DIKIRIM,
+                        K_OTHER,
                         Total};
                 rowKeteranganPivotRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowKeteranganPivotRow);
@@ -1625,6 +1636,7 @@ namespace SEALCHK.Reports {
                 this.columnK_TELAH_DIKELUARKAN = base.Columns["K_TELAH_DIKELUARKAN"];
                 this.columnK_TIDAK_PERNAH_KEMBALI = base.Columns["K_TIDAK_PERNAH_KEMBALI"];
                 this.columnK_DIKIRIM = base.Columns["K_DIKIRIM"];
+                this.columnK_OTHER = base.Columns["K_OTHER"];
                 this.columnTotal = base.Columns["Total"];
             }
             
@@ -1643,6 +1655,8 @@ namespace SEALCHK.Reports {
                 base.Columns.Add(this.columnK_TIDAK_PERNAH_KEMBALI);
                 this.columnK_DIKIRIM = new global::System.Data.DataColumn("K_DIKIRIM", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnK_DIKIRIM);
+                this.columnK_OTHER = new global::System.Data.DataColumn("K_OTHER", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnK_OTHER);
                 this.columnTotal = new global::System.Data.DataColumn("Total", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
             }
@@ -2657,6 +2671,22 @@ namespace SEALCHK.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int K_OTHER {
+                get {
+                    try {
+                        return ((int)(this[this.tableKeteranganPivot.K_OTHERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'K_OTHER\' in table \'KeteranganPivot\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableKeteranganPivot.K_OTHERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int Total {
                 get {
                     try {
@@ -2741,6 +2771,18 @@ namespace SEALCHK.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetK_DIKIRIMNull() {
                 this[this.tableKeteranganPivot.K_DIKIRIMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsK_OTHERNull() {
+                return this.IsNull(this.tableKeteranganPivot.K_OTHERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetK_OTHERNull() {
+                this[this.tableKeteranganPivot.K_OTHERColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -453,6 +453,7 @@ ORDER BY r.NoPlat;";
             public int K_TELAH_DIKELUARKAN { get; set; }
             public int K_TIDAK_PERNAH_KEMBALI { get; set; }
             public int K_DIKIRIM { get; set; }
+            public int K_OTHER { get; set; }   // <-- NEW
             public int Total { get; set; }
         }
 
@@ -464,18 +465,38 @@ SET NUMERIC_ROUNDABORT OFF;
 
 SELECT
   r.NoPlat,
-  SUM(CASE WHEN (d.Keterangan LIKE '%TEPAT WAKTU%' AND d.Keterangan not like '%TELAH DIKELUARKAN%')        THEN 1 ELSE 0 END) AS K_TEPAT_WAKTU,
-  SUM(CASE WHEN (d.Keterangan LIKE '%TERLAMBAT%'  AND d.Keterangan not like '%TELAH DIKELUARKAN%')        THEN 1 ELSE 0 END) AS K_TERLAMBAT,
-  SUM(CASE WHEN d.Keterangan LIKE '%TELAH DIKELUARKAN%'  THEN 1 ELSE 0 END) AS K_TELAH_DIKELUARKAN,
-  SUM(CASE WHEN d.Keterangan LIKE '%TIDAK PERNAH KEMBALI%' THEN 1 ELSE 0 END) AS K_TIDAK_PERNAH_KEMBALI,
-  SUM(CASE WHEN d.Keterangan is null THEN 1 ELSE 0 END) AS K_DIKIRIM,
+
+  SUM(CASE WHEN ISNULL(d.Keterangan,'') LIKE '%TELAH DIKELUARKAN%' THEN 1 ELSE 0 END) AS K_TELAH_DIKELUARKAN,
+
+  SUM(CASE WHEN ISNULL(d.Keterangan,'') LIKE '%TIDAK PERNAH KEMBALI%' THEN 1 ELSE 0 END) AS K_TIDAK_PERNAH_KEMBALI,
+
+  SUM(CASE 
+        WHEN ISNULL(d.Keterangan,'') LIKE '%TERLAMBAT%' 
+         AND ISNULL(d.Keterangan,'') NOT LIKE '%TELAH DIKELUARKAN%' 
+        THEN 1 ELSE 0 END) AS K_TERLAMBAT,
+
+  SUM(CASE 
+        WHEN ISNULL(d.Keterangan,'') LIKE '%TEPAT WAKTU%' 
+         AND ISNULL(d.Keterangan,'') NOT LIKE '%TELAH DIKELUARKAN%' 
+        THEN 1 ELSE 0 END) AS K_TEPAT_WAKTU,
+
+  SUM(CASE WHEN d.Status = 'DIKIRIM' THEN 1 ELSE 0 END) AS K_DIKIRIM,
+
+  SUM(CASE WHEN
+        (d.Status <> 'DIKIRIM' OR d.Status IS NULL)
+    AND ISNULL(d.Keterangan,'') NOT LIKE '%TELAH DIKELUARKAN%'
+    AND ISNULL(d.Keterangan,'') NOT LIKE '%TIDAK PERNAH KEMBALI%'
+    AND ISNULL(d.Keterangan,'') NOT LIKE '%TERLAMBAT%'
+    AND ISNULL(d.Keterangan,'') NOT LIKE '%TEPAT WAKTU%'
+    THEN 1 ELSE 0 END) AS K_OTHER,
+
   COUNT(*) AS Total
 FROM dbo.TblRegister r
 JOIN dbo.TblDetailRegister d
-  ON d.NoPlat=r.NoPlat AND d.Tgl_Input=r.Tgl_Input
+  ON d.NoPlat = r.NoPlat AND d.Tgl_Input = r.Tgl_Input
 WHERE r.Tgl_Input >= @pFrom AND r.Tgl_Input < @pToExcl
-  AND (@pNoPlat='' OR r.NoPlat=@pNoPlat)
-  AND (@pStatus='' OR ISNULL(d.Status,'') LIKE '%'+@pStatus+'%')
+  AND (@pNoPlat = '' OR r.NoPlat = @pNoPlat)
+  AND (@pStatus = '' OR ISNULL(d.Status,'') LIKE '%'+@pStatus+'%')
 GROUP BY r.NoPlat
 ORDER BY r.NoPlat;";
 
@@ -487,23 +508,32 @@ ORDER BY r.NoPlat;";
                 new SqlParameter("@pStatus", (status ?? "").Trim())
             ).ToList();
 
-            var dt = new DataTable("KeteranganPivot"); // <-- table name Crystal will use in the subreport
+            var dt = new DataTable("KeteranganPivot");
             dt.Columns.Add("NoPlat", typeof(string));
             dt.Columns.Add("K_TEPAT_WAKTU", typeof(int));
             dt.Columns.Add("K_TERLAMBAT", typeof(int));
             dt.Columns.Add("K_TELAH_DIKELUARKAN", typeof(int));
             dt.Columns.Add("K_TIDAK_PERNAH_KEMBALI", typeof(int));
             dt.Columns.Add("K_DIKIRIM", typeof(int));
+            dt.Columns.Add("K_OTHER", typeof(int));   // <-- NEW
             dt.Columns.Add("Total", typeof(int));
 
             foreach (var r in rows)
-                dt.Rows.Add(r.NoPlat ?? "", r.K_TEPAT_WAKTU, r.K_TERLAMBAT, r.K_TELAH_DIKELUARKAN, r.K_TIDAK_PERNAH_KEMBALI, r.K_DIKIRIM, r.Total);
+            {
+                dt.Rows.Add(
+                    r.NoPlat ?? "",
+                    r.K_TEPAT_WAKTU,
+                    r.K_TERLAMBAT,
+                    r.K_TELAH_DIKELUARKAN,
+                    r.K_TIDAK_PERNAH_KEMBALI,
+                    r.K_DIKIRIM,
+                    r.K_OTHER,
+                    r.Total
+                );
+            }
 
             return dt;
         }
-
-
-
 
         // Log available parameters (for quick diagnosis)
         private static string ListParams(ReportDocument rpt)

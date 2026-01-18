@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:RegisterDetail" ZOrder="4" X="230" Y="2" Height="239" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
     <Shape ID="DesignTable:BAPenghapusanSegel" ZOrder="3" X="0" Y="0" Height="182" Width="192" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
     <Shape ID="DesignTable:SealPerStatusPivot" ZOrder="2" X="6" Y="193" Height="162" Width="175" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="158" />
-    <Shape ID="DesignTable:KeteranganPivot" ZOrder="1" X="227" Y="271" Height="162" Width="194" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="158" />
+    <Shape ID="DesignTable:KeteranganPivot" ZOrder="1" X="227" Y="271" Height="181" Width="194" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="177" />
   </Shapes>
   <Connectors />
 </DiagramLayout>
